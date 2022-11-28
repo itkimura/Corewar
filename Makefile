@@ -6,7 +6,7 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/11/28 15:59:42 by thle             ###   ########.fr        #
+#    Updated: 2022/11/28 16:10:12 by thle             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,11 @@ all: $(NAME) $(ASM)
 
 $(NAME): $(LIB) $(OBJS_DIR) $(COREWAR_OBJS)
 	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) -L$(LIB_DIR) -lft
+	@echo "Compiled $(NAME)"
 
 $(ASM): $(LIB) $(OBJS_DIR) $(ASM_OBJS)
 	@$(CC) -o $(ASM) $(FLAGS) $(ASM_OBJS) -L$(LIB_DIR) -lft
+	@echo "Compiled $(ASM)"
 
 $(LIB): #$(wildcard libft/srcs/*.c)
 	@$(MAKE) -sC ./libft
