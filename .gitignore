@@ -1,0 +1,15 @@
+.DS_Store
+.vscode
+*.dSYM
+
+*.out
+*.a
+
+objs/
+*.o
+
+corewar
+!corewar/
+
+asm
+!asm/
