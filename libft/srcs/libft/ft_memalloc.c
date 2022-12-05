@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/05 15:09:40 by thle             ###   ########.fr       */
+/*   Created: 2021/11/16 11:57:01 by itkimura          #+#    #+#             */
+/*   Updated: 2021/11/29 16:39:20 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "libft.h"
 
-# include "op.h"
-# include "libft.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
+void	*ft_memalloc(size_t size)
+{
+	void	*str;
 
-#endif
+	str = (void *)malloc(size);
+	if (!str)
+		return (0);
+	else
+		ft_bzero(str, size);
+	return (str);
+}

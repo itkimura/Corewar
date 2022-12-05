@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/05 15:09:40 by thle             ###   ########.fr       */
+/*   Created: 2021/11/03 13:34:16 by itkimura          #+#    #+#             */
+/*   Updated: 2021/11/10 18:15:40 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "libft.h"
 
-# include "op.h"
-# include "libft.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
+char	*ft_strncpy(char *dst, const char *src, size_t len)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (*src && i < len)
+	{
+		dst[i] = *src;
+		src++;
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
+}

@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/05 15:09:40 by thle             ###   ########.fr       */
+/*   Created: 2021/11/21 01:26:28 by itkimura          #+#    #+#             */
+/*   Updated: 2021/11/21 01:34:03 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include "libft.h"
 
-# include "op.h"
-# include "libft.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
-
-#endif
+int	ft_strequ(char const *s1, char const *s2)
+{
+	if (s1 && s2)
+	{
+		while (*s1 || *s2)
+		{
+			if (*s1 != *s2)
+				return (0);
+			s1++;
+			s2++;
+		}
+		return (1);
+	}
+	return (0);
+}
