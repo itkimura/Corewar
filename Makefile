@@ -6,7 +6,7 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/11/28 16:10:12 by thle             ###   ########.fr        #
+#    Updated: 2022/12/05 15:24:44 by thle             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(ASM): $(LIB) $(OBJS_DIR) $(ASM_OBJS)
 	@$(CC) -o $(ASM) $(FLAGS) $(ASM_OBJS) -L$(LIB_DIR) -lft
 	@echo "Compiled $(ASM)"
 
-$(LIB): #$(wildcard libft/srcs/*.c)
+$(LIB):
 	@$(MAKE) -sC ./libft
 	@echo "Compiled $(LIB)"
 
