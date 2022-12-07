@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   validate_flag.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/07 15:00:15 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:29:54 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
 /* validate nb and return true or false*/
-t_bool validate_n_flag_nb(char *argv, int index, t_flag *flag)
+t_bool validate_n_flag_nb(char *argv, int index, t_vm_flag *flag)
 {
 	int nb = ft_atoi(argv[index]);
 	*flag = FLAG_N;
@@ -27,7 +27,7 @@ t_bool validate_n_flag_nb(char *argv, int index, t_flag *flag)
 /*
 return which flag by ft_strcmp
 */
-t_bool which_flag(char *argv, int index, t_flag *flag)
+t_bool which_flag(char *argv, int index, t_vm_flag *flag)
 {
 	// if (ft_strcmp(arv, "-d") == 0)
 	// 	return (FLAG_DUMP);

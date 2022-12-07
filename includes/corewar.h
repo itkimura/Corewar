@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/07 15:46:47 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/07 16:30:29 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,12 @@ typedef enum e_bool
  * struct for flag
  * rmb to update TOTAL_FLAGS
 */
-typedef enum e_flag
+typedef enum e_vm_flag
 {
 	NOT_FLAG = -1,
 	FLAG_N,
 	FLAG_DUMP
-} t_flag;
-
-/* 
- * struct for general data of the game
-*/
-typedef struct s_game
-{
-	int total_players; //initialize 0
-	t_program *player_array[MAX_PLAYERS];
-	int flags_value[TOTAL_FLAGS]; //initialize to 0
-}	t_game;
+} t_vm_flag;
 
 /* 
  * cattiage struct
@@ -70,6 +60,16 @@ typedef struct s_program
 	unsigned char name[PROG_NAME_LENGTH + 1];
 	unsigned char *exec_code;
 } t_program;
+
+/* 
+ * struct for general data of the game
+*/
+typedef struct s_game
+{
+	int total_players; //initialize 0
+	t_program *player_array[MAX_PLAYERS];
+	int flags_value[TOTAL_FLAGS]; //initialize to 0
+}	t_game;
 
 /* 
  * error enum
@@ -110,8 +110,8 @@ t_bool read_champion(t_program *program, int fd);
 /*
  * validate_flag.c
 */
-t_bool validate_n_flag_nb(char *argv, int index, t_flag *flag);
-t_bool which_flag(char *argv, int index, t_flag *flag);
+t_bool validate_n_flag_nb(char *argv, int index, t_vm_flag *flag);
+t_bool which_flag(char *argv, int index, t_vm_flag *flag);
 
 
 #endif

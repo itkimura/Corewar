@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/07 15:31:55 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/07 16:21:24 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int validate_argv(int argc, char **argv)
 	index = 1;
 	while (index < argc)
 	{
-		if (which_flag(argv, index, &flag) == false)
-			ERROR
+		if (which_flag(argv, index, &flag) == FALSE)
+			ft_printf("ERRPOR");
 		if (flag = NOT_FLAG)
 		{
 			//champion validation

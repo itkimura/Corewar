@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/07 15:45:30 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/07 16:25:37 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /* Magic_header (4 byte)-> validate with COREWAR_EXEC_MAGIC */
 t_bool validate_magic_header(int fd)
 {
-	unsigned char bytes[5];
-	read(fd, bytes, 4);
-	bytes[5] = '\0';
+	// unsigned char bytes[5];
+	// read(fd, bytes, 4);
+	// bytes[5] = '\0';
 	// validate
 }
 
@@ -62,10 +62,23 @@ t_bool read_exec_code(t_program *program, int fd)
 t_bool read_champion(t_program *program, int fd)
 {
 	validte_magic_header(fd);
-	read_champion_name(program, fd);
-	validate_null(fd);
-	validte_exec_code(program, fd);
-	read_champion_comments(program, fd);
-	validate_null(fd);
-	read_exec_code();
+	// read_champion_name(program, fd);
+	// validate_null(fd);
+	// validte_exec_code(program, fd);
+	// read_champion_comments(program, fd);
+	// validate_null(fd);
+	// read_exec_code(program, fd);
+}
+
+int main(int argc, char **argv)
+{
+	if (argc < 1)
+		ft_printf("argc is wrong!");
+	else
+	{
+		int fd = open(argv[1], O_RDONLY);
+		t_program *program = malloc(sizeof(t_program));
+		read_champion(program, fd);
+	}
+	return 0;
 }
