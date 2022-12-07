@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 int main()
 {
@@ -9,8 +10,7 @@ int main()
 
     read(fd, bytes, 32);
     bytes[32] = '\0';
-    printf("-- hexdump --\n");
     for (int i = 0; i < 32; i++)
-      printf("[%d] = %X\n", i, bytes[i]);
+      write(1, &bytes[i], 1);
     return (0);
 }

@@ -6,49 +6,11 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/05 14:52:52 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/07 15:10:03 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include <string.h>
-
-# define TOTAL_FLAGS 2
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-} t_bool;
-
-/* rmb to update TOTAL_FLAGS */
-typedef enum e_flag
-{
-	FLAG_N,
-	FLAG_DUMP
-} t_flag;
-
-typedef struct s_game
-{
-	int total_players; //initialize 0
-	t_carriage *player_array[MAX_PLAYERS];
-	int flags_value[TOTAL_FLAGS]; //initialize to 0
-	
-}	t_game;
-
-typedef struct s_carriage
-{
-	int32_t registry[16];
-	// r1: will be champion's code but minus
-	// the rest: 0
-	int32_t pc;
-	t_bool carry; //-> 0?
-	char *comment;
-	char *name;
-} t_carriage;
-
-/* ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ... */
-
+#include "../../includes/corewar.h"
 
 /* init game t_game struct */
 int init_game(t_game *game)
@@ -56,40 +18,47 @@ int init_game(t_game *game)
 	
 }
 
-/*
-return which flag by ft_strcmp
-*/
-t_flag which_flag(char *arv)
+t_bool get_then_init_program(t_program **new)
 {
-	// if (ft_strcmp(arv, "-d") == 0)
-	// 	return (FLAG_DUMP);
-	// if (ft_strcmp(arv, "-n") == 0){
-	// 	return ()
-	// }
-	// return (0);
-}
-
-t_bool get_then_init_carriage(t_carriage **new)
-{
-	*new = (t_carriage *)malloc(sizeof(t_carriage));
+	*new = (t_program *)malloc(sizeof(t_program));
 	if (new == NULL)
 		return (FALSE);
 	//init new
-	//Check if flag_value[Flag_n] -> t_carriage new, new.r[0] = flag_value[FLAG_N];
+	//Check if flag_value[Flag_n] -> t_program new, new.r[0] = flag_value[FLAG_N];
 	//flag_value[flag_n] = 0;
 }
+
+/*
+ * store_player number
+ * if game->flag_value[FLAG_N] != 0 -> program->registry[0]
+ * Check game->player_array[nb] != 0) -> swap and put into the next one
+ *
+ * else
+ *  program->registory[total_players] = program;
+ *  total_players++;
+*/
+void store_palyer_number(t_game *game, t_program *program)
+{
+
+}
+/*
+ * open file -> if it's fail, it means the file is not exist.
+ * if success
+ * 1. Make program structure
+ * 2. Start reading and save info into program
+*/
 
 t_bool champion_validation(char *str, t_game *game)
 {
 	int fd = open(str, O_RDONLY);
-	t_carriage *new;
+	t_program *new;
 
 	new = NULL;
 	if (fd < 0)
 		return FALSE;
-	if (get_then_init_carriage(new) == NULL) return FALSE;
+	if (get_then_init_program(new) == NULL)
+		return FALSE;
 	/* read then validate */
-
 	close(fd);
 }
 
@@ -98,10 +67,10 @@ while loop each argv
 call get_arg_type
 	if flag, check which flag
 		if FLAG_DUMP &&  => t_game->flag_value[FLAG_DUMP] = atoi(argv)
-	if CHAMPION -> open ->  init_carriage -> 
+	if CHAMPION -> open ->  init_program -> 
 	->read -> validation_champion; t_game->total_players++;
 */
-int validation(int argc, char **argv)
+int validate_argv(int argc, char **argv)
 {
 	int flag;
 	int index;
@@ -110,38 +79,30 @@ int validation(int argc, char **argv)
 	index = 1;
 	while (index < argc)
 	{
-		flag = which_flag(argv[index]);
-		if (flag != -1)
-		{
-			if (is_number(argv[++index]) == TRUE)
-			{
-				t_game->flag_value[FLAG_DUMP] = ft_atoi(arv);
-				flag = -1;
-			}
-			else
-				ERROR
-			
-		}
-		else
+		if (which_flag(argv, index, &flag) == false)
+			ERROR
+		if (flag = NOT_FLAG)
 		{
 			//champion validation
 		}
+		flag = NOT_FLAG;
 		index++;
 	}
 }
 
+/*
+ * Check the number of args, and it is only one print help text
+ * if there are some arguments, start validation.
+*/
 int main(int argc, char *argv[])
 {
 	// Branch 'vm' set up to track remote branch 'vm' from 'origin'.
 	// ./corewar [-dump nbr_cycles] [[-n number] champion1.cor]
-
 	/*
 	if argc < 2:
-		print help
+		print_help();
 	else:
 		start testing
-
 	*/
-
 	return (0);
 }
