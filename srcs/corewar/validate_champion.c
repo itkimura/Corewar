@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_champion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/07 15:09:47 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:45:30 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_bool read_champion_comment(t_program *program, int fd)
 }
 
 /* Exec code (t_program->exec_code_size) -> malloc and save it in program->exec_code */
-t_bool read_champion_comment(t_program *program, int fd)
+t_bool read_exec_code(t_program *program, int fd)
 {
 
 }
