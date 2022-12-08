@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 13:27:09 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:12:48 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_bool validate_player_nb(t_program *new, t_game *game)
 }
 /*
  * init program structure
- *
  * 1.malloc structure
  * 2.validate and store player number
  * 
@@ -143,6 +142,7 @@ t_bool validate_argv(int argc, char **argv)
 	{
 		if (which_flag(argv, index, &flag, game) == FALSE)
 			return (FALSE);
+		print_game(game);
 		//if (flag == NOT_FLAG)
 		//	validate_champion(argv[index], game);
 		flag = NOT_FLAG;

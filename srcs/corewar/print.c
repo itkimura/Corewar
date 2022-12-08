@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 13:26:37 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:13:02 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ void	print_program(t_program *program)
 	ft_printf("%sfix_postion%s:\t%d\n", BOLD, RESET, program->fix_position);
 	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, program->exec_code_size);
 	ft_printf("%scomment%s:\t%s\n", BOLD, RESET, program->comment);
-	ft_printf("%sexec_code%s:\t%d\n", BOLD, RESET, program->exec_code);
+	if (program->exec_code != NULL)
+	{
+		ft_printf("%sexec_code%s:\t", BOLD, RESET);
+		for (unsigned int i = 0; i < program->exec_code_size; i++)
+			ft_printf("%X", program->exec_code[i]);
+	}
 }
 
 /*
@@ -78,5 +83,6 @@ void	print_game(t_game *game)
 		ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->player_array[i]);
 	ft_printf("%sflags_value:\t\n", BOLD, RESET);
 	for(int i = 0; i < TOTAL_FLAGS; i++)
-		ft_printf("%s\t[%d]%s:\t%d", BOLD, i, RESET, game->flags_value[i]);
+		ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
+	ft_printf("\n");
 }
