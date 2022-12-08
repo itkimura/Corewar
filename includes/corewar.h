@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/07 16:30:29 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/08 10:34:15 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 
 # define TOTAL_FLAGS 2
 
+# define RED "\e[31m"
+# define GREEN "\e[32m"
+# define BLUE "\e[33m"
+# define BOLD "\e[1m"
+# define RESET "\e[m"
 /*
  * t_bool struct
  */
@@ -43,6 +48,14 @@ typedef enum e_vm_flag
 	FLAG_N,
 	FLAG_DUMP
 } t_vm_flag;
+
+/* 
+ * error enum
+ */
+typedef enum e_error{
+	MALLOC_FAIL,
+	WRONG_NB,
+} t_error;
 
 /* 
  * cattiage struct
@@ -71,28 +84,22 @@ typedef struct s_game
 	int flags_value[TOTAL_FLAGS]; //initialize to 0
 }	t_game;
 
-/* 
- * error enum
- */
-typedef enum e_error{
-	MALLOC_FAIL,
-} t_error;
 
 /*
  * corewar.c
  * main starts here
 */
-int init_game(t_game *game);
-t_bool get_then_init_program(t_program **new);
-void store_palyer_number(t_game *game, t_program *program);
-t_bool champion_validation(char *str, t_game *game);
-int validate_argv(int argc, char **argv);
+t_bool	init_game(t_game **game);
+t_bool	get_then_init_program(t_program **new);
+void	store_palyer_number(t_game *game, t_program *program);
+t_bool	champion_validation(char *str, t_game *game);
+t_bool	validate_argv(int argc, char **argv);
 
 /*
  * print.c
 */
-void print_error(char *str, t_error error);
-void print_help(void);
+t_bool	print_error(char *str, t_error error);
+void	print_help(char *file_path);
 
 
 /*
@@ -110,8 +117,8 @@ t_bool read_champion(t_program *program, int fd);
 /*
  * validate_flag.c
 */
-t_bool validate_n_flag_nb(char *argv, int index, t_vm_flag *flag);
-t_bool which_flag(char *argv, int index, t_vm_flag *flag);
+t_bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game);
+t_bool which_flag(char **argv, int index, t_vm_flag *flag, t_game *game);
 
 
 #endif
