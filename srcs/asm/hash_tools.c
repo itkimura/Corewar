@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 09:48:13 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 11:56:33 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 12:32:19 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,18 @@ static int	insert_statements(t_asmdata *data)
 	return (1);
 }
 
-int	get_statement_index(char *name)
+int	get_index(t_asmdata *data, char *name)
 {
-	return (hash(name));
+	t_hashstatement	*tmp;
+
+	tmp = data->hashtable[hash(name)];
+	while (tmp)
+	{
+		if (ft_strequ(tmp->name, name))
+			return (tmp->index);
+		tmp = tmp->next;
+	}
+	return (-1);
 }
 
 int	init_hashtable(t_asmdata *data)

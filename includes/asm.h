@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 11:54:02 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 12:29:56 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # include <string.h>
 # include <stdbool.h>
 
-typedef struct s_statements
+typedef struct s_statement
 {
 	char			*name;
 	int				code;
 	bool			argcode;
 	u_int16_t	args;
-}	t_statements;
+}	t_statement;
 
 typedef struct s_hashstatement
 {
@@ -41,7 +41,7 @@ typedef struct s_asmdata
 	t_hashstatement	**hashtable;	
 }	t_asmdata;
 
-static const t_statements	g_statements[16] = {
+static const t_statement	g_statements[16] = {
 {.code = 1, .name = "live", .argcode = false, .args = 0},
 {.code = 2, .name = "ld", .argcode = true, .args = 0},
 {.code = 3, .name = "st", .argcode = true, .args = 0},
@@ -62,10 +62,11 @@ static const t_statements	g_statements[16] = {
 
 void	free_exit(t_asmdata *data);
 int		init_hashtable(t_asmdata *data);
-int		get_statement_index(char *name);
+int		get_index(t_asmdata *data, char *name);
 
 /* tempfunctions */
 
 void	print_hashtable(t_asmdata *data);
+void	print_statement(t_statement statement);
 
 #endif
