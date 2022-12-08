@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 14:06:19 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:06:12 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_statement(t_asmdata *data, char *name)
 	t_statement	statement;
 	int			index;
 
-	index = get_index(data, name);
+	index = get_statement_index(data, name);
 	if (index == -1)
 		exit(1);
 	statement = g_statements[index];
@@ -36,6 +36,17 @@ void	print_hashtable(t_asmdata *data)
 		t_hashstatement	*tmp = data->hashtable[i];
 		while (tmp) {
 			ft_printf("Name: {%s}\n", tmp->name);
+			tmp = tmp->next;
+		}
+	}
+}
+
+void	print_hashlabel(t_asmdata *data)
+{
+	for (int i = 0; i < HASHTABLESIZE; i++) {
+		t_labels	*tmp = data->labels[i];
+		while (tmp) {
+			ft_printf("i:[%d] Name: {%s} index {%d}\n", i, tmp->name, tmp->index);
 			tmp = tmp->next;
 		}
 	}

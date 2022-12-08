@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 14:24:37 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 14:55:57 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(void)
 	if (!data)
 		return (0);
 	init_structs(data);
-	print_statement(data, "sti");
+	insert_label(data, "Test", 0);
+	print_hashlabel(data);
 	return (0);
 }

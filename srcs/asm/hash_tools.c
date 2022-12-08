@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 09:48:13 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 14:30:25 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:08:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ unsigned long	hash(char *str)
 	return (hash % HASHTABLESIZE);
 }
 
-int	get_index(t_asmdata *data, char *name)
+int	get_statement_index(t_asmdata *data, char *name)
 {
 	t_hashstatement	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 14:42:05 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:04:09 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,38 @@
 
 static	int	init_label(t_labels **label, char *name, int index)
 {
-	*label = (t_labels *)malloc(sizeof(t_labels));
-	if (!(*label))
+	t_labels	*tmp;
+
+	tmp = (t_labels *)malloc(sizeof(t_labels));
+	if (!tmp)
 		return (0);
-	(*label)->name = ft_strdup(name);
-	if (!(*label)->name)
+	tmp->name = ft_strdup(name);
+	if (!tmp->name)
 		return (0);
-	(*label)->index = index;
+	tmp->index = index;
+	if (*label)
+		tmp->next = *label;
+	*label = tmp;
 	return (1);
 }
 
-void	get_label_index(t_asmdata *data, char *label)
+int	get_label_index(t_asmdata *data, char *name)
 {
-	/* get the instruction index of label */
-	if (data || label)
-		return ;
+	t_labels	*tmp;
+
+	tmp = data->labels[hash(name)];
+	while (tmp)
+	{
+		if (ft_strequ(tmp->name, name))
+			return (tmp->index);
+		tmp = tmp->next;
+	}
+	return (-1);
 }
 
 void	insert_label(t_asmdata *data, char *name, int index)
 {
-	int			hashindex;
+	int	hashindex;
 
 	hashindex = hash(name);
 	if (!init_label(&data->labels[hashindex], name, index))
@@ -46,7 +58,7 @@ int	init_labels(t_asmdata *data)
 
 	i = 0;
 	data->labels = (t_labels **)malloc(sizeof(t_labels *) * HASHTABLESIZE);
-	if (data->labels)
+	if (!data->labels)
 		return (0);
 	while (i < HASHTABLESIZE)
 		data->labels[i++] = NULL;
