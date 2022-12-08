@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 15:32:20 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:01:04 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,7 @@ t_bool read_champion(t_program *program, int fd);
 /*
  * validate_flag.c
 */
-t_bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game);
-t_bool which_flag(char **argv, int index, t_vm_flag *flag, t_game *game);
-
+t_bool	validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game);
+t_bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 
 #endif

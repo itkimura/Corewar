@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 15:32:28 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:08:55 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_bool	print_error(char *str, t_error error)
 	else if (error == DUP_PLAYER_NB)
 		ft_printf("duplication of player number %s%s%s\n", BOLD, str, RESET);
 	else if (error == NO_PLAYER_AFTER_FLAG_N)
-		ft_printf("the next player should be inputed after %s%s%s\n", BOLD, str, RESET);
+		ft_printf("the input after %s-n N%s should be a player\n", BOLD, RESET);
 	return (FALSE);
 }
 
