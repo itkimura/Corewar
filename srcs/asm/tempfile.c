@@ -6,21 +6,28 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 12:26:18 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 14:06:19 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	print_statement(t_statement statement)
+void	print_statement(t_asmdata *data, char *name)
 {
-	ft_printf("code: [%d] ", statement.code);
-	ft_printf("name: {%s} ", statement.name);
+	t_statement	statement;
+	int			index;
+
+	index = get_index(data, name);
+	if (index == -1)
+		exit(1);
+	statement = g_statements[index];
+	ft_printf("[Statement code]: {%d} ", statement.code);
+	ft_printf("[Name]: {%s} ", statement.name);
 	if (statement.argcode == true)
-		ft_printf("argcode: {%s} ", "true");
+		ft_printf("[Argcode]: {%s} ", "true");
 	else
-		ft_printf("argcode: {%s} ", "false");
-	ft_printf("args: [%d]\n", statement.args);
+		ft_printf("[Argcode]: {%s} ", "false");
+	ft_printf("[Args]: {%d}\n", statement.args);
 }
 
 void	print_hashtable(t_asmdata *data)
