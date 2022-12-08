@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 16:43:06 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 17:03:21 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,20 +110,20 @@ t_bool read_champion(t_program *program, char *argv, int fd)
 	return (TRUE);
 }
 
-int main(int argc, char **argv)
-{
-	if (argc < 1)
-		ft_printf("argc is wrong!");
-	else
-	{
-		int fd = open(argv[1], O_RDONLY);
-		t_program *program = (t_program *)malloc(sizeof(t_program));
-		if (read_champion(program, argv[1], fd) == TRUE)
-			print_program(program);
-		if (program->exec_code != NULL)
-			free(program->exec_code);
-		free(program);
-		close(fd);
-	}
-	return 0;
-}
+// int main(int argc, char **argv)
+// {
+// 	if (argc < 1)
+// 		ft_printf("argc is wrong!");
+// 	else
+// 	{
+// 		int fd = open(argv[1], O_RDONLY);
+// 		t_program *program = (t_program *)malloc(sizeof(t_program));
+// 		if (read_champion(program, argv[1], fd) == TRUE)
+// 			print_program(program);
+// 		if (program->exec_code != NULL)
+// 			free(program->exec_code);
+// 		free(program);
+// 		close(fd);
+// 	}
+// 	return 0;
+// }
