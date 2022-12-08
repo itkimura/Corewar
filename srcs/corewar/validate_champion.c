@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 15:16:32 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 16:43:06 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,26 +94,20 @@ t_bool read_exec_code(t_program *program, int fd)
 /*
  * read the campion, go to each function to save data
 */
-t_bool read_champion(t_program *program, int fd)
+t_bool read_champion(t_program *program, char *argv, int fd)
 {
-	if (validate_magic_header(fd) == TRUE)
-	{
-		read_champion_name(program, fd);
-		if (validate_null(fd) == TRUE)
-		{
-			if (validate_exec_code_size(program, fd) == TRUE)
-			{
-				read_champion_comment(program, fd);
-				if (validate_null(fd) == TRUE)
-				{
-					read_exec_code(program, fd);
-					return (TRUE);
-				}
-			}
-		
-		}
-	}
-	return (FALSE);
+	if (validate_magic_header(fd) == FALSE)
+		return (print_error(argv, INVALID_HEADER));
+	read_champion_name(program, fd);
+	if (validate_null(fd) == FALSE)
+		return (print_error(argv, INVALID_NULL));
+	if (validate_exec_code_size(program, fd) == FALSE)
+		return (print_error(argv, INVALID_CHAMPION_SIZE));
+	read_champion_comment(program, fd);
+	if (validate_null(fd) == FALSE)
+		return (print_error(argv, INVALID_NULL));
+	read_exec_code(program, fd);
+	return (TRUE);
 }
 
 int main(int argc, char **argv)
@@ -124,10 +118,8 @@ int main(int argc, char **argv)
 	{
 		int fd = open(argv[1], O_RDONLY);
 		t_program *program = (t_program *)malloc(sizeof(t_program));
-		if (read_champion(program, fd) == TRUE)
+		if (read_champion(program, argv[1], fd) == TRUE)
 			print_program(program);
-		else
-			ft_printf("not correct\n");
 		if (program->exec_code != NULL)
 			free(program->exec_code);
 		free(program);

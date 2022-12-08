@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 16:01:04 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:00:59 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef enum e_error{
 	OPEN_FAIL,
 	DUP_PLAYER_NB,
 	NO_PLAYER_AFTER_FLAG_N,
+	INVALID_HEADER,
+	INVALID_NULL,
+	INVALID_CHAMPION_SIZE
 } t_error;
 
 /* 
@@ -118,7 +121,7 @@ uint32_t bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx);
 t_bool validate_exec_code_size(t_program *program, int fd);
 t_bool read_champion_comment(t_program *program, int fd);
 t_bool read_exec_code(t_program *program, int fd);
-t_bool read_champion(t_program *program, int fd);
+t_bool read_champion(t_program *program, char *argv, int fd);
 
 /*
  * validate_flag.c
