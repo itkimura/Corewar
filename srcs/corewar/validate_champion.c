@@ -6,26 +6,11 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 14:49:03 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 15:16:32 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
-
-void print_bits(uint32_t nbr, int size)
-{
-	ft_printf("%lu: ", nbr);
-	for (int bit = size - 1; bit >= 0; bit--)
-	{
-		if (((nbr >> bit) & 1) == 0)
-			ft_printf("0 ");
-		else
-			ft_printf("1 ");
-		if (bit % 4 == 0)
-			ft_printf("  ");
-	}
-	ft_printf("\n");
-}
 
 /* like atoi, convert bytes to decimal */
 uint32_t	bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx)
@@ -140,10 +125,11 @@ int main(int argc, char **argv)
 		int fd = open(argv[1], O_RDONLY);
 		t_program *program = (t_program *)malloc(sizeof(t_program));
 		if (read_champion(program, fd) == TRUE)
-			ft_printf("correct\n");
+			print_program(program);
 		else
 			ft_printf("not correct\n");
-		
+		if (program->exec_code != NULL)
+			free(program->exec_code);
 		free(program);
 		close(fd);
 	}

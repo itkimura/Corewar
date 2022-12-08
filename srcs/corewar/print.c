@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 15:31:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:32:28 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ void	print_program(t_program *program)
 	{
 		ft_printf("%sexec_code%s:\t", BOLD, RESET);
 		for (unsigned int i = 0; i < program->exec_code_size; i++)
-			ft_printf("%X", program->exec_code[i]);
+			ft_printf("%02x ", program->exec_code[i]);
 	}
+	ft_printf("\n");
 }
 
 /*
@@ -90,4 +91,22 @@ void	print_game(t_game *game)
 			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
 		ft_printf("\n");
 	}
+}
+
+/*
+ * Print bits to debug numbers.
+ */
+void print_bits(uint32_t nbr, int size)
+{
+	ft_printf("%lu: ", nbr);
+	for (int bit = size - 1; bit >= 0; bit--)
+	{
+		if (((nbr >> bit) & 1) == 0)
+			ft_printf("0 ");
+		else
+			ft_printf("1 ");
+		if (bit % 4 == 0)
+			ft_printf("  ");
+	}
+	ft_printf("\n");
 }
