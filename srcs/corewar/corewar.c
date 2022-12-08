@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 17:07:35 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 18:17:48 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool init_game(t_game **game)
 	if (*game == NULL)
 		return (false);
 	index = 0;
-	while (index < MAX_PLAYERS)
+	while (index < MAX_PLAYERS + 1)
 		(*game)->player_array[index++] = NULL;
 	index = 0;
 	while (index < TOTAL_FLAGS)
@@ -37,23 +37,34 @@ bool init_game(t_game **game)
  */
 bool validate_player_nb(t_program *new, t_game *game)
 {
-	int player_nb;
+	int	player_nb;
 
-	(void)new;
-	(void)game;
-	(void)player_nb;
-	ft_printf("here\n");
+	ft_printf("flags_value[FLAG_N] = %d\n", game->flags_value[FLAG_N]);
 	if (game->flags_value[FLAG_N])
 	{
+		ft_printf("-n optin\n");
 		player_nb = game->flags_value[FLAG_N];
-		if (game->player_array[player_nb] == NULL || game->player_array[player_nb]->fix_position == true)
-			return (print_error(ft_itoa(player_nb), DUP_PLAYER_NB));
+		if (game->player_array[player_nb] != NULL)
+		{
+			if (game->player_array[player_nb]->fix_position == true)
+				return (print_error(ft_itoa(player_nb), DUP_PLAYER_NB));
+		}
+		new->fix_position = true;
 	}
 	else
 	{
 		player_nb = game->total_players;
-		while (game->player_array[player_nb]->fix_position == true)
-			player_nb++;
+		while (player_nb < MAX_PLAYERS + 1)
+		{
+			if (game->player_array[player_nb] != NULL)
+			{
+				if (game->player_array[player_nb]->fix_position == true)
+					player_nb++;
+			}
+			else
+				break ;
+		}
+		ft_printf("player_nb = %d\n", player_nb);
 	}
 	new->registry[0] = -1 * player_nb;
 	game->flags_value[FLAG_N] = 0;
@@ -61,6 +72,14 @@ bool validate_player_nb(t_program *new, t_game *game)
 	return (true);
 }
 
+void	ft_unsigned_char_zero(unsigned char *str, int len)
+{
+	int	index;
+
+	index = 0;
+	while (index < len)
+		str[index++] = 0;
+}
 /*
  * init program structure
  * 1.malloc structure
@@ -69,12 +88,24 @@ bool validate_player_nb(t_program *new, t_game *game)
  */
 bool init_program(t_program **new, t_game *game)
 {
+	int	index;
+
 	*new = (t_program *)malloc(sizeof(t_program));
 	if (*new == NULL)
 		return (print_error("init_program", MALLOC_FAIL));
-	if (validate_player_nb(*new, game))
+	index = 0;
+	while (index < REG_NUMBER)
+		(*new)->registry[index++] = 0;
+	(*new)->pc = 0;
+	(*new)->carry = 0;
+	(*new)->fix_position = false;
+	(*new)->exec_code = NULL;
+	ft_unsigned_char_zero((*new)->comment, COMMENT_LENGTH + 1);
+	ft_unsigned_char_zero((*new)->name, PROG_NAME_LENGTH + 1);
+	if (validate_player_nb(*new, game) == false)
 		return (false);
-	// print_program(*new);
+	game->player_array[(*new)->registry[0] * -1 -1] = *new;
+	print_program(*new);
 	return (true);
 	// Check if flag_value[Flag_n] -> t_program new, new.r[0] = flag_value[FLAG_N];
 	// flag_value[flag_n] = 0;

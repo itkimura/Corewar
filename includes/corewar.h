@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 17:07:34 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 18:01:03 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_program
 typedef struct s_game
 {
 	int total_players; // initialize 0
-	t_program *player_array[MAX_PLAYERS];
+	t_program *player_array[MAX_PLAYERS + 1];
 	int flags_value[TOTAL_FLAGS]; // initialize to 0
 } t_game;
 

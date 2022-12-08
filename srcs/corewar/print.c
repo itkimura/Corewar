@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 17:07:36 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 17:39:11 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void print_program(t_program *program)
 	for (int i = 0; i < 16; i++)
 		ft_printf("%s\t[%d]%s:%d\n", BOLD, i, RESET, program->registry[i]);
 	ft_printf("\n");
-	ft_printf("%spc:\t%d\n", BOLD, RESET, program->pc);
+	ft_printf("%spc:%s\t%d\n", BOLD, RESET, program->pc);
 	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, program->carry);
 	ft_printf("%sfix_postion%s:\t%d\n", BOLD, RESET, program->fix_position);
 	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, program->exec_code_size);
@@ -91,7 +91,10 @@ void print_game(t_game *game)
 		ft_printf("%stotal_players%s:\t%d\n", BOLD, RESET, game->total_players);
 		ft_printf("%splayer_array:\t\n", BOLD, RESET);
 		for (int i = 0; i < MAX_PLAYERS; i++)
-			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->player_array[i]);
+		{
+			if (game->player_array[i])
+				ft_printf("%s\t[%d]%s:\t%s\n", BOLD, i, RESET, game->player_array[i]->name);
+		}
 		ft_printf("%sflags_value:\t\n", BOLD, RESET);
 		for (int i = 0; i < TOTAL_FLAGS; i++)
 			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
