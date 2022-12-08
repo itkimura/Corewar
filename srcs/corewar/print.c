@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 15:32:28 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:52:26 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ t_bool	print_error(char *str, t_error error)
 		ft_printf("duplication of player number %s%s%s\n", BOLD, str, RESET);
 	else if (error == NO_PLAYER_AFTER_FLAG_N)
 		ft_printf("the next player should be inputed after %s%s%s\n", BOLD, str, RESET);
+	else if (error == INVALID_HEADER)
+		ft_printf("File %s%s%s has invalid magic header\n", BOLD, str, RESET);
+	else if (error == INVALID_NULL)
+		ft_printf("File %s%s%s has invalid null bytes\n", BOLD, str, RESET);
+	else if (error == INVALID_CHAMPION_SIZE)
+		ft_printf("File %s%s%s has too large champion size\n", BOLD, str, RESET);
 	return (FALSE);
 }
 
