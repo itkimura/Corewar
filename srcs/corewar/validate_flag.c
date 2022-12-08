@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 13:35:27 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:22:57 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 	game->flags_value[FLAG_DUMP] = nb;
 	return (TRUE);
 }
+
 /*
 return which flag by ft_strcmp
 */

@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 15:12:48 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:31:36 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ t_bool	init_game(t_game **game)
 	*game = (t_game *)malloc(sizeof(t_game));
 	if (*game == NULL)
 		return (FALSE);
-	(*game)->total_players = 0;
 	index = 0;
 	while (index < MAX_PLAYERS)
 		(*game)->player_array[index++] = NULL;
 	index = 0;
 	while (index < TOTAL_FLAGS)
 		(*game)->flags_value[index++] = 0;
+	(*game)->total_players = 0;
+	print_game(*game);
 	return (TRUE);
 }
 
@@ -39,7 +40,6 @@ t_bool validate_player_nb(t_program *new, t_game *game)
 {
 	int	player_nb;
 
-	ft_printf("here");
 	(void)player_nb;
 	(void)game;
 	(void)new;
@@ -62,6 +62,7 @@ t_bool validate_player_nb(t_program *new, t_game *game)
 	*/
 	return (TRUE);
 }
+
 /*
  * init program structure
  * 1.malloc structure
@@ -136,6 +137,7 @@ t_bool validate_argv(int argc, char **argv)
 	game = NULL;
 	if (init_game(&game) == FALSE)
 		return (print_error("init_game", MALLOC_FAIL));
+	print_game(game);
 	flag = -1;
 	index = 1;
 	while (index < argc)

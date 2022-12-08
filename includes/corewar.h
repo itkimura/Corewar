@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 14:54:47 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 15:19:02 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 
-# define TOTAL_FLAGS 2
+# define TOTAL_FLAGS 5
 
 # define RED "\e[31m"
 # define GREEN "\e[32m"
@@ -58,6 +58,7 @@ typedef enum e_error{
 	WRONG_NB,
 	OPEN_FAIL,
 	DUP_PLAYER_NB,
+	NO_PLAYER_AFTER_FLAG_N,
 } t_error;
 
 /* 

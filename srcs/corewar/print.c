@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 15:13:02 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:31:13 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ t_bool	print_error(char *str, t_error error)
 	ft_printf("%sError%s: ", RED, RESET);
 	if (error == MALLOC_FAIL)
 		ft_printf("malloc fail at %s%s%s\n", BOLD, str, RESET);
-	if (error == WRONG_NB)
+	else if (error == WRONG_NB)
 		ft_printf("wrong input number for %s%s%s\n", BOLD, str, RESET);
-	if (error == OPEN_FAIL)
+	else if (error == OPEN_FAIL)
 		ft_printf("cannot open %s%s%s file\n", BOLD, str, RESET);
-	if (error == DUP_PLAYER_NB)
-		ft_printf("duplication pf player number %s%s%s\n", BOLD, str, RESET);
+	else if (error == DUP_PLAYER_NB)
+		ft_printf("duplication of player number %s%s%s\n", BOLD, str, RESET);
+	else if (error == NO_PLAYER_AFTER_FLAG_N)
+		ft_printf("the next player should be inputed after %s%s%s\n", BOLD, str, RESET);
 	return (FALSE);
 }
 
@@ -76,13 +78,16 @@ void	print_program(t_program *program)
  */
 void	print_game(t_game *game)
 {
-	ft_printf("[%st_game%s]\n", BOLD, RESET);
-	ft_printf("%stotal_players:\t%d\n", BOLD, RESET, game->total_players);
-	ft_printf("%splayer_array:\t\n", BOLD, RESET);
-	for(int i = 0; i < MAX_PLAYERS; i++)
-		ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->player_array[i]);
-	ft_printf("%sflags_value:\t\n", BOLD, RESET);
-	for(int i = 0; i < TOTAL_FLAGS; i++)
-		ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
-	ft_printf("\n");
+	if (game != NULL)
+	{
+		ft_printf("[%st_game%s]\n", BOLD, RESET);
+		ft_printf("%stotal_players%s:\t%d\n", BOLD, RESET, game->total_players);
+		ft_printf("%splayer_array:\t\n", BOLD, RESET);
+		for(int i = 0; i < MAX_PLAYERS; i++)
+			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->player_array[i]);
+		ft_printf("%sflags_value:\t\n", BOLD, RESET);
+		for(int i = 0; i < TOTAL_FLAGS; i++)
+			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
+		ft_printf("\n");
+	}
 }
