@@ -1,0 +1,17 @@
+Code	Name	Argument # 1	Argument # 2	Argument # 3	Argument Type Code	Size T_DIR
+0x01	live	T_DIR	-	-	No	4
+0x02	ld	T_DIR / T_IND	T_REG	-	Yes	4
+0x03	st	T_REG	T_REG / T_IND	-	Yes	4
+0x04	add	T_REG	T_REG	T_REG	Yes	4
+0x05	sub	T_REG	T_REG	T_REG	Yes	4
+0x06	and	T_REG / T_DIR / T_IND	T_REG / T_DIR / T_IND	T_REG	Yes	4
+0x07	or	T_REG / T_DIR / T_IND	T_REG / T_DIR / T_IND	T_REG	Yes	4
+0x08	xor	T_REG / T_DIR / T_IND	T_REG / T_DIR / T_IND	T_REG	Yes	4
+0x09	zjmp	T_DIR	-	-	No	2
+0x0a	ldi	T_REG / T_DIR / T_IND	T_REG / T_DIR	T_REG	Yes	2
+0x0b	sti	T_REG	T_REG / T_DIR / T_IND	T_REG / T_DIR	Yes	2
+0x0c	fork	T_DIR	-	-	No	2
+0x0d	lld	T_DIR / T_IND	T_REG	-	Yes	4
+0x0e	lldi	T_REG / T_DIR / T_IND	T_REG / T_DIR	T_REG	Yes	2
+0x0f	lfork	T_DIR	-	-	No	2
+0x10	aff	T_REG	-	-	Yes	4
