@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 13:28:08 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 14:54:47 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
+# include <fcntl.h>
+# include <stdbool.h>
+# include <string.h>
+
 # include "op.h"
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
-# include <fcntl.h>
-
-
-# include <string.h>
 
 # define TOTAL_FLAGS 2
 
@@ -29,6 +29,7 @@
 # define BLUE "\e[33m"
 # define BOLD "\e[1m"
 # define RESET "\e[m"
+
 /*
  * t_bool struct
  */
@@ -111,8 +112,8 @@ void	print_game(t_game *game);
 t_bool validate_magic_header(int fd);
 t_bool validate_null(int fd);
 t_bool read_champion_name(t_program *program, int fd);
-unsigned int bytes_to_decimal(unsigned char *bytes);
-t_bool validate_exec_code(t_program *program, int fd);
+uint32_t bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx);
+t_bool validate_exec_code_size(t_program *program, int fd);
 t_bool read_champion_comment(t_program *program, int fd);
 t_bool read_exec_code(t_program *program, int fd);
 t_bool read_champion(t_program *program, int fd);
