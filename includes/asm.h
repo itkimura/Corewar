@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 14:23:25 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 14:36:23 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_hashstatement
 
 typedef struct s_labels
 {
-	char						*label;
+	char						*name;
 	int							index;
 	struct s_labels	*next;
 }	t_labels;
@@ -77,14 +77,15 @@ int		get_index(t_asmdata *data, char *name);
 */
 
 int		init_labels(t_asmdata *data);
-void	insert_label(t_asmdata *data, char *label);
+void	insert_label(t_asmdata *data, char *name, int index);
 void	get_label_index(t_asmdata *data, char *label);
 
 /* 
 ** Hash functions
 */
 
-int		init_hashtable(t_asmdata *data);
+int				init_hashtable(t_asmdata *data);
+unsigned long	hash(char *str);
 
 /*
 ** tempfunctions to be removed

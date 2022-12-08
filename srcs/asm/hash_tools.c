@@ -6,24 +6,11 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 09:48:13 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 12:32:19 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 14:30:25 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-/* hash * 33 + c */
-static unsigned long	hash(char *str)
-{
-	unsigned long	hash;
-	unsigned long	i;
-
-	hash = 5381;
-	i = 0;
-	while (str[i])
-		hash = ((hash << 5) + hash) + str[i++];
-	return (hash % HASHTABLESIZE);
-}
 
 static int	init_statements(t_hashstatement **statement, int i)
 {
@@ -58,6 +45,19 @@ static int	insert_statements(t_asmdata *data)
 		i++;
 	}
 	return (1);
+}
+
+/* hash * 33 + c */
+unsigned long	hash(char *str)
+{
+	unsigned long	hash;
+	unsigned long	i;
+
+	hash = 5381;
+	i = 0;
+	while (str[i])
+		hash = ((hash << 5) + hash) + str[i++];
+	return (hash % HASHTABLESIZE);
 }
 
 int	get_index(t_asmdata *data, char *name)
