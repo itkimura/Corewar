@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 14:54:47 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/08 15:17:24 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ t_bool	print_error(char *str, t_error error);
 void	print_help(char *file_path);
 void	print_program(t_program *program);
 void	print_game(t_game *game);
+void	print_bits(uint32_t nbr, int size);
 
 /*
  * validate_champion.c
