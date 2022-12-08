@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.c                                              :+:      :+:    :+:   */
+/*   tempfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 11:55:21 by leo              ###   ########.fr       */
+/*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
+/*   Updated: 2022/12/08 11:57:50 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int	main(void)
+void	print_hashtable(t_asmdata *data)
 {
-	t_asmdata	*data;
-
-	data = (t_asmdata *)malloc(sizeof(t_asmdata));
-	if (!data)
-		return (0);
-	data->hashtable = NULL;
-	if (!init_hashtable(data))
-		free_exit(data);
-	print_hashtable(data);
-	ft_printf("Exit\n");
-	return (0);
+	for (int i = 0; i < HASHTABLESIZE; i++) {
+		t_hashstatement	*tmp = data->hashtable[i];
+		while (tmp) {
+			ft_printf("Name: {%s}\n", tmp->name);
+			tmp = tmp->next;
+		}
+	}
 }
