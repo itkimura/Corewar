@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 12:38:35 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 13:18:30 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(void)
 {
 	t_asmdata	*data;
+	int			index;
 
 	data = (t_asmdata *)malloc(sizeof(t_asmdata));
 	if (!data)
@@ -24,8 +25,11 @@ int	main(void)
 		free_exit(data);
 	// print_hashtable(data);
 
-	print_statement(g_statements[get_index(data, "live")]);
+	index = get_index(data, "live");
+	if (index == -1)
+		return (0);
+	print_statement(g_statements[index]);
 	// print_statement(tmp);
-	ft_printf("Exit\n");
+	ft_printf("done.\n");
 	return (0);
 }
