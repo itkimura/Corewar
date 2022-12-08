@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 14:10:15 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 14:23:25 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,25 @@ static const t_statement	g_statements[HASHTABLESIZE] = {
 };
 
 void	free_exit(t_asmdata *data);
-int		init_hashtable(t_asmdata *data);
 int		get_index(t_asmdata *data, char *name);
 
-/* tempfunctions */
+/* 
+**	Label functions
+*/
+
+int		init_labels(t_asmdata *data);
+void	insert_label(t_asmdata *data, char *label);
+void	get_label_index(t_asmdata *data, char *label);
+
+/* 
+** Hash functions
+*/
+
+int		init_hashtable(t_asmdata *data);
+
+/*
+** tempfunctions to be removed
+*/
 
 void	print_hashtable(t_asmdata *data);
 void	print_statement(t_asmdata *data, char *name);
