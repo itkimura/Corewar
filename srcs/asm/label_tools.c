@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 15:04:09 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:14:28 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static	int	init_label(t_labels **label, char *name, int index)
 	return (1);
 }
 
+void	insert_label(t_asmdata *data, char *name, int index)
+{
+	int	hashindex;
+
+	hashindex = hash(name);
+	if (!init_label(&data->labels[hashindex], name, index))
+		free_exit(data);
+}
+
 int	get_label_index(t_asmdata *data, char *name)
 {
 	t_labels	*tmp;
@@ -43,21 +52,13 @@ int	get_label_index(t_asmdata *data, char *name)
 	return (-1);
 }
 
-void	insert_label(t_asmdata *data, char *name, int index)
-{
-	int	hashindex;
-
-	hashindex = hash(name);
-	if (!init_label(&data->labels[hashindex], name, index))
-		free_exit(data);
-}
-
-int	init_labels(t_asmdata *data)
+int	init_labels_table(t_asmdata *data)
 {
 	int	i;
 
 	i = 0;
-	data->labels = (t_labels **)malloc(sizeof(t_labels *) * HASHTABLESIZE);
+	data->labels = (t_labels **)malloc(\
+		sizeof(t_labels *) * HASHTABLESIZE);
 	if (!data->labels)
 		return (0);
 	while (i < HASHTABLESIZE)

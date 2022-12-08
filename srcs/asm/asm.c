@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 14:55:57 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:13:56 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_structs(t_asmdata *data)
 {
-	if (!init_hashtable(data) || !init_labels(data))
+	if (!init_statements_table(data) || !init_labels_table(data))
 		free_exit(data);
 }
 
