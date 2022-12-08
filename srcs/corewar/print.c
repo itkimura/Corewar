@@ -6,16 +6,16 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 17:00:26 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:07:36 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
 /*
- * print error message 
+ * print error message
  */
-t_bool	print_error(char *str, t_error error)
+bool print_error(char *str, t_error error)
 {
 	ft_printf("%sError%s: ", RED, RESET);
 	if (error == MALLOC_FAIL)
@@ -34,13 +34,13 @@ t_bool	print_error(char *str, t_error error)
 		ft_printf("File %s%s%s has invalid null bytes\n", BOLD, str, RESET);
 	else if (error == INVALID_CHAMPION_SIZE)
 		ft_printf("File %s%s%s has too large champion size\n", BOLD, str, RESET);
-	return (FALSE);
+	return (false);
 }
 
 /*
  * print help function
  */
-void	print_help(char *file_path)
+void print_help(char *file_path)
 {
 	ft_printf("%sName\n\t%s%s", BOLD, file_path, RESET);
 	ft_printf(" - is a program that the progress of the battle and");
@@ -59,7 +59,7 @@ void	print_help(char *file_path)
 /*
  * Debug printing function
  */
-void	print_program(t_program *program)
+void print_program(t_program *program)
 {
 	ft_printf("[%s%s%s]\n", BOLD, program->name, RESET);
 	ft_printf("%sregistry:\t\n", BOLD, RESET);
@@ -83,17 +83,17 @@ void	print_program(t_program *program)
 /*
  * Debug printing t_game function
  */
-void	print_game(t_game *game)
+void print_game(t_game *game)
 {
 	if (game != NULL)
 	{
 		ft_printf("[%st_game%s]\n", BOLD, RESET);
 		ft_printf("%stotal_players%s:\t%d\n", BOLD, RESET, game->total_players);
 		ft_printf("%splayer_array:\t\n", BOLD, RESET);
-		for(int i = 0; i < MAX_PLAYERS; i++)
+		for (int i = 0; i < MAX_PLAYERS; i++)
 			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->player_array[i]);
 		ft_printf("%sflags_value:\t\n", BOLD, RESET);
-		for(int i = 0; i < TOTAL_FLAGS; i++)
+		for (int i = 0; i < TOTAL_FLAGS; i++)
 			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
 		ft_printf("\n");
 	}

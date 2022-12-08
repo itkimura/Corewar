@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 16:16:47 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 17:07:35 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-/* 
+/*
  * init game t_game struct
  */
-t_bool	init_game(t_game **game)
+bool init_game(t_game **game)
 {
-	int		index;
+	int index;
 
 	*game = (t_game *)malloc(sizeof(t_game));
 	if (*game == NULL)
-		return (FALSE);
+		return (false);
 	index = 0;
 	while (index < MAX_PLAYERS)
 		(*game)->player_array[index++] = NULL;
@@ -29,15 +29,15 @@ t_bool	init_game(t_game **game)
 	while (index < TOTAL_FLAGS)
 		(*game)->flags_value[index++] = 0;
 	(*game)->total_players = 0;
-	return (TRUE);
+	return (true);
 }
 
 /*
- * 
+ *
  */
-t_bool validate_player_nb(t_program *new, t_game *game)
+bool validate_player_nb(t_program *new, t_game *game)
 {
-	int	player_nb;
+	int player_nb;
 
 	(void)new;
 	(void)game;
@@ -46,38 +46,38 @@ t_bool validate_player_nb(t_program *new, t_game *game)
 	if (game->flags_value[FLAG_N])
 	{
 		player_nb = game->flags_value[FLAG_N];
-		if (game->player_array[player_nb] == NULL || game->player_array[player_nb]->fix_position == TRUE)
+		if (game->player_array[player_nb] == NULL || game->player_array[player_nb]->fix_position == true)
 			return (print_error(ft_itoa(player_nb), DUP_PLAYER_NB));
 	}
 	else
 	{
 		player_nb = game->total_players;
-		while (game->player_array[player_nb]->fix_position == TRUE)
+		while (game->player_array[player_nb]->fix_position == true)
 			player_nb++;
 	}
 	new->registry[0] = -1 * player_nb;
 	game->flags_value[FLAG_N] = 0;
 	game->total_players++;
-	return (TRUE);
+	return (true);
 }
 
 /*
  * init program structure
  * 1.malloc structure
  * 2.validate and store player number
- * 
+ *
  */
-t_bool init_program(t_program **new, t_game *game)
+bool init_program(t_program **new, t_game *game)
 {
 	*new = (t_program *)malloc(sizeof(t_program));
 	if (*new == NULL)
 		return (print_error("init_program", MALLOC_FAIL));
 	if (validate_player_nb(*new, game))
-		return (FALSE);
-	//print_program(*new);
-	return (TRUE);
-	//Check if flag_value[Flag_n] -> t_program new, new.r[0] = flag_value[FLAG_N];
-	//flag_value[flag_n] = 0;
+		return (false);
+	// print_program(*new);
+	return (true);
+	// Check if flag_value[Flag_n] -> t_program new, new.r[0] = flag_value[FLAG_N];
+	// flag_value[flag_n] = 0;
 }
 
 /*
@@ -98,8 +98,8 @@ void store_palyer_number(t_game *game, t_program *program)
  * 1. open -> if it's fail, it means the file is not exist.
  * 1. Make program structure
  * 2. Start reading and save info into program
-*/
-t_bool validate_champion(char *file_path, t_game *game)
+ */
+bool validate_champion(char *file_path, t_game *game)
 {
 	int fd;
 	t_program *new;
@@ -108,25 +108,25 @@ t_bool validate_champion(char *file_path, t_game *game)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		return (print_error(file_path, OPEN_FAIL));
-	if (init_program(&new, game) == FALSE)
-		return (FALSE);
+	if (init_program(&new, game) == false)
+		return (false);
 	// read then validate
 	close(fd);
-	return (TRUE);
+	return (true);
 }
 
 /*
  * 1.initiarize game structure
  * 2.Check if argv is directory
-*/
-t_bool validate_argv(int argc, char **argv)
+ */
+bool validate_argv(int argc, char **argv)
 {
-	int		flag;
-	int		index;
-	t_game	*game;
+	int flag;
+	int index;
+	t_game *game;
 
 	game = NULL;
-	if (init_game(&game) == FALSE)
+	if (init_game(&game) == false)
 		return (print_error("init_game", MALLOC_FAIL));
 	flag = -1;
 	index = 1;
@@ -134,25 +134,25 @@ t_bool validate_argv(int argc, char **argv)
 	{
 		ft_printf("---- %s ----\n", argv[index]);
 		print_game(game);
-		if (which_flag(argv, &index, &flag, game) == FALSE)
-			return (FALSE);
+		if (which_flag(argv, &index, &flag, game) == false)
+			return (false);
 		if (flag == NOT_FLAG)
 		{
-			if (validate_champion(argv[index], game) == FALSE)
-				return (FALSE);
+			if (validate_champion(argv[index], game) == false)
+				return (false);
 		}
 		flag = NOT_FLAG;
 		index++;
 	}
-	return (TRUE);
+	return (true);
 }
 
 /*
  * Check the number of args, and it is only one print help text
  * if there are some arguments, start validation.
- * 
+ *
  * Error occured -> return (1);
-*/
+ */
 int main(int argc, char *argv[])
 {
 	// Branch 'vm' set up to track remote branch 'vm' from 'origin'.
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 		print_help(argv[0]);
 	else
 	{
-		if (validate_argv(argc, argv) == FALSE)
+		if (validate_argv(argc, argv) == false)
 			return (1);
 	}
 	return (0);
