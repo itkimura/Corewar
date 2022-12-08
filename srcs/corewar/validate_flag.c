@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 10:43:36 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:35:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ t_bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 	if (nb > MAX_PLAYERS)
 		return (print_error("-n flag", WRONG_NB));
 	// need to check if the player n used or now
-	if (game->player_array[nb]->fix_position == TRUE)
-		return (TRUE);
+	if (game->player_array[nb] && game->player_array[nb]->fix_position == TRUE)
+		return (print_error("-n flag", WRONG_NB));
+	game->flags_value[FLAG_N] = nb;
 	return (TRUE);
 }
 
@@ -51,6 +52,12 @@ t_bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 t_bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 {
 	int nb;
+	if (is_number(argv) == FALSE)
+		return (print_error("-d flag", WRONG_NB));
+	nb = ft_atoi(argv);
+	*flag = FLAG_DUMP;
+	game->flags_value[FLAG_DUMP] = nb;
+	return (TRUE);
 }
 /*
 return which flag by ft_strcmp
@@ -58,7 +65,7 @@ return which flag by ft_strcmp
 t_bool which_flag(char **argv, int index, t_vm_flag *flag, t_game *game)
 {
 	if (ft_strcmp(argv[index], "-d") == 0)
-		return (TRUE);
+		return (validate_d_flag_nb(argv[++index], flag, game));
 	if (ft_strcmp(argv[index], "-n") == 0)
 		return (validate_n_flag_nb(argv[++index], flag, game));
 	return (TRUE);

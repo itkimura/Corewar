@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 10:34:15 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:28:08 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef enum e_vm_flag
 typedef enum e_error{
 	MALLOC_FAIL,
 	WRONG_NB,
+	OPEN_FAIL,
+	DUP_PLAYER_NB,
 } t_error;
 
 /* 
@@ -62,7 +64,7 @@ typedef enum e_error{
  */
 typedef struct s_program
 {
-	int32_t registry[16];
+	int32_t registry[REG_NUMBER];
 	// r1: will be champion's code but minus
 	// the rest: 0
 	int32_t pc;
@@ -90,9 +92,9 @@ typedef struct s_game
  * main starts here
 */
 t_bool	init_game(t_game **game);
-t_bool	get_then_init_program(t_program **new);
+t_bool	init_program(t_program **new, t_game *game);
 void	store_palyer_number(t_game *game, t_program *program);
-t_bool	champion_validation(char *str, t_game *game);
+t_bool	validate_champion(char *file_path, t_game *game);
 t_bool	validate_argv(int argc, char **argv);
 
 /*
@@ -100,7 +102,8 @@ t_bool	validate_argv(int argc, char **argv);
 */
 t_bool	print_error(char *str, t_error error);
 void	print_help(char *file_path);
-
+void	print_program(t_program *program);
+void	print_game(t_game *game);
 
 /*
  * validate_champion.c
