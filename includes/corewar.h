@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 18:01:03 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:18:50 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef enum e_error
 	NO_PLAYER_AFTER_FLAG_N,
 	INVALID_HEADER,
 	INVALID_NULL,
-	INVALID_CHAMPION_SIZE
+	INVALID_CHAMPION_SIZE,
+	EXTRA_CHAMPION_CODE
 } t_error;
 
 /*
@@ -105,13 +106,6 @@ void print_bits(uint32_t nbr, int size);
 /*
  * validate_champion.c
  */
-bool validate_magic_header(int fd);
-bool validate_null(int fd);
-bool read_champion_name(t_program *program, int fd);
-uint32_t bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx);
-bool validate_exec_code_size(t_program *program, int fd);
-bool read_champion_comment(t_program *program, int fd);
-bool read_exec_code(t_program *program, int fd);
 bool read_champion(t_program *program, char *argv, int fd);
 
 /*
@@ -119,5 +113,15 @@ bool read_champion(t_program *program, char *argv, int fd);
  */
 bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game);
 bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
+
+/*
+ * calc_utils.c
+ */
+uint32_t	bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx);
+
+/*
+ * read_utils.c
+ */
+void	read_then_terminate_bytes(int fd, unsigned char *bytes, int size);
 
 #endif

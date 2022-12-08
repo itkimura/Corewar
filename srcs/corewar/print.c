@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 17:39:11 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:19:02 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ bool print_error(char *str, t_error error)
 		ft_printf("File %s%s%s has invalid null bytes\n", BOLD, str, RESET);
 	else if (error == INVALID_CHAMPION_SIZE)
 		ft_printf("File %s%s%s has too large champion size\n", BOLD, str, RESET);
+	else if (error == INVALID_CHAMPION_SIZE)
+		ft_printf("File %s%s%s has extra champion code\n", BOLD, str, RESET);
 	return (false);
 }
 
