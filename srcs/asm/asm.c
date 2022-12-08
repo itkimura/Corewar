@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 15:19:50 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:45:07 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 
 	data = (t_asmdata *)malloc(sizeof(t_asmdata));
 	if (!data)
-		return (0);
+		return (1);
 	init_structs(data);
 	return (0);
 }

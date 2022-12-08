@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 15:19:42 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/08 15:32:16 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ typedef struct s_labels
 
 typedef struct s_asmdata
 {
+	char			***instructions;
 	t_hashstatement	**hashtable;
 	t_labels		**labels;
-	char			**instructions;
 }	t_asmdata;
 
 static const t_statement	g_statements[HASHTABLESIZE] = {
