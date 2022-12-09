@@ -6,13 +6,13 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 15:14:28 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/09 10:20:26 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static	int	init_label(t_labels **label, char *name, int index)
+static	int	init_label(t_labels **label, char *name, char *ptr)
 {
 	t_labels	*tmp;
 
@@ -22,23 +22,23 @@ static	int	init_label(t_labels **label, char *name, int index)
 	tmp->name = ft_strdup(name);
 	if (!tmp->name)
 		return (0);
-	tmp->index = index;
+	tmp->ptr = &ptr;
 	if (*label)
 		tmp->next = *label;
 	*label = tmp;
 	return (1);
 }
 
-void	insert_label(t_asmdata *data, char *name, int index)
+void	insert_label(t_asmdata *data, char *name, char *ptr)
 {
 	int	hashindex;
 
 	hashindex = hash(name);
-	if (!init_label(&data->labels[hashindex], name, index))
+	if (!init_label(&data->labels[hashindex], name, ptr))
 		free_exit(data);
 }
 
-int	get_label_index(t_asmdata *data, char *name)
+char	*get_label_adr(t_asmdata *data, char *name)
 {
 	t_labels	*tmp;
 
@@ -46,10 +46,10 @@ int	get_label_index(t_asmdata *data, char *name)
 	while (tmp)
 	{
 		if (ft_strequ(tmp->name, name))
-			return (tmp->index);
+			return (*tmp->ptr);
 		tmp = tmp->next;
 	}
-	return (-1);
+	return (NULL);
 }
 
 int	init_labels_table(t_asmdata *data)

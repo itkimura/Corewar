@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 15:06:12 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/09 10:19:43 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_hashlabel(t_asmdata *data)
 	for (int i = 0; i < HASHTABLESIZE; i++) {
 		t_labels	*tmp = data->labels[i];
 		while (tmp) {
-			ft_printf("i:[%d] Name: {%s} index {%d}\n", i, tmp->name, tmp->index);
+			ft_printf("i:[%d] Name: {%s} ptr {%p}\n", i, tmp->name, &tmp->ptr);
 			tmp = tmp->next;
 		}
 	}
