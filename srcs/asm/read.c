@@ -6,14 +6,12 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 18:07:07 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/09 10:24:53 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <fcntl.h>
-
-
 
 int	read_input(t_asmdata *data, char *argv)
 {
@@ -32,5 +30,7 @@ int	read_input(t_asmdata *data, char *argv)
 		parse(data, line);
 		ft_strdel(&line);
 	}
+	if (close(fd) == -1)
+		free_exit(data);
 	return (1);
 }

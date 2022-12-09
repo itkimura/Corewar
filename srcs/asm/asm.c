@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 21:35:25 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/09 11:03:42 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int	main(int argc, char **argv)
 		return (1);
 	init_structs(data);
 	read_input(data, argv[1]);
+	ft_printf("name: {%s}\n", data->header->prog_name);
+	ft_printf("comment: {%s}\n", data->header->comment);
 	return (0);
 }
