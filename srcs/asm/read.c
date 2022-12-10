@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2022/12/09 10:24:53 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 15:28:17 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	read_input(t_asmdata *data, char *argv)
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		parse(data, line);
+		parse(data, line, fd);
 		ft_strdel(&line);
 	}
 	if (close(fd) == -1)

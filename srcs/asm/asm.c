@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/09 11:03:42 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 16:08:21 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ static void	init_structs(t_asmdata *data)
 	data->header = (header_t *)malloc(sizeof(header_t));
 	if (!data->header)
 		free_exit(data);
-	ft_memset((void *)data->header->prog_name, 0, PROG_NAME_LENGTH + 1);
-	ft_memset((void *)data->header->comment, 0, COMMENT_LENGTH + 1);
+	ft_memset((void *)data->header->prog_name, '#', PROG_NAME_LENGTH + 1);
+	ft_memset((void *)data->header->comment, '#', COMMENT_LENGTH + 1);
+	data->header->prog_name[PROG_NAME_LENGTH] = '\0';
+	data->header->comment[COMMENT_LENGTH] = '\0';
 	data->header->magic = COREWAR_EXEC_MAGIC;
 	data->header->prog_size = 0;
 }

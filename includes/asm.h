@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/09 10:18:02 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 15:50:35 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	free_exit(t_asmdata *data);
 int		get_statement_index(t_asmdata *data, char *name);
 int		init_statements_table(t_asmdata *data);
 int		read_input(t_asmdata *data, char *argv);
-void	parse(t_asmdata *data, char *line);
+void	parse(t_asmdata *data, char *line, int fd);
+void	parse_cmd(t_asmdata *data, char *line, int fd);
 
 /* 
 **	Label functions

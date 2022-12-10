@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:57:04 by itkimura          #+#    #+#             */
-/*   Updated: 2022/08/24 14:11:26 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/10 16:14:57 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** the system resources for running processes.
 ** The soft limit cannot be greater than the hard limit.
 */
-# define BUFF_SIZE 8
+# define BUFF_SIZE 1
 # define MAX_FD 4096
 # include "libft.h"
 
