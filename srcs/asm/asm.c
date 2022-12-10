@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/10 17:07:11 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 23:06:09 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	init_structs(t_asmdata *data)
 	data->header->comment[COMMENT_LENGTH] = '\0';
 	data->header->magic = COREWAR_EXEC_MAGIC;
 	data->header->prog_size = 0;
-	data->name = false;
-	data->comment = false;
+	data->name = 0;
+	data->comment = 0;
 }
 
 int	main(int argc, char **argv)
