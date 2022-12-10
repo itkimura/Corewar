@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/09 10:20:26 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 17:07:26 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	insert_label(t_asmdata *data, char *name, char *ptr)
 
 	hashindex = hash(name);
 	if (!init_label(&data->labels[hashindex], name, ptr))
-		free_exit(data);
+		free_exit(data, MALLOCFAIL, ERROR);
 }
 
 char	*get_label_adr(t_asmdata *data, char *name)

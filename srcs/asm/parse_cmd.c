@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:49:52 by leo               #+#    #+#             */
-/*   Updated: 2022/12/10 16:24:32 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 17:12:34 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_full_cmd(char *ptr, int fd, int j)
 
 static int store_cmd(char *ptr, char *line, int fd, int i)
 {
-	int	j;
+	int		j;
 
 	j = 0;
 	if (line[i] == ' ')
@@ -51,15 +51,22 @@ static int store_cmd(char *ptr, char *line, int fd, int i)
 	return (1);
 }
 
-void	parse_cmd(t_asmdata *data, char *line, int fd)
+int	parse_cmd(t_asmdata *data, char *line, int fd)
 {
 	int		res;
 
-	res = 0;
+	res = 1;
 	if (!ft_strncmp(line, NAME_CMD_STRING, 5))
+	{
 		res = store_cmd(data->header->prog_name, line, fd, 5);
+		data->name = true;
+	}
 	else if (!ft_strncmp(line, COMMENT_CMD_STRING, 8))
+	{
 		res = store_cmd(data->header->comment, line, fd, 8);
+		data->comment = true;
+	}
 	if (!res)
-		free_exit(data);
+		free_exit(data, "No strings found after command", ERROR);
+	return (1);
 }

@@ -6,13 +6,15 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/10 15:50:35 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 17:12:16 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 # define HASHTABLESIZE 16
+# define ERROR 1
+# define MALLOCFAIL "Malloc fail"
 
 # include "op.h"
 # include "libft.h"
@@ -55,6 +57,8 @@ typedef struct s_asmdata
 	t_hashstatement	**hashtable;
 	t_labels		**labels;
 	header_t		*header;
+	bool			name;
+	bool			comment;
 }	t_asmdata;
 
 static const t_statement	g_statements[HASHTABLESIZE] = {
@@ -76,12 +80,12 @@ static const t_statement	g_statements[HASHTABLESIZE] = {
 {.code = 16, .name = "aff", .argcode = true, .args = 0b100000000},
 };
 
-void	free_exit(t_asmdata *data);
+void	free_exit(t_asmdata *data, char *str, bool is_error);
 int		get_statement_index(t_asmdata *data, char *name);
 int		init_statements_table(t_asmdata *data);
 int		read_input(t_asmdata *data, char *argv);
-void	parse(t_asmdata *data, char *line, int fd);
-void	parse_cmd(t_asmdata *data, char *line, int fd);
+int		parse(t_asmdata *data, char *line, int fd);
+int		parse_cmd(t_asmdata *data, char *line, int fd);
 
 /* 
 **	Label functions

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/10 16:08:21 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/10 17:07:11 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 static void	init_structs(t_asmdata *data)
 {
 	if (!init_statements_table(data) || !init_labels_table(data))
-		free_exit(data);
+		free_exit(data, MALLOCFAIL, ERROR);
 	data->header = (header_t *)malloc(sizeof(header_t));
 	if (!data->header)
-		free_exit(data);
+		free_exit(data, MALLOCFAIL, ERROR);
 	ft_memset((void *)data->header->prog_name, '#', PROG_NAME_LENGTH + 1);
 	ft_memset((void *)data->header->comment, '#', COMMENT_LENGTH + 1);
 	data->header->prog_name[PROG_NAME_LENGTH] = '\0';
 	data->header->comment[COMMENT_LENGTH] = '\0';
 	data->header->magic = COREWAR_EXEC_MAGIC;
 	data->header->prog_size = 0;
+	data->name = false;
+	data->comment = false;
 }
 
 int	main(int argc, char **argv)
