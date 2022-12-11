@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/10 23:06:09 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 03:57:39 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	init_structs(t_asmdata *data)
 {
-	if (!init_statements_table(data) || !init_labels_table(data))
+	
+	if (!init_statements_table(data) || !init_labels_table(data) \
+		|| !init_op_table(&data->oplist, OPSIZE))
 		free_exit(data, MALLOCFAIL, ERROR);
 	data->header = (header_t *)malloc(sizeof(header_t));
 	if (!data->header)
@@ -27,6 +29,7 @@ static void	init_structs(t_asmdata *data)
 	data->header->prog_size = 0;
 	data->name = 0;
 	data->comment = 0;
+	data->opsize = OPSIZE;
 }
 
 int	main(int argc, char **argv)
@@ -42,5 +45,6 @@ int	main(int argc, char **argv)
 	read_input(data, argv[1]);
 	ft_printf("name: {%s}\n", data->header->prog_name);
 	ft_printf("comment: {%s}\n", data->header->comment);
+	system("leaks -q asm");
 	return (0);
 }

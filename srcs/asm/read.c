@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2022/12/10 17:08:23 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 03:26:28 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	read_input(t_asmdata *data, char *argv)
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		parse(data, line, fd);
-		ft_strdel(&line);
+		if (ret == 1)
+			parse(data, line, fd);
 	}
 	if (close(fd) == -1)
 		free_exit(data, "Closing file failed", ERROR);
