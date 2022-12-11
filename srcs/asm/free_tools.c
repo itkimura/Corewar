@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:28:33 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 23:02:47 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 23:05:39 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ void	free_exit(t_asmdata *data, char *str, bool is_error)
 	leaks = data->leaks;
 	if (is_error)
 		ft_printf("[Error]: %s\n", str);
+	free_labels(data);
 	free_hashtable(data);
 	free_oplist(data);
-	free_labels(data);
 	ft_memdel((void **)&data->header);
 	ft_memdel((void **)&data);
 	if (leaks)
