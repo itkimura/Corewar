@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 12:19:31 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 22:49:02 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,30 @@ void	insert_label(t_asmdata *data, char *name, char *ptr)
 		free_exit(data, MALLOCFAIL, ERROR);
 }
 
-char	*get_label_adr(t_asmdata *data, char *name)
+int	get_label_adr(t_asmdata *data, char **ptr, char *name)
 {
 	t_labels	*tmp;
-
+	int			i;
+	
+	if (!name)
+		return (0);
 	tmp = data->labels[hash(name)];
+	i = 0;
 	while (tmp)
 	{
 		if (ft_strequ(tmp->name, name))
-			return (tmp->ptr);
+		{
+			while (tmp->ptr[i + 1])
+				i++;
+			if (tmp->ptr[i] == LABEL_CHAR)
+				get_label_adr(data, ptr, tmp->ptr);
+			else
+				*ptr = tmp->ptr;
+			break ;
+		}
 		tmp = tmp->next;
 	}
-	return (NULL);
+	return (1);
 }
 
 int	init_labels_table(t_asmdata *data)

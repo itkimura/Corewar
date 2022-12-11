@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 12:19:50 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 22:23:40 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	validate_label(char *label)
 	int	i;
 
 	i = 0;
-	while (label[i])
+	while (label[i + 1])
 	{
 		if (!ft_strchr(LABEL_CHARS, label[i]))
 			return (0);
@@ -26,7 +26,7 @@ static int	validate_label(char *label)
 	return (1);
 }
 
-static char	*seperate_label(t_asmdata *data, char *ptr, int *i)
+static char	*seperate_label(t_asmdata *data, char *ptr, int i)
 {
 	char	*label;
 	int		j;
@@ -36,7 +36,7 @@ static char	*seperate_label(t_asmdata *data, char *ptr, int *i)
 		j++;
 	if (ptr[j - 1] == DIRECT_CHAR)
 		return (ptr);
-	label = ft_strsub(ptr, 0, j++);
+	label = ft_strsub(ptr, 0, ++j);
 	if (!label)
 		free_exit(data, MALLOCFAIL, ERROR);
 	if (!validate_label(label))
@@ -46,10 +46,8 @@ static char	*seperate_label(t_asmdata *data, char *ptr, int *i)
 	if (ptr[j])
 		ptr = &ptr[j];
 	else
-		ptr = data->oplist[++(*i)]->instruction;
+		ptr = data->oplist[i + 1]->instruction;
 	insert_label(data, label, ptr);
-	// ft_printf("label: %s\n", label);
-	// ft_printf("next instruction after label %s\n", ptr);
 	return (ptr);
 }
 
@@ -72,8 +70,8 @@ void	parse_instructions(t_asmdata *data)
 	{
 		ptr = data->oplist[i]->instruction;
 		if (ft_strchr(ptr, LABEL_CHAR))
-			ptr = seperate_label(data, ptr, &i);
-		if (!seperate_instruction(data, ptr))
+			ptr = seperate_label(data, ptr, i);
+		else if (!seperate_instruction(data, ptr))
 			free_exit(data, "Invalid instruction", ERROR);
 		i++;
 	}

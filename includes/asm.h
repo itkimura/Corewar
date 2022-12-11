@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 12:18:52 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 22:47:53 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	parse_instructions(t_asmdata *data);
 */
 
 int		init_labels_table(t_asmdata *data);
-char	*get_label_adr(t_asmdata *data, char *name);
+int		get_label_adr(t_asmdata *data, char **ptr, char *name);
 void	insert_label(t_asmdata *data, char *name, char *ptr);
 
 /* 
