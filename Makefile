@@ -6,7 +6,7 @@
 #    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/11 05:49:34 by leo              ###   ########.fr        #
+#    Updated: 2022/12/11 10:23:40 by leo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ COREWAR_SRCS = $(addprefix $(COREWAR_SRCS_DIR), $(COREWAR_FILES))
 COREWAR_OBJS = $(addprefix $(OBJS_DIR), $(COREWAR_FILES:%.c=%.o))
 
 ASM_FILES = debug.c asm.c free_tools.c hash_tools.c label_tools.c \
-						statement_tools.c read.c op_tools.c
+						statement_tools.c read.c op_tools.c parse.c
 ASM_SRCS_DIR = ./srcs/asm/
 ASM_SRCS = $(addprefix $(ASM_SRCS_DIR), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))

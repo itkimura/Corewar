@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 05:02:49 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 11:53:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,21 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 {
 	t_op	*tmp;
 	int		ret;
+	int		i;
 
 	ret = 1;
 	while (ret)
 	{
+		i = 0;
 		if (data->opcount == data->opsize)
 			resize_op_table(data);
 		if (!init_op(&tmp, line))
 			free_exit(data, MALLOCFAIL, ERROR);
 		data->oplist[data->opcount++] = tmp;
 		ret = get_next_line(fd, &line);
-		while (!(*line) || *line == COMMENT_CHAR)
+		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+			i++;
+		while (!(*line) || *line == COMMENT_CHAR || !line[i])
 		{
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
@@ -80,8 +84,10 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 {
 	int	res;
 
-	res = 1;
-	if (!(*line))
+	res = 0;
+	while (line[res] && (line[res] == ' ' || line[res] == '\t'))
+		res++;
+	if (!(*line) || !line[res])
 		ft_strdel(&line);
 	else if (data->name && data->comment && *line)
 		res = store_op(data, line, fd);

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 05:49:49 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 11:41:15 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int		read_input(t_asmdata *data, char *argv);
 int		init_op_table(t_op	***oplist, int size);
 int		resize_op_table(t_asmdata *data);
 int		init_op(t_op **op, char *line);
+void	parse_instructions(t_asmdata *data);
+
 
 /* 
 **	Label functions
