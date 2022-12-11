@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/09 10:19:43 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 04:48:45 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,12 @@ void	print_hashlabel(t_asmdata *data)
 			ft_printf("i:[%d] Name: {%s} ptr {%p}\n", i, tmp->name, &tmp->ptr);
 			tmp = tmp->next;
 		}
+	}
+}
+
+void	print_oplist(t_asmdata *data)
+{
+	for (t_op **tmp = data->oplist; *tmp; tmp++) {
+		ft_printf("%s\n", (*tmp)->instruction);
 	}
 }

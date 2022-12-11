@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 04:00:18 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 04:48:52 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_asmdata
 	t_labels		**labels;
 	header_t		*header;
 	int				opsize;
+	int				opcount;
 	int				name;
 	int				comment;
 }	t_asmdata;
@@ -112,5 +113,6 @@ unsigned long	hash(char *str);
 void	print_hashtable(t_asmdata *data);
 void	print_statement(t_asmdata *data, char *name);
 void	print_hashlabel(t_asmdata *data);
+void	print_oplist(t_asmdata *data);
 
 #endif

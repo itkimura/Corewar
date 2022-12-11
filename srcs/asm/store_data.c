@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   storedata.c                                        :+:      :+:    :+:   */
+/*   store_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:07:09 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 04:00:12 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 04:48:04 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	get_full_cmd(char *ptr, int fd, int j)
 	return (j);
 }
 
-static int store_cmd(char *ptr, char *line, int fd, int i)
+static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
 
@@ -52,11 +52,26 @@ static int store_cmd(char *ptr, char *line, int fd, int i)
 	return (1);
 }
 
-static int store_op(t_asmdata *data, char *line, int fd)
+static int	store_op(t_asmdata *data, char *line, int fd)
 {
-	ft_strdel(&line);
-	if (!data || !line || !fd)
-		return (1);
+	t_op	*tmp;
+	int		ret;
+
+	ret = 1;
+	while (ret)
+	{
+		if (data->opcount == data->opsize)
+			resize_op_table(data);
+		if (!init_op(&tmp, line))
+			free_exit(data, MALLOCFAIL, ERROR);
+		data->oplist[data->opcount++] = tmp;
+		ret = get_next_line(fd, &line);
+		while (!(*line) || *line == COMMENT_CHAR)
+		{
+			ft_strdel(&line);
+			ret = get_next_line(fd, &line);
+		}
+	}
 	return (1);
 }
 
