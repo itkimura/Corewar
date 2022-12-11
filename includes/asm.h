@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 05:44:17 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 05:49:49 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	insert_label(t_asmdata *data, char *name, char *ptr);
 unsigned long	hash(char *str);
 
 /*
-** tempfunctions to be removed
+** Debugger tools
 */
 
 void	print_hashtable(t_asmdata *data);
