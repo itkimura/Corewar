@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 22:49:54 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 23:09:47 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ static	int	init_label(t_labels **label, char *name, char *ptr)
 	tmp = (t_labels *)malloc(sizeof(t_labels));
 	if (!tmp)
 		return (0);
-	tmp->name = ft_strdup(name);
-	if (!tmp->name)
-		return (0);
+	tmp->name = name;
 	tmp->ptr = ptr;
 	if (*label)
 		tmp->next = *label;

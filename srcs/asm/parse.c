@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 23:07:46 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 23:09:52 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static char	*seperate_label(t_asmdata *data, char *ptr, int i)
 	else
 		ptr = data->oplist[i + 1]->instruction;
 	insert_label(data, label, ptr);
-	ft_strdel(&label);
 	return (ptr);
 }
 
