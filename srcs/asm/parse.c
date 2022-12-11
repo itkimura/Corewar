@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 11:32:05 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 12:19:50 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static char	*seperate_label(t_asmdata *data, char *ptr, int *i)
 	else
 		ptr = data->oplist[++(*i)]->instruction;
 	insert_label(data, label, ptr);
-	ft_printf("label: %s\n", label);
+	// ft_printf("label: %s\n", label);
 	// ft_printf("next instruction after label %s\n", ptr);
 	return (ptr);
 }
 
 static int	seperate_instruction(t_asmdata *data, char *ptr)
 {
-	ft_printf("instruction found: {%s}\n", ptr);
+	// ft_printf("instruction found: {%p}\n", &ptr);
 	// ft_printf("	%s", ptr);
 	if (!data || !ptr)
 		return (0);

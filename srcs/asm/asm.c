@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 11:54:37 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 11:58:03 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
-	// print_hashlabel(data);
+	print_hashlabel(data);
 	// ft_printf("name: {%s}\n", data->header->prog_name);
 	// ft_printf("comment: {%s}\n", data->header->comment);
 	// print_oplist(data);

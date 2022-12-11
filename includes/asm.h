@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 11:41:15 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 12:18:52 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_hashstatement
 
 typedef struct s_labels
 {
-	char			**ptr;
+	char			*ptr;
 	char			*name;
 	struct s_labels	*next;
 }	t_labels;

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 11:42:24 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 12:19:31 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	int	init_label(t_labels **label, char *name, char *ptr)
 	tmp->name = ft_strdup(name);
 	if (!tmp->name)
 		return (0);
-	tmp->ptr = &ptr;
+	tmp->ptr = ptr;
 	if (*label)
 		tmp->next = *label;
 	*label = tmp;
@@ -46,7 +46,7 @@ char	*get_label_adr(t_asmdata *data, char *name)
 	while (tmp)
 	{
 		if (ft_strequ(tmp->name, name))
-			return (*tmp->ptr);
+			return (tmp->ptr);
 		tmp = tmp->next;
 	}
 	return (NULL);
