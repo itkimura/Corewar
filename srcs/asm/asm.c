@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 11:29:34 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 11:54:37 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	init_structs(t_asmdata *data)
 	data->comment = 0;
 	data->opcount = 0;
 	data->opsize = OPSIZE;
-	data->leaks	= false;
+	data->leaks = false;
 }
 
 int	main(int argc, char **argv)
