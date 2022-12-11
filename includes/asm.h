@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 05:03:17 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 05:44:17 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ASM_H
 # define HASHTABLESIZE 16
 # define ERROR 1
+# define SUCCESS 0
 # define MALLOCFAIL "Malloc fail"
 # define OPSIZE 256
 
@@ -62,6 +63,7 @@ typedef struct s_asmdata
 	int				opcount;
 	int				name;
 	int				comment;
+	bool			leaks;
 }	t_asmdata;
 
 static const t_statement	g_statements[HASHTABLESIZE] = {
