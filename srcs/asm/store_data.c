@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   storedata.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 18:07:09 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 03:55:24 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 04:00:12 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int store_op(t_asmdata *data, char *line, int fd)
 	return (1);
 }
 
-int	parse(t_asmdata *data, char *line, int fd)
+int	store_data(t_asmdata *data, char *line, int fd)
 {
 	int	res;
 

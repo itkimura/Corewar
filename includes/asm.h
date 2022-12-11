@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/11 03:57:50 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 04:00:18 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	free_exit(t_asmdata *data, char *str, bool is_error);
 int		get_statement_index(t_asmdata *data, char *name);
 int		init_statements_table(t_asmdata *data);
 int		read_input(t_asmdata *data, char *argv);
-int		parse(t_asmdata *data, char *line, int fd);
+int		store_data(t_asmdata *data, char *line, int fd);
 int		init_op_table(t_op	***oplist, int size);
 int		resize_op_table(t_asmdata *data);
 int		init_op(t_op **op, char *line);
