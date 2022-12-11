@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 22:49:02 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/11 22:49:54 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_label_adr(t_asmdata *data, char **ptr, char *name)
 {
 	t_labels	*tmp;
 	int			i;
-	
+
 	if (!name)
 		return (0);
 	tmp = data->labels[hash(name)];
