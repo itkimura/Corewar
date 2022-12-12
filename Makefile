@@ -6,7 +6,7 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/08 17:05:52 by thle             ###   ########.fr        #
+#    Updated: 2022/12/12 16:52:27 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,11 @@ LIB_DIR = ./libft/
 LIB = $(addprefix $(LIB_DIR), libft.a)
 LIB_INCLUDE = ./libft/includes/
 
-COREWAR_FILES =		corewar.c		print.c		validate_flag.c		\
-					validate_champion.c
+COREWAR_FILES =		corewar.c				print.c				\
+					validate_flag.c			init_structures.c	\
+					update_players_array.c	free.c				\
+					validate_champion.c		read_utils.c		\
+					calc_utils.c	\
 
 COREWAR_SRCS_DIR = ./srcs/corewar/
 COREWAR_SRCS = $(addprefix $(COREWAR_SRCS_DIR), $(COREWAR_FILES))

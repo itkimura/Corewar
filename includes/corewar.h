@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 18:18:50 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:29:00 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "get_next_line.h"
 #include "ft_printf.h"
 
-#define TOTAL_FLAGS 5
+#define TOTAL_FLAGS 2
 
 #define RED "\e[31m"
 #define GREEN "\e[32m"
@@ -51,6 +51,7 @@ typedef enum e_error
 	OPEN_FAIL,
 	DUP_PLAYER_NB,
 	NO_PLAYER_AFTER_FLAG_N,
+	MISSING_PLAYER,
 	INVALID_HEADER,
 	INVALID_NULL,
 	INVALID_CHAMPION_SIZE,
@@ -62,16 +63,16 @@ typedef enum e_error
  */
 typedef struct s_program
 {
-	int32_t registry[REG_NUMBER];
+	int32_t			registry[REG_NUMBER];
 	// r1: will be champion's code but minus
 	// the rest: 0
-	int32_t pc;
-	bool carry;		   //-> 0?
-	bool fix_position; // false -> -n -> true
-	unsigned int exec_code_size;
-	unsigned char comment[COMMENT_LENGTH + 1];
-	unsigned char name[PROG_NAME_LENGTH + 1];
-	unsigned char *exec_code;
+	int32_t			pc;
+	bool			carry;		   //-> 0?
+	bool			fix_position;
+	unsigned int	exec_code_size;
+	unsigned char	comment[COMMENT_LENGTH + 1];
+	unsigned char	name[PROG_NAME_LENGTH + 1];
+	unsigned char	*exec_code;
 } t_program;
 
 /*
@@ -79,14 +80,15 @@ typedef struct s_program
  */
 typedef struct s_game
 {
-	int total_players; // initialize 0
-	t_program *player_array[MAX_PLAYERS + 1];
-	int flags_value[TOTAL_FLAGS]; // initialize to 0
+	int			total_players; // initialize 0
+	t_program	*players_in_order[MAX_PLAYERS];
+	t_program	*all_players[MAX_PLAYERS];
+	int			total_tmp_players;
+	int			flags_value[TOTAL_FLAGS]; // initialize to 0
 } t_game;
 
 /*
  * corewar.c
- * main starts here
  */
 bool init_game(t_game **game);
 bool init_program(t_program **new, t_game *game);
@@ -95,11 +97,32 @@ bool validate_champion(char *file_path, t_game *game);
 bool validate_argv(int argc, char **argv);
 
 /*
+ * update_players_array.c
+ */
+bool	add_player(t_program *new, t_game *game);
+bool	update_players_array(t_game *game);
+
+/*
+ * init_structure.c
+ */
+bool	init_game(t_game **game);
+void	ft_unsigned_char_zero(unsigned char *str, int len);
+bool	init_program(t_program **new, t_game *game);
+
+/*
+ * free_all.c
+ */
+void	free_program(t_program *p);
+void	free_game(t_game *game);
+void	free_all(t_game *game);
+
+/*
  * print.c
  */
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
 void print_program(t_program *program);
+void print_all_programs(t_game *game);
 void print_game(t_game *game);
 void print_bits(uint32_t nbr, int size);
 
@@ -107,6 +130,7 @@ void print_bits(uint32_t nbr, int size);
  * validate_champion.c
  */
 bool read_champion(t_program *program, char *argv, int fd);
+bool validate_champion(char *file_path, t_game *game);
 
 /*
  * validate_flag.c
