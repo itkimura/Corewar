@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 18:19:02 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:42:08 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool print_error(char *str, t_error error)
 		ft_printf("duplication of player number %s%s%s\n", BOLD, str, RESET);
 	else if (error == NO_PLAYER_AFTER_FLAG_N)
 		ft_printf("the input after %s-n N%s should be a player\n", BOLD, RESET);
+	else if (error == MISSING_PLAYER)
+		ft_printf("Player %s%s%s is missing\n", BOLD, str, RESET);
 	else if (error == INVALID_HEADER)
 		ft_printf("File %s%s%s has invalid magic header\n", BOLD, str, RESET);
 	else if (error == INVALID_NULL)
@@ -55,7 +57,7 @@ void print_help(char *file_path)
 	ft_printf("\t%s-d N%s\tDump memory (32 octets per line) after", BOLD, RESET);
 	ft_printf(" %sN%s cycles and exit\n", BOLD, RESET);
 	ft_printf("\t%s-n N%s\t", BOLD, RESET);
-	ft_printf("Set %sN%s of the next player\n", BOLD, RESET);
+	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
 }
 
 /*
@@ -70,7 +72,6 @@ void print_program(t_program *program)
 	ft_printf("\n");
 	ft_printf("%spc:%s\t%d\n", BOLD, RESET, program->pc);
 	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, program->carry);
-	ft_printf("%sfix_postion%s:\t%d\n", BOLD, RESET, program->fix_position);
 	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, program->exec_code_size);
 	ft_printf("%scomment%s:\t%s\n", BOLD, RESET, program->comment);
 	if (program->exec_code != NULL)
@@ -83,23 +84,56 @@ void print_program(t_program *program)
 }
 
 /*
+ * Debug printing function
+ */
+void	print_programs(t_program *p[MAX_PLAYERS])
+{
+	int	index;
+
+	index = 0;
+	while (index < MAX_PLAYERS)
+	{
+		if (p[index] != NULL)
+			print_program(p[index]);
+		index++;
+	}
+}
+
+/*
  * Debug printing t_game function
  */
+
+char *flag_name(int nb)
+{
+	if (nb == FLAG_N)
+		return ("-n");
+	if (nb == FLAG_DUMP)
+		return ("-d");
+	return (NULL);
+}
+
 void print_game(t_game *game)
 {
 	if (game != NULL)
 	{
 		ft_printf("[%st_game%s]\n", BOLD, RESET);
-		ft_printf("%stotal_players%s:\t%d\n", BOLD, RESET, game->total_players);
-		ft_printf("%splayer_array:\t\n", BOLD, RESET);
+		ft_printf("%stotal_players%s:\t\t%d\n", BOLD, RESET, game->total_players);
+		//ft_printf("%stotal_tmp_players%s:\t%d\n", BOLD, RESET, game->total_tmp_players);
+		ft_printf("%splayers_in_order:\t\n", BOLD, RESET);
 		for (int i = 0; i < MAX_PLAYERS; i++)
 		{
-			if (game->player_array[i])
-				ft_printf("%s\t[%d]%s:\t%s\n", BOLD, i, RESET, game->player_array[i]->name);
+			if (game->players_in_order[i])
+				ft_printf("%s\t[%d]%s:\t%s\n", BOLD, i, RESET, game->players_in_order[i]->name);
+		}
+		ft_printf("%sall_players:\t\n", BOLD, RESET);
+		for (int i = 0; i < MAX_PLAYERS; i++)
+		{
+			if (game->all_players[i])
+				ft_printf("%s\t[%d]%s:\t%s\tfix_position:\t*d\n", BOLD, i, RESET, game->all_players[i]->name, game->all_players[i]->fix_position);
 		}
 		ft_printf("%sflags_value:\t\n", BOLD, RESET);
 		for (int i = 0; i < TOTAL_FLAGS; i++)
-			ft_printf("%s\t[%d]%s:\t%d\n", BOLD, i, RESET, game->flags_value[i]);
+			ft_printf("%s\t[%s]%s:\t%d\n", BOLD, flag_name(i), RESET, game->flags_value[i]);
 		ft_printf("\n");
 	}
 }

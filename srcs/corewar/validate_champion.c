@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 17:43:01 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/12 16:00:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,28 @@ bool read_champion(t_program *program, char *argv, int fd)
 	return (true);
 }
 
+/*
+ * 1. open -> if it's fail, it means the file is not exist.
+ * 1. Make program structure
+ * 2. Start reading and save info into program
+ */
+bool validate_champion(char *file_path, t_game *game)
+{
+	int fd;
+	t_program *new;
+
+	new = NULL;
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		return (print_error(file_path, OPEN_FAIL));
+	if (init_program(&new, game) == false)
+		return (false);
+	read_champion(new, file_path, fd);
+	close(fd);
+	return (true);
+}
+
+/*
 int main(int argc, char **argv)
 {
 	if (argc < 1)
@@ -99,3 +121,4 @@ int main(int argc, char **argv)
 	}
 	return 0;
 }
+*/

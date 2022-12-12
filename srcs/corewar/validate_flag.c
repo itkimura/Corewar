@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/08 17:07:38 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/12 17:46:32 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 	if (nb > MAX_PLAYERS)
 		return (print_error("-n flag", WRONG_NB));
 	// need to check if the player n used or now
-	if (game->player_array[nb] && game->player_array[nb]->fix_position == true)
+	if (game->players_in_order[nb - 1] != NULL)
 		return (print_error("-n flag", WRONG_NB));
 	game->flags_value[FLAG_N] = nb;
 	return (true);
@@ -80,6 +80,7 @@ return which flag by ft_strcmp
 */
 bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 {
+	*flag = NOT_FLAG;
 	if (ft_strcmp(argv[*index], "-d") == 0)
 		return (validate_d_flag_nb(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-n") == 0)
