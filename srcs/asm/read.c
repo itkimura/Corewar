@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 11:53:00 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/13 09:28:57 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 		ret = get_next_line(fd, &line);
 		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 			i++;
-		while (!(*line) || *line == COMMENT_CHAR || !line[i])
+		while (!(*line) || *line == COMMENT_CHAR \
+			|| *line == ALTERNATE_COMMENT_CHAR || !line[i])
 		{
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
