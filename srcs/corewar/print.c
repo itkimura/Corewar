@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/12 17:42:08 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:49:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ bool print_error(char *str, t_error error)
 		ft_printf("the input after %s-n N%s should be a player\n", BOLD, RESET);
 	else if (error == MISSING_PLAYER)
 		ft_printf("Player %s%s%s is missing\n", BOLD, str, RESET);
+	else if (error == TOO_MANY_PLAYERS)
+		ft_printf("Too many players\n");
 	else if (error == INVALID_HEADER)
 		ft_printf("File %s%s%s has invalid magic header\n", BOLD, str, RESET);
 	else if (error == INVALID_NULL)

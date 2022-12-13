@@ -6,21 +6,23 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/12 17:53:50 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:44:47 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
 /*
- * add program into player adday of t_game structure
+ * add program into player array of t_game structure
  * if "-n" option is active, put the program into game->players array.
- * if not, put program game->tmp_players array.
+ * if not, put program game->all_players array.
  */
 bool	add_player(t_program *new, t_game *game)
 {
 	int	player_nb;
 
+	if (game->total_players >= MAX_PLAYERS)
+		return (print_error("", WRONG_NB));
 	if (game->flags_value[FLAG_N])
 	{
 		player_nb = game->flags_value[FLAG_N] - 1;
@@ -28,9 +30,9 @@ bool	add_player(t_program *new, t_game *game)
 			return (print_error(ft_itoa(player_nb), DUP_PLAYER_NB));
 		game->players_in_order[player_nb] = new;
 		new->fix_position = true;
+		game->flags_value[FLAG_N] = 0;
 	}
 	game->all_players[game->total_players++] = new;
-	game->flags_value[FLAG_N] = 0;
 	return (true);
 }
 
@@ -38,7 +40,7 @@ bool	add_player(t_program *new, t_game *game)
  * add players from all_payers array to players_in_order array
  *
  * i -> index to loop all_players array
- * j -> index to loop playes_in_order array
+ * j -> index to loop players_in_order array
  */
 void	align_players(t_game *game)
 {

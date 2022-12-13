@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/12 16:00:27 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:48:03 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ bool validate_champion(char *file_path, t_game *game)
 	int fd;
 	t_program *new;
 
+	if (game->total_players >= MAX_PLAYERS)
+		return (print_error(file_path, TOO_MANY_PLAYERS));
 	new = NULL;
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)

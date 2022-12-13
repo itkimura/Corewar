@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/12 17:29:00 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:49:34 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef enum e_error
 	DUP_PLAYER_NB,
 	NO_PLAYER_AFTER_FLAG_N,
 	MISSING_PLAYER,
+	TOO_MANY_PLAYERS,
 	INVALID_HEADER,
 	INVALID_NULL,
 	INVALID_CHAMPION_SIZE,
