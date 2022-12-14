@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/14 18:38:21 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 18:51:08 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
-	print_hashlabel(data);
+	// print_hashlabel(data);
 	print_oplist(data);
 	free_exit(data, NULL, SUCCESS);
 	return (0);

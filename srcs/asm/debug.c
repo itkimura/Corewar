@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 18:36:17 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 18:56:20 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,73 @@ void	print_statement(t_asmdata *data, char *name)
 
 void	print_hashtable(t_asmdata *data)
 {
-	for (int i = 0; i < HASHTABLESIZE; i++) {
-		t_hashstatement	*tmp = data->hashtable[i];
+	t_hashstatement	*tmp;
+	int				i;
+
+	i = 0;
+	while (i < HASHTABLESIZE)
+	{
+		tmp = data->hashtable[i];
 		ft_printf("{%p}:\n", tmp);
-		while (tmp) {
+		while (tmp)
+		{
 			ft_printf("	Name: {%s}\n", tmp->name);
 			tmp = tmp->next;
 		}
+		i++;
 	}
 }
 
 void	print_hashlabel(t_asmdata *data)
 {
-	for (int i = 0; i < HASHTABLESIZE; i++) {
-		t_labels	*tmp = data->labels[i];
+	t_labels	*tmp;
+	t_op		*result;
+	int			i;
+
+	i = 0;
+	while (i < HASHTABLESIZE)
+	{
+		tmp = data->labels[i];
 		ft_printf("{%p}:\n", tmp);
-		while (tmp) {
+		while (tmp)
+		{
 			ft_printf("i:[%d] label: {%s}", i, tmp->name);
 			if (!tmp->ptr->statement)
 			{
 				ft_printf("ptr to label: {%s}", tmp->ptr->label);
-				t_op *result;
 				get_label_adr(data, &result, tmp->ptr->label);
 				ft_printf(" final statment: {%s}\n", result->statement);
 			}	
 			else
-				ft_printf("ptr to op with statement: {%s}\n", tmp->ptr->statement);
+				ft_printf("ptr to statement: {%s}\n", tmp->ptr->statement);
 			tmp = tmp->next;
 		}
+		i++;
 	}
 }
 
 void	print_oplist(t_asmdata *data)
 {
-	for (t_op **tmp = data->oplist; *tmp; tmp++) {
-		ft_printf("{%s}\n", (*tmp)->statement);
-		for (int i = 0; i < 3; i++) {
-			if ((*tmp)->arg[i])
-				ft_printf("	arg: {%s}\n", (*tmp)->arg[i]);
+	t_op	**tmp;
+	int		i;
+
+	tmp = data->oplist;
+	while (*tmp)
+	{
+		i = 0;
+		if ((*tmp)->statement)
+		{
+			ft_printf("statement: {%s}\n", (*tmp)->statement);
+			while (i < 3)
+			{
+				if ((*tmp)->arg[i])
+					ft_printf("	arg: {%s}\n", (*tmp)->arg[i]);
+				i++;
+			}
+			ft_printf("\n");
 		}
+		else
+			ft_printf("label: {%s}\n", (*tmp)->label);
+		tmp++;
 	}
 }
