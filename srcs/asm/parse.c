@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 18:38:13 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 19:14:53 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ static char	*seperate_arguments(char *arg, int start)
 {
 	int	end;
 
-	if (arg[start] == '-' && ft_isdigit(arg[start + 1]))
-		start++;
-	else if (arg[start] == DIRECT_CHAR || arg[start] == LABEL_CHAR \
+	if (arg[start] == DIRECT_CHAR || arg[start] == LABEL_CHAR \
 		|| arg[start] == 'r' || ft_isdigit(arg[start]))
 	{
 		end = start;
@@ -28,8 +26,8 @@ static char	*seperate_arguments(char *arg, int start)
 		arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
 		arg[end - start] = '\0';
 	}
-	else
-		return (NULL);
+	// else
+		// return (NULL);
 	return (arg);
 }
 
@@ -47,6 +45,8 @@ static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 	{
 		start = 0;
 		while (args[j][start] == ' ' || args[j][start] == '\t')
+			start++;
+		if (args[j][start] == '-' && ft_isdigit(args[j][start + 1]))
 			start++;
 		data->oplist[index]->arg[j] = seperate_arguments(args[j], start);
 		j++;
