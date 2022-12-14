@@ -11,8 +11,7 @@ forks5:
 forks8:
 forks9:
 forks10:
-forks11:
-add	r2, r3, r2		;increment r2
+forks11:	add	r2, r3, r2		;increment r2
 xor	r2, %15, r4		;if (r4) {carry = 0}
 live2:
 	live 	%4

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 16:43:34 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 18:37:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,20 @@ void	insert_label(t_asmdata *data, t_op *ptr, char *name)
 int	get_label_adr(t_asmdata *data, t_op **ptr, char *name)
 {
 	t_labels	*tmp;
-	int			i;
 
-	if (!name || !ptr)
+	if (!name)
 		return (0);
 	tmp = data->labels[hash(name)];
-	i = 0;
-	if (i)
-		ft_printf("");
 	while (tmp)
 	{
-		// if (ft_strequ(tmp->name, name))
-		// {
-		// 	while (tmp->ptr[i + 1])
-		// 		i++;
-		// 	if (tmp->ptr[i] == LABEL_CHAR)
-		// 		get_label_adr(data, ptr, tmp->ptr);
-		// 	else
-		// 		*ptr = tmp->ptr;
-		// 	break ;
-		// }
+		if (ft_strequ(tmp->name, name))
+		{
+			if (tmp->ptr->label && !tmp->ptr->statement)
+				get_label_adr(data, ptr, tmp->ptr->label);
+			else
+				*ptr = tmp->ptr;
+			break ;
+		}
 		tmp = tmp->next;
 	}
 	return (1);

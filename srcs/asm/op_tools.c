@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 03:39:40 by leo               #+#    #+#             */
-/*   Updated: 2022/12/13 09:48:18 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 16:58:43 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	init_op(t_op **op, char *line)
 		return (0);
 	(*op)->instruction = line;
 	(*op)->statement = NULL;
+	(*op)->label = NULL;
 	(*op)->arg[0] = NULL;
 	(*op)->arg[1] = NULL;
 	(*op)->arg[2] = NULL;

@@ -6,32 +6,11 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 16:44:25 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 18:38:13 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-static int	validate_label(t_asmdata *data, char *ptr, int index, int j)
-{
-	char	*label;
-
-	while (ptr[j] && ft_strchr(LABEL_CHARS, ptr[j]))
-		j++;
-	if (ptr[j++] != LABEL_CHAR)
-		return (0);
-	label = ft_strsub(ptr, 0, j);
-	if (!label)
-		free_exit(data, MALLOCFAIL, ERROR);
-	while (ptr[j] && (ptr[j] == ' ' || ptr[j] == '\t'))
-		j++;
-	if (ptr[j])
-		ptr = &ptr[j];
-	else
-		ptr = data->oplist[index + 1]->instruction;
-	insert_label(data, data->oplist[index + 1], label);
-	return (1);
-}
 
 static char	*seperate_arguments(char *arg, int start)
 {
@@ -54,47 +33,73 @@ static char	*seperate_arguments(char *arg, int start)
 	return (arg);
 }
 
-static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int j)
+static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 {
 	char	**args;
 	char	*tmp;
-	int		i;
+	int		j;
 	int		start;
 
-	tmp = &ptr[j];
-	i = 0;
+	tmp = &ptr[i];
+	j = 0;
 	args = ft_strsplit(tmp, SEPARATOR_CHAR);
-	while (args && args[i])
+	while (args && args[j])
 	{
 		start = 0;
-		while (args[i][start] == ' ' || args[i][start] == '\t')
+		while (args[j][start] == ' ' || args[j][start] == '\t')
 			start++;
-		data->oplist[index]->arg[i] = seperate_arguments(args[i], start);
-		i++;
+		data->oplist[index]->arg[j] = seperate_arguments(args[j], start);
+		j++;
 	}
 	if (!args)
 		free_exit(data, "no arguements", ERROR);
 	ft_memdel((void **)&args);
 }
 
-static int	validate_statement(t_asmdata *data, char *ptr, int index, int j)
+static int	validate_statement(t_asmdata *data, char *ptr, int index, int *i)
 {
 	char	*statement;
-	int		i;
+	int		j;
 
 	statement = NULL;
-	i = 0;
-	while (ptr[i] == ' ' || ptr[i] == '\t')
-		i++;
+	j = *i;
+	while (ptr[j] && ft_isalpha(ptr[j]))
+		j++;
 	if (ptr[j] == ' ' || ptr[j] == '\t' || ptr[j] == DIRECT_CHAR \
 		|| ptr[j] == LABEL_CHAR)
-		statement = ft_strsub(ptr, i, j - i);
+		statement = ft_strsub(ptr, *i, j - (*i));
 	if (!statement || get_statement_index(data, statement) == -1)
 	{
 		ft_strdel(&statement);
 		return (0);
 	}
 	data->oplist[index]->statement = statement;
+	*i = j;
+	return (1);
+}
+
+static int	validate_label(t_asmdata *data, char *ptr, int index)
+{
+	char	*label;
+	int		i;
+
+	i = 0;
+	while (ptr[i] && ft_strchr(LABEL_CHARS, ptr[i]))
+		i++;
+	if (ptr[i++] != LABEL_CHAR)
+		return (0);
+	label = ft_strsub(ptr, 0, i);
+	if (!label)
+		free_exit(data, MALLOCFAIL, ERROR);
+	data->oplist[index]->label = label;
+	while (ptr[i] && (ptr[i] == ' ' || ptr[i] == '\t'))
+		i++;
+	if (ptr[i] && validate_statement(data, ptr, index, &i))
+		seperate_instruction(data, ptr, index, i);
+	else if (ptr[i] && (ptr[i] != COMMENT_CHAR \
+		|| ptr[i] != ALTERNATE_COMMENT_CHAR))
+		free_exit(data, "Invalid instruction/label2", ERROR);
+	insert_label(data, data->oplist[index + !(ptr[i])], label);
 	return (1);
 }
 
@@ -103,22 +108,17 @@ void	parse_instructions(t_asmdata *data)
 	char	*ptr;
 	int		index;
 	int		i;
-	int		j;
 
 	index = 0;
 	while (index < data->opcount)
 	{
 		i = 0;
-		j = 0;
 		ptr = data->oplist[index]->instruction;
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
-		j = i;
-		while (ptr[j] && ft_isalpha(ptr[j]))
-			j++;
-		if (validate_statement(data, ptr, index, j))
-			seperate_instruction(data, ptr, index, j);
-		else if (i == 0 && !validate_label(data, ptr, index, j))
+		if (validate_statement(data, ptr, index, &i))
+			seperate_instruction(data, ptr, index, i);
+		else if (i == 0 && !validate_label(data, ptr, index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;
 	}
