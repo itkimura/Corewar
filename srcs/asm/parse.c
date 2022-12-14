@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/13 14:21:44 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 06:40:58 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,60 +33,58 @@ static int	validate_label(t_asmdata *data, char *ptr, int index, int j)
 	return (1);
 }
 
-static int	seperate_arguments(t_asmdata *data, char **args, int index)
+static char	*seperate_arguments(char *arg, int start)
 {
-	char	*arg;
-	int		i;
-	int		start;
-	int		end;
+	int	end;
 
-	i = 0;
-	arg = NULL;
-	while (args[i])
+	if (arg[start] == '-' && ft_isdigit(arg[start + 1]))
+		start++;
+	else if (arg[start] == DIRECT_CHAR || arg[start] == LABEL_CHAR \
+		|| arg[start] == 'r' || ft_isdigit(arg[start]))
 	{
-		start = 0;
-		end = 0;
-		while (args[i][start] == ' ' || args[i][start] == '\t')
-			start++;
-		if (args[i][start] == '-' && ft_isdigit(args[i][start + 1]))
-			start++;
-		else if (args[i][start] == DIRECT_CHAR || args[i][start] == LABEL_CHAR \
-			|| args[i][start] == 'r' || ft_isdigit(args[i][start]))
-		{
-			end = start;
-			while (args[i][end] && args[i][end] != ' ' && args[i][end] != '\t' \
-				&& args[i][end] != COMMENT_CHAR && args[i][end] != ALTERNATE_COMMENT_CHAR)
-				end++;
-			arg = ft_strsub(args[i], start, end - start);
-			data->oplist[index]->arg[i] = arg;
-		}
-		else
-			return (0);
-		i++;
+		end = start;
+		while (arg[end] && arg[end] != ' ' && arg[end] != '\t' \
+			&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
+			end++;
+		arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
+		arg[end - start] = '\0';
 	}
-	return (1);
+	else
+		return (NULL);
+	return (arg);
 }
 
 static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int j)
 {
 	char	**args;
-	char	*tmp;
+	int		i;
+	int		start;
 
-	tmp = &ptr[j];
-	args = ft_strsplit(tmp, SEPARATOR_CHAR);
-	if (!args || !seperate_arguments(data, args, index))
-		free_exit(data, "invalid arguements", ERROR);
+	ptr = ft_memmove((void *)&ptr[0], (void *)&ptr[j], ft_strlen(ptr) - j);
+	i = 0;
+	args = ft_strsplit(ptr, SEPARATOR_CHAR);
+	// while (i < 3 && args[i])
+		// ft_strdel(&args[i++]);
+	// ft_memdel((void **)args);
+	while (args && args[i])
+	{
+		start = 0;
+		while (args[i][start] == ' ' || args[i][start] == '\t')
+			start++;
+		data->oplist[index]->arg[i] = seperate_arguments(args[i], start);
+		i++;
+	}
+	if (!args)
+		free_exit(data, "no arguements", ERROR);
 	//set byte and totalbyte = (index - 1)->totalbyte + byte. 
 }
 
 static int	validate_statement(t_asmdata *data, char *ptr, int index, int j)
 {
 	char	*statement;
-	int		ret;
 	int		i;
 
 	statement = NULL;
-	ret = 1;
 	i = 0;
 	while (ptr[i] == ' ' || ptr[i] == '\t')
 		i++;
@@ -94,10 +92,12 @@ static int	validate_statement(t_asmdata *data, char *ptr, int index, int j)
 		|| ptr[j] == LABEL_CHAR)
 		statement = ft_strsub(ptr, i, j - i);
 	if (!statement || get_statement_index(data, statement) == -1)
-		ret = 0;
-	if (ret)
-		data->oplist[index]->statement = statement;
-	return (ret);
+	{
+		ft_strdel(&statement);
+		return (0);
+	}
+	data->oplist[index]->statement = statement;
+	return (1);
 }
 
 void	parse_instructions(t_asmdata *data)

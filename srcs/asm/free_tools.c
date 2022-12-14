@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:28:33 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 23:05:39 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 06:06:50 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,16 @@ static void	free_labels(t_asmdata *data)
 static void	free_oplist(t_asmdata *data)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < data->opcount)
 	{
+		j = 0;
 		ft_strdel(&data->oplist[i]->instruction);
+		ft_strdel(&data->oplist[i]->statement);
+		while (j < 3 && data->oplist[i]->arg[j])
+			ft_strdel(&data->oplist[i]->arg[j++]);
 		ft_memdel((void **)&data->oplist[i]);
 		i++;
 	}
