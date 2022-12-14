@@ -6,17 +6,17 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 09:48:13 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 15:09:51 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 19:03:34 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 /* hash * 33 + c */
-unsigned long	hash(char *str)
+uint32_t	hash(char *str)
 {
-	unsigned long	hash;
-	unsigned long	i;
+	uint32_t	hash;
+	uint32_t	i;
 
 	hash = 5381;
 	i = 0;

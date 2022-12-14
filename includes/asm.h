@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/14 16:58:17 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 19:07:06 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_hashstatement
 {
 	char					*name;
 	int						index;
-	struct s_hashstatement 	*next;
-} t_hashstatement;
+	struct s_hashstatement	*next;
+}	t_hashstatement;
 
 typedef struct s_op
 {
@@ -89,37 +89,36 @@ static const t_statement	g_statements[HASHTABLESIZE] = {
 {.code = 16, .name = "aff", .argcode = true, .args = 0b100000000},
 };
 
-void	free_exit(t_asmdata *data, char *str, bool is_error);
-int		get_statement_index(t_asmdata *data, char *name);
-int		init_statements_table(t_asmdata *data);
-int		read_input(t_asmdata *data, char *argv);
-int		init_op_table(t_op	***oplist, int size);
-int		resize_op_table(t_asmdata *data);
-int		init_op(t_op **op, char *line);
-void	parse_instructions(t_asmdata *data);
-
+int			init_op_table(t_op ***oplist, int size);
+int			resize_op_table(t_asmdata *data);
+int			init_op(t_op **op, char *line);
+int			init_statements_table(t_asmdata *data);
+int			get_statement_index(t_asmdata *data, char *name);
+int			read_input(t_asmdata *data, char *argv);
+void		parse_instructions(t_asmdata *data);
+void		free_exit(t_asmdata *data, char *str, bool is_error);
 
 /* 
 **	Label functions
 */
 
-int		init_labels_table(t_asmdata *data);
-int		get_label_adr(t_asmdata *data, t_op **ptr, char *name);
-void	insert_label(t_asmdata *data, t_op *ptr, char *name);
+int			init_labels_table(t_asmdata *data);
+int			get_label_adr(t_asmdata *data, t_op **ptr, char *name);
+void		insert_label(t_asmdata *data, t_op *ptr, char *name);
 
 /* 
 ** Hash functions
 */
 
-unsigned long	hash(char *str);
+uint32_t	hash(char *str);
 
 /*
-** Debugger tools
+** Bonus: Debugger tools
 */
 
-void	print_hashtable(t_asmdata *data);
-void	print_statement(t_asmdata *data, char *name);
-void	print_hashlabel(t_asmdata *data);
-void	print_oplist(t_asmdata *data);
+void		print_hashtable(t_asmdata *data);
+void		print_statement(t_asmdata *data, char *name);
+void		print_hashlabel(t_asmdata *data);
+void		print_oplist(t_asmdata *data);
 
 #endif
