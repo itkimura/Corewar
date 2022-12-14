@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 20:19:10 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/15 01:39:39 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,25 @@ void	print_hashlabel(t_asmdata *data)
 	}
 }
 
+/* 
+**	replace with itoa_base
+*/
+
+static void	showbits(unsigned int x)
+{
+	int	i;
+
+	i = (sizeof(int) * 2) - 1;
+	while (i >= 0)
+	{
+		if (x & (1u << i))
+			ft_putchar('1');
+		else
+			ft_putchar('0');
+		i--;
+	}
+}
+
 void	print_oplist(t_asmdata *data)
 {
 	t_op	**tmp;
@@ -88,8 +107,11 @@ void	print_oplist(t_asmdata *data)
 		i = 0;
 		if ((*tmp)->statement)
 		{
-			ft_printf("statement: {%s} byte: [%d] totbyte: [%d]\n", \
-			(*tmp)->statement, (*tmp)->byte, (*tmp)->totalbyte);
+			ft_printf("statement: {%s} byte: [%d] totbyte: [%d] argcode[%d]\
+			\nargcode[", (*tmp)->statement, (*tmp)->byte, \
+			(*tmp)->totalbyte, (*tmp)->argcode);
+			showbits((*tmp)->argcode);
+			ft_printf("]\n");
 			while (i < 3)
 			{
 				if ((*tmp)->arg[i])

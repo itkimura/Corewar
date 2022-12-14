@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/14 20:07:37 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/15 01:34:07 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_op
 	char	*label;
 	char	*statement;
 	char	*arg[3];
+	int		argcode;
 	int		totalbyte;
 	int		byte;
 }	t_op;
