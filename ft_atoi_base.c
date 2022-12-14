@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 14:28:28 by ccariou           #+#    #+#             */
-/*   Updated: 2022/12/14 14:29:52 by ccariou          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:31:01 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_atoi_base(const char *str, int base)
 			isneg = 1;
 		i++;
 	}
-	while (base(str[i], base) != -1)
+	while (convert(str[i], base) != -1)
 	{
 		nb *= base;
 		nb += convert(str[i], base);
