@@ -6,13 +6,13 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/11 23:09:47 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 16:43:34 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static	int	init_label(t_labels **label, char *name, char *ptr)
+static	int	init_label(t_labels **label, t_op *ptr, char *name)
 {
 	t_labels	*tmp;
 
@@ -27,36 +27,38 @@ static	int	init_label(t_labels **label, char *name, char *ptr)
 	return (1);
 }
 
-void	insert_label(t_asmdata *data, char *name, char *ptr)
+void	insert_label(t_asmdata *data, t_op *ptr, char *name)
 {
 	int	hashindex;
 
 	hashindex = hash(name);
-	if (!init_label(&data->labels[hashindex], name, ptr))
+	if (!init_label(&data->labels[hashindex], ptr, name))
 		free_exit(data, MALLOCFAIL, ERROR);
 }
 
-int	get_label_adr(t_asmdata *data, char **ptr, char *name)
+int	get_label_adr(t_asmdata *data, t_op **ptr, char *name)
 {
 	t_labels	*tmp;
 	int			i;
 
-	if (!name)
+	if (!name || !ptr)
 		return (0);
 	tmp = data->labels[hash(name)];
 	i = 0;
+	if (i)
+		ft_printf("");
 	while (tmp)
 	{
-		if (ft_strequ(tmp->name, name))
-		{
-			while (tmp->ptr[i + 1])
-				i++;
-			if (tmp->ptr[i] == LABEL_CHAR)
-				get_label_adr(data, ptr, tmp->ptr);
-			else
-				*ptr = tmp->ptr;
-			break ;
-		}
+		// if (ft_strequ(tmp->name, name))
+		// {
+		// 	while (tmp->ptr[i + 1])
+		// 		i++;
+		// 	if (tmp->ptr[i] == LABEL_CHAR)
+		// 		get_label_adr(data, ptr, tmp->ptr);
+		// 	else
+		// 		*ptr = tmp->ptr;
+		// 	break ;
+		// }
 		tmp = tmp->next;
 	}
 	return (1);

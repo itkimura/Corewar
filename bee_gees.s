@@ -24,6 +24,6 @@ zjmp	%:forks
 endwhile:
 ld	%0, r4			;carry = 1
 
-live2:
+live3:
 live %4
 zjmp %:live

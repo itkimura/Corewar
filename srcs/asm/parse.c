@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 10:17:22 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 16:44:25 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	validate_label(t_asmdata *data, char *ptr, int index, int j)
 		ptr = &ptr[j];
 	else
 		ptr = data->oplist[index + 1]->instruction;
-	insert_label(data, label, ptr);
+	insert_label(data, data->oplist[index + 1], label);
 	return (1);
 }
 
@@ -75,7 +75,6 @@ static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int j)
 	if (!args)
 		free_exit(data, "no arguements", ERROR);
 	ft_memdel((void **)&args);
-	//set byte and totalbyte = (index - 1)->totalbyte + byte. 
 }
 
 static int	validate_statement(t_asmdata *data, char *ptr, int index, int j)

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2022/12/13 09:42:59 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 15:59:02 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ typedef struct s_hashstatement
 	struct s_hashstatement 	*next;
 } t_hashstatement;
 
-typedef struct s_labels
-{
-	char			*ptr;
-	char			*name;
-	struct s_labels	*next;
-}	t_labels;
-
 typedef struct s_op
 {
 	char	*instruction;
@@ -55,6 +48,13 @@ typedef struct s_op
 	int		totalbyte;
 	int		byte;
 }	t_op;
+
+typedef struct s_labels
+{
+	t_op			*ptr;
+	char			*name;
+	struct s_labels	*next;
+}	t_labels;
 
 typedef struct s_asmdata
 {
@@ -103,8 +103,8 @@ void	parse_instructions(t_asmdata *data);
 */
 
 int		init_labels_table(t_asmdata *data);
-int		get_label_adr(t_asmdata *data, char **ptr, char *name);
-void	insert_label(t_asmdata *data, char *name, char *ptr);
+int		get_label_adr(t_asmdata *data, t_op **ptr, char *name);
+void	insert_label(t_asmdata *data, t_op *ptr, char *name);
 
 /* 
 ** Hash functions
