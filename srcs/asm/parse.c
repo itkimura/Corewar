@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 06:40:58 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 10:00:14 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ static char	*seperate_arguments(char *arg, int start)
 static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int j)
 {
 	char	**args;
+	char	*tmp;
 	int		i;
 	int		start;
 
-	ptr = ft_memmove((void *)&ptr[0], (void *)&ptr[j], ft_strlen(ptr) - j);
+	tmp = &ptr[j];
 	i = 0;
-	args = ft_strsplit(ptr, SEPARATOR_CHAR);
+	return ;
+	args = ft_strsplit(tmp, SEPARATOR_CHAR);
 	// while (i < 3 && args[i])
 		// ft_strdel(&args[i++]);
 	// ft_memdel((void **)args);
