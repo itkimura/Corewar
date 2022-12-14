@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 10:00:14 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 10:17:22 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,7 @@ static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int j)
 
 	tmp = &ptr[j];
 	i = 0;
-	return ;
 	args = ft_strsplit(tmp, SEPARATOR_CHAR);
-	// while (i < 3 && args[i])
-		// ft_strdel(&args[i++]);
-	// ft_memdel((void **)args);
 	while (args && args[i])
 	{
 		start = 0;
@@ -78,6 +74,7 @@ static void	seperate_instruction(t_asmdata *data, char *ptr, int index, int j)
 	}
 	if (!args)
 		free_exit(data, "no arguements", ERROR);
+	ft_memdel((void **)&args);
 	//set byte and totalbyte = (index - 1)->totalbyte + byte. 
 }
 

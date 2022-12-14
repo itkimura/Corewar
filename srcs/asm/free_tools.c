@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:28:33 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 06:06:50 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 10:16:58 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,12 @@ static void	free_oplist(t_asmdata *data)
 		j = 0;
 		ft_strdel(&data->oplist[i]->instruction);
 		ft_strdel(&data->oplist[i]->statement);
-		while (j < 3 && data->oplist[i]->arg[j])
-			ft_strdel(&data->oplist[i]->arg[j++]);
+		while (j < 3)
+		{
+			if (data->oplist[i]->arg[j])
+				ft_strdel(&data->oplist[i]->arg[j]);
+			j++;
+		}
 		ft_memdel((void **)&data->oplist[i]);
 		i++;
 	}
