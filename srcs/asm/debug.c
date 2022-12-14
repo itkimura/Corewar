@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 18:56:20 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 20:19:10 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	print_oplist(t_asmdata *data)
 		i = 0;
 		if ((*tmp)->statement)
 		{
-			ft_printf("statement: {%s}\n", (*tmp)->statement);
+			ft_printf("statement: {%s} byte: [%d] totbyte: [%d]\n", \
+			(*tmp)->statement, (*tmp)->byte, (*tmp)->totalbyte);
 			while (i < 3)
 			{
 				if ((*tmp)->arg[i])

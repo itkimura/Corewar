@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:09:08 by leo               #+#    #+#             */
-/*   Updated: 2022/12/08 15:11:37 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 20:05:43 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ static int	insert_statements(t_asmdata *data)
 			return (0);
 		i++;
 	}
+	return (1);
+}
+
+int	validate_statement(t_asmdata *data, char *ptr, int index, int *i)
+{
+	char	*statement;
+	int		j;
+
+	statement = NULL;
+	j = *i;
+	while (ptr[j] && ft_isalpha(ptr[j]))
+		j++;
+	if (ptr[j] == ' ' || ptr[j] == '\t' || ptr[j] == DIRECT_CHAR \
+		|| ptr[j] == LABEL_CHAR)
+		statement = ft_strsub(ptr, *i, j - (*i));
+	if (!statement || get_statement_index(data, statement) == -1)
+	{
+		ft_strdel(&statement);
+		return (0);
+	}
+	data->oplist[index]->statement = statement;
+	*i = j;
 	return (1);
 }
 

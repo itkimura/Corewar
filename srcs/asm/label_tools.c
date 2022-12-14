@@ -6,13 +6,13 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 18:37:00 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/14 20:04:22 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static	int	init_label(t_labels **label, t_op *ptr, char *name)
+static int	init_label(t_labels **label, t_op *ptr, char *name)
 {
 	t_labels	*tmp;
 
@@ -27,7 +27,7 @@ static	int	init_label(t_labels **label, t_op *ptr, char *name)
 	return (1);
 }
 
-void	insert_label(t_asmdata *data, t_op *ptr, char *name)
+static void	insert_label(t_asmdata *data, t_op *ptr, char *name)
 {
 	int	hashindex;
 
@@ -55,6 +55,31 @@ int	get_label_adr(t_asmdata *data, t_op **ptr, char *name)
 		}
 		tmp = tmp->next;
 	}
+	return (1);
+}
+
+int	validate_label(t_asmdata *data, char *ptr, int index)
+{
+	char	*label;
+	int		i;
+
+	i = 0;
+	while (ptr[i] && ft_strchr(LABEL_CHARS, ptr[i]))
+		i++;
+	if (ptr[i++] != LABEL_CHAR)
+		return (0);
+	label = ft_strsub(ptr, 0, i);
+	if (!label)
+		free_exit(data, MALLOCFAIL, ERROR);
+	data->oplist[index]->label = label;
+	while (ptr[i] && (ptr[i] == ' ' || ptr[i] == '\t'))
+		i++;
+	if (ptr[i] && validate_statement(data, ptr, index, &i))
+		seperate_instruction(data, ptr, index, i);
+	else if (ptr[i] && (ptr[i] != COMMENT_CHAR \
+		|| ptr[i] != ALTERNATE_COMMENT_CHAR))
+		free_exit(data, "Invalid instruction/label2", ERROR);
+	insert_label(data, data->oplist[index + !(ptr[i])], label);
 	return (1);
 }
 
