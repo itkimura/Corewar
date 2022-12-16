@@ -6,11 +6,37 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/15 01:34:26 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/16 12:52:58 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+static int	validate_ind_arg(char *arg, int res)
+{
+	int	tmp;
+	int	i;
+
+	tmp = res;
+	i = 1;
+	if (arg[0] == LABEL_CHAR || arg[0] == '-' || ft_isdigit(arg[0]))
+		tmp = IND_CODE;
+	if (res == DIR_CODE || arg[0] == '-')
+		i++;
+	if (arg[0] == LABEL_CHAR || res)
+	{
+		while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
+			i++;
+	}
+	else if (arg[0] != LABEL_CHAR)
+	{
+		while (arg[i] && ft_isdigit(arg[i]))
+			i++;
+	}
+	if (arg[i])
+		tmp = 0;
+	return (tmp);
+}
 
 static int	validate_arg(char *arg)
 {
@@ -18,18 +44,24 @@ static int	validate_arg(char *arg)
 	int	i;
 
 	res = 0;
-	i = 0;
-	if (arg[0] == 'r' && ft_isdigit(arg[1]) \
-		&& (!arg[2] || (ft_isdigit(arg[2]) && !arg[3])))
+	i = 1;
+	if (arg[0] == 'r' && arg[1] == '0' && arg[2] == '0')
+		return (res);
+	if (arg[0] == 'r' && ft_isdigit(arg[1]) && (!arg[2] \
+		|| (ft_isdigit(arg[2]) && !arg[3])))
 		res = REG_CODE;
-	else if (arg[i] == DIRECT_CHAR)
-	{
+	else if (arg[0] == DIRECT_CHAR)
 		res = DIR_CODE;
-	}
-	else if (arg[0] == LABEL_CHAR || arg[0] == '-' || ft_isdigit(arg[0]))
+	if (arg[0] == DIRECT_CHAR && arg[1] != LABEL_CHAR)
 	{
-		res = IND_CODE;
+		while (arg[i] == '0')
+			i++;
+		if (arg[i] && !ft_isdigit(arg[i]) && arg[i + 1] \
+			&& (!ft_isdigit(arg[i + 1]) && arg[i + 2]))
+			res = 0;
 	}
+	else if (arg[0] != 'r')
+		res = validate_ind_arg(arg, res);
 	return (res);
 }
 

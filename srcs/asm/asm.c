@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2022/12/14 18:57:04 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/15 14:07:47 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	read_input(data, argv[1]);
 	parse_instructions(data);
 	print_oplist(data);
+	// print_hashlabel(data);
 	free_exit(data, NULL, SUCCESS);
 	return (0);
 }
