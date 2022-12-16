@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 03:39:40 by leo               #+#    #+#             */
-/*   Updated: 2022/12/15 00:28:31 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/16 13:07:26 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_op(t_op **op, char *line)
 	(*op)->arg[1] = NULL;
 	(*op)->arg[2] = NULL;
 	(*op)->argcode = 0;
+	(*op)->args = 0;
 	(*op)->totalbyte = 0;
 	(*op)->byte = 0;
 	return (1);

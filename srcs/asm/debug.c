@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/15 01:39:39 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/16 13:50:10 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	print_hashlabel(t_asmdata *data)
 **	replace with itoa_base
 */
 
-static void	showbits(unsigned int x)
+static void	showbits(unsigned int x, int n, int flag)
 {
 	int	i;
 
-	i = (sizeof(int) * 2) - 1;
+	i = (sizeof(int) * n) - 1;
 	while (i >= 0)
 	{
 		if (x & (1u << i))
@@ -94,6 +94,8 @@ static void	showbits(unsigned int x)
 			ft_putchar('0');
 		i--;
 	}
+	if (flag)
+		ft_printf("\n");
 }
 
 void	print_oplist(t_asmdata *data)
@@ -110,13 +112,13 @@ void	print_oplist(t_asmdata *data)
 			ft_printf("statement: {%s} byte: [%d] totbyte: [%d] argcode[%d]\
 			\nargcode[", (*tmp)->statement, (*tmp)->byte, \
 			(*tmp)->totalbyte, (*tmp)->argcode);
-			showbits((*tmp)->argcode);
-			ft_printf("]\n");
+			showbits((*tmp)->argcode, 2, 0);
+			ft_printf("] args: ");
+			showbits((*tmp)->args, 3, 1);
 			while (i < 3)
 			{
-				if ((*tmp)->arg[i])
-					ft_printf("	arg: {%s}\n", (*tmp)->arg[i]);
-				i++;
+				if ((*tmp)->arg[i++])
+					ft_printf("	arg: {%s}\n", (*tmp)->arg[i - 1]);
 			}
 			ft_printf("\n");
 		}
