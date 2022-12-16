@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/16 13:47:28 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/16 16:44:27 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 {
 	char	**args;
-	t_op	*op;
 	int		j;
 	int		start;
 
@@ -102,17 +101,19 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 	while (args && args[j])
 	{
 		start = 0;
-		op = data->oplist[index];
 		while (args[j][start] == ' ' || args[j][start] == '\t')
 			start++;
 		if (args[j][start] == DIRECT_CHAR || args[j][start] == LABEL_CHAR \
 			|| args[j][start] == 'r' || ft_isdigit(args[j][start]) \
 			|| (args[j][start] == '-' && ft_isdigit(args[j][start + 1])))
-			op->arg[j] = trim_arg(data, args[j], index, start);
+			data->oplist[index]->arg[j] = trim_arg(data, args[j], index, start);
 		j++;
 	}
 	while (j++ < 3)
-		op->argcode = op->argcode << 2;
+	{
+		data->oplist[index]->argcode = data->oplist[index]->argcode << 2;
+		data->oplist[index]->args = data->oplist[index]->args << 3;
+	}
 	if (!args)
 		free_exit(data, "ft_strsplit fail", ERROR);
 	ft_memdel((void **)&args);
@@ -120,9 +121,11 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 
 void	parse_instructions(t_asmdata *data)
 {
-	char	*ptr;
-	int		index;
-	int		i;
+	char		*ptr;
+	u_int16_t	tmp;
+	int			index;
+	int			i;
+	int			tmp_i;
 
 	index = 0;
 	while (index < data->opcount)
@@ -132,7 +135,13 @@ void	parse_instructions(t_asmdata *data)
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
 		if (validate_statement(data, ptr, index, &i))
+		{
 			seperate_instruction(data, ptr, index, i);
+			tmp_i = get_statement_index(data, data->oplist[index]->statement);
+			tmp = data->oplist[index]->args & g_statements[tmp_i].args;
+			if (tmp != data->oplist[index]->args)
+				free_exit(data, "invalid arg type for statement", ERROR);
+		}	
 		else if (i == 0 && !validate_label(data, ptr, index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;
