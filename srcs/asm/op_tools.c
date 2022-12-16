@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 03:39:40 by leo               #+#    #+#             */
-/*   Updated: 2022/12/16 13:07:26 by leo              ###   ########.fr       */
+/*   Updated: 2022/12/16 19:49:37 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,33 @@ int	init_op_table(t_op	***oplist, int size)
 	while (i < size)
 		(*oplist)[i++] = NULL;
 	return (1);
+}
+
+void	add_byte_to_op(t_asmdata *data, int index, int arg_code, int tmp_index)
+{
+	t_op	*tmp;
+	int		byte;
+
+	tmp = data->oplist[index];
+	byte = 0;
+	if (!tmp->byte)
+	{
+		while (index > 0 && !data->oplist[index - 1]->statement)
+			index--;
+		if (index != 0)
+			tmp->totalbyte = data->oplist[index - 1]->totalbyte;
+		tmp->byte += 1 + (g_statements[tmp_index].argcode);
+		tmp->totalbyte += tmp->byte;
+	}
+	if (arg_code == REG_CODE)
+		byte = 1;
+	else if (arg_code == IND_CODE)
+		byte = 2;
+	else if (arg_code == DIR_CODE)
+		byte = g_statements[tmp_index].size;
+	tmp->byte += byte;
+	if (index == 0)
+		tmp->totalbyte = tmp->byte;
+	else
+		tmp->totalbyte += byte;
 }
