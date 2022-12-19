@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/13 12:49:27 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:23:43 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void print_help(char *file_path)
 /*
  * Debug printing function
  */
-void print_program(t_program *program)
+void print_single_program(t_program *program)
 {
 	ft_printf("[%s%s%s]\n", BOLD, program->name, RESET);
 	ft_printf("%sregistry:\t\n", BOLD, RESET);
@@ -73,6 +73,7 @@ void print_program(t_program *program)
 		ft_printf("%s\t[%d]%s:%d\n", BOLD, i, RESET, program->registry[i]);
 	ft_printf("\n");
 	ft_printf("%spc:%s\t%d\n", BOLD, RESET, program->pc);
+	ft_printf("%sid:%s\t%u\n", BOLD, RESET, program->id);
 	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, program->carry);
 	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, program->exec_code_size);
 	ft_printf("%scomment%s:\t%s\n", BOLD, RESET, program->comment);
@@ -96,8 +97,20 @@ void	print_programs(t_program *p[MAX_PLAYERS])
 	while (index < MAX_PLAYERS)
 	{
 		if (p[index] != NULL)
-			print_program(p[index]);
+			print_single_program(p[index]);
 		index++;
+	}
+}
+
+/*
+ * print carriage linked list*
+ */
+void	print_carriage_list(t_program *head)
+{
+	while(head)
+	{
+		print_single_program(head);
+		head = head->next;
 	}
 }
 

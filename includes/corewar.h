@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/19 13:40:32 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 13:42:48 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,18 @@ typedef enum e_error
  */
 typedef struct s_program
 {
-	int32_t			registry[REG_NUMBER];
+	int32_t				registry[REG_NUMBER];
 	// r1: will be champion's code but minus
 	// the rest: 0
-	int32_t			pc;
-	bool			carry;		   //-> 0?
-	
-
-	
-	bool			fix_position;
-	unsigned int	exec_code_size;
-	unsigned char	comment[COMMENT_LENGTH + 1];
-	unsigned char	name[PROG_NAME_LENGTH + 1];
-	unsigned char	*exec_code;
+	int32_t				pc;
+	bool				carry;		   //-> 0?
+	bool				fix_position;
+	unsigned int		exec_code_size;
+	unsigned int		id;
+	unsigned char		comment[COMMENT_LENGTH + 1];
+	unsigned char		name[PROG_NAME_LENGTH + 1];
+	unsigned char		*exec_code;
+	struct s_program	*next;
 } t_program;
 
 /*
@@ -94,6 +93,8 @@ typedef struct s_game
 	int			number_of_cycles; //for the entire run
 	int			number_of_live_statement; //for the last cycles_to_die
 	int			number_of_check;
+	t_program	*carriage_head;
+	int32_t		arena[MEM_SIZE];
 } t_game;
 
 /*
@@ -130,7 +131,9 @@ void	free_all(t_game *game);
  */
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
-void print_program(t_program *program);
+void print_single_program(t_program *program);
+void print_programs(t_program *p[MAX_PLAYERS]);
+void print_carriage_list(t_program *head);
 void print_all_programs(t_game *game);
 void print_game(t_game *game);
 void print_bits(uint32_t nbr, int size);

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/13 12:48:03 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:16:28 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ bool read_champion(t_program *program, char *argv, int fd)
  */
 bool validate_champion(char *file_path, t_game *game)
 {
-	int fd;
-	t_program *new;
+	int			fd;
+	t_program	*new;
 
 	if (game->total_players >= MAX_PLAYERS)
 		return (print_error(file_path, TOO_MANY_PLAYERS));
@@ -99,8 +99,9 @@ bool validate_champion(char *file_path, t_game *game)
 	if (fd < 0)
 		return (print_error(file_path, OPEN_FAIL));
 	if (init_program(&new, game) == false)
-		return (false);
-	read_champion(new, file_path, fd);
+		return (close(fd), false);
+	if (read_champion(new, file_path, fd) == false)
+		return (close(fd), false);
 	close(fd);
 	return (true);
 }

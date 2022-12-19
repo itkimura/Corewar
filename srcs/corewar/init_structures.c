@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 13:40:08 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 13:43:38 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ bool init_game(t_game **game)
 	while (index < MAX_PLAYERS)
 		(*game)->all_players[index++] = NULL;
 	index = 0;
-	index = 0;
 	while (index < TOTAL_FLAGS)
 		(*game)->flags_value[index++] = 0;
+	index = 0;
+	while (index < MEM_SIZE)
+		(*game)->arena[index++] = 0;
 	(*game)->total_players = 0;
 	(*game)->total_tmp_players = 0;
 	(*game)->cycles_to_die = CYCLE_TO_DIE;
@@ -39,6 +41,7 @@ bool init_game(t_game **game)
 	(*game)->number_of_cycles = 0;
 	(*game)->number_of_live_statement = 0;
 	(*game)->number_of_check = 0;
+	(*game)->carriage_head = NULL;
 	return (true);
 }
 
@@ -66,11 +69,13 @@ bool init_program(t_program **new, t_game *game)
 	while (index < REG_NUMBER)
 		(*new)->registry[index++] = 0;
 	(*new)->pc = 0;
+	(*new)->id = 0;
 	(*new)->carry = 0;
 	(*new)->fix_position = false;
 	(*new)->exec_code = NULL;
 	ft_unsigned_char_zero((*new)->comment, COMMENT_LENGTH + 1);
 	ft_unsigned_char_zero((*new)->name, PROG_NAME_LENGTH + 1);
 	add_player(*new, game);
+	(*new)->next = NULL;
 	return (true);
 }
