@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/19 16:21:17 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 18:37:44 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,13 @@ bool	validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	/* to be deleted */
-	ft_printf("---- End ----\n");
+	//ft_printf("---- End ----\n");
 	// print_game(game);
 	// print_carriage_list(game->carriage_head);
 	// print_all_programs(game);
-	init_arena(game);
-	print_arena(game);
+	print_player_announce(game);
+	//init_arena(game);
+	//print_arena(game);
 	free_all(game);
 	return (true);
 }

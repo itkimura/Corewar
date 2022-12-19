@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:42:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 14:55:37 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 18:33:45 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void free_game(t_game *game)
 		while (index < MAX_PLAYERS)
 		{
 			if (game->all_players[index] != NULL)
-			{
-				ft_printf("%d here\n", index);
 				free_program(game->all_players[index]);
-			}
 			index++;
 		}
 		free_carriages(game->carriage_head);

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 15:04:33 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 18:37:20 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,30 @@ void print_help(char *file_path)
 	ft_printf(" %sN%s cycles and exit\n", BOLD, RESET);
 	ft_printf("\t%s-n N%s\t", BOLD, RESET);
 	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
+}
+
+/*
+ * print announcement of before the battle
+* Player 1, weighing 22 bytes, "Batman" ("This city needs me")!
+* Player 2, weighing 12 bytes, "Ant-Man" ("So small")!
+* Player 3, weighing 28 bytes, "Iron Man" ("Jarvis, check all systems!")!
+ * 
+ */
+void	print_player_announce(t_game *game)
+{
+	int			index;
+	t_program	*player;
+
+	index = 0;
+	ft_printf("Introducing contestants ...\n");
+	while (index < game->total_players)
+	{
+		player = game->players_in_order[index];
+		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
+		ft_printf("weighing %d bytes, ", player->exec_code_size);
+		ft_printf("\"%s\" (\"%s\")!\n", player->name, player->comment);
+		index++;
+	}
 }
 
 /*
