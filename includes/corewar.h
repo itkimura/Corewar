@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/13 12:49:34 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:40:32 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_program
 	// the rest: 0
 	int32_t			pc;
 	bool			carry;		   //-> 0?
+	
+
+	
 	bool			fix_position;
 	unsigned int	exec_code_size;
 	unsigned char	comment[COMMENT_LENGTH + 1];
@@ -86,6 +89,11 @@ typedef struct s_game
 	t_program	*all_players[MAX_PLAYERS];
 	int			total_tmp_players;
 	int			flags_value[TOTAL_FLAGS]; // initialize to 0
+	int			cycles_to_die;
+	int			winner; //could be t_program
+	int			number_of_cycles; //for the entire run
+	int			number_of_live_statement; //for the last cycles_to_die
+	int			number_of_check;
 } t_game;
 
 /*

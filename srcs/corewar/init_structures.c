@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/12 17:29:45 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:40:08 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ bool init_game(t_game **game)
 		(*game)->flags_value[index++] = 0;
 	(*game)->total_players = 0;
 	(*game)->total_tmp_players = 0;
+	(*game)->cycles_to_die = CYCLE_TO_DIE;
+	(*game)->winner = 0;
+	(*game)->number_of_cycles = 0;
+	(*game)->number_of_live_statement = 0;
+	(*game)->number_of_check = 0;
 	return (true);
 }
 
