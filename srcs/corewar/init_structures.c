@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 13:43:38 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 14:38:58 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,32 @@ void	ft_unsigned_char_zero(unsigned char *str, int len)
  */
 bool init_program(t_program **new, t_game *game)
 {
-	int	index;
-
 	*new = (t_program *)malloc(sizeof(t_program));
 	if (*new == NULL)
 		return (print_error("init_program", MALLOC_FAIL));
-	index = 0;
-	while (index < REG_NUMBER)
-		(*new)->registry[index++] = 0;
-	(*new)->pc = 0;
-	(*new)->id = 0;
-	(*new)->carry = 0;
-	(*new)->fix_position = false;
-	(*new)->exec_code = NULL;
-	ft_unsigned_char_zero((*new)->comment, COMMENT_LENGTH + 1);
-	ft_unsigned_char_zero((*new)->name, PROG_NAME_LENGTH + 1);
+	ft_memset(*new, 0, sizeof(t_program));
+	// index = 0;
+	// while (index < REG_NUMBER)
+	// 	(*new)->registry[index++] = 0;
+	// // (*new)->pc = 0;
+	// (*new)->id = 0;
+	// (*new)->carry = false;
+	// (*new)->fix_position = false;
+	// (*new)->exec_code = NULL;
+	// ft_unsigned_char_zero((*new)->comment, COMMENT_LENGTH + 1);
+	// ft_unsigned_char_zero((*new)->name, PROG_NAME_LENGTH + 1);
 	add_player(*new, game);
-	(*new)->next = NULL;
+	// (*new)->next = NULL;
+	return (true);
+}
+
+bool init_carriage(t_carriage **new, int id)
+{
+	*new = (t_carriage *) malloc(sizeof(t_carriage));
+	if (*new == NULL)
+		return (print_error("init_carriage", MALLOC_FAIL));
+	ft_memset(*new, 0, sizeof(t_carriage));
+	(*new)->id = id;
+	(*new)->registry[0] = -id;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 13:16:28 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:19:38 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,22 +106,3 @@ bool validate_champion(char *file_path, t_game *game)
 	return (true);
 }
 
-/*
-int main(int argc, char **argv)
-{
-	if (argc < 1)
-		ft_printf("argc is wrong!");
-	else
-	{
-		int fd = open(argv[1], O_RDONLY);
-		t_program *program = (t_program *)malloc(sizeof(t_program));
-		if (read_champion(program, argv[1], fd) == true)
-			print_program(program);
-		if (program->exec_code != NULL)
-			free(program->exec_code);
-		free(program);
-		close(fd);
-	}
-	return 0;
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 13:23:43 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:04:33 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ void print_single_program(t_program *program)
 {
 	ft_printf("[%s%s%s]\n", BOLD, program->name, RESET);
 	ft_printf("%sregistry:\t\n", BOLD, RESET);
-	for (int i = 0; i < 16; i++)
-		ft_printf("%s\t[%d]%s:%d\n", BOLD, i, RESET, program->registry[i]);
-	ft_printf("\n");
-	ft_printf("%spc:%s\t%d\n", BOLD, RESET, program->pc);
-	ft_printf("%sid:%s\t%u\n", BOLD, RESET, program->id);
-	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, program->carry);
 	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, program->exec_code_size);
 	ft_printf("%scomment%s:\t%s\n", BOLD, RESET, program->comment);
 	if (program->exec_code != NULL)
@@ -89,11 +83,13 @@ void print_single_program(t_program *program)
 /*
  * Debug printing function
  */
-void	print_programs(t_program *p[MAX_PLAYERS])
+void	print_all_programs(t_game *game)
 {
 	int	index;
+	t_program **p;
 
 	index = 0;
+	p = game->all_players;
 	while (index < MAX_PLAYERS)
 	{
 		if (p[index] != NULL)
@@ -103,13 +99,30 @@ void	print_programs(t_program *p[MAX_PLAYERS])
 }
 
 /*
+ * print single carriage
+ */
+void	print_single_carriage(t_carriage *head)
+{
+	for (int i = 0; i < REG_NUMBER; i++)
+		ft_printf("%s\t[%d]%s:%d\n", BOLD, i, RESET, head->registry[i]);
+	ft_printf("\n");
+	ft_printf("%sid:%s\t%u\n", BOLD, RESET, head->id);
+	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, head->carry);
+	ft_printf("%sstatement_code%s:\t%d\n", BOLD, RESET, head->statement_code);
+	ft_printf("%slast_live_performed%s:\t%d\n", BOLD, RESET, head->last_live_performed);
+	ft_printf("%sremaining_cycle%s:\t%d\n", BOLD, RESET, head->remaining_cycle);
+	ft_printf("%scurr_pos%s:\t%d\n", BOLD, RESET, head->curr_pos);
+	ft_printf("%scrossed_bytes%s:\t%d\n", BOLD, RESET, head->crossed_bytes);
+}
+
+/*
  * print carriage linked list*
  */
-void	print_carriage_list(t_program *head)
+void	print_carriage_list(t_carriage *head)
 {
-	while(head)
+	while (head)
 	{
-		print_single_program(head);
+		print_single_carriage(head);
 		head = head->next;
 	}
 }

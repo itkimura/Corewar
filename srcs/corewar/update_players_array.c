@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_players_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 13:23:52 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:08:50 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,26 @@ void	align_players(t_game *game)
  */
 bool	update_players_array(t_game *game)
 {
-	int		index;
-	t_program *prev;
-
+	int			index;
+	char		missing_player[2];
+	t_carriage *prev;
+	t_carriage *new;
+	
+	missing_player[1] = '\0';
 	align_players(game);
-	index = game->total_players - 1;;
-	ft_printf("here\n");
+	index = game->total_players - 1;
 	while (index >= 0)
 	{
+		missing_player[0] = index + 1 + '0';
 		if (game->players_in_order[index] == NULL)
-			return (print_error(ft_itoa(index + 1), MISSING_PLAYER));
+			return (print_error(missing_player, MISSING_PLAYER));
+		if (init_carriage(&new, index + 1) == false)
+			return (false);
 		if (index == game->total_players - 1)
-			game->carriage_head = game->players_in_order[index];
+			game->carriage_head = new;
 		else
-			prev->next = game->players_in_order[index];
-		prev = game->players_in_order[index];
-		game->players_in_order[index]->registry[0] = -1 * (index + 1);
-		game->players_in_order[index]->id = index + 1;
+			prev->next = new;
+		prev = new;
 		index--;
 	}
 	return (true);

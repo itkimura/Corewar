@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/19 13:42:48 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/19 15:38:43 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,36 @@ typedef enum e_error
 } t_error;
 
 /*
+ * carriage struct
+ */
+typedef struct s_carriage
+{
+	int32_t				registry[REG_NUMBER];
+	unsigned int		id;
+	// int32_t				pc;
+	bool				carry;		   //-> false
+	
+	uint16_t			statement_code;
+	uint32_t			last_live_performed;
+	uint32_t			remaining_cycle;
+	uint32_t			curr_pos;
+	uint32_t			crossed_bytes;
+	struct s_carriage	*next;
+
+} t_carriage;
+
+/*
  * cattiage struct
  */
 typedef struct s_program
 {
-	int32_t				registry[REG_NUMBER];
 	// r1: will be champion's code but minus
 	// the rest: 0
-	int32_t				pc;
-	bool				carry;		   //-> 0?
-	bool				fix_position;
 	unsigned int		exec_code_size;
-	unsigned int		id;
+	bool				fix_position;
 	unsigned char		comment[COMMENT_LENGTH + 1];
 	unsigned char		name[PROG_NAME_LENGTH + 1];
 	unsigned char		*exec_code;
-	struct s_program	*next;
 } t_program;
 
 /*
@@ -88,13 +102,15 @@ typedef struct s_game
 	t_program	*all_players[MAX_PLAYERS];
 	int			total_tmp_players;
 	int			flags_value[TOTAL_FLAGS]; // initialize to 0
+	
 	int			cycles_to_die;
 	int			winner; //could be t_program
 	int			number_of_cycles; //for the entire run
 	int			number_of_live_statement; //for the last cycles_to_die
 	int			number_of_check;
-	t_program	*carriage_head;
-	int32_t		arena[MEM_SIZE];
+	
+	t_carriage	*carriage_head;
+	unsigned char		arena[MEM_SIZE];
 } t_game;
 
 /*
@@ -118,6 +134,7 @@ bool	update_players_array(t_game *game);
 bool	init_game(t_game **game);
 void	ft_unsigned_char_zero(unsigned char *str, int len);
 bool	init_program(t_program **new, t_game *game);
+bool	init_carriage(t_carriage **new, int id);
 
 /*
  * free_all.c
@@ -132,11 +149,12 @@ void	free_all(t_game *game);
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
 void print_single_program(t_program *program);
-void print_programs(t_program *p[MAX_PLAYERS]);
-void print_carriage_list(t_program *head);
+// void print_programs(t_program *p[MAX_PLAYERS]);
 void print_all_programs(t_game *game);
 void print_game(t_game *game);
 void print_bits(uint32_t nbr, int size);
+void	print_single_carriage(t_carriage *head);
+void	print_carriage_list(t_carriage *head);
 
 /*
  * validate_champion.c

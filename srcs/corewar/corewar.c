@@ -6,11 +6,52 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/19 13:14:03 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:21:17 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
+
+/*
+ * print arena
+ */
+void print_arena(t_game *game)
+{
+	int index;
+
+	index = 0;
+	while (index < MEM_SIZE)
+	{
+		if ((index) % 64 == 0)
+			ft_printf("0x%04x : ", index);
+		ft_printf("%02x ", game->arena[index]);
+		if ((index + 1) % 64 == 0)
+			ft_printf("\n");
+		index++;
+	}
+}
+
+/*
+ * initialize arena, place players onto arena
+ */
+void	init_arena(t_game *game)
+{
+	int	index;
+	int	max_memory;
+	int	position;
+
+	max_memory = MEM_SIZE / game->total_players;
+	index = 0;
+	position = 0;
+	while (index < game->total_players)
+	{
+		ft_memcpy(game->arena + position, \
+				game->players_in_order[index]->exec_code, \
+				game->players_in_order[index]->exec_code_size);
+		position += max_memory;
+		index++;
+	}
+}
 
 /*
  * 1.initiarize game structure
@@ -42,12 +83,16 @@ bool	validate_argv(int argc, char **argv)
 		}
 		index++;
 	}
+
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	/* to be deleted */
 	ft_printf("---- End ----\n");
-	print_game(game);
-	print_carriage_list(game->carriage_head);
+	// print_game(game);
+	// print_carriage_list(game->carriage_head);
+	// print_all_programs(game);
+	init_arena(game);
+	print_arena(game);
 	free_all(game);
 	return (true);
 }
