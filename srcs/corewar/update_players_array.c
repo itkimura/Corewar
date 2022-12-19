@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/13 12:44:47 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:23:52 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,24 @@ void	align_players(t_game *game)
  */
 bool	update_players_array(t_game *game)
 {
-	int	index;
+	int		index;
+	t_program *prev;
 
 	align_players(game);
-	index = 0;
-	while (index < game->total_players)
+	index = game->total_players - 1;;
+	ft_printf("here\n");
+	while (index >= 0)
 	{
 		if (game->players_in_order[index] == NULL)
 			return (print_error(ft_itoa(index + 1), MISSING_PLAYER));
+		if (index == game->total_players - 1)
+			game->carriage_head = game->players_in_order[index];
+		else
+			prev->next = game->players_in_order[index];
+		prev = game->players_in_order[index];
 		game->players_in_order[index]->registry[0] = -1 * (index + 1);
-		index++;
+		game->players_in_order[index]->id = index + 1;
+		index--;
 	}
 	return (true);
 }
