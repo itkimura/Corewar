@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 18:37:20 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:07:54 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ void	print_player_announce(t_game *game)
 	t_program	*player;
 
 	index = 0;
-	ft_printf("Introducing contestants ...\n");
+	ft_printf("Introducing contestants...\n");
 	while (index < game->total_players)
 	{
 		player = game->players_in_order[index];
 		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
 		ft_printf("weighing %d bytes, ", player->exec_code_size);
-		ft_printf("\"%s\" (\"%s\")!\n", player->name, player->comment);
+		ft_printf("\"%s\" (\"%s\") !\n", player->name, player->comment);
 		index++;
 	}
 }

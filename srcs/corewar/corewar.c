@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/19 18:37:44 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:07:17 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ bool	validate_argv(int argc, char **argv)
 	// print_carriage_list(game->carriage_head);
 	// print_all_programs(game);
 	print_player_announce(game);
-	//init_arena(game);
-	//print_arena(game);
+	init_arena(game);
+	print_arena(game);
 	free_all(game);
 	return (true);
 }
