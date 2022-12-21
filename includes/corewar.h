@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/19 18:32:18 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:57:07 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,7 @@ void	free_all(t_game *game);
  */
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
-void	print_player_announce(t_game *game);
 void print_single_program(t_program *program);
-// void print_programs(t_program *p[MAX_PLAYERS]);
 void print_all_programs(t_game *game);
 void print_game(t_game *game);
 void print_bits(uint32_t nbr, int size);

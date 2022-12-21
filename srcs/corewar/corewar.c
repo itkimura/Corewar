@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/20 12:07:17 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/21 13:56:17 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,29 @@ void print_arena(t_game *game)
 
 /*
  * initialize arena, place players onto arena
+ * also print announcement of players
  */
 void	init_arena(t_game *game)
 {
-	int	index;
-	int	max_memory;
-	int	position;
+	int			index;
+	int			max_memory;
+	int			position;
+	t_program	*player;
 
 	max_memory = MEM_SIZE / game->total_players;
 	index = 0;
 	position = 0;
+	ft_printf("Introducing contestants...\n");
 	while (index < game->total_players)
 	{
 		ft_memcpy(game->arena + position, \
 				game->players_in_order[index]->exec_code, \
 				game->players_in_order[index]->exec_code_size);
 		position += max_memory;
+		player = game->players_in_order[index];
+		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
+		ft_printf("weighing %d bytes, ", player->exec_code_size);
+		ft_printf("\"%s\" (\"%s\") !\n", player->name, player->comment);
 		index++;
 	}
 }
@@ -91,7 +98,6 @@ bool	validate_argv(int argc, char **argv)
 	// print_game(game);
 	// print_carriage_list(game->carriage_head);
 	// print_all_programs(game);
-	print_player_announce(game);
 	init_arena(game);
 	print_arena(game);
 	free_all(game);
