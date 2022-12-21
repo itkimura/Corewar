@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/21 13:56:39 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/21 15:48:20 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool print_error(char *str, t_error error)
 void print_help(char *file_path)
 {
 	ft_printf("%sName\n\t%s%s", BOLD, file_path, RESET);
-	ft_printf(" - is a program that the progress of the battle and");
+	ft_printf(" - is a player that the progress of the battle and");
 	ft_printf(" declare the winner champion after its completion\n\n");
 	ft_printf("%sHELP\n\t%s%s NO INPUT - ", BOLD, file_path, RESET);
 	ft_printf("print this help message\n\n");
@@ -65,17 +65,17 @@ void print_help(char *file_path)
 /*
  * Debug printing function
  */
-void print_single_program(t_program *program)
+void print_single_player(t_player *player)
 {
-	ft_printf("[%s%s%s]\n", BOLD, program->name, RESET);
+	ft_printf("[%s%s%s]\n", BOLD, player->name, RESET);
 	ft_printf("%sregistry:\t\n", BOLD, RESET);
-	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, program->exec_code_size);
-	ft_printf("%scomment%s:\t%s\n", BOLD, RESET, program->comment);
-	if (program->exec_code != NULL)
+	ft_printf("%sexec_code_size%s:\t%d\n", BOLD, RESET, player->exec_code_size);
+	ft_printf("%scomment%s:\t%s\n", BOLD, RESET, player->comment);
+	if (player->exec_code != NULL)
 	{
 		ft_printf("%sexec_code%s:\t", BOLD, RESET);
-		for (unsigned int i = 0; i < program->exec_code_size; i++)
-			ft_printf("%02x ", program->exec_code[i]);
+		for (unsigned int i = 0; i < player->exec_code_size; i++)
+			ft_printf("%02x ", player->exec_code[i]);
 	}
 	ft_printf("\n");
 }
@@ -83,17 +83,17 @@ void print_single_program(t_program *program)
 /*
  * Debug printing function
  */
-void	print_all_programs(t_game *game)
+void print_all_players(t_game *game)
 {
-	int	index;
-	t_program **p;
+	int index;
+	t_player **p;
 
 	index = 0;
 	p = game->all_players;
 	while (index < MAX_PLAYERS)
 	{
 		if (p[index] != NULL)
-			print_single_program(p[index]);
+			print_single_player(p[index]);
 		index++;
 	}
 }
@@ -101,7 +101,7 @@ void	print_all_programs(t_game *game)
 /*
  * print single carriage
  */
-void	print_single_carriage(t_carriage *head)
+void print_single_carriage(t_carriage *head)
 {
 	for (int i = 0; i < REG_NUMBER; i++)
 		ft_printf("%s\t[%d]%s:%d\n", BOLD, i, RESET, head->registry[i]);
@@ -118,7 +118,7 @@ void	print_single_carriage(t_carriage *head)
 /*
  * print carriage linked list*
  */
-void	print_carriage_list(t_carriage *head)
+void print_carriage_list(t_carriage *head)
 {
 	while (head)
 	{
@@ -146,7 +146,7 @@ void print_game(t_game *game)
 	{
 		ft_printf("[%st_game%s]\n", BOLD, RESET);
 		ft_printf("%stotal_players%s:\t\t%d\n", BOLD, RESET, game->total_players);
-		//ft_printf("%stotal_tmp_players%s:\t%d\n", BOLD, RESET, game->total_tmp_players);
+		// ft_printf("%stotal_tmp_players%s:\t%d\n", BOLD, RESET, game->total_tmp_players);
 		ft_printf("%splayers_in_order:\t\n", BOLD, RESET);
 		for (int i = 0; i < MAX_PLAYERS; i++)
 		{

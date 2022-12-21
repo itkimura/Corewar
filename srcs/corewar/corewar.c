@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/21 13:56:17 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/21 15:48:12 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void print_arena(t_game *game)
  * initialize arena, place players onto arena
  * also print announcement of players
  */
-void	init_arena(t_game *game)
+void init_arena(t_game *game)
 {
-	int			index;
-	int			max_memory;
-	int			position;
-	t_program	*player;
+	int index;
+	int max_memory;
+	int position;
+	t_player *player;
 
 	max_memory = MEM_SIZE / game->total_players;
 	index = 0;
@@ -48,9 +48,9 @@ void	init_arena(t_game *game)
 	ft_printf("Introducing contestants...\n");
 	while (index < game->total_players)
 	{
-		ft_memcpy(game->arena + position, \
-				game->players_in_order[index]->exec_code, \
-				game->players_in_order[index]->exec_code_size);
+		ft_memcpy(game->arena + position,
+				  game->players_in_order[index]->exec_code,
+				  game->players_in_order[index]->exec_code_size);
 		position += max_memory;
 		player = game->players_in_order[index];
 		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
@@ -62,13 +62,13 @@ void	init_arena(t_game *game)
 
 /*
  * 1.initiarize game structure
- * 
+ *
  * [while loop each argv]
  * 1.if it is flag, save value into game->flag_value
  * 2.if it is a player name, validate the champion.
  * 3.Call update_players_array to give the correct Player number
  */
-bool	validate_argv(int argc, char **argv)
+bool validate_argv(int argc, char **argv)
 {
 	int flag;
 	int index;
@@ -94,10 +94,10 @@ bool	validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	/* to be deleted */
-	//ft_printf("---- End ----\n");
-	// print_game(game);
-	// print_carriage_list(game->carriage_head);
-	// print_all_programs(game);
+	// ft_printf("---- End ----\n");
+	//  print_game(game);
+	//  print_carriage_list(game->carriage_head);
+	//  print_all_players(game);
 	init_arena(game);
 	print_arena(game);
 	free_all(game);

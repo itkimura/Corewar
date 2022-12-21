@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 14:38:58 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/21 15:48:18 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,25 @@ bool init_game(t_game **game)
 	return (true);
 }
 
-void	ft_unsigned_char_zero(unsigned char *str, int len)
+void ft_unsigned_char_zero(unsigned char *str, int len)
 {
-	int	index;
+	int index;
 
 	index = 0;
 	while (index < len)
 		str[index++] = 0;
 }
 /*
- * init program structure
+ * init player structure
  * 1.malloc structure
- * 2.add program into player adday of t_game structure
+ * 2.add player into player adday of t_game structure
  */
-bool init_program(t_program **new, t_game *game)
+bool init_player(t_player **new, t_game *game)
 {
-	*new = (t_program *)malloc(sizeof(t_program));
+	*new = (t_player *)malloc(sizeof(t_player));
 	if (*new == NULL)
-		return (print_error("init_program", MALLOC_FAIL));
-	ft_memset(*new, 0, sizeof(t_program));
+		return (print_error("init_player", MALLOC_FAIL));
+	ft_memset(*new, 0, sizeof(t_player));
 	// index = 0;
 	// while (index < REG_NUMBER)
 	// 	(*new)->registry[index++] = 0;
@@ -81,7 +81,7 @@ bool init_program(t_program **new, t_game *game)
 
 bool init_carriage(t_carriage **new, int id)
 {
-	*new = (t_carriage *) malloc(sizeof(t_carriage));
+	*new = (t_carriage *)malloc(sizeof(t_carriage));
 	if (*new == NULL)
 		return (print_error("init_carriage", MALLOC_FAIL));
 	ft_memset(*new, 0, sizeof(t_carriage));

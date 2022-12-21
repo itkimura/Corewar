@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   update_players_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/19 15:08:50 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/21 15:48:24 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
 /*
- * add program into player array of t_game structure
- * if "-n" option is active, put the program into game->players array.
- * if not, put program game->all_players array.
+ * add player into player array of t_game structure
+ * if "-n" option is active, put the player into game->players array.
+ * if not, put player game->all_players array.
  */
-bool	add_player(t_program *new, t_game *game)
+bool add_player(t_player *new, t_game *game)
 {
-	int	player_nb;
+	int player_nb;
 
 	if (game->total_players >= MAX_PLAYERS)
 		return (print_error("", WRONG_NB));
@@ -42,10 +42,10 @@ bool	add_player(t_program *new, t_game *game)
  * i -> index to loop all_players array
  * j -> index to loop players_in_order array
  */
-void	align_players(t_game *game)
+void align_players(t_game *game)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -68,13 +68,13 @@ void	align_players(t_game *game)
  * Call "align_players" to add players from all_payers array to players array
  * while loop -> check if any players missing and set registry[0]
  */
-bool	update_players_array(t_game *game)
+bool update_players_array(t_game *game)
 {
-	int			index;
-	char		missing_player[2];
+	int index;
+	char missing_player[2];
 	t_carriage *prev;
 	t_carriage *new;
-	
+
 	missing_player[1] = '\0';
 	align_players(game);
 	index = game->total_players - 1;
