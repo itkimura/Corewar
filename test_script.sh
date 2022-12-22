@@ -1,10 +1,10 @@
 #!/bin/bash
 
-VM_PATH="/Users/thule/Desktop/projects/corewar/"
+VM_PATH="./"
 
-INTRA_VM_PATH="/Users/thule/Desktop/projects/corewar/resources/"
+INTRA_VM_PATH="./resources/"
 
-COR_FILES_PATH="/Users/thule/Desktop/projects/corewar/resources/cor_files/working/"
+COR_FILES_PATH="./resources/cor_files/working/"
 COR_FILES=(`ls ${COR_FILES_PATH}*`)
 TOTAL_COR_FILES=$(ls $COR_FILES_PATH | wc -l)
 
