@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/21 15:48:20 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/22 11:35:52 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void print_single_carriage(t_carriage *head)
 	ft_printf("%sstatement_code%s:\t%d\n", BOLD, RESET, head->statement_code);
 	ft_printf("%slast_live_performed%s:\t%d\n", BOLD, RESET, head->last_live_performed);
 	ft_printf("%sremaining_cycle%s:\t%d\n", BOLD, RESET, head->remaining_cycle);
-	ft_printf("%scurr_pos%s:\t%d\n", BOLD, RESET, head->curr_pos);
+	ft_printf("%spc%s:\t%d\n", BOLD, RESET, head->pc);
 	ft_printf("%scrossed_bytes%s:\t%d\n", BOLD, RESET, head->crossed_bytes);
 }
 
