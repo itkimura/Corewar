@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:28:41 by thule             #+#    #+#             */
-/*   Updated: 2022/12/27 16:35:59 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/27 18:47:25 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	op_live(t_game *game, t_carriage *carriage)
 
 	carriage->last_live_performed = game->number_of_cycles;
 	player = bytes_to_decimal(game->arena, carriage->pc + 1, carriage->pc + 4);
-	if (player > 0 && player <= game->total_players)
+	if (player > 0 && player <= (uint32_t)game->total_players)
 		game->winner = player;
 	return true;
 }
@@ -65,22 +65,6 @@ bool	op_live(t_game *game, t_carriage *carriage)
  * If the carry value is zero, no movement is performed.
 */
 bool	op_zjmp(t_game *game, t_carriage *carriage)
-{
-	(void) game;
-	(void) carriage;
-	return false;
-}
-
-
-
-bool	op_fork(t_game *game, t_carriage *carriage)
-{
-	(void) game;
-	(void) carriage;
-	return false;
-}
-
-bool	op_lfork(t_game *game, t_carriage *carriage)
 {
 	(void) game;
 	(void) carriage;

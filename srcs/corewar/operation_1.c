@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 12:31:45 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/27 13:22:50 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:45:47 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int	reverse_bytes(t_game *game, unsigned int pc, int nbytes)
 	return (-1);
 }
 
-bool	add_carriage(t_game *game, t_carriage *src, unsigned int son_pc)
+bool	add_carriage(t_game *game, t_carriage *src, unsigned int dst_pc)
 {
 	t_carriage *dst;
-	t_carriage *tmp;
 	int	index;
 
 	if (init_carriage(&dst, game->carriage_head->id + 1) == false)
@@ -54,9 +53,14 @@ bool	add_carriage(t_game *game, t_carriage *src, unsigned int son_pc)
 	dst->last_live_performed = src->last_live_performed;
 	dst->remaining_cycle = src->remaining_cycle;
 	dst->crossed_bytes = src->crossed_bytes;
+	dst->pc = dst_pc;
 	index = 0;
 	while (index < REG_NUMBER)
-		dst->registry[index] = src->registry[index++];
+	{
+	
+		dst->registry[index] = src->registry[index];
+		index++;
+	}
 	dst->next = game->carriage_head;
 	game->carriage_head = dst;
 	return (true);

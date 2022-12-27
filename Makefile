@@ -6,7 +6,7 @@
 #    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/27 16:37:00 by thule            ###   ########.fr        #
+#    Updated: 2022/12/27 18:42:24 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ COREWAR_FILES =		corewar.c				print.c				\
 					update_players_array.c	free.c				\
 					validate_champion.c		read_utils.c		\
 					calc_utils.c			op.c				\
+					operation_1.c			operation_2.c
 
 COREWAR_SRCS_DIR = ./srcs/corewar/
 COREWAR_SRCS = $(addprefix $(COREWAR_SRCS_DIR), $(COREWAR_FILES))
