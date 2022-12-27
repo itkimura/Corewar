@@ -6,13 +6,15 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/21 15:48:25 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/27 12:51:38 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-/* Magic_header (4 byte)-> validate with COREWAR_EXEC_MAGIC */
+/*
+ * Magic_header (4 byte)-> validate with COREWAR_EXEC_MAGIC
+ */
 static bool validate_magic_header(int fd)
 {
 	unsigned char bytes[5];
@@ -21,7 +23,9 @@ static bool validate_magic_header(int fd)
 	return (bytes_to_decimal(bytes, 0, 3) == COREWAR_EXEC_MAGIC);
 }
 
-/* validate_null */
+/* 
+ * validate_null
+ */
 static bool validate_null(int fd)
 {
 	unsigned char bytes[5];
@@ -30,7 +34,9 @@ static bool validate_null(int fd)
 	return (bytes_to_decimal(bytes, 0, 3) == 0);
 }
 
-/* validate it under CHAMP_MAX_SIZE and save it into t_player->exec_code_size */
+/* 
+ * validate it under CHAMP_MAX_SIZE and save it into t_player->exec_code_size
+ */
 static bool validate_exec_code_size(t_player *player, int fd)
 {
 	unsigned char bytes[5];

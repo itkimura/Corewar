@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/22 11:35:17 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/27 13:17:09 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,11 @@ uint32_t bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx);
  */
 void read_then_terminate_bytes(int fd, unsigned char *bytes, int size);
 
+/* 
+ * op.c
+ */
+t_op	g_op_tab[16];
+
 /*
  * operation functions
  */
@@ -210,10 +215,10 @@ void	op_xor(t_game *game, t_carriage *carriage);
 void	op_zjmp(t_game *game, t_carriage *carriage);
 void	op_ldi(t_game *game, t_carriage *carriage);
 void	op_sti(t_game *game, t_carriage *carriage);
-void	op_fork(t_game *game, t_carriage *carriage);
+bool	op_fork(t_game *game, t_carriage *carriage);
 void	op_lld(t_game *game, t_carriage *carriage);
 void	op_lldi(t_game *game, t_carriage *carriage);
-void	op_lfork(t_game *game, t_carriage *carriage);
+bool	op_lfork(t_game *game, t_carriage *carriage);
 void	op_aff(t_game *game, t_carriage *carriage);
 
 
