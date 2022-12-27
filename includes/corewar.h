@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/27 13:17:09 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:56:36 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,14 @@ typedef struct s_game
 */
 typedef struct s_op
 {
-	unsigned char	*name;
+	char			*name;
 	int				nbr_arg;
 	unsigned char	arg[3];
 	unsigned char	op_code;
 	int				cycles;
 	bool			arg_code_type;
 	int				t_dir_size;
-	void			(*f)(t_game *game, t_carriage *s_carriage);
+	bool			(*f)(t_game *game, t_carriage *s_carriage);
 }	t_op;
 
 /*
@@ -199,27 +199,27 @@ void read_then_terminate_bytes(int fd, unsigned char *bytes, int size);
 /* 
  * op.c
  */
-t_op	g_op_tab[16];
+extern t_op	g_op_tab[16];
 
 /*
  * operation functions
  */
-void	op_live(t_game *game, t_carriage *carriage);
-void	op_ld(t_game *game, t_carriage *carriage);
-void	op_st(t_game *game, t_carriage *carriage);
-void	op_add(t_game *game, t_carriage *carriage);
-void	op_sub(t_game *game, t_carriage *carriage);
-void	op_and(t_game *game, t_carriage *carriage);
-void	op_or(t_game *game, t_carriage *carriage);
-void	op_xor(t_game *game, t_carriage *carriage);
-void	op_zjmp(t_game *game, t_carriage *carriage);
-void	op_ldi(t_game *game, t_carriage *carriage);
-void	op_sti(t_game *game, t_carriage *carriage);
+bool	op_live(t_game *game, t_carriage *carriage);
+bool	op_ld(t_game *game, t_carriage *carriage);
+bool	op_st(t_game *game, t_carriage *carriage);
+bool	op_add(t_game *game, t_carriage *carriage);
+bool	op_sub(t_game *game, t_carriage *carriage);
+bool	op_and(t_game *game, t_carriage *carriage);
+bool	op_or(t_game *game, t_carriage *carriage);
+bool	op_xor(t_game *game, t_carriage *carriage);
+bool	op_zjmp(t_game *game, t_carriage *carriage);
+bool	op_ldi(t_game *game, t_carriage *carriage);
+bool	op_sti(t_game *game, t_carriage *carriage);
 bool	op_fork(t_game *game, t_carriage *carriage);
-void	op_lld(t_game *game, t_carriage *carriage);
-void	op_lldi(t_game *game, t_carriage *carriage);
+bool	op_lld(t_game *game, t_carriage *carriage);
+bool	op_lldi(t_game *game, t_carriage *carriage);
 bool	op_lfork(t_game *game, t_carriage *carriage);
-void	op_aff(t_game *game, t_carriage *carriage);
+bool	op_aff(t_game *game, t_carriage *carriage);
 
 
 //get_arg_type(t_game *game, t_carriage *carriage) -> carriage->arg[]
