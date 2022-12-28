@@ -6,27 +6,32 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:34:21 by thle              #+#    #+#             */
-/*   Updated: 2022/12/08 17:34:45 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/28 14:09:26 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "corewar.h"
 
-/* like atoi, convert bytes to decimal */
-uint32_t	bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx)
+/*
+ * reverse_bytes
+ *
+ * read the bytes depending on T_DIR siz, 2 or 4
+ * short -> 2 bytes
+ * int -> 4 bytes
+ */
+int reverse_bytes(unsigned char *bytes, unsigned int pos, int nbytes)
 {
-	uint32_t	res;
-	uint32_t	tmp;
-	short int	shifted_value;
+	unsigned char	number[4];
+	int				index;
 
-	shifted_value = 0;
-	res = 0;
-	while (end_idx >= start_idx)
+	index = 0;
+	while (index < 4)
 	{
-		tmp = (uint32_t)bytes[end_idx];
-		res = (tmp << shifted_value) | res;
-		shifted_value += 8;
-		end_idx--;
+		if ((nbytes == 2 && index > 1) || (nbytes == 1 && index > 0))
+			number[index] = '\0';
+		else
+			number[index] = bytes[pos + (nbytes - (index + 1))];
+		index++;
 	}
-	return (res);
+	return (*(int *)&number[0]);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
+#    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/27 18:42:24 by itkimura         ###   ########.fr        #
+#    Updated: 2022/12/28 17:47:23 by thle             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,22 @@ COREWAR_FILES =		corewar.c				print.c				\
 					update_players_array.c	free.c				\
 					validate_champion.c		read_utils.c		\
 					calc_utils.c			op.c				\
-					operation_1.c			operation_2.c
+					operation_1.c			
 
 COREWAR_SRCS_DIR = ./srcs/corewar/
 COREWAR_SRCS = $(addprefix $(COREWAR_SRCS_DIR), $(COREWAR_FILES))
 COREWAR_OBJS = $(addprefix $(OBJS_DIR), $(COREWAR_FILES:%.c=%.o))
+
+
+OP_FILES =	op_live.c op_ld.c op_st.c op_add.c op_sub.c op_and.c \
+			op_or.c op_xor.c op_zjmp.c op_ldi.c op_sti.c op_fork.c \
+			op_lld.c op_lldi.c op_lfork.c op_aff.c \
+			op_utils.c get_arg.c
+
+OP_SRCS_DIR = ./srcs/corewar/operations/
+OP_SRCS = $(addprefix $(OP_SRCS_DIR), $(OP_FILES))
+OP_OBJS = $(addprefix $(OBJS_DIR), $(OP_FILES:%.c=%.o))
+
 
 ASM_FILES = asm.c
 ASM_SRCS_DIR = ./srcs/asm/
@@ -41,8 +52,8 @@ ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))
 
 all: $(NAME) $(ASM)
 
-$(NAME): $(LIB) $(OBJS_DIR) $(COREWAR_OBJS)
-	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) -L$(LIB_DIR) -lft
+$(NAME): $(LIB) $(OBJS_DIR) $(COREWAR_OBJS) $(OP_OBJS)
+	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) $(OP_OBJS) -L$(LIB_DIR) -lft
 	@echo "Compiled $(NAME)"
 
 $(ASM): $(LIB) $(OBJS_DIR) $(ASM_OBJS)
@@ -61,6 +72,10 @@ $(OBJS_DIR)%.o: $(COREWAR_SRCS_DIR)%.c
 	@echo "Compiled $@"
 
 $(OBJS_DIR)%.o: $(ASM_SRCS_DIR)%.c
+	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
+	@echo "Compiled $@"
+
+$(OBJS_DIR)%.o: $(OP_SRCS_DIR)%.c
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/27 15:56:36 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/28 18:06:54 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ typedef struct s_carriage
 	uint32_t pc;
 	uint32_t crossed_bytes;
 
-	unsigned char	arg[3];
-	int32_t			arg_value[3];
+	unsigned char	arg[4];
+	int32_t			arg_value[4];
 
 	struct s_carriage *next;
 
@@ -189,7 +189,7 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 /*
  * calc_utils.c
  */
-uint32_t bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx);
+int reverse_bytes(unsigned char *bytes, unsigned int pos, int nbytes);
 
 /*
  * read_utils.c
@@ -206,23 +206,32 @@ extern t_op	g_op_tab[16];
  */
 bool	op_live(t_game *game, t_carriage *carriage);
 bool	op_ld(t_game *game, t_carriage *carriage);
-bool	op_st(t_game *game, t_carriage *carriage);
+bool	op_lld(t_game *game, t_carriage *carriage);
 bool	op_add(t_game *game, t_carriage *carriage);
 bool	op_sub(t_game *game, t_carriage *carriage);
 bool	op_and(t_game *game, t_carriage *carriage);
 bool	op_or(t_game *game, t_carriage *carriage);
 bool	op_xor(t_game *game, t_carriage *carriage);
-bool	op_zjmp(t_game *game, t_carriage *carriage);
-bool	op_ldi(t_game *game, t_carriage *carriage);
+
+bool	op_st(t_game *game, t_carriage *carriage);
 bool	op_sti(t_game *game, t_carriage *carriage);
-bool	op_fork(t_game *game, t_carriage *carriage);
-bool	op_lld(t_game *game, t_carriage *carriage);
+bool	op_ldi(t_game *game, t_carriage *carriage);
 bool	op_lldi(t_game *game, t_carriage *carriage);
+bool	op_fork(t_game *game, t_carriage *carriage);
 bool	op_lfork(t_game *game, t_carriage *carriage);
+bool	op_zjmp(t_game *game, t_carriage *carriage);
 bool	op_aff(t_game *game, t_carriage *carriage);
 
+/*
+ * op_utils.c
+ */
+bool add_carriage(t_game *game, t_carriage *src, unsigned int dst_pc);
 
-//get_arg_type(t_game *game, t_carriage *carriage) -> carriage->arg[]
+/*
+ * get_arg.c
+ */
+bool get_arg_value(t_carriage *carriage, unsigned char *arena);
+
 
 
 #endif

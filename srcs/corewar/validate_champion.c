@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_champion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/27 12:51:38 by itkimura         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:41:16 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static bool validate_magic_header(int fd)
 	unsigned char bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
-	return (bytes_to_decimal(bytes, 0, 3) == COREWAR_EXEC_MAGIC);
+	return (reverse_bytes(bytes, 0, 4) == COREWAR_EXEC_MAGIC);
 }
 
 /* 
@@ -31,7 +31,7 @@ static bool validate_null(int fd)
 	unsigned char bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
-	return (bytes_to_decimal(bytes, 0, 3) == 0);
+	return (reverse_bytes(bytes, 0, 4) == 0);
 }
 
 /* 
@@ -42,7 +42,7 @@ static bool validate_exec_code_size(t_player *player, int fd)
 	unsigned char bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
-	player->exec_code_size = bytes_to_decimal(bytes, 0, 3);
+	player->exec_code_size = reverse_bytes(bytes, 0, 4);
 	return (player->exec_code_size <= CHAMP_MAX_SIZE);
 }
 
