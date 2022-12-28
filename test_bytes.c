@@ -68,10 +68,10 @@ uint32_t	bytes_to_decimal(unsigned char *bytes, int start_idx, int end_idx)
 int main(void)
 {
 	unsigned char bytes[4]; //unsigned char = 1 byte
-	bytes[0] = 1;
-	bytes[1] = 1;
-	bytes[2] = 1;
-	bytes[3] = 1;
+	bytes[0] = 0;
+	bytes[1] = 0;
+	bytes[2] = 0;
+	bytes[3] = 42;
 	printf("----- before -----\n");
 	printf("unsigned char array: ");
 	for (int index = 0; index < 4; index++)
