@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/28 18:06:54 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/29 20:27:24 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void print_game(t_game *game);
 void print_bits(uint32_t nbr, int size);
 void print_single_carriage(t_carriage *head);
 void print_carriage_list(t_carriage *head);
+void print_arg_and_val(t_carriage *carriage);
 
 /*
  * validate_champion.c

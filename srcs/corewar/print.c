@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/28 14:32:28 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/29 21:13:21 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,24 @@ void print_bits(uint32_t nbr, int size)
 			ft_printf("  ");
 	}
 	ft_printf("\n");
+}
+
+/*
+ * print arguments and their value
+ */
+void print_arg_and_val(t_carriage *carriage)
+{
+	char *arg_name;
+
+	ft_printf("%s%s%s%s:", BOLD, GREEN, g_op_tab[carriage->statement_code].name, RESET);
+	for (int i = 0; i < g_op_tab[carriage->statement_code].nbr_arg; i++)
+	{
+		if (carriage->arg[i] == T_REG)
+			arg_name = "T_REG";
+		else if (carriage->arg[i] == T_DIR)
+			arg_name = "T_DIR";
+		else if (carriage->arg[i] == T_IND)
+			arg_name = "T_IND";
+		ft_printf("\t[%d] - %s - %d\n", i + 1, arg_name, carriage->arg_value[i]);
+	}
 }
