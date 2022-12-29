@@ -6,15 +6,11 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:59 by thle              #+#    #+#             */
-/*   Updated: 2022/12/29 22:23:36 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/29 22:39:23 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-#define FIRST_ARG 0
-#define SECOND_ARG 1
-#define THIRD_ARG 2
 
 /*
 The task of this statement is to load the value into the registry.
