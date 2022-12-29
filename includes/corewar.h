@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/29 22:39:04 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/29 22:40:56 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 #define BOLD "\e[1m"
 #define RESET "\e[m"
 
-#define FIRST_ARG 0
-#define SECOND_ARG 1
-#define THIRD_ARG 2
 
 typedef enum e_arg
 {
