@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2022/12/28 18:04:47 by thle             ###   ########.fr       */
+/*   Updated: 2022/12/29 20:54:40 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 #define FOURTH 0b00000011
 #define IND_VALUE 3
 
+#define T_REG_SIZE 1
+#define T_IND_SIZE 2
+
 
 static bool	collect_arg_values(t_carriage *carriage, unsigned char *arena)
 {
@@ -39,9 +42,9 @@ static bool	collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		if (carriage->arg[index] == T_DIR)
 			size = g_op_tab[arena[carriage->pc] - 1].t_dir_size;
 		else if (carriage->arg[index] == T_REG)
-			size = T_REG;
+			size = T_REG_SIZE;
 		else if (carriage->arg[index] == T_IND)
-			size = T_IND;
+			size = T_IND_SIZE;
 		carriage->arg_value[index] = reverse_bytes(arena, current_position, size);
 		current_position = (current_position + size) % MEM_SIZE;
 		if (carriage->arg[index] == T_REG &&
@@ -62,7 +65,8 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 	unsigned char act;
 
 	statement_code = arena[carriage->pc] - 1;
-	act = arena[carriage->pc] + 1;
+	carriage->statement_code = statement_code;
+	act = arena[carriage->pc + 1];
 	carriage->arg[0] = (act & FIRST) >> 6;
 	carriage->arg[1] = (act & SECOND) >> 4;
 	carriage->arg[2] = (act & THIRD) >> 2;
@@ -73,9 +77,12 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 		if (carriage->arg[index] == IND_VALUE)
 			carriage->arg[index] = T_IND;
 		if (index >= g_op_tab[statement_code].nbr_arg && carriage->arg[index] != 0)
-			return (ft_printf("1"), false);
+		{
+			ft_printf("index: %d\n", index);
+			return (ft_printf("error in get_arg_value 1\n"), false);
+		}
 		else if ((carriage->arg[index] & g_op_tab[statement_code].arg[index]) != carriage->arg[index])
-			return (ft_printf("2"), false);
+			return (ft_printf("error in get_arg_value 2\n"), false);
 		index++;
 	}
 	return (collect_arg_values(carriage, arena));
