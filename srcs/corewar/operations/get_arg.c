@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2022/12/29 20:54:40 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/30 12:50:11 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		carriage->arg_value[index] = reverse_bytes(arena, current_position, size);
 		current_position = (current_position + size) % MEM_SIZE;
 		if (carriage->arg[index] == T_REG &&
-			(carriage->arg_value[index] > REG_NUMBER || carriage->arg_value[index] < 0))
+			(carriage->arg_value[index] > REG_NUMBER || carriage->arg_value[index] < 1))
 				return (false);
 		index++;
 	}
