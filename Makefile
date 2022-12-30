@@ -6,7 +6,7 @@
 #    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/30 13:39:02 by thule            ###   ########.fr        #
+#    Updated: 2022/12/30 14:00:25 by thule            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,11 +51,11 @@ ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))
 
 all: $(NAME) $(ASM)
 
-$(NAME): $(LIB) $(OBJS_DIR) $(COREWAR_OBJS) $(OP_OBJS)
+$(NAME): $(LIB) $(COREWAR_OBJS) $(OP_OBJS)
 	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) $(OP_OBJS) -L$(LIB_DIR) -lft
 	@echo "Compiled $(NAME)"
 
-$(ASM): $(LIB) $(OBJS_DIR) $(ASM_OBJS)
+$(ASM): $(LIB) $(ASM_OBJS)
 	@$(CC) -o $(ASM) $(FLAGS) $(ASM_OBJS) -L$(LIB_DIR) -lft
 	@echo "Compiled $(ASM)"
 
@@ -63,14 +63,16 @@ $(LIB):
 	@$(MAKE) -sC ./libft
 	@echo "Compiled $(LIB)"
 
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+# $(OBJS_DIR):
+# 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(COREWAR_SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
 $(OBJS_DIR)%.o: $(ASM_SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
