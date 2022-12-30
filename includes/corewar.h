@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/29 22:40:56 by thule            ###   ########.fr       */
+/*   Updated: 2022/12/30 13:34:07 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,6 +240,11 @@ bool add_carriage(t_game *game, t_carriage *src, unsigned int dst_pc);
  * get_arg.c
  */
 bool get_arg_value(t_carriage *carriage, unsigned char *arena);
+
+/*
+ * get_value.c
+ */
+int get_value(t_game *game, t_carriage *carriage, int order, bool mod);
 
 
 

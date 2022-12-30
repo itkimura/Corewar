@@ -6,7 +6,7 @@
 #    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/29 20:23:35 by thule            ###   ########.fr        #
+#    Updated: 2022/12/30 13:39:02 by thule            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ COREWAR_OBJS = $(addprefix $(OBJS_DIR), $(COREWAR_FILES:%.c=%.o))
 OP_FILES =	op_live.c op_ld.c op_st.c op_add.c op_sub.c op_and.c \
 			op_or.c op_xor.c op_zjmp.c op_ldi.c op_sti.c op_fork.c \
 			op_lld.c op_lldi.c op_lfork.c op_aff.c \
-			op_utils.c get_arg.c
+			op_utils.c get_arg.c get_value.c
 
 OP_SRCS_DIR = ./srcs/corewar/operations/
 OP_SRCS = $(addprefix $(OP_SRCS_DIR), $(OP_FILES))
