@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/29 21:13:21 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/02 13:10:00 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,17 @@ void print_help(char *file_path)
 	ft_printf(" %sN%s cycles and exit\n", BOLD, RESET);
 	ft_printf("\t%s-n N%s\t", BOLD, RESET);
 	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
+}
+
+void	print_v(t_game *game, t_carriage *carriage, int shift)
+{
+	int	i;
+
+	i = 0;
+	ft_printf("ADV %d (0x%04x -> 0x%04x) ", shift, carriage->pc, carriage->pc + shift);
+	while (i < shift)
+		ft_printf("%02x ", game->arena[carriage->pc + i++]);
+	ft_printf("\n");
 }
 
 /*
@@ -137,6 +148,10 @@ char *flag_name(int nb)
 		return ("-n");
 	if (nb == FLAG_DUMP)
 		return ("-d");
+	if (nb == FLAG_V)
+		return ("-v");
+	if (nb == FLAG_A)
+		return ("-a");
 	return (NULL);
 }
 

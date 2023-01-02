@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2022/12/28 16:19:10 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/02 11:33:08 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,23 @@ bool validate_argv(int argc, char **argv)
 
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
-	
+	init_arena(game);
 	/* to be deleted */
-	// ft_printf("---- End ----\n");
-	//  print_game(game);
-	  print_carriage_list(game->carriage_head);
-	 init_arena(game);
-	 print_all_players(game);
-	// ft_printf("---- before ----\n");
-	// print_carriage_list(game->carriage_head);
-	// //print_arena(game);
-	// game->carriage_head->pc = 5;
-	 op_ld(game, game->carriage_head);
+	ft_printf("---- print_carriage ----\n");
+	print_carriage_list(game->carriage_head);
+	ft_printf("---- print_all_player ----\n");
+	print_all_players(game);
+	//ft_printf("---- before ----\n");
+	//print_carriage_list(game->carriage_head);
+	//print_arena(game);
+	//game->carriage_head->pc = 5;
+	ft_printf("---- print_game ----\n");
+	print_game(game);
+	ft_printf("---- test_op ----\n");
+	game->carriage_head->registry[1] = 42;
+	op_aff(game, game->carriage_head);
 	// ft_printf("---- after ----\n");
 	// print_carriage_list(game->carriage_head);
-	
-
 	free_all(game);
 	return (true);
 }
