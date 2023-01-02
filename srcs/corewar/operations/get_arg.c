@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 14:44:32 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/02 16:37:23 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		current_position = (current_position + size) % MEM_SIZE;
 		index++;
 	}
-	// carriage->pc = current_position + 1;
+	carriage->crossed_bytes = current_position;
 	return true;
 }
 
