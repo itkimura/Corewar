@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:30 by thle              #+#    #+#             */
-/*   Updated: 2022/12/28 15:31:49 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/02 17:25:03 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,17 @@ bool	op_zjmp(t_game *game, t_carriage *carriage)
 {
 	(void) game;
 	(void) carriage;
+	/*
+	int shift;
+
+	shift = reverse_bytes(game->arena, carriage->pc + 1,  g_op_tab[11].t_dir_size);
+	if (get_arg_value(carriage, game->arena))
+	{
+		if (carriage->carry == 1)
+			carriage->pc = reverse_
+	}
+	carriage->pc += ;
+	carriage->pc %= MEM_SIZE;
+	*/
 	return false;
 }
