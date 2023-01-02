@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:34:21 by thle              #+#    #+#             */
-/*   Updated: 2022/12/28 14:09:26 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/02 14:03:17 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int reverse_bytes(unsigned char *bytes, unsigned int pos, int nbytes)
 	index = 0;
 	while (index < 4)
 	{
-		if ((nbytes == 2 && index > 1) || (nbytes == 1 && index > 0))
+		if (nbytes == 2 && index > 1)
 			number[index] = '\0';
 		else
 			number[index] = bytes[pos + (nbytes - (index + 1))];
 		index++;
 	}
-	return (*(int *)&number[0]);
+	if (nbytes == 4)
+		return (*(int *)&number[0]);
+	return (*(short *)&number[0]);
 }
