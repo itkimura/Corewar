@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:33:01 by thule             #+#    #+#             */
-/*   Updated: 2023/01/02 11:49:07 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:08:36 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "corewar.h"
 
@@ -29,8 +30,13 @@
 int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 {
 	int value;
+	int	size;
 
 	value = carriage->arg_value[order];
+	size = 4;
+	// if statement is lld
+	if (carriage->statement_code == 12)
+		size = 2;
 	if (carriage->arg[order] == T_REG)
 		value = carriage->registry[carriage->arg_value[order] - 1];
 	else if (carriage->arg[order] == T_IND)
@@ -38,11 +44,11 @@ int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 		if (mod == true)
 			value = reverse_bytes(game->arena,
 				(carriage->pc + carriage->arg_value[order] % IDX_MOD) % MEM_SIZE,
-				4);
+				size);
 		else
 			value = reverse_bytes(game->arena,
 				carriage->pc + carriage->arg_value[order] % MEM_SIZE,
-				4);
+				size);
 	}
 	return value;
 }

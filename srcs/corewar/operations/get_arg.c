@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 11:46:39 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:37:23 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,41 @@
 #define T_REG_SIZE 1
 #define T_IND_SIZE 2
 
-/* 
+/*
  * Based on the carriage->arg array, we get the value on the byte code
  */
-static bool	collect_arg_values(t_carriage *carriage, unsigned char *arena)
+static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 {
-	int	index;
-	int	current_position;
-	int	size;
+	int index;
+	int current_position;
+	int size;
 
 	index = 0;
 	current_position = (carriage->pc + 2) % MEM_SIZE;
 	while (index < g_op_tab[arena[carriage->pc] - 1].nbr_arg)
 	{
-		if (carriage->arg[index] == T_DIR)
-			size = g_op_tab[arena[carriage->pc] - 1].t_dir_size;
-		else if (carriage->arg[index] == T_REG)
-			size = T_REG_SIZE;
-		else if (carriage->arg[index] == T_IND)
-			size = T_IND_SIZE;
-		carriage->arg_value[index] = reverse_bytes(arena, current_position, size);
-		current_position = (current_position + size) % MEM_SIZE;
-		if (carriage->arg[index] == T_REG &&
-			(carriage->arg_value[index] > REG_NUMBER || carriage->arg_value[index] < 1))
+		size = 1;
+		if (carriage->arg[index] == T_REG)
+		{
+			carriage->arg_value[index] = arena[current_position];
+			if (carriage->arg_value[index] > REG_NUMBER || carriage->arg_value[index] < 1)
 				return (false);
+		}
+		else
+		{
+			size = T_IND_SIZE;
+			if (carriage->arg[index] == T_DIR)
+				size = g_op_tab[arena[carriage->pc] - 1].t_dir_size;
+			carriage->arg_value[index] = reverse_bytes(arena, current_position, size);
+		}
+		current_position = (current_position + size) % MEM_SIZE;
 		index++;
 	}
-	// carriage->pc = current_position + 1;
+	carriage->crossed_bytes = current_position;
 	return true;
 }
 
-
-//act: argument code type
+// act: argument code type
 bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 {
 	int index;
@@ -80,7 +83,6 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 			carriage->arg[index] = T_IND;
 		if (index >= g_op_tab[statement_code].nbr_arg && carriage->arg[index] != 0)
 		{
-			ft_printf("index: %d\n", index);
 			return (ft_printf("error in get_arg_value 1\n"), false);
 		}
 		else if ((carriage->arg[index] & g_op_tab[statement_code].arg[index]) != carriage->arg[index])

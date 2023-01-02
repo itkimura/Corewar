@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_add.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:33:00 by thle              #+#    #+#             */
-/*   Updated: 2022/12/30 13:57:46 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/02 13:42:35 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,5 @@ bool	op_add(t_game *game, t_carriage *carriage)
 	// ft_printf("carry: %d\n", carriage->carry);
 	return true;
 }
+
+
