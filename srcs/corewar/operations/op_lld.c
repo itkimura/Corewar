@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_lld.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:35:51 by thle              #+#    #+#             */
-/*   Updated: 2022/12/29 22:37:53 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/02 13:45:30 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ bool	op_lld(t_game *game, t_carriage *carriage)
 	}
 	else
 	{
-		value = reverse_bytes(
-				game->arena,
-				(carriage->pc + carriage->arg_value[FIRST_ARG]) % MEM_SIZE,
-				4);
+		value = get_value(game, carriage, FIRST_ARG, false);
 	}
 	carriage->registry[reg] = value;
 	carriage->carry = (value == 0);
@@ -81,3 +78,5 @@ bool	op_lld(t_game *game, t_carriage *carriage)
 	ft_printf("carry: %d\n", carriage->carry);
 	return true;
 }
+
+
