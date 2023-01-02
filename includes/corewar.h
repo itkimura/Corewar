@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 13:10:23 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:40:20 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,13 @@ typedef struct s_carriage
 	unsigned int id;
 	bool carry; //-> false
 
+	//if carriage perfom live -> change live_performed = true
+	//during check, need to set back to false
+	bool live_performed;
+
 	uint16_t statement_code;
-	uint32_t last_live_performed;
 	uint32_t remaining_cycle;
+
 	uint32_t pc;
 	uint32_t crossed_bytes;
 
