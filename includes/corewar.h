@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 13:10:23 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/02 17:21:46 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,29 @@ typedef enum e_error
 	INVALID_CHAMPION_SIZE,
 	EXTRA_CHAMPION_CODE
 } t_error;
+
+/* 
+ * operation
+ */
+enum e_op
+{
+	OP_LIVE,
+	OP_LD,
+	OP_ST,
+	OP_ADD,
+	OP_SUB,
+	OP_AND,
+	OP_OR,
+	OP_XOR,
+	OP_ZJMP,
+	OP_LDI,
+	OP_STI,
+	OP_FORK,
+	OP_LLD,
+	OP_LLDI,
+	OP_LFORK,
+	OP_AFF
+};
 
 /*
  * carriage struct
