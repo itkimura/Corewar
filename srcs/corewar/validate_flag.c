@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/13 12:55:51 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/02 11:28:57 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool is_after_flag_n(t_game *game)
 }
 
 /*
- * validate nb and return true or false
+ * validate "-n" nb and return true or false
  */
 bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 {
@@ -59,7 +59,7 @@ bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 }
 
 /*
- * validate nb and return true or false
+ * validate "-d" and nb and return true or false
  */
 bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 {
@@ -75,6 +75,33 @@ bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 	return (true);
 }
 
+
+bool validate_v_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
+{
+	int nb;
+
+	if (is_after_flag_n(game) == true)
+		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	if (is_number(argv) == false)
+		return (print_error("-v flag", WRONG_NB));
+	nb = ft_atoi(argv);
+	*flag = FLAG_V;
+	game->flags_value[FLAG_V] = nb;
+	return (true);
+}
+
+/*
+ * validate "-a" flag
+ */
+bool validate_a_flag(t_vm_flag *flag, t_game *game)
+{
+	if (is_after_flag_n(game) == true)
+		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	*flag = FLAG_A;
+	game->flags_value[FLAG_A] = 1;
+	return (true);
+}
+
 /*
 return which flag by ft_strcmp
 */
@@ -85,5 +112,9 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 		return (validate_d_flag_nb(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-n") == 0)
 		return (validate_n_flag_nb(argv[++(*index)], flag, game));
+	if (ft_strcmp(argv[*index], "-v") == 0)
+		return (validate_v_flag_nb(argv[++(*index)], flag, game));
+	if (ft_strcmp(argv[*index], "-a") == 0)
+		return (validate_a_flag(flag, game));
 	return (true);
 }

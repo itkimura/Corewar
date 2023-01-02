@@ -1,4 +1,5 @@
 .name    "test"
 .comment "Invincible"
 
-	ld	%1, r1
+#	ld %42, r2
+	aff r2

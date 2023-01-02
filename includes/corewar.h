@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2022/12/30 13:34:07 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/02 13:10:23 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "get_next_line.h"
 #include "ft_printf.h"
 
-#define TOTAL_FLAGS 2
+#define TOTAL_FLAGS 4
 
 #define RED "\e[31m"
 #define GREEN "\e[32m"
@@ -46,7 +46,9 @@ typedef enum e_vm_flag
 {
 	NOT_FLAG = -1,
 	FLAG_N,
-	FLAG_DUMP
+	FLAG_DUMP,
+	FLAG_V,
+	FLAG_A,
 } t_vm_flag;
 
 /*
@@ -175,6 +177,8 @@ void free_all(t_game *game);
  */
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
+void	print_v(t_game *game, t_carriage *carriage, int shift);
+
 void print_single_player(t_player *player);
 void print_all_players(t_game *game);
 void print_game(t_game *game);

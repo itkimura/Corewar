@@ -6,12 +6,22 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 16:47:39 by thule             #+#    #+#             */
-/*   Updated: 2022/12/28 16:42:48 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/02 11:53:16 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+/* 
+ * 1.statement name
+ * 2.number of argument
+ * 3.arugment
+ * 4.statement code (index)
+ * 5.cycle to dye
+ * 6.argument code type (true or false)
+ * 7.size of T_DIR
+ * 8.pointer to function
+ */
 t_op	g_op_tab[16] =
 {
 	{"live",	1,	{T_DIR},												1,	10,		false,	4,	&op_live},

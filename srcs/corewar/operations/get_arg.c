@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2022/12/30 12:50:11 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/02 11:46:39 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@
 #define T_REG_SIZE 1
 #define T_IND_SIZE 2
 
-
+/* 
+ * Based on the carriage->arg array, we get the value on the byte code
+ */
 static bool	collect_arg_values(t_carriage *carriage, unsigned char *arena)
 {
 	int	index;
