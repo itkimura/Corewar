@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/03 16:57:23 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:07:18 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	update_next_statement(t_carriage *carriage)
 			size += T_IND_SIZE;
 		index++;
 	}
-	carriage->next_statement = (carriage->next_statement + size) % MEM_SIZE;
+	carriage->next_statement = (carriage->next_statement + size + 2) % MEM_SIZE;
 }
 
 // act: argument code type
