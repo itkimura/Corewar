@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:30:10 by thle              #+#    #+#             */
-/*   Updated: 2022/12/29 20:04:47 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/03 15:34:37 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ bool	op_live(t_game *game, t_carriage *carriage)
 {
 	int	player;
 
-	carriage->last_live_performed = game->number_of_cycles;
+	carriage->live_performed = true;
 	player = -(reverse_bytes(game->arena, carriage->pc + 1, 4));
 	if (player > 0 && player <= game->total_players)
 		game->winner = player;
-	carriage->last_live_performed = game->number_of_cycles;
+	carriage->crossed_bytes = 4;
+	carriage->remaining_cycle = g_op_tab[OP_LIVE].cycles;
 	return true;
 }

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 16:37:23 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/03 16:57:23 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		if (carriage->arg[index] == T_REG)
 		{
 			carriage->arg_value[index] = arena[current_position];
+			// reg_number check
 			if (carriage->arg_value[index] > REG_NUMBER || carriage->arg_value[index] < 1)
 				return (false);
 		}
@@ -58,8 +59,28 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		current_position = (current_position + size) % MEM_SIZE;
 		index++;
 	}
-	carriage->crossed_bytes = current_position;
-	return true;
+	//carriage->next_statement = current_position;
+	return (true);
+}
+
+void	update_next_statement(t_carriage *carriage)
+{
+	int	index;
+	int	size;
+
+	index = 0;
+	size = 0;
+	while (index < 4)
+	{
+		if (carriage->arg[index] == T_REG)
+			size += 1;
+		if (carriage->arg[index] == T_DIR)
+			size += g_op_tab[carriage->statement_code].t_dir_size;
+		if (carriage->arg[index] == T_IND)
+			size += T_IND_SIZE;
+		index++;
+	}
+	carriage->next_statement = (carriage->next_statement + size) % MEM_SIZE;
 }
 
 // act: argument code type
@@ -76,6 +97,7 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 	carriage->arg[1] = (act & SECOND) >> 4;
 	carriage->arg[2] = (act & THIRD) >> 2;
 	carriage->arg[3] = (act & FOURTH);
+	update_next_statement(carriage);
 	index = 0;
 	while (index < 4)
 	{
@@ -83,7 +105,7 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 			carriage->arg[index] = T_IND;
 		if (index >= g_op_tab[statement_code].nbr_arg && carriage->arg[index] != 0)
 		{
-			return (ft_printf("error in get_arg_value 1\n"), false);
+			return (ft_printf("It should be 0 error in get_arg_value 1\n"), false);
 		}
 		else if ((carriage->arg[index] & g_op_tab[statement_code].arg[index]) != carriage->arg[index])
 			return (ft_printf("error in get_arg_value 2\n"), false);

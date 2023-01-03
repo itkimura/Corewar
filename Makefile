@@ -6,7 +6,7 @@
 #    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2022/12/30 14:00:25 by thule            ###   ########.fr        #
+#    Updated: 2023/01/03 15:42:36 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ COREWAR_FILES =		corewar.c				print.c				\
 					validate_flag.c			init_structures.c	\
 					update_players_array.c	free.c				\
 					validate_champion.c		read_utils.c		\
-					calc_utils.c			op.c				
+					calc_utils.c			
 
 COREWAR_SRCS_DIR = ./srcs/corewar/
 COREWAR_SRCS = $(addprefix $(COREWAR_SRCS_DIR), $(COREWAR_FILES))
@@ -37,7 +37,7 @@ COREWAR_OBJS = $(addprefix $(OBJS_DIR), $(COREWAR_FILES:%.c=%.o))
 OP_FILES =	op_live.c op_ld.c op_st.c op_add.c op_sub.c op_and.c \
 			op_or.c op_xor.c op_zjmp.c op_ldi.c op_sti.c op_fork.c \
 			op_lld.c op_lldi.c op_lfork.c op_aff.c \
-			op_utils.c get_arg.c get_value.c
+			op_utils.c get_arg.c get_value.c op.c
 
 OP_SRCS_DIR = ./srcs/corewar/operations/
 OP_SRCS = $(addprefix $(OP_SRCS_DIR), $(OP_FILES))

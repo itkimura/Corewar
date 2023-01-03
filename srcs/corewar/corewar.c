@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 14:09:01 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/03 16:41:12 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ bool validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
+
 	/* to be deleted */
 	ft_printf("---- print_carriage ----\n");
 	print_carriage_list(game->carriage_head);

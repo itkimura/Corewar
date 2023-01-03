@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 17:27:51 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:40:53 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_carriage
 	uint32_t remaining_cycle;
 
 	uint32_t pc;
-	uint32_t crossed_bytes;
+	uint32_t next_statement;
 
 	unsigned char	arg[4];
 	int32_t			arg_value[4];
@@ -143,7 +143,7 @@ typedef struct s_game
 	int total_tmp_players;
 	int flags_value[TOTAL_FLAGS]; // initialize to 0
 
-	int cycles_to_die;
+	int cycles_to_die; //could be changed 
 	int winner;					  // could be t_player
 	int number_of_cycles;		  // for the entire run
 	int number_of_live_statement; // for the last cycles_to_die
