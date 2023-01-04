@@ -6,31 +6,12 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/03 16:41:12 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:08:10 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/corewar.h"
-
-/*
- * print arena
- */
-void print_arena(t_game *game)
-{
-	int index;
-
-	index = 0;
-	while (index < MEM_SIZE)
-	{
-		if ((index) % 64 == 0)
-			ft_printf("0x%04x : ", index);
-		ft_printf("%02x ", game->arena[index]);
-		if ((index + 1) % 64 == 0)
-			ft_printf("\n");
-		index++;
-	}
-}
 
 /*
  * initialize arena, place players onto arena
@@ -47,13 +28,15 @@ void init_arena(t_game *game)
 	index = 0;
 	position = 0;
 	ft_printf("Introducing contestants...\n");
+	game->winner = game->total_players;
 	while (index < game->total_players)
 	{
+		player = game->players_in_order[index];
 		ft_memcpy(game->arena + position,
 				  game->players_in_order[index]->exec_code,
 				  game->players_in_order[index]->exec_code_size);
+		player->carriage->pc = position;
 		position += max_memory;
-		player = game->players_in_order[index];
 		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
 		ft_printf("weighing %d bytes, ", player->exec_code_size);
 		ft_printf("\"%s\" (\"%s\") !\n", player->name, player->comment);
@@ -95,21 +78,24 @@ bool validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
+	print_all_players(game);
+	// print_arena(game);
+	run_game(game);
 
 	/* to be deleted */
-	ft_printf("---- print_carriage ----\n");
-	print_carriage_list(game->carriage_head);
-	ft_printf("---- print_all_player ----\n");
-	print_all_players(game);
+	// ft_printf("---- print_carriage ----\n");
+	// print_carriage_list(game->carriage_head);
+	// ft_printf("---- print_all_player ----\n");
+	// print_all_players(game);
 	//ft_printf("---- before ----\n");
 	//print_carriage_list(game->carriage_head);
 	//print_arena(game);
 	//game->carriage_head->pc = 5;
-	ft_printf("---- print_game ----\n");
-	print_game(game);
-	ft_printf("---- test_op ----\n");
-	game->carriage_head->registry[1] = 42;
-	op_aff(game, game->carriage_head);
+	// ft_printf("---- print_game ----\n");
+	// print_game(game);
+	// ft_printf("---- test_op ----\n");
+	// game->carriage_head->registry[1] = 42;
+	// op_aff(game, game->carriage_head);
 	// ft_printf("---- after ----\n");
 	// print_carriage_list(game->carriage_head);
 	free_all(game);

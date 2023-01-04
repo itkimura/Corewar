@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/03 16:27:24 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:46:11 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool init_game(t_game **game)
 		(*game)->all_players[index++] = NULL;
 	index = 0;
 	while (index < TOTAL_FLAGS)
-		(*game)->flags_value[index++] = 0;
+		(*game)->flags_value[index++] = -1;
 	index = 0;
 	while (index < MEM_SIZE)
 		(*game)->arena[index++] = 0;

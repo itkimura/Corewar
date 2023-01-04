@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/02 11:28:57 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:55:08 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool is_number(char *argv)
  */
 bool is_after_flag_n(t_game *game)
 {
-	if (game->flags_value[FLAG_N])
+	if (game->flags_value[FLAG_N] != -1)
 		return (true);
 	return (false);
 }

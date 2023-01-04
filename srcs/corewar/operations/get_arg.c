@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/03 17:07:18 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:43:44 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,55 +59,60 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		current_position = (current_position + size) % MEM_SIZE;
 		index++;
 	}
-	//carriage->next_statement = current_position;
+	// carriage->next_statement_pc = current_position;
 	return (true);
 }
 
-void	update_next_statement(t_carriage *carriage)
+void update_next_statement_pc(t_carriage *carriage)
 {
-	int	index;
-	int	size;
+	int index;
+	int size;
 
 	index = 0;
 	size = 0;
-	while (index < 4)
+	if (g_op_tab[carriage->statement_index].arg_code_type == false)
+		carriage->next_statement_pc = (carriage->pc + 1 + g_op_tab[carriage->statement_index].t_dir_size) % MEM_SIZE;
+	else
 	{
-		if (carriage->arg[index] == T_REG)
-			size += 1;
-		if (carriage->arg[index] == T_DIR)
-			size += g_op_tab[carriage->statement_code].t_dir_size;
-		if (carriage->arg[index] == T_IND)
-			size += T_IND_SIZE;
-		index++;
+		while (index < 4)
+		{
+			if (carriage->arg[index] == T_REG)
+				size += 1;
+			if (carriage->arg[index] == T_DIR)
+				size += g_op_tab[carriage->statement_index].t_dir_size;
+			if (carriage->arg[index] == T_IND)
+				size += T_IND_SIZE;
+			index++;
+		}
+		carriage->next_statement_pc = (carriage->pc + size + 2) % MEM_SIZE;
 	}
-	carriage->next_statement = (carriage->next_statement + size + 2) % MEM_SIZE;
 }
 
 // act: argument code type
 bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 {
 	int index;
-	int statement_code;
+	int statement_index;
 	unsigned char act;
 
-	statement_code = arena[carriage->pc] - 1;
-	carriage->statement_code = statement_code;
+	statement_index = arena[carriage->pc] - 1;
+	carriage->statement_index = statement_index;
 	act = arena[carriage->pc + 1];
 	carriage->arg[0] = (act & FIRST) >> 6;
 	carriage->arg[1] = (act & SECOND) >> 4;
 	carriage->arg[2] = (act & THIRD) >> 2;
 	carriage->arg[3] = (act & FOURTH);
-	update_next_statement(carriage);
+	update_next_statement_pc(carriage);
 	index = 0;
 	while (index < 4)
 	{
 		if (carriage->arg[index] == IND_VALUE)
 			carriage->arg[index] = T_IND;
-		if (index >= g_op_tab[statement_code].nbr_arg && carriage->arg[index] != 0)
+		if (index >= g_op_tab[statement_index].nbr_arg && carriage->arg[index] != 0)
 		{
 			return (ft_printf("It should be 0 error in get_arg_value 1\n"), false);
 		}
-		else if ((carriage->arg[index] & g_op_tab[statement_code].arg[index]) != carriage->arg[index])
+		else if ((carriage->arg[index] & g_op_tab[statement_index].arg[index]) != carriage->arg[index])
 			return (ft_printf("error in get_arg_value 2\n"), false);
 		index++;
 	}

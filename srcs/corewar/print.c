@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/03 15:05:02 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:14:07 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,34 @@ void print_help(char *file_path)
 	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
 }
 
-void	print_v(t_game *game, t_carriage *carriage, int shift)
+void print_v(t_game *game, t_carriage *carriage, int shift)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	ft_printf("ADV %d (0x%04x -> 0x%04x) ", shift, carriage->pc, carriage->pc + shift);
 	while (i < shift)
 		ft_printf("%02x ", game->arena[carriage->pc + i++]);
 	ft_printf("\n");
+}
+
+/*
+ * print arena
+ */
+void print_arena(t_game *game)
+{
+	int index;
+
+	index = 0;
+	while (index < MEM_SIZE)
+	{
+		if ((index) % 64 == 0)
+			ft_printf("0x%04x : ", index);
+		ft_printf("%02x ", game->arena[index]);
+		if ((index + 1) % 64 == 0)
+			ft_printf("\n");
+		index++;
+	}
 }
 
 /*
@@ -119,11 +138,11 @@ void print_single_carriage(t_carriage *head)
 	ft_printf("\n");
 	ft_printf("%sid:%s\t%u\n", BOLD, RESET, head->id);
 	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, head->carry);
-	ft_printf("%sstatement_code%s:\t%d\n", BOLD, RESET, head->statement_code);
+	ft_printf("%sstatement_index%s:\t%d\n", BOLD, RESET, head->statement_index);
 	ft_printf("%slive_performed%s:\t%d\n", BOLD, RESET, head->live_performed);
 	ft_printf("%sremaining_cycle%s:\t%d\n", BOLD, RESET, head->remaining_cycle);
 	ft_printf("%spc%s:\t%d\n", BOLD, RESET, head->pc);
-	ft_printf("%scrossed_bytes%s:\t%d\n", BOLD, RESET, head->crossed_bytes);
+	ft_printf("%snext_statment_pc%s:\t%d\n", BOLD, RESET, head->next_statement_pc);
 }
 
 /*
@@ -206,8 +225,8 @@ void print_arg_and_val(t_carriage *carriage)
 {
 	char *arg_name;
 
-	ft_printf("%s%s%s%s:", BOLD, GREEN, g_op_tab[carriage->statement_code].name, RESET);
-	for (int i = 0; i < g_op_tab[carriage->statement_code].nbr_arg; i++)
+	ft_printf("%s%s%s%s:", BOLD, GREEN, g_op_tab[carriage->statement_index].name, RESET);
+	for (int i = 0; i < g_op_tab[carriage->statement_index].nbr_arg; i++)
 	{
 		if (carriage->arg[i] == T_REG)
 			arg_name = "T_REG";

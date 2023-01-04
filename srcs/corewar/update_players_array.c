@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_players_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/21 15:48:24 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/04 16:18:56 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ bool add_player(t_player *new, t_game *game)
 
 	if (game->total_players >= MAX_PLAYERS)
 		return (print_error("", WRONG_NB));
-	if (game->flags_value[FLAG_N])
+	if (game->flags_value[FLAG_N] != -1)
 	{
 		player_nb = game->flags_value[FLAG_N] - 1;
 		if (game->players_in_order[player_nb] != NULL)
 			return (print_error(ft_itoa(player_nb), DUP_PLAYER_NB));
 		game->players_in_order[player_nb] = new;
 		new->fix_position = true;
-		game->flags_value[FLAG_N] = 0;
+		game->flags_value[FLAG_N] = -1;
 	}
 	game->all_players[game->total_players++] = new;
 	return (true);
@@ -78,6 +78,7 @@ bool update_players_array(t_game *game)
 	missing_player[1] = '\0';
 	align_players(game);
 	index = game->total_players - 1;
+	print_game(game);
 	while (index >= 0)
 	{
 		missing_player[0] = index + 1 + '0';
@@ -90,6 +91,7 @@ bool update_players_array(t_game *game)
 		else
 			prev->next = new;
 		prev = new;
+		game->players_in_order[index]->carriage = new;
 		index--;
 	}
 	return (true);

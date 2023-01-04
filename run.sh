@@ -12,9 +12,9 @@ else
 			make re
 		else
 			./resources/asm $arg
-			str=`echo $arg | sed 's/.s$/.cor/'`
+			str+=`echo $arg | sed 's/.s$/.cor /'`
 		fi
 	done
 	echo "echo $str"
-	./corewar $str
+	./corewar -v 16 $str
 fi

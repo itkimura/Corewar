@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
+#    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/01/03 15:42:36 by itkimura         ###   ########.fr        #
+#    Updated: 2023/01/04 15:38:53 by thle             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ COREWAR_FILES =		corewar.c				print.c				\
 					validate_flag.c			init_structures.c	\
 					update_players_array.c	free.c				\
 					validate_champion.c		read_utils.c		\
-					calc_utils.c			
+					calc_utils.c			run_game.c
 
 COREWAR_SRCS_DIR = ./srcs/corewar/
 COREWAR_SRCS = $(addprefix $(COREWAR_SRCS_DIR), $(COREWAR_FILES))

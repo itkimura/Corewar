@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:39:05 by thle              #+#    #+#             */
-/*   Updated: 2022/12/28 15:48:02 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/04 16:41:44 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool op_lfork(t_game *game, t_carriage *carriage)
 	if (add_carriage(game, carriage,
 					 (unsigned int)(carriage->pc + shift) % MEM_SIZE) == false)
 		return (false);
-	carriage->pc += 3;
-	carriage->pc %= MEM_SIZE;
+	update_next_statement_pc(carriage);
 	return (true);
 }

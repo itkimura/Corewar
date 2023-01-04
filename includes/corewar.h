@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/03 16:40:53 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:47:45 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #define BOLD "\e[1m"
 #define RESET "\e[m"
 
+#define INITIAL_VALUE -1
 
 typedef enum e_arg
 {
@@ -69,7 +70,7 @@ typedef enum e_error
 	EXTRA_CHAMPION_CODE
 } t_error;
 
-/* 
+/*
  * operation
  */
 enum e_op
@@ -101,18 +102,18 @@ typedef struct s_carriage
 	unsigned int id;
 	bool carry; //-> false
 
-	//if carriage perfom live -> change live_performed = true
-	//during check, need to set back to false
+	// if carriage perfom live -> change live_performed = true
+	// during check, need to set back to false
 	bool live_performed;
 
-	uint16_t statement_code;
+	uint16_t statement_index;
 	uint32_t remaining_cycle;
 
 	uint32_t pc;
-	uint32_t next_statement;
+	uint32_t next_statement_pc;
 
-	unsigned char	arg[4];
-	int32_t			arg_value[4];
+	unsigned char arg[4];
+	int32_t arg_value[4];
 
 	struct s_carriage *next;
 
@@ -130,6 +131,7 @@ typedef struct s_player
 	unsigned char comment[COMMENT_LENGTH + 1];
 	unsigned char name[PROG_NAME_LENGTH + 1];
 	unsigned char *exec_code;
+	t_carriage *carriage;
 } t_player;
 
 /*
@@ -143,7 +145,7 @@ typedef struct s_game
 	int total_tmp_players;
 	int flags_value[TOTAL_FLAGS]; // initialize to 0
 
-	int cycles_to_die; //could be changed 
+	int cycles_to_die;			  // could be changed
 	int winner;					  // could be t_player
 	int number_of_cycles;		  // for the entire run
 	int number_of_live_statement; // for the last cycles_to_die
@@ -153,21 +155,20 @@ typedef struct s_game
 	unsigned char arena[MEM_SIZE];
 } t_game;
 
-
 /*
  * op_tab
-*/
+ */
 typedef struct s_op
 {
-	char			*name;
-	int				nbr_arg;
-	unsigned char	arg[3];
-	unsigned char	op_code;
-	int				cycles;
-	bool			arg_code_type;
-	int				t_dir_size;
-	bool			(*f)(t_game *game, t_carriage *s_carriage);
-}	t_op;
+	char *name;
+	int nbr_arg;
+	unsigned char arg[3];
+	unsigned char op_code;
+	int cycles;
+	bool arg_code_type;
+	int t_dir_size;
+	bool (*f)(t_game *game, t_carriage *s_carriage);
+} t_op;
 
 /*
  * corewar.c
@@ -177,6 +178,11 @@ bool init_player(t_player **new, t_game *game);
 void store_palyer_number(t_game *game, t_player *player);
 bool validate_champion(char *file_path, t_game *game);
 bool validate_argv(int argc, char **argv);
+
+/*
+ * run_game.c
+ */
+bool run_game(t_game *game);
 
 /*
  * update_players_array.c
@@ -204,7 +210,8 @@ void free_all(t_game *game);
  */
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
-void	print_v(t_game *game, t_carriage *carriage, int shift);
+void print_v(t_game *game, t_carriage *carriage, int shift);
+void print_arena(t_game *game);
 
 void print_single_player(t_player *player);
 void print_all_players(t_game *game);
@@ -236,31 +243,31 @@ int reverse_bytes(unsigned char *bytes, unsigned int pos, int nbytes);
  */
 void read_then_terminate_bytes(int fd, unsigned char *bytes, int size);
 
-/* 
+/*
  * op.c
  */
-extern t_op	g_op_tab[16];
+extern t_op g_op_tab[16];
 
 /*
  * operation functions
  */
-bool	op_live(t_game *game, t_carriage *carriage);
-bool	op_ld(t_game *game, t_carriage *carriage);
-bool	op_lld(t_game *game, t_carriage *carriage);
-bool	op_add(t_game *game, t_carriage *carriage);
-bool	op_sub(t_game *game, t_carriage *carriage);
-bool	op_and(t_game *game, t_carriage *carriage);
-bool	op_or(t_game *game, t_carriage *carriage);
-bool	op_xor(t_game *game, t_carriage *carriage);
+bool op_live(t_game *game, t_carriage *carriage);
+bool op_ld(t_game *game, t_carriage *carriage);
+bool op_lld(t_game *game, t_carriage *carriage);
+bool op_add(t_game *game, t_carriage *carriage);
+bool op_sub(t_game *game, t_carriage *carriage);
+bool op_and(t_game *game, t_carriage *carriage);
+bool op_or(t_game *game, t_carriage *carriage);
+bool op_xor(t_game *game, t_carriage *carriage);
 
-bool	op_st(t_game *game, t_carriage *carriage);
-bool	op_sti(t_game *game, t_carriage *carriage);
-bool	op_ldi(t_game *game, t_carriage *carriage);
-bool	op_lldi(t_game *game, t_carriage *carriage);
-bool	op_fork(t_game *game, t_carriage *carriage);
-bool	op_lfork(t_game *game, t_carriage *carriage);
-bool	op_zjmp(t_game *game, t_carriage *carriage);
-bool	op_aff(t_game *game, t_carriage *carriage);
+bool op_st(t_game *game, t_carriage *carriage);
+bool op_sti(t_game *game, t_carriage *carriage);
+bool op_ldi(t_game *game, t_carriage *carriage);
+bool op_lldi(t_game *game, t_carriage *carriage);
+bool op_fork(t_game *game, t_carriage *carriage);
+bool op_lfork(t_game *game, t_carriage *carriage);
+bool op_zjmp(t_game *game, t_carriage *carriage);
+bool op_aff(t_game *game, t_carriage *carriage);
 
 /*
  * op_utils.c
@@ -270,13 +277,12 @@ bool add_carriage(t_game *game, t_carriage *src, unsigned int dst_pc);
 /*
  * get_arg.c
  */
+void update_next_statement_pc(t_carriage *carriage);
 bool get_arg_value(t_carriage *carriage, unsigned char *arena);
 
 /*
  * get_value.c
  */
 int get_value(t_game *game, t_carriage *carriage, int order, bool mod);
-
-
 
 #endif

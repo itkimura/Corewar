@@ -3,57 +3,117 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/03 16:58:17 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:45:33 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	run_check(t_game *game)
+void kill_carriage(t_game *game, t_carriage *prev, t_carriage *curr, t_carriage *next)
 {
-	
+	ft_printf("carriage %d\n", curr->id);
+	if (game->carriage_head == curr)
+		game->carriage_head = next;
+	if (curr != NULL)
+		free(curr);
+	curr = NULL;
+	if (prev != NULL)
+		prev->next = next;
 }
 
-
-bool	run_carriages(t_carriage *carriage)
+void run_check(t_game *game)
 {
-	int	statement;
+	t_carriage *carriage;
+	t_carriage *next;
+	t_carriage *prev;
 
+	carriage = game->carriage_head;
+	prev = NULL;
+	next = NULL;
 	while (carriage)
 	{
+		next = carriage->next;
+		// number_of_live_statement >= NBR_LIVE -> game->cycle_to_die - CYCLE_DELTA
+		game->number_of_live_statement = 0;
+		if (carriage->live_performed == false)
+		{
+			kill_carriage(game, prev, carriage, next);
+		}
+		else
+		{
+			carriage->live_performed = false;
+			prev = carriage;
+		}
+		carriage = next;
+	}
+	if (game->number_of_live_statement >= NBR_LIVE || game->number_of_check % MAX_CHECKS == 0)
+	{
+		game->cycles_to_die = game->cycles_to_die - CYCLE_DELTA;
+		game->number_of_check = 0;
+	}
+	game->number_of_live_statement = 0;
+	game->number_of_check++;
+}
+
+bool run_carriages(t_game *game)
+{
+	t_carriage *carriage;
+
+	carriage = game->carriage_head;
+	while (carriage)
+	{
+		print_single_carriage(carriage);
 		if (carriage->remaining_cycle <= 0)
 		{
-			carriage->statement_code = game->arena[carriage->pc] - 1;
-			if (carriage->statement_code > 15 && carriage->statement_code < 0)
+			carriage->statement_index = game->arena[carriage->pc] - 1;
+			if (carriage->statement_index > 15 && carriage->statement_index < 0)
 			{
 				carriage->pc = (carriage->pc + 1) % MEM_SIZE;
 			}
 			else
 			{
-				g_op_tab[carriage->statement_code].f(game, c);
-				carriage->remaining_cycle = g_op_tab[carriage->statement_code].cycle;
-				carriage->pc = carriage->next_statement;
+				if (g_op_tab[carriage->statement_index].arg_code_type == false ||
+					(g_op_tab[carriage->statement_index].arg_code_type == true &&
+					 get_arg_value(carriage, game->arena) == true))
+				{
+					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
+						return (false);
+					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
+				}
+				update_next_statement_pc(carriage);
+				carriage->pc = carriage->next_statement_pc;
+				// if (game->flags_value[FLAG_V] == 16)
+				// 	print_v(game, carriage, carriage->next_statement_pc - carriage->pc);
 			}
+			/* put flags */
 		}
 		carriage = carriage->next;
 	}
+	return true;
 }
 
-bool	run_game(t_game *game)
+bool run_game(t_game *game)
 {
-	while (game->carriage_head != NULL)
+	int index;
+
+	index = 0;
+	while (game->carriage_head != NULL && index < 7)
 	{
-		/* dump */
-		if (game->flags_cvalue[FLAG_DUMP] == game->number_of_cycle)
+		/* dump -> end the game */
+		ft_printf("%s----------%d--------%s\n", RED, index, RESET);
+		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
 		{
 			print_arena(game);
-			break ;
+			break;
 		}
-		run_each_carriage(game->carriage_head);
-		game->number_of_cycle++;
+		game->number_of_cycles++;
+		run_carriages(game);
+		if (game->number_of_cycles % game->cycles_to_die == 0 || game->cycles_to_die <= 0)
+			run_check(game);
+		index++;
 	}
 	return (true);
 }
