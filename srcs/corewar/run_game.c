@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/04 17:45:33 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 11:50:37 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool run_carriages(t_game *game)
 	carriage = game->carriage_head;
 	while (carriage)
 	{
-		print_single_carriage(carriage);
+		//print_single_carriage(carriage);
 		if (carriage->remaining_cycle <= 0)
 		{
 			carriage->statement_index = game->arena[carriage->pc] - 1;
@@ -85,8 +85,8 @@ bool run_carriages(t_game *game)
 				}
 				update_next_statement_pc(carriage);
 				carriage->pc = carriage->next_statement_pc;
-				// if (game->flags_value[FLAG_V] == 16)
-				// 	print_v(game, carriage, carriage->next_statement_pc - carriage->pc);
+				if (game->flags_value[FLAG_V] == FO_ADV)
+					print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 			}
 			/* put flags */
 		}
@@ -103,7 +103,9 @@ bool run_game(t_game *game)
 	while (game->carriage_head != NULL && index < 7)
 	{
 		/* dump -> end the game */
-		ft_printf("%s----------%d--------%s\n", RED, index, RESET);
+		//ft_printf("%s----------%d--------%s\n", RED, index, RESET);
+		if (game->flags_value[FLAG_V] == FO_CYCLES)
+			ft_printf("It is not cycle %d\n", game->number_of_cycles++);
 		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
 		{
 			print_arena(game);

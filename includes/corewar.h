@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/04 17:47:45 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 11:49:44 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,24 @@ enum e_op
 	OP_LLDI,
 	OP_LFORK,
 	OP_AFF
+};
+
+/* 
+ * options value
+ * 0 : Show only essentials
+ * 1 : Show lives
+ * 2 : Show cycles
+ * 4 : Show operations (Params are NOT litteral ...)
+ * 8 : Show deaths
+ * 16 : Show PC movements (Except for jumps)
+ */
+enum flag_options{
+	FO_ESSENTIALS,
+	FO_LIVES,
+	FO_CYCLES,
+	FO_OPERAIONS = 4,
+	FO_DEATHS = 8,
+	FO_ADV = 16
 };
 
 /*
@@ -210,7 +228,7 @@ void free_all(t_game *game);
  */
 bool print_error(char *str, t_error error);
 void print_help(char *file_path);
-void print_v(t_game *game, t_carriage *carriage, int shift);
+void print_adv(t_game *game, t_carriage *carriage, int shift);
 void print_arena(t_game *game);
 
 void print_single_player(t_player *player);

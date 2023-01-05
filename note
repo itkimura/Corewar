@@ -1,0 +1,9 @@
+Introducing contestants...
+* Player 1, weighing 20 bytes, "test" ("Invincible") !
+* Player 2, weighing 10 bytes, "test22" ("Invincible") !
+P    2 | ld 42 r2
+P    1 | ld 42 r2
+P    1 | live -1
+P    1 | lld -12288 r2
+P    1 | ld 42 r2
+Contestant 1, "test", has won !

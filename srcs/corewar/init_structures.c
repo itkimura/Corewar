@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/04 15:46:11 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 10:54:41 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool init_game(t_game **game)
 		(*game)->all_players[index++] = NULL;
 	index = 0;
 	while (index < TOTAL_FLAGS)
-		(*game)->flags_value[index++] = -1;
+		(*game)->flags_value[index++] = INITIAL_VALUE;
 	index = 0;
 	while (index < MEM_SIZE)
 		(*game)->arena[index++] = 0;

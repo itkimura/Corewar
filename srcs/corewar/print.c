@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/04 17:14:07 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 12:51:50 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ void print_help(char *file_path)
 	ft_printf(" %sN%s cycles and exit\n", BOLD, RESET);
 	ft_printf("\t%s-n N%s\t", BOLD, RESET);
 	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
+	ft_printf("\t%s-a%s\t", BOLD, RESET);
+	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
 }
 
-void print_v(t_game *game, t_carriage *carriage, int shift)
+void print_adv(t_game *game, t_carriage *carriage, int shift)
 {
 	int i;
 
