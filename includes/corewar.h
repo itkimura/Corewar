@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 11:49:44 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:06:01 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 #include "get_next_line.h"
 #include "ft_printf.h"
 
-#define TOTAL_FLAGS 4
+/*increment when we add new flags*/
+#define TOTAL_FLAGS 5
 
 #define RED "\e[31m"
 #define GREEN "\e[32m"
@@ -46,8 +47,9 @@ typedef enum e_arg
 typedef enum e_vm_flag
 {
 	NOT_FLAG = -1,
-	FLAG_N,
 	FLAG_DUMP,
+	FLAG_N,
+	FLAG_L,
 	FLAG_V,
 	FLAG_A,
 } t_vm_flag;

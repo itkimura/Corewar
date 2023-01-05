@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 11:50:37 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:05:20 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void kill_carriage(t_game *game, t_carriage *prev, t_carriage *curr, t_carriage *next)
 {
-	ft_printf("carriage %d\n", curr->id);
 	if (game->carriage_head == curr)
 		game->carriage_head = next;
 	if (curr != NULL)
@@ -77,18 +76,16 @@ bool run_carriages(t_game *game)
 			{
 				if (g_op_tab[carriage->statement_index].arg_code_type == false ||
 					(g_op_tab[carriage->statement_index].arg_code_type == true &&
-					 get_arg_value(carriage, game->arena) == true))
+					get_arg_value(carriage, game->arena) == true))
 				{
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
 					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
 				}
 				update_next_statement_pc(carriage);
-				carriage->pc = carriage->next_statement_pc;
-				if (game->flags_value[FLAG_V] == FO_ADV)
+				if (game->flags_value[FLAG_L] == FO_ADV)
 					print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 			}
-			/* put flags */
 		}
 		carriage = carriage->next;
 	}
@@ -100,20 +97,19 @@ bool run_game(t_game *game)
 	int index;
 
 	index = 0;
-	while (game->carriage_head != NULL && index < 7)
+	while (game->carriage_head != NULL)
 	{
 		/* dump -> end the game */
-		//ft_printf("%s----------%d--------%s\n", RED, index, RESET);
-		if (game->flags_value[FLAG_V] == FO_CYCLES)
-			ft_printf("It is not cycle %d\n", game->number_of_cycles++);
+		if (game->flags_value[FLAG_L] == FO_CYCLES)
+			ft_printf("It is not cycle %d\n", game->number_of_cycles + 1);
 		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
 		{
 			print_arena(game);
 			break;
 		}
-		game->number_of_cycles++;
 		run_carriages(game);
-		if (game->number_of_cycles % game->cycles_to_die == 0 || game->cycles_to_die <= 0)
+		game->number_of_cycles++;
+		if (game->cycles_to_die <= 0 || game->number_of_cycles % game->cycles_to_die == 0)
 			run_check(game);
 		index++;
 	}

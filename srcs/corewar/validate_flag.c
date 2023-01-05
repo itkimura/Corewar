@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 10:54:19 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:06:34 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 }
 
 
-bool validate_v_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
+bool validate_l_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 {
 	int nb;
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
 	if (is_number(argv) == false)
-		return (print_error("-v flag", WRONG_NB));
+		return (print_error("-l flag", WRONG_NB));
 	nb = ft_atoi(argv);
-	*flag = FLAG_V;
-	game->flags_value[FLAG_V] = nb;
+	*flag = FLAG_L;
+	game->flags_value[FLAG_L] = nb;
 	return (true);
 }
 
@@ -112,8 +112,8 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 		return (validate_d_flag_nb(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-n") == 0)
 		return (validate_n_flag_nb(argv[++(*index)], flag, game));
-	if (ft_strcmp(argv[*index], "-v") == 0)
-		return (validate_v_flag_nb(argv[++(*index)], flag, game));
+	if (ft_strcmp(argv[*index], "-l") == 0)
+		return (validate_l_flag_nb(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-a") == 0)
 		return (validate_a_flag(flag, game));
 	return (true);

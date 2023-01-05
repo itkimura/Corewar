@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/04 16:18:56 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 15:10:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ bool update_players_array(t_game *game)
 	missing_player[1] = '\0';
 	align_players(game);
 	index = game->total_players - 1;
-	print_game(game);
 	while (index >= 0)
 	{
 		missing_player[0] = index + 1 + '0';

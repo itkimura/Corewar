@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 12:51:50 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:22:54 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,18 @@ void print_help(char *file_path)
 	ft_printf("%sUsage\n\t%s%s [-d N | -n N]", BOLD, file_path, RESET);
 	ft_printf(" <champion1.cor> <...>\n\n");
 	ft_printf("%sFlag%s\n", BOLD, RESET);
-	ft_printf("\t%s-d N%s\tDump memory (32 octets per line) after", BOLD, RESET);
+	ft_printf("\t%s-d N%s:\tDump memory (32 octets per line) after", BOLD, RESET);
 	ft_printf(" %sN%s cycles and exit\n", BOLD, RESET);
-	ft_printf("\t%s-n N%s\t", BOLD, RESET);
-	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
-	ft_printf("\t%s-a%s\t", BOLD, RESET);
-	ft_printf("Set %sN%s of the next player\n\n", BOLD, RESET);
+	ft_printf("\t%s-n N%s:\t", BOLD, RESET);
+	ft_printf("Set %sN%s of the next player\n", BOLD, RESET);
+	ft_printf("\t%s-l N:%s\t\n", BOLD, RESET);
+	ft_printf("\t\t%s1 %s :Show lives\n", BOLD, RESET);
+	ft_printf("\t\t%s2 %s :Show the number of cycles\n", BOLD, RESET);
+	ft_printf("\t\t%s4 %s :Show operations (Params )\n", BOLD, RESET);
+	ft_printf("\t\t%s8 %s :Show death\n", BOLD, RESET);
+	ft_printf("\t\t%s16%s :Show PC movement (Except for jumps)\n\n", BOLD, RESET);
+	ft_printf("\t%s-a  %s:\t", BOLD, RESET);
+	ft_printf("Print output from \"%saff%s\"\n\n", BOLD, RESET);
 }
 
 void print_adv(t_game *game, t_carriage *carriage, int shift)
@@ -182,6 +188,7 @@ void print_game(t_game *game)
 	{
 		ft_printf("[%st_game%s]\n", BOLD, RESET);
 		ft_printf("%stotal_players%s:\t\t%d\n", BOLD, RESET, game->total_players);
+		ft_printf("%scycle_to_die%s:\t\t%d\n", BOLD, RESET, game->cycles_to_die);
 		// ft_printf("%stotal_tmp_players%s:\t%d\n", BOLD, RESET, game->total_tmp_players);
 		ft_printf("%splayers_in_order:\t\n", BOLD, RESET);
 		for (int i = 0; i < MAX_PLAYERS; i++)
