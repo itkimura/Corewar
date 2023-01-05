@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/04 17:08:10 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 15:10:09 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ bool validate_argv(int argc, char **argv)
 	init_arena(game);
 	print_all_players(game);
 	// print_arena(game);
-	run_game(game);
+	// run_game(game);
+
+	get_arg_value(game->carriage_head, game->arena);
+	op_st(game, game->carriage_head);
+	print_arena(game);
 
 	/* to be deleted */
 	// ft_printf("---- print_carriage ----\n");

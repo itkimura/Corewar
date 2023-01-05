@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:33:01 by thule             #+#    #+#             */
-/*   Updated: 2023/01/04 16:56:53 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 13:12:13 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 	else if (carriage->arg[order] == T_IND)
 	{
 		if (mod == true)
-			value = reverse_bytes(game->arena,
-								  (carriage->pc + carriage->arg_value[order] % IDX_MOD) % MEM_SIZE,
-								  size);
+			value = char_to_int(game->arena,
+								(carriage->pc + carriage->arg_value[order] % IDX_MOD) % MEM_SIZE,
+								size);
 		else
-			value = reverse_bytes(game->arena,
-								  carriage->pc + carriage->arg_value[order] % MEM_SIZE,
-								  size);
+			value = char_to_int(game->arena,
+								carriage->pc + carriage->arg_value[order] % MEM_SIZE,
+								size);
 	}
 	return value;
 }
