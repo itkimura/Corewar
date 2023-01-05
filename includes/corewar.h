@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 15:06:01 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:08:13 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ enum e_op
 	OP_AFF
 };
 
-/* 
+/*
  * options value
  * 0 : Show only essentials
  * 1 : Show lives
@@ -104,7 +104,8 @@ enum e_op
  * 8 : Show deaths
  * 16 : Show PC movements (Except for jumps)
  */
-enum flag_options{
+enum flag_options
+{
 	FO_ESSENTIALS,
 	FO_LIVES,
 	FO_CYCLES,
@@ -256,7 +257,7 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 /*
  * calc_utils.c
  */
-int reverse_bytes(unsigned char *bytes, unsigned int pos, int nbytes);
+int char_to_int(unsigned char *bytes, unsigned int pos, int nbytes);
 
 /*
  * read_utils.c

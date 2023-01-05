@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:39:05 by thle              #+#    #+#             */
-/*   Updated: 2023/01/04 16:41:44 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/05 13:12:14 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ bool op_lfork(t_game *game, t_carriage *carriage)
 {
 	int shift;
 
-	shift = reverse_bytes(game->arena, carriage->pc + 1, g_op_tab[11].t_dir_size);
-		ft_printf("shift:%d\n", shift);
-	// shift = reverse_bytes(game, carriage->pc, + 1, 2);
+	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[11].t_dir_size);
+	ft_printf("shift:%d\n", shift);
+	// shift = char_to_int(game, carriage->pc, + 1, 2);
 	if (add_carriage(game, carriage,
 					 (unsigned int)(carriage->pc + shift) % MEM_SIZE) == false)
 		return (false);
