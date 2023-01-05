@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 15:10:26 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:15:48 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool update_players_array(t_game *game)
 		missing_player[0] = index + 1 + '0';
 		if (game->players_in_order[index] == NULL)
 			return (print_error(missing_player, MISSING_PLAYER));
-		if (init_carriage(&new, index + 1) == false)
+		if (init_carriage(&new, game->players_in_order[index], index + 1) == false)
 			return (false);
 		if (index == game->total_players - 1)
 			game->carriage_head = new;

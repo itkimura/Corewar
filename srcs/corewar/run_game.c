@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 17:05:20 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:20:37 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void run_check(t_game *game)
 	game->number_of_check++;
 }
 
+/*
+ * Fix to excute statement after waiting remaining cycle becomes 0
+ */
 bool run_carriages(t_game *game)
 {
 	t_carriage *carriage;
@@ -87,6 +90,7 @@ bool run_carriages(t_game *game)
 					print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 			}
 		}
+		carriage->remaining_cycle--;
 		carriage = carriage->next;
 	}
 	return true;

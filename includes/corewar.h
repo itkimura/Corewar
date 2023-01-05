@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 17:08:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:14:49 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ bool update_players_array(t_game *game);
 bool init_game(t_game **game);
 void ft_unsigned_char_zero(unsigned char *str, int len);
 bool init_player(t_player **new, t_game *game);
-bool init_carriage(t_carriage **new, int id);
+bool init_carriage(t_carriage **new, t_player *player, int id);
 
 /*
  * free_all.c
