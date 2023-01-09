@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 17:08:24 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:34:54 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ bool validate_argv(int argc, char **argv)
 	print_all_players(game);
 	ft_printf("---- print_game ----\n");
 	print_game(game);
+	ft_printf("---- run_game ----\n");
 	run_game(game);
 
 	/* to be deleted */
