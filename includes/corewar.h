@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 17:14:49 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:55:58 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_carriage
 	// during check, need to set back to false
 	bool live_performed;
 
-	uint16_t statement_index;
+	int16_t statement_index;
 	uint32_t remaining_cycle;
 
 	uint32_t pc;
