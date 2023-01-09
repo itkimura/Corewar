@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:32:17 by thle              #+#    #+#             */
-/*   Updated: 2023/01/09 11:38:48 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 13:10:57 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,6 @@ into memory at the received address.
 
 */
 
-#define FIRST 0xFF000000
-#define SECOND 0x00FF0000
-#define THIRD 0x0000FF00
-#define FOURTH 0x000000FF
-
-void place_value(t_game *game, int value, int pos)
-{
-	// ft_printf("nbr is %d\n", value);
-	// print_bits(value, 32);
-	int shift;
-	int index;
-	
-	shift = 0;
-	index = 0;
-
-	unsigned char answer[4];
-
-	answer[0] = (value & 0xFF000000 )>> 24;
-	answer[1] = (value & SECOND) >> 16;
-	answer[2] = (value & THIRD) >> 8;
-	answer[3] = value & FOURTH;
-	while (index < 4)
-	{
-		game->arena[pos] = answer[index];
-		// ft_printf("%d: %x\n", index , game->arena[pos]);
-		pos = (pos + 1) % MEM_SIZE;
-		// shift += 16;
-		index++;
-	}
-}
 
 bool	op_st(t_game *game, t_carriage *carriage)
 {
