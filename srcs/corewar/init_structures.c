@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 17:15:30 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:30:26 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ bool init_carriage(t_carriage **new, t_player *player, int id)
 	(*new)->id = id;
 	(*new)->registry[0] = -id;
 	(*new)->statement_index = player->exec_code[0] - 1;
-	(*new)->remaining_cycle = g_op_tab[(*new)->statement_index].cycles;
+	(*new)->remaining_cycle = g_op_tab[(*new)->statement_index].cycles - 1;
 	return (true);
 }
