@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:32:17 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 16:56:55 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 11:38:48 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ into memory at the received address.
 void place_value(t_game *game, int value, int pos)
 {
 	// ft_printf("nbr is %d\n", value);
-	print_bits(value, 32);
+	// print_bits(value, 32);
 	int shift;
 	int index;
 	
@@ -64,7 +64,7 @@ void place_value(t_game *game, int value, int pos)
 	while (index < 4)
 	{
 		game->arena[pos] = answer[index];
-		ft_printf("%d: %x\n", index , game->arena[pos]);
+		// ft_printf("%d: %x\n", index , game->arena[pos]);
 		pos = (pos + 1) % MEM_SIZE;
 		// shift += 16;
 		index++;
@@ -86,7 +86,7 @@ bool	op_st(t_game *game, t_carriage *carriage)
 	}
 	else
 	{
-		ft_printf("else statement op_st\n");
+		// ft_printf("else statement op_st\n");
 		pos = (carriage->pc + carriage->arg_value[SECOND_ARG] % IDX_MOD) % MEM_SIZE;
 		place_value(game, value, pos);
 	}

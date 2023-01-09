@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:30:10 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 13:12:14 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 11:33:59 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 bool op_live(t_game *game, t_carriage *carriage)
 {
 	int player;
-	ft_printf("op_live\n");
+	// ft_printf("op_live\n");
 	carriage->live_performed = true;
 	player = -(char_to_int(game->arena, carriage->pc + 1, 4));
 	if (player > 0 && player <= game->total_players)
