@@ -16,5 +16,8 @@ else
 		fi
 	done
 	echo "echo $str"
-	./corewar -v 16 $str
+	./corewar $str
+	# ./corewar -dump 31 $str > our
+	# ./resources/corewar -d 31 $str > intra
+	# diff our intra
 fi

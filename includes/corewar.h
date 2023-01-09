@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/09 14:22:23 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:49:55 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,5 +308,10 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena);
  * get_value.c
  */
 int get_value(t_game *game, t_carriage *carriage, int order, bool mod);
+
+/*
+ place_value.c
+ */
+void place_value(t_game *game, int value, int pos);
 
 #endif

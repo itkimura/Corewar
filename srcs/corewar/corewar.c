@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/09 11:34:54 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 14:33:48 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ bool validate_argv(int argc, char **argv)
 	game = NULL;
 	if (init_game(&game) == false)
 		return (free_all(game), false);
-	ft_printf("---- print_game ----\n");
-	print_game(game);
+	// ft_printf("---- print_game ----\n");
+	// print_game(game);
 	flag = -1;
 	index = 1;
 	while (index < argc)
@@ -79,27 +79,19 @@ bool validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
-	//print_all_players(game);
-	// print_arena(game);
-	ft_printf("---- print_all_player ----\n");
-	print_all_players(game);
-	ft_printf("---- print_game ----\n");
-	print_game(game);
-	ft_printf("---- run_game ----\n");
+
+	/* general test */
+	// ft_printf("---- print_all_player ----\n");
+	// print_all_players(game);
+	// ft_printf("---- print_game ----\n");
+	// print_game(game);
+	// ft_printf("---- run_game ----\n");
 	run_game(game);
 
-	/* to be deleted */
-	// ft_printf("---- print_carriage ----\n");
-	// print_carriage_list(game->carriage_head);
-	//ft_printf("---- before ----\n");
-	//print_carriage_list(game->carriage_head);
-	//print_arena(game);
-	//game->carriage_head->pc = 5;
-	// ft_printf("---- test_op ----\n");
-	// game->carriage_head->registry[1] = 42;
-	// op_aff(game, game->carriage_head);
-	// ft_printf("---- after ----\n");
-	// print_carriage_list(game->carriage_head);
+	/* thu's test */
+	// get_arg_value(game->carriage_head, game->arena);
+	// op_sti(game, game->carriage_head);
+
 	free_all(game);
 	return (true);
 }
