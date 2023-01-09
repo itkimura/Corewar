@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/09 11:55:58 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 14:22:23 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <fcntl.h>
 #include <stdbool.h>
 #include <string.h>
+/*library for bonus*/
+#include <stdio.h>
 
 #include "op.h"
 #include "libft.h"
@@ -23,7 +25,7 @@
 #include "ft_printf.h"
 
 /*increment when we add new flags*/
-#define TOTAL_FLAGS 5
+#define TOTAL_FLAGS 6
 
 #define RED "\e[31m"
 #define GREEN "\e[32m"
@@ -52,6 +54,7 @@ typedef enum e_vm_flag
 	FLAG_L,
 	FLAG_V,
 	FLAG_A,
+	FLAG_S,
 } t_vm_flag;
 
 /*

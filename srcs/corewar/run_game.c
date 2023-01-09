@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 12:03:09 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 14:27:13 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,29 @@ bool run_carriages(t_game *game)
 	return true;
 }
 
+bool print_dump(t_game *game)
+{
+	int c;
+
+	c = 0;
+	if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
+	{
+		print_arena(game);
+		return (false);;
+	}
+	if (game->number_of_cycles % game->flags_value[FLAG_S] == 0 && game->number_of_cycles != 0)
+	{
+		print_arena(game);
+		while (1)
+		{
+			c = getchar();
+			if (c == '\n')
+				break ;
+		}
+	}
+	return (true);
+}
+
 bool run_game(t_game *game)
 {
 	int index;
@@ -112,11 +135,8 @@ bool run_game(t_game *game)
 		/* dump -> end the game */
 		if (game->flags_value[FLAG_L] == FO_CYCLES)
 			ft_printf("It is now cycle %d\n", game->number_of_cycles + 1);
-		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
-		{
-			print_arena(game);
-			break;
-		}
+		if (print_dump(game) == false)
+			break ;
 		run_carriages(game);
 		game->number_of_cycles++;
 		if (game->cycles_to_die <= 0 || game->number_of_cycles % game->cycles_to_die == 0)

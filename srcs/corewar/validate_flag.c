@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 15:06:34 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:09:14 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool is_after_flag_n(t_game *game)
 /*
  * validate "-n" nb and return true or false
  */
-bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
+bool validate_n_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
 	int nb;
 
@@ -51,7 +51,6 @@ bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 	*flag = FLAG_N;
 	if (nb > MAX_PLAYERS || nb <= 0)
 		return (print_error("-n flag", WRONG_NB));
-	// need to check if the player n used or now
 	if (game->players_in_order[nb - 1] != NULL)
 		return (print_error("-n flag", WRONG_NB));
 	game->flags_value[FLAG_N] = nb;
@@ -61,7 +60,7 @@ bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 /*
  * validate "-d" and nb and return true or false
  */
-bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
+bool validate_d_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
 	int nb;
 
@@ -75,8 +74,10 @@ bool validate_d_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
 	return (true);
 }
 
-
-bool validate_l_flag_nb(char *argv, t_vm_flag *flag, t_game *game)
+/* 
+ * validate -s flag and save number in game->flag_value;
+ */
+bool validate_l_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
 	int nb;
 
@@ -103,18 +104,37 @@ bool validate_a_flag(t_vm_flag *flag, t_game *game)
 }
 
 /*
-return which flag by ft_strcmp
-*/
+ * validate "-s" flag
+ */
+bool validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
+{
+	int nb;
+
+	if (is_after_flag_n(game) == true)
+		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	if (is_number(argv) == false)
+		return (print_error("-s flag", WRONG_NB));
+	nb = ft_atoi(argv);
+	*flag = FLAG_S;
+	game->flags_value[FLAG_S] = nb;
+	return (true);
+}
+
+/*
+ * return which flag by ft_strcmp
+ */
 bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 {
 	*flag = NOT_FLAG;
 	if (ft_strcmp(argv[*index], "-dump") == 0)
-		return (validate_d_flag_nb(argv[++(*index)], flag, game));
+		return (validate_d_flag(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-n") == 0)
-		return (validate_n_flag_nb(argv[++(*index)], flag, game));
+		return (validate_n_flag(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-l") == 0)
-		return (validate_l_flag_nb(argv[++(*index)], flag, game));
+		return (validate_l_flag(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-a") == 0)
 		return (validate_a_flag(flag, game));
+	if (ft_strcmp(argv[*index], "-s") == 0)
+		return (validate_s_flag(argv[++(*index)], flag, game));
 	return (true);
 }
