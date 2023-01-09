@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:32:17 by thle              #+#    #+#             */
-/*   Updated: 2023/01/09 13:10:57 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 14:00:06 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	op_st(t_game *game, t_carriage *carriage)
 	else
 	{
 		// ft_printf("else statement op_st\n");
-		pos = (carriage->pc + carriage->arg_value[SECOND_ARG] % IDX_MOD) % MEM_SIZE;
+		pos = (carriage->pc + (carriage->arg_value[SECOND_ARG] % IDX_MOD)) % MEM_SIZE;
 		place_value(game, value, pos);
 	}
 	// uint32_t nbr = (uint32_t)value;
