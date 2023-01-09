@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 12:03:09 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/09 14:29:51 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void run_check(t_game *game)
 	carriage = game->carriage_head;
 	prev = NULL;
 	next = NULL;
-	ft_printf("live_cycles: %d\n", game->cycles_to_die);
 	while (carriage)
 	{
 		next = carriage->next;
@@ -56,7 +55,6 @@ void run_check(t_game *game)
 	}
 	game->number_of_live_statement = 0;
 	game->number_of_check++;
-	ft_printf("after live_cycles: %d\n", game->cycles_to_die);
 }
 
 /*
