@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 17:20:37 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:03:09 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void run_check(t_game *game)
 	carriage = game->carriage_head;
 	prev = NULL;
 	next = NULL;
+	ft_printf("live_cycles: %d\n", game->cycles_to_die);
 	while (carriage)
 	{
 		next = carriage->next;
@@ -48,13 +49,14 @@ void run_check(t_game *game)
 		}
 		carriage = next;
 	}
-	if (game->number_of_live_statement >= NBR_LIVE || game->number_of_check % MAX_CHECKS == 0)
+	if (game->number_of_live_statement >= NBR_LIVE || (game->number_of_check % MAX_CHECKS == 0 && game->number_of_check != 0))
 	{
 		game->cycles_to_die = game->cycles_to_die - CYCLE_DELTA;
 		game->number_of_check = 0;
 	}
 	game->number_of_live_statement = 0;
 	game->number_of_check++;
+	ft_printf("after live_cycles: %d\n", game->cycles_to_die);
 }
 
 /*
@@ -67,27 +69,31 @@ bool run_carriages(t_game *game)
 	carriage = game->carriage_head;
 	while (carriage)
 	{
-		//print_single_carriage(carriage);
 		if (carriage->remaining_cycle <= 0)
 		{
-			carriage->statement_index = game->arena[carriage->pc] - 1;
-			if (carriage->statement_index > 15 && carriage->statement_index < 0)
+			if (carriage->statement_index > 15 || carriage->statement_index < 0)
 			{
 				carriage->pc = (carriage->pc + 1) % MEM_SIZE;
+				carriage->statement_index = game->arena[carriage->pc] - 1;
+				carriage->remaining_cycle = 1;
 			}
 			else
 			{
+
 				if (g_op_tab[carriage->statement_index].arg_code_type == false ||
 					(g_op_tab[carriage->statement_index].arg_code_type == true &&
-					get_arg_value(carriage, game->arena) == true))
+					 get_arg_value(carriage, game->arena) == true))
 				{
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
-					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
 				}
 				update_next_statement_pc(carriage);
+				carriage->pc = carriage->next_statement_pc;
 				if (game->flags_value[FLAG_L] == FO_ADV)
 					print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
+				carriage->statement_index = game->arena[carriage->pc] - 1;
+				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
+					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
 			}
 		}
 		carriage->remaining_cycle--;
@@ -105,7 +111,7 @@ bool run_game(t_game *game)
 	{
 		/* dump -> end the game */
 		if (game->flags_value[FLAG_L] == FO_CYCLES)
-			ft_printf("It is not cycle %d\n", game->number_of_cycles + 1);
+			ft_printf("It is now cycle %d\n", game->number_of_cycles + 1);
 		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
 		{
 			print_arena(game);
