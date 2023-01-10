@@ -6,13 +6,14 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 15:50:44 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:32:10 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void kill_carriage(t_game *game, t_carriage *prev, t_carriage *curr, t_carriage *next)
+void	kill_carriage(t_game *game, t_carriage *prev,
+			t_carriage *curr, t_carriage *next)
 {
 	if (game->carriage_head == curr)
 		game->carriage_head = next;
@@ -23,11 +24,11 @@ void kill_carriage(t_game *game, t_carriage *prev, t_carriage *curr, t_carriage 
 		prev->next = next;
 }
 
-void run_check(t_game *game)
+void	run_check(t_game *game)
 {
-	t_carriage *carriage;
-	t_carriage *next;
-	t_carriage *prev;
+	t_carriage	*carriage;
+	t_carriage	*next;
+	t_carriage	*prev;
 
 	carriage = game->carriage_head;
 	prev = NULL;
@@ -61,12 +62,51 @@ void run_check(t_game *game)
 	game->number_of_check++;
 }
 
+void	print_flag_l_operations(t_game *game, t_carriage *carriage)
+{
+	int	value;
+	int	index;
+
+	index = 0;
+	ft_printf("P    %d | %s",
+		-(carriage->registry[0]), g_op_tab[carriage->statement_index].name);
+	while (index < g_op_tab[carriage->statement_index].nbr_arg)
+	{
+		ft_putchar(' ');
+		if (g_op_tab[carriage->statement_index].arg_code_type == false)
+		{
+			value = char_to_int(game->arena, carriage->pc + 1,
+					g_op_tab[carriage->statement_index].t_dir_size);
+			ft_printf("%d", value);
+			break ;
+		}
+		else
+		{
+			if (carriage->arg[index] == T_DIR)
+				ft_putchar('%');
+			if (carriage->arg[index] == T_REG)
+				ft_putchar('r');
+			ft_printf("%d", carriage->arg_value[index]);
+		}
+		index++;
+	}
+	ft_putchar('\n');
+}
+
+void	flag_l(t_game *game, t_carriage *carriage)
+{
+	if (game->flags_value[FLAG_L] == FO_ADV)
+		print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
+	if (game->flags_value[FLAG_L] == FO_OPERAIONS)
+		print_flag_l_operations(game, carriage);
+}
+
 /*
  * Fix to excute statement after waiting remaining cycle becomes 0
  */
-bool run_carriages(t_game *game)
+bool	run_carriages(t_game *game)
 {
-	t_carriage *carriage;
+	t_carriage	*carriage;
 
 	carriage = game->carriage_head;
 	// ft_printf("cycle: %d\n", game->number_of_cycles);
@@ -82,18 +122,17 @@ bool run_carriages(t_game *game)
 			}
 			else
 			{
-				if (g_op_tab[carriage->statement_index].arg_code_type == false ||
-					(g_op_tab[carriage->statement_index].arg_code_type == true &&
-					 get_arg_value(carriage, game->arena) == true))
+				if (g_op_tab[carriage->statement_index].arg_code_type == false
+					|| (g_op_tab[carriage->statement_index].arg_code_type == true
+						&& get_arg_value(carriage, game->arena) == true))
 				{
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
 				}
 				if (carriage->statement_index != OP_ZJMP && carriage->carry != true)
 					update_next_statement_pc(carriage);
+				flag_l(game, carriage);
 				carriage->pc = carriage->next_statement_pc;
-				if (game->flags_value[FLAG_L] == FO_ADV)
-					print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 				carriage->statement_index = game->arena[carriage->pc] - 1;
 				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
 					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
@@ -102,19 +141,19 @@ bool run_carriages(t_game *game)
 		carriage->remaining_cycle--;
 		carriage = carriage->next;
 	}
-	return true;
+	return (true);
 }
 
-bool print_dump(t_game *game)
+bool	print_dump(t_game *game)
 {
-	int c;
+	int	c;
 
 	c = 0;
 	if (game->flags_value[FLAG_DUMP] != INITIAL_VALUE
 		&& game->flags_value[FLAG_DUMP] == game->number_of_cycles)
 	{
 		print_arena(game);
-		return (false);;
+		return (false);
 	}
 	if (game->flags_value[FLAG_S] != INITIAL_VALUE
 		&& game->number_of_cycles % game->flags_value[FLAG_S] == 0
@@ -131,9 +170,9 @@ bool print_dump(t_game *game)
 	return (true);
 }
 
-bool run_game(t_game *game)
+bool	run_game(t_game *game)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (game->carriage_head != NULL)
@@ -141,11 +180,11 @@ bool run_game(t_game *game)
 		if (game->flags_value[FLAG_L] == FO_CYCLES)
 			ft_printf("It is now cycle %d\n", game->number_of_cycles + 1);
 		if (print_dump(game) == false)
-		 	break ;
+			break ;
 		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
 		{
 			print_arena(game);
-			return true;
+			return (true);
 		}
 		run_carriages(game);
 		game->number_of_cycles++;

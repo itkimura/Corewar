@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 15:38:40 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:11:15 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,10 @@ void print_single_carriage(t_carriage *head)
 	ft_printf("%sremaining_cycle%s:\t%d\n", BOLD, RESET, head->remaining_cycle);
 	ft_printf("%spc%s:\t%d\n", BOLD, RESET, head->pc);
 	ft_printf("%snext_statment_pc%s:\t%d\n", BOLD, RESET, head->next_statement_pc);
+	for (int i = 0; i < 4; i++)
+		ft_printf("arg[%d]:\t%d\n", i, head->arg[i]);
+	for (int i = 0; i < 4; i++)
+		ft_printf("arg_value[%d]:\t%d\n", i, head->arg_value[i]);
 }
 
 /*
