@@ -6,20 +6,21 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 15:39:57 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:41:49 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-bool is_number(char *argv)
+bool	is_number(char *argv)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (argv[index])
 	{
-		if (!(argv[index] == '+' && index == 0) && !(argv[index] >= '0' && argv[index] <= '9'))
+		if (!(argv[index] == '+' && index == 0)
+			&& !(argv[index] >= '0' && argv[index] <= '9'))
 			return (false);
 		index++;
 	}
@@ -29,7 +30,7 @@ bool is_number(char *argv)
 /*
  *  if the current argv is after flag_n or not
  */
-bool is_after_flag_n(t_game *game)
+bool	is_after_flag_n(t_game *game)
 {
 	if (game->flags_value[FLAG_N] != INITIAL_VALUE)
 		return (true);
@@ -39,9 +40,9 @@ bool is_after_flag_n(t_game *game)
 /*
  * validate "-n" nb and return true or false
  */
-bool validate_n_flag(char *argv, t_vm_flag *flag, t_game *game)
+bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
-	int nb;
+	int	nb;
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
@@ -60,9 +61,9 @@ bool validate_n_flag(char *argv, t_vm_flag *flag, t_game *game)
 /*
  * validate "-d" and nb and return true or false
  */
-bool validate_d_flag(char *argv, t_vm_flag *flag, t_game *game)
+bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
-	int nb;
+	int	nb;
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
@@ -77,9 +78,9 @@ bool validate_d_flag(char *argv, t_vm_flag *flag, t_game *game)
 /* 
  * validate -s flag and save number in game->flag_value;
  */
-bool validate_l_flag(char *argv, t_vm_flag *flag, t_game *game)
+bool	validate_l_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
-	int nb;
+	int	nb;
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
@@ -94,7 +95,7 @@ bool validate_l_flag(char *argv, t_vm_flag *flag, t_game *game)
 /*
  * validate "-a" flag
  */
-bool validate_a_flag(t_vm_flag *flag, t_game *game)
+bool	validate_a_flag(t_vm_flag *flag, t_game *game)
 {
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
@@ -106,9 +107,9 @@ bool validate_a_flag(t_vm_flag *flag, t_game *game)
 /*
  * validate "-s" flag
  */
-bool validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
+bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
 {
-	int nb;
+	int	nb;
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
@@ -123,7 +124,7 @@ bool validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
 /*
  * return which flag by ft_strcmp
  */
-bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
+bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 {
 	*flag = NOT_FLAG;
 	if (ft_strcmp(argv[*index], "-dump") == 0

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 13:12:12 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/10 21:40:12 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /*
  * Magic_header (4 byte)-> validate with COREWAR_EXEC_MAGIC
  */
-static bool validate_magic_header(int fd)
+static bool	validate_magic_header(int fd)
 {
-	unsigned char bytes[5];
+	unsigned char	bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
 	return (char_to_int(bytes, 0, 4) == COREWAR_EXEC_MAGIC);
@@ -26,9 +26,9 @@ static bool validate_magic_header(int fd)
 /*
  * validate_null
  */
-static bool validate_null(int fd)
+static bool	validate_null(int fd)
 {
-	unsigned char bytes[5];
+	unsigned char	bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
 	return (char_to_int(bytes, 0, 4) == 0);
@@ -37,9 +37,9 @@ static bool validate_null(int fd)
 /*
  * validate it under CHAMP_MAX_SIZE and save it into t_player->exec_code_size
  */
-static bool validate_exec_code_size(t_player *player, int fd)
+static bool	validate_exec_code_size(t_player *player, int fd)
 {
-	unsigned char bytes[5];
+	unsigned char	bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
 	player->exec_code_size = char_to_int(bytes, 0, 4);
@@ -50,9 +50,9 @@ static bool validate_exec_code_size(t_player *player, int fd)
  * Exec code (t_player->exec_code_size)
  * -> malloc and save it in player->exec_code
  */
-static bool read_exec_code(t_player *player, int fd)
+static bool	read_exec_code(t_player *player, int fd)
 {
-	char str[1];
+	char	str[1];
 
 	player->exec_code = (unsigned char *)malloc(player->exec_code_size + 1);
 	if (player->exec_code == NULL)
@@ -67,7 +67,7 @@ static bool read_exec_code(t_player *player, int fd)
 /*
  * read the campion, go to each function to save data
  */
-bool read_champion(t_player *player, char *argv, int fd)
+bool	read_champion(t_player *player, char *argv, int fd)
 {
 	if (validate_magic_header(fd) == false)
 		return (print_error(argv, INVALID_HEADER));
@@ -93,10 +93,10 @@ bool read_champion(t_player *player, char *argv, int fd)
  * 1. Make player structure
  * 2. Start reading and save info into player
  */
-bool validate_champion(char *file_path, t_game *game)
+bool	validate_champion(char *file_path, t_game *game)
 {
-	int fd;
-	t_player *new;
+	int			fd;
+	t_player	*new;
 
 	if (game->total_players >= MAX_PLAYERS)
 		return (print_error(file_path, TOO_MANY_PLAYERS));

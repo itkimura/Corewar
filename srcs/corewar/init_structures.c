@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 11:30:26 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/10 21:37:09 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 /*
  * init game t_game struct
  */
-bool init_game(t_game **game)
+bool	init_game(t_game **game)
 {
-	int index;
+	int	index;
 
 	*game = (t_game *)malloc(sizeof(t_game));
 	if (*game == NULL)
@@ -45,20 +45,21 @@ bool init_game(t_game **game)
 	return (true);
 }
 
-void ft_unsigned_char_zero(unsigned char *str, int len)
+void	ft_unsigned_char_zero(unsigned char *str, int len)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (index < len)
 		str[index++] = 0;
 }
+
 /*
  * init player structure
  * 1.malloc structure
  * 2.add player into player adday of t_game structure
  */
-bool init_player(t_player **new, t_game *game)
+bool	init_player(t_player **new, t_game *game)
 {
 	*new = (t_player *)malloc(sizeof(t_player));
 	if (*new == NULL)
@@ -79,7 +80,7 @@ bool init_player(t_player **new, t_game *game)
 	return (true);
 }
 
-bool init_carriage(t_carriage **new, t_player *player, int id)
+bool	init_carriage(t_carriage **new, t_player *player, int id)
 {
 	*new = (t_carriage *)malloc(sizeof(t_carriage));
 	if (*new == NULL)

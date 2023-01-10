@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/05 17:15:48 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:38:46 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  * if "-n" option is active, put the player into game->players array.
  * if not, put player game->all_players array.
  */
-bool add_player(t_player *new, t_game *game)
+bool	add_player(t_player *new, t_game *game)
 {
-	int player_nb;
+	int	player_nb;
 
 	if (game->total_players >= MAX_PLAYERS)
 		return (print_error("", WRONG_NB));
@@ -42,10 +42,10 @@ bool add_player(t_player *new, t_game *game)
  * i -> index to loop all_players array
  * j -> index to loop players_in_order array
  */
-void align_players(t_game *game)
+void	align_players(t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -68,12 +68,12 @@ void align_players(t_game *game)
  * Call "align_players" to add players from all_payers array to players array
  * while loop -> check if any players missing and set registry[0]
  */
-bool update_players_array(t_game *game)
+bool	update_players_array(t_game *game)
 {
-	int index;
-	char missing_player[2];
-	t_carriage *prev;
-	t_carriage *new;
+	int			index;
+	char		missing_player[2];
+	t_carriage	*prev;
+	t_carriage	*new;
 
 	missing_player[1] = '\0';
 	align_players(game);
@@ -83,7 +83,8 @@ bool update_players_array(t_game *game)
 		missing_player[0] = index + 1 + '0';
 		if (game->players_in_order[index] == NULL)
 			return (print_error(missing_player, MISSING_PLAYER));
-		if (init_carriage(&new, game->players_in_order[index], index + 1) == false)
+		if (init_carriage(&new,
+				game->players_in_order[index], index + 1) == false)
 			return (false);
 		if (index == game->total_players - 1)
 			game->carriage_head = new;

@@ -6,10 +6,9 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/09 14:33:48 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/10 21:34:58 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/corewar.h"
 
@@ -17,12 +16,12 @@
  * initialize arena, place players onto arena
  * also print announcement of players
  */
-void init_arena(t_game *game)
+void	init_arena(t_game *game)
 {
-	int index;
-	int max_memory;
-	int position;
-	t_player *player;
+	int			index;
+	int			max_memory;
+	int			position;
+	t_player	*player;
 
 	max_memory = MEM_SIZE / game->total_players;
 	index = 0;
@@ -33,8 +32,8 @@ void init_arena(t_game *game)
 	{
 		player = game->players_in_order[index];
 		ft_memcpy(game->arena + position,
-				  game->players_in_order[index]->exec_code,
-				  game->players_in_order[index]->exec_code_size);
+			game->players_in_order[index]->exec_code,
+			game->players_in_order[index]->exec_code_size);
 		player->carriage->pc = position;
 		position += max_memory;
 		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
@@ -52,11 +51,11 @@ void init_arena(t_game *game)
  * 2.if it is a player name, validate the champion.
  * 3.Call update_players_array to give the correct Player number
  */
-bool validate_argv(int argc, char **argv)
+bool	validate_argv(int argc, char **argv)
 {
-	int flag;
-	int index;
-	t_game *game;
+	int		flag;
+	int		index;
+	t_game	*game;
 
 	game = NULL;
 	if (init_game(&game) == false)
@@ -102,7 +101,7 @@ bool validate_argv(int argc, char **argv)
  *
  * Error occured -> return (1);
  */
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (argc < 2)
 		print_help(argv[0]);

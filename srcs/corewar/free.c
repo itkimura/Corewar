@@ -6,13 +6,13 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:42:25 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/21 15:48:14 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/10 21:35:50 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-void free_player(t_player *p)
+void	free_player(t_player *p)
 {
 	if (p != NULL)
 	{
@@ -24,9 +24,9 @@ void free_player(t_player *p)
 	}
 }
 
-void free_carriages(t_carriage *head)
+void	free_carriages(t_carriage *head)
 {
-	t_carriage *next;
+	t_carriage	*next;
 
 	while (head)
 	{
@@ -36,9 +36,9 @@ void free_carriages(t_carriage *head)
 	}
 }
 
-void free_game(t_game *game)
+void	free_game(t_game *game)
 {
-	int index;
+	int	index;
 
 	if (game != NULL)
 	{
@@ -54,8 +54,7 @@ void free_game(t_game *game)
 	}
 }
 
-void free_all(t_game *game)
+void	free_all(t_game *game)
 {
-	// print_all_players(game);
 	free_game(game);
 }
