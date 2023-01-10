@@ -58,21 +58,30 @@ loop_tests() {
 	loop=$cycle
 	
 	echo "Files: $champions"
-	while [ $loop -lt 100 ]
+	while [ $loop -lt 1000 ]
 	do
-		our=`./corewar -dump $cycle $champions`
-		intra=`./resources/corewar -d $cycle $champions`
-		diff=`diff our intra`
-		if [ -z $diff]
+		./corewar -dump $cycle $champions > test1
+		./resources/corewar -d $cycle $champions > test2
+		#echo "Run $our"
+		#echo "Run $intra"
+		diff=`diff test1 test2`
+		#echo "diff = $diff"
+		if [ "$diff" == "" ]
 		then
 			echo -e -n "${GREEN}.${NC}"
 		else
 			echo -e -n "${RED}.${NC}"
+			#echo "Do you want to print diff? [y/n]"
+			#read -r b
+			#if [ "$b" == "y" ]
+			#then
+			#	echo "diff = $diff"
+			#fi
 		fi
 		((loop+=$cycle))
 	done
+	rm -f test1 test2
 	echo ""
 }
 
 loop_tests
-
