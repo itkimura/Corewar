@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:33:01 by thule             #+#    #+#             */
-/*   Updated: 2023/01/05 13:12:13 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/10 11:14:18 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 	value = carriage->arg_value[order];
 	size = 4;
 	// if statement is lld
-	if (carriage->statement_index == 12)
+	if (carriage->statement_index == OP_LLD)
 		size = 2;
 	if (carriage->arg[order] == T_REG)
 		value = carriage->registry[carriage->arg_value[order] - 1];

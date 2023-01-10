@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:30 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 13:12:15 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/10 13:39:49 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,14 @@
  *
  * If the carry value is zero, no movement is performed.
  */
+
 bool op_zjmp(t_game *game, t_carriage *carriage)
 {
-	(void)game;
-	(void)carriage;
-	/*
-	int shift;
-
-	shift = char_to_int(game->arena, carriage->pc + 1,  g_op_tab[11].t_dir_size);
-	if (get_arg_value(carriage, game->arena))
+	if (carriage->carry == true)
 	{
-		if (carriage->carry == 1)
-			carriage->pc = reverse_
+		carriage->next_statement_pc = (carriage->pc +
+						char_to_int(game->arena, carriage->pc + 1, 2) % IDX_MOD) %
+					   MEM_SIZE;
 	}
-	carriage->pc += ;
-	carriage->pc %= MEM_SIZE;
-	*/
-	return false;
+	return true;
 }
