@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 14:50:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:20:33 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ bool print_dump(t_game *game)
 		print_arena(game);
 		return (false);;
 	}
-	if (game->number_of_cycles % game->flags_value[FLAG_S] == 0 && game->number_of_cycles != 0)
+	if (game->flags_value[FLAG_S] != INITIAL_VALUE
+		&& game->number_of_cycles % game->flags_value[FLAG_S] == 0
+		&& game->number_of_cycles != 0)
 	{
 		print_arena(game);
 		while (1)
