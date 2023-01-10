@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 14:50:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:53:08 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ bool run_carriages(t_game *game)
 	t_carriage *carriage;
 
 	carriage = game->carriage_head;
+	// ft_printf("cycle: %d\n", game->number_of_cycles);
 	while (carriage)
 	{
 		if (carriage->remaining_cycle <= 0)
@@ -77,7 +78,6 @@ bool run_carriages(t_game *game)
 			}
 			else
 			{
-
 				if (g_op_tab[carriage->statement_index].arg_code_type == false ||
 					(g_op_tab[carriage->statement_index].arg_code_type == true &&
 					 get_arg_value(carriage, game->arena) == true))
@@ -85,7 +85,8 @@ bool run_carriages(t_game *game)
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
 				}
-				update_next_statement_pc(carriage);
+				if (carriage->statement_index != OP_ZJMP && carriage->carry != true)
+					update_next_statement_pc(carriage);
 				carriage->pc = carriage->next_statement_pc;
 				if (game->flags_value[FLAG_L] == FO_ADV)
 					print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
@@ -133,8 +134,13 @@ bool run_game(t_game *game)
 		/* dump -> end the game */
 		if (game->flags_value[FLAG_L] == FO_CYCLES)
 			ft_printf("It is now cycle %d\n", game->number_of_cycles + 1);
-		if (print_dump(game) == false)
-			break ;
+		// if (print_dump(game) == false)
+		// 	break ;
+		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
+		{
+			print_arena(game);
+			return true;
+		}
 		run_carriages(game);
 		game->number_of_cycles++;
 		if (game->cycles_to_die <= 0 || game->number_of_cycles % game->cycles_to_die == 0)
