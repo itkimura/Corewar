@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 14:09:14 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:39:57 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ bool validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
 bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 {
 	*flag = NOT_FLAG;
-	if (ft_strcmp(argv[*index], "-dump") == 0)
+	if (ft_strcmp(argv[*index], "-dump") == 0
+		|| ft_strcmp(argv[*index], "-d") == 0)
 		return (validate_d_flag(argv[++(*index)], flag, game));
 	if (ft_strcmp(argv[*index], "-n") == 0)
 		return (validate_n_flag(argv[++(*index)], flag, game));

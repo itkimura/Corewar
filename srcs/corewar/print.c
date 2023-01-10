@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/09 14:48:44 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:38:40 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,21 @@ void print_help(char *file_path)
 	ft_printf(" declare the winner champion after its completion\n\n");
 	bold("Help", "\n\t");
 	bold(file_path, "\tNO INPUT - print this help message\n\n");
-	ft_printf("%sUsage\n\t%s%s [-d N | -n N]", BOLD, file_path, RESET);
-	ft_printf(" <champion1.cor> <...>\n\n");
-	ft_printf("%sFlag%s\n", BOLD, RESET);
-	ft_printf("\t%s-d N%s:\tDump memory (32 octets per line) after", BOLD, RESET);
-	ft_printf(" %sN%s cycles and exit\n", BOLD, RESET);
-	ft_printf("\t%s-s N%s:\tDump memory (32 octets per line) every", BOLD, RESET);
-	ft_printf(" %sN%s cycles, pause and repeat again when 'enter' pressed \n", BOLD, RESET);
-	ft_printf("\t%s-n N%s:\t", BOLD, RESET);
-	ft_printf("Set %sN%s of the next player\n", BOLD, RESET);
-	ft_printf("\t%s-l N:%s\t\n", BOLD, RESET);
-	ft_printf("\t\t%s1 %s :Show lives\n", BOLD, RESET);
-	ft_printf("\t\t%s2 %s :Show the number of cycles\n", BOLD, RESET);
-	ft_printf("\t\t%s4 %s :Show operations (Params )\n", BOLD, RESET);
-	ft_printf("\t\t%s8 %s :Show death\n", BOLD, RESET);
-	ft_printf("\t\t%s16%s :Show PC movement (Except for jumps)\n\n", BOLD, RESET);
-	ft_printf("\t%s-a  %s:\t", BOLD, RESET);
-	ft_printf("Print output from \"%saff%s\"\n\n", BOLD, RESET);
+	bold("Usage", "\n\t");
+	bold(file_path, "\t[-d N | -n N] <champion1.cor> <...>\n");
+	bold("Flag", "\n");
+	bold("\t[-d / -dump N]", ":\tDump memory (32 octets·per·line) after");
+	bold("N", "cycles and exit\n");
+	bold("\t[-s N]", ":\t\tDump memory (32 octets per line) every");
+	bold("N", " cycles, pause and repeat again when 'enter' pressed\n");
+	bold("\t[-n N]", ":\t\tSet %sN%s of the next player\n");
+	bold("\t[-l N]", ":\n");
+	bold("\t\t\t1  ", ":Show lives\n");
+	bold("\t\t\t2  ", ":Show the number of cycles\n");
+	bold("\t\t\t4  ", ":Show operations (Params )\n");
+	bold("\t\t\t8  ", ":Show death\n");
+	bold("\t\t\t16 ", ":Show PC movement (Except for jumps)\n\n");
+	bold("\t[-a]:", ":\t\tPrint output from \"%saff%s\"\n\n");
 }
 
 void print_adv(t_game *game, t_carriage *carriage, int shift)
