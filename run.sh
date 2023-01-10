@@ -25,7 +25,7 @@ else
 	done
 	echo -e "${GREEN}Run ./corewar$str${RESET}"
 	./corewar$str
-	# ./corewar -dump 31 $str > our
-	# ./resources/corewar -d 31 $str > intra
-	# diff our intra
+	#our=`./corewar -dump 31 $str`
+	#intra=`./resources/corewar -d 31 $str`
+	#diff our intra
 fi
