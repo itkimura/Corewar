@@ -71,12 +71,18 @@ loop_tests() {
 			echo -e -n "${GREEN}.${NC}"
 		else
 			echo -e -n "${RED}.${NC}"
-			#echo "Do you want to print diff? [y/n]"
-			#read -r b
-			#if [ "$b" == "y" ]
-			#then
-			#	echo "diff = $diff"
-			#fi
+			echo "Do you want to print diff? [y/n]"
+			read -r b
+			if [ "$b" == "y" ]
+			then
+				echo "diff = $diff"
+			fi
+			echo "Do you want to quit? [y/n]"
+			read -r b
+			if [ "$b" == "y" ]
+			then
+				break ;
+			fi
 		fi
 		((loop+=$cycle))
 	done
