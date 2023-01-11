@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/11 12:31:22 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:32:07 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ typedef struct s_carriage
 
 	// if carriage perfom live -> change live_performed = true
 	// during check, need to set back to false
-	unsigned long	live_performed;
+	unsigned long	last_live_performed;
+	bool			live_performed;
 
 	int16_t statement_index;
 	uint32_t remaining_cycle;

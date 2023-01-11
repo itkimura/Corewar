@@ -75,6 +75,7 @@ loop_tests() {
 			read -r b
 			if [ "$b" == "y" ]
 			then
+				echo -e "${RED}ERROR:${NC} ./corewar -d $loop $champions"
 				echo "diff = $diff"
 			fi
 			echo "Do you want to quit? [y/n]"

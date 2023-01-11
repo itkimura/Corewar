@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 13:12:12 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/11 14:49:08 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 
 	index = 0;
 	current_position = (carriage->pc + 2) % MEM_SIZE;
+	if (g_op_tab[carriage->statement_index].arg_code_type == false)
+		current_position = (carriage->pc + 1) % MEM_SIZE;
+
 	while (index < g_op_tab[arena[carriage->pc] - 1].nbr_arg)
 	{
 		size = 1;
@@ -98,6 +101,10 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 	statement_index = arena[carriage->pc] - 1;
 	carriage->statement_index = statement_index;
 	act = arena[carriage->pc + 1];
+	if (g_op_tab[carriage->statement_index].arg_code_type == false)
+	{
+		act = 0b10000000;
+	}
 	carriage->arg[0] = (act & FIRST) >> 6;
 	carriage->arg[1] = (act & SECOND) >> 4;
 	carriage->arg[2] = (act & THIRD) >> 2;

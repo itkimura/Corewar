@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:33:58 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 15:02:28 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/11 14:52:19 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ The 4-byte number read at this address will be the required value.
 
 bool	op_and(t_game *game, t_carriage *carriage)
 {
-	ft_printf("\n");
-	print_arg_and_val(carriage);
 	int reg;
 	int value;
 
@@ -51,14 +49,5 @@ bool	op_and(t_game *game, t_carriage *carriage)
 			get_value(game, carriage, SECOND_ARG, true);
 	carriage->registry[reg] = value;
 	carriage->carry = (value == 0);
-
-	
-
-	ft_printf("first: %d\n", get_value(game, carriage, FIRST_ARG, true));
-	ft_printf("second: %d\n", get_value(game, carriage, SECOND_ARG, true));
-	
-	ft_printf("r%d - %d\n", reg + 1, value);
-	ft_printf("carry: %d\n", carriage->carry);
-	
 	return true;
 }

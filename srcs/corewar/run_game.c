@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/11 12:39:14 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:50:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ void	run_check(t_game *game)
 		next = carriage->next;
 		// number_of_live_statement >= NBR_LIVE -> game->cycle_to_die - CYCLE_DELTA
 		game->number_of_live_statement = 0;
-				ft_printf("live_performed = %d\n", carriage->live_performed);
-		if (carriage->live_performed == 0)
+		if (carriage->live_performed == false)
 		{
 			if (game->flags_value[FLAG_L] == FO_DEATHS)
 			{
+				ft_printf("live_performed = %d\n", carriage->live_performed);
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-					-(carriage->registry[0]), game->number_of_cycles,
+					carriage->id, game->number_of_cycles - carriage->last_live_performed - 1,
 					game->cycles_to_die);
 			}
 			kill_carriage(game, prev, carriage, next);
 		}
 		else
 		{
-			carriage->live_performed = 0;
+			carriage->live_performed = false;
 			prev = carriage;
 		}
 		carriage = next;
@@ -65,9 +65,8 @@ void	run_check(t_game *game)
 	game->number_of_check++;
 }
 
-void	print_flag_l_operations(t_game *game, t_carriage *carriage)
+void	print_flag_l_operations(t_carriage *carriage)
 {
-	int	value;
 	int	index;
 
 	index = 0;
@@ -76,21 +75,9 @@ void	print_flag_l_operations(t_game *game, t_carriage *carriage)
 	while (index < g_op_tab[carriage->statement_index].nbr_arg)
 	{
 		ft_putchar(' ');
-		if (g_op_tab[carriage->statement_index].arg_code_type == false)
-		{
-			value = char_to_int(game->arena, carriage->pc + 1,
-					g_op_tab[carriage->statement_index].t_dir_size);
-			ft_printf("%d", value);
-			break ;
-		}
-		else
-		{
-			if (carriage->arg[index] == T_DIR)
-				ft_putchar('%');
-			if (carriage->arg[index] == T_REG)
-				ft_putchar('r');
-			ft_printf("%d", carriage->arg_value[index]);
-		}
+		if (carriage->arg[index] == T_REG)
+			ft_putchar('r');
+		ft_printf("%d", carriage->arg_value[index]);
 		index++;
 	}
 	ft_putchar('\n');
@@ -101,7 +88,7 @@ void	flag_l(t_game *game, t_carriage *carriage)
 	if (game->flags_value[FLAG_L] == FO_ADV)
 		print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 	if (game->flags_value[FLAG_L] == FO_OPERAIONS)
-		print_flag_l_operations(game, carriage);
+		print_flag_l_operations(carriage);
 }
 
 /*
@@ -125,9 +112,7 @@ bool	run_carriages(t_game *game)
 			}
 			else
 			{
-				if (g_op_tab[carriage->statement_index].arg_code_type == false
-					|| (g_op_tab[carriage->statement_index].arg_code_type == true
-						&& get_arg_value(carriage, game->arena) == true))
+				if (get_arg_value(carriage, game->arena) == true)
 				{
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
