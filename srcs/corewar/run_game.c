@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 21:32:10 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:39:14 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,20 @@ void	run_check(t_game *game)
 		next = carriage->next;
 		// number_of_live_statement >= NBR_LIVE -> game->cycle_to_die - CYCLE_DELTA
 		game->number_of_live_statement = 0;
-		if (carriage->live_performed == false)
+				ft_printf("live_performed = %d\n", carriage->live_performed);
+		if (carriage->live_performed == 0)
 		{
 			if (game->flags_value[FLAG_L] == FO_DEATHS)
+			{
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 					-(carriage->registry[0]), game->number_of_cycles,
 					game->cycles_to_die);
+			}
 			kill_carriage(game, prev, carriage, next);
 		}
 		else
 		{
-			carriage->live_performed = false;
+			carriage->live_performed = 0;
 			prev = carriage;
 		}
 		carriage = next;

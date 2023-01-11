@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:30:10 by thle              #+#    #+#             */
-/*   Updated: 2023/01/10 15:45:24 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:41:06 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ bool	op_live(t_game *game, t_carriage *carriage)
 {
 	int	player;
 
-	carriage->live_performed = true;
+	ft_printf("---------- live ---------\n");
+	carriage->live_performed = game->number_of_cycles;
+	ft_printf("live_performed = %d\n", carriage->live_performed);
 	player = -(char_to_int(game->arena, carriage->pc + 1, 4));
 	if (player > 0 && player <= game->total_players)
 		game->winner = player;

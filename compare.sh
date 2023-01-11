@@ -60,8 +60,8 @@ loop_tests() {
 	echo "Files: $champions"
 	while [ $loop -lt 1000 ]
 	do
-		./corewar -dump $cycle $champions > test1
-		./resources/corewar -d $cycle $champions > test2
+		./corewar -dump $loop $champions > test1
+		./resources/corewar -d $loop $champions > test2
 		#echo "Run $our"
 		#echo "Run $intra"
 		diff=`diff test1 test2`
