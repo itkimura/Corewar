@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/12 15:58:02 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/12 22:36:51 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	print_flag_l_operations(t_carriage *carriage)
 
 void	flag_l(t_game *game, t_carriage *carriage)
 {
-	if (game->flags_value[FLAG_L] == FO_ADV)
+	if (game->flags_value[FLAG_L] == FO_ADV && carriage->statement_index != OP_ZJMP)
 		print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 	if (game->flags_value[FLAG_L] == FO_OPERAIONS)
 		print_flag_l_operations(carriage);
@@ -101,7 +101,6 @@ bool	run_carriages(t_game *game)
 	carriage = game->carriage_head;
 	while (carriage)
 	{
-		
 		if (carriage->remaining_cycle <= 0)
 		{
 			if (carriage->statement_index > 15 || carriage->statement_index < 0)
