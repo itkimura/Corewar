@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:35:09 by thle              #+#    #+#             */
-/*   Updated: 2023/01/10 11:12:19 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/12 14:51:17 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ current position + (<FIRST_ARGUMENT_VALUE> + <SECOND_ARGUMENT_VALUE>) % IDX_MOD.
 
 bool op_ldi(t_game *game, t_carriage *carriage)
 {
+	// print_single_carriage(carriage);
 	int reg_index;
 	unsigned int pos;
 

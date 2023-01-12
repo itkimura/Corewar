@@ -58,7 +58,7 @@ loop_tests() {
 	loop=$cycle
 	
 	echo "Files: $champions"
-	while [ $loop -lt 1000 ]
+	while [ $loop -lt 10000 ]
 	do
 		./corewar -dump $loop $champions > test1
 		./resources/corewar -d $loop $champions > test2

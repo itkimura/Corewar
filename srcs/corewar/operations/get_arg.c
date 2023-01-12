@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/11 14:49:08 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:46:49 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void update_next_statement_pc(t_carriage *carriage)
 				size += 1;
 			if (carriage->arg[index] == T_DIR)
 				size += g_op_tab[carriage->statement_index].t_dir_size;
-			if (carriage->arg[index] == T_IND)
+			if (carriage->arg[index] == T_IND || carriage->arg[index] == IND_VALUE)
 				size += T_IND_SIZE;
 			index++;
 		}
@@ -98,13 +98,11 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 	int statement_index;
 	unsigned char act;
 
-	statement_index = arena[carriage->pc] - 1;
-	carriage->statement_index = statement_index;
+	statement_index = carriage->statement_index;
+	// carriage->statement_index = statement_index;
 	act = arena[carriage->pc + 1];
 	if (g_op_tab[carriage->statement_index].arg_code_type == false)
-	{
 		act = 0b10000000;
-	}
 	carriage->arg[0] = (act & FIRST) >> 6;
 	carriage->arg[1] = (act & SECOND) >> 4;
 	carriage->arg[2] = (act & THIRD) >> 2;
@@ -117,10 +115,10 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 			carriage->arg[index] = T_IND;
 		if (index >= g_op_tab[statement_index].nbr_arg && carriage->arg[index] != 0)
 		{
-			return (ft_printf("It should be 0 error in get_arg_value 1\n"), false);
+			return (false);
 		}
 		else if ((carriage->arg[index] & g_op_tab[statement_index].arg[index]) != carriage->arg[index])
-			return (ft_printf("error in get_arg_value 2\n"), false);
+			return (false);
 		index++;
 	}
 	return (collect_arg_values(carriage, arena));

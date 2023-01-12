@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:38:53 by thle              #+#    #+#             */
-/*   Updated: 2023/01/05 13:12:13 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/12 15:51:04 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,9 @@ bool op_fork(t_game *game, t_carriage *carriage)
 {
 	int shift;
 
-	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[11].t_dir_size);
-
-	// shift = char_to_int(game, carriage->pc + 1, 2);
+	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[OP_FORK].t_dir_size);
 	if (add_carriage(game, carriage,
-					 (unsigned int)(carriage->pc + (shift % IDX_MOD)) % MEM_SIZE) == false)
+					 (unsigned int)((carriage->pc + shift % IDX_MOD)) % MEM_SIZE) == false)
 		return (false);
-	update_next_statement_pc(carriage);
-
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/11 14:50:26 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:58:02 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	print_flag_l_operations(t_carriage *carriage)
 
 	index = 0;
 	ft_printf("P    %d | %s",
-		-(carriage->registry[0]), g_op_tab[carriage->statement_index].name);
+		carriage->id, g_op_tab[carriage->statement_index].name);
 	while (index < g_op_tab[carriage->statement_index].nbr_arg)
 	{
 		ft_putchar(' ');
@@ -99,9 +99,9 @@ bool	run_carriages(t_game *game)
 	t_carriage	*carriage;
 
 	carriage = game->carriage_head;
-	// ft_printf("cycle: %d\n", game->number_of_cycles);
 	while (carriage)
 	{
+		
 		if (carriage->remaining_cycle <= 0)
 		{
 			if (carriage->statement_index > 15 || carriage->statement_index < 0)
@@ -117,8 +117,6 @@ bool	run_carriages(t_game *game)
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
 				}
-				if (carriage->statement_index != OP_ZJMP && carriage->carry != true)
-					update_next_statement_pc(carriage);
 				flag_l(game, carriage);
 				carriage->pc = carriage->next_statement_pc;
 				carriage->statement_index = game->arena[carriage->pc] - 1;
@@ -126,7 +124,7 @@ bool	run_carriages(t_game *game)
 					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
 			}
 		}
-		carriage->remaining_cycle--;
+		(carriage->remaining_cycle)--;
 		carriage = carriage->next;
 	}
 	return (true);
@@ -177,7 +175,10 @@ bool	run_game(t_game *game)
 		run_carriages(game);
 		game->number_of_cycles++;
 		if (game->cycles_to_die <= 0 || game->number_of_cycles % game->cycles_to_die == 0)
+		{
+			// ft_printf("run check\n");
 			run_check(game);
+		}
 		index++;
 	}
 	return (true);

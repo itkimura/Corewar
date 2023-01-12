@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 21:37:09 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:12:34 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ bool	init_carriage(t_carriage **new, t_player *player, int id)
 	(*new)->registry[0] = -id;
 	(*new)->statement_index = player->exec_code[0] - 1;
 	(*new)->remaining_cycle = g_op_tab[(*new)->statement_index].cycles - 1;
+	(*new)->next = NULL;
 	return (true);
 }

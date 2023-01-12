@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
+#    By: thule <thule@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/01/09 13:13:19 by thle             ###   ########.fr        #
+#    Updated: 2023/01/12 15:36:04 by thule            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 NAME = corewar
 ASM = asm
