@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 21:11:15 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:25:17 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void bold(char *str1, char *str2)
 void print_help(char *file_path)
 {
 	bold("Name", "\n");
-	//ft_printf("%sName\n\t%s%s", BOLD, file_path, RESET);
+	// ft_printf("%sName\n\t%s%s", BOLD, file_path, RESET);
 	ft_printf("\t - is a player that the progress of the battle and");
 	ft_printf(" declare the winner champion after its completion\n\n");
 	bold("Help", "\n\t");
@@ -221,7 +221,7 @@ void print_game(t_game *game)
 /*
  * Print bits to debug numbers.
  */
-void print_bits(uint32_t nbr, int size)
+void print_bits(unsigned int nbr, int size)
 {
 	ft_printf("%lu: ", nbr);
 	for (int bit = size - 1; bit >= 0; bit--)
