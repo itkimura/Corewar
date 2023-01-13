@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/12 15:51:06 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/13 16:43:33 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,23 +122,23 @@ enum flag_options
  */
 typedef struct s_carriage
 {
-	int32_t registry[REG_NUMBER];
+	int registry[REG_NUMBER];
 	unsigned int id;
 	bool carry; //-> false
 
 	// if carriage perfom live -> change live_performed = true
 	// during check, need to set back to false
-	unsigned long	last_live_performed;
-	bool			live_performed;
+	unsigned long last_live_performed;
+	bool live_performed;
 
-	int16_t statement_index;
-	uint32_t remaining_cycle;
+	short int statement_index;
+	int remaining_cycle;
 
-	uint32_t pc;
-	uint32_t next_statement_pc;
+	unsigned int pc;
+	unsigned int next_statement_pc;
 
-	unsigned char arg[4];
-	int32_t arg_value[4];
+	int arg[4];
+	int arg_value[4];
 
 	struct s_carriage *next;
 
@@ -241,7 +241,7 @@ void print_arena(t_game *game);
 void print_single_player(t_player *player);
 void print_all_players(t_game *game);
 void print_game(t_game *game);
-void print_bits(uint32_t nbr, int size);
+void print_bits(unsigned int nbr, int size);
 void print_single_carriage(t_carriage *head);
 void print_carriage_list(t_carriage *head);
 void print_arg_and_val(t_carriage *carriage);
@@ -261,7 +261,7 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 /*
  * calc_utils.c
  */
-int char_to_int(unsigned char *bytes, unsigned int pos, int nbytes);
+int char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_arena);
 
 /*
  * read_utils.c
