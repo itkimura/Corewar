@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:33:01 by thule             #+#    #+#             */
-/*   Updated: 2023/01/10 11:14:18 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/14 01:09:46 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * mod: when arg_type is T_IND
  * 		if  true: mod with IDX_MOD
  *
- * if carriage->arg[order] == T_IND -> take value from carriage->arg_value[order]
+ * if carriage->arg[order] == T_DIR -> take value from carriage->arg_value[order]
  * if carriage->arg[order] == T_REG -> take value from that reg
  * else take value from address
  *
@@ -30,24 +30,23 @@ int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 {
 	int value;
 	int size;
+	int pos;
 
 	value = carriage->arg_value[order];
 	size = 4;
-	// if statement is lld
-	if (carriage->statement_index == OP_LLD)
-		size = 2;
 	if (carriage->arg[order] == T_REG)
 		value = carriage->registry[carriage->arg_value[order] - 1];
 	else if (carriage->arg[order] == T_IND)
 	{
+		if (carriage->statement_index == OP_LLD)
+			size = 2;
 		if (mod == true)
-			value = char_to_int(game->arena,
-								(carriage->pc + carriage->arg_value[order] % IDX_MOD) % MEM_SIZE,
-								size);
+			pos = carriage->pc + (carriage->arg_value[order] % IDX_MOD);
 		else
-			value = char_to_int(game->arena,
-								carriage->pc + carriage->arg_value[order] % MEM_SIZE,
-								size);
+			pos = carriage->pc + carriage->arg_value[order];
+		if (pos < 0)
+			pos = MEM_SIZE + pos;
+		value = char_to_int(game->arena, pos % MEM_SIZE, size, true);
 	}
 	return value;
 }
