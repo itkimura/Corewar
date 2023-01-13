@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/12 13:46:49 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/13 16:45:13 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 			size = T_IND_SIZE;
 			if (carriage->arg[index] == T_DIR)
 				size = g_op_tab[arena[carriage->pc] - 1].t_dir_size;
-			carriage->arg_value[index] = char_to_int(arena, current_position, size);
+			carriage->arg_value[index] = char_to_int(arena, current_position, size, true);
 		}
 		current_position = (current_position + size) % MEM_SIZE;
 		index++;
@@ -96,10 +96,9 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 {
 	int index;
 	int statement_index;
-	unsigned char act;
+	int act;
 
 	statement_index = carriage->statement_index;
-	// carriage->statement_index = statement_index;
 	act = arena[carriage->pc + 1];
 	if (g_op_tab[carriage->statement_index].arg_code_type == false)
 		act = 0b10000000;
