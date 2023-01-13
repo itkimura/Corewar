@@ -49,14 +49,18 @@ fi
 # loop cycles
 #
 loop_tests() {
-	while [ $playernb -gt 0 ]
-	do
-		random=$(($RANDOM%TOTAL_COR_FILES))
-		champions+=" ${COR_FILES[$random]}"
-		((playernb--))
-	done
+	if [ "$3" == "" ]
+	then
+		while [ $playernb -gt 0 ]
+		do
+			random=$(($RANDOM%TOTAL_COR_FILES))
+			champions+=" ${COR_FILES[$random]}"
+			((playernb--))
+		done
+	else
+		champions+="$2"
+	fi
 	loop=$cycle
-	
 	echo "Files: $champions"
 	while [ $loop -lt 10000 ]
 	do
