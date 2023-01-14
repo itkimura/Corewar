@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:38:53 by thle              #+#    #+#             */
-/*   Updated: 2023/01/12 15:51:04 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/14 02:44:23 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool op_fork(t_game *game, t_carriage *carriage)
 {
 	int shift;
 
-	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[OP_FORK].t_dir_size);
+	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[OP_FORK].t_dir_size, true);
 	if (add_carriage(game, carriage,
 					 (unsigned int)((carriage->pc + shift % IDX_MOD)) % MEM_SIZE) == false)
 		return (false);
