@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:30 by thle              #+#    #+#             */
-/*   Updated: 2023/01/10 13:39:49 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/13 16:49:55 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ bool op_zjmp(t_game *game, t_carriage *carriage)
 	if (carriage->carry == true)
 	{
 		carriage->next_statement_pc = (carriage->pc +
-						char_to_int(game->arena, carriage->pc + 1, 2) % IDX_MOD) %
+						char_to_int(game->arena, carriage->pc + 1, 2, true) % IDX_MOD) %
 					   MEM_SIZE;
+		if (carriage->next_statement_pc < 0)
+			carriage->next_statement_pc = (MEM_SIZE + carriage->next_statement_pc) % MEM_SIZE;
 	}
 	return true;
 }

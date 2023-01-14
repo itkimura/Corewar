@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:36:13 by thle              #+#    #+#             */
-/*   Updated: 2023/01/10 12:45:28 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/13 16:49:14 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ bool	op_lldi(t_game *game, t_carriage *carriage)
 	pos = (carriage->pc +
 		get_value(game, carriage, FIRST_ARG, true) +
 		get_value(game, carriage, SECOND_ARG, true)) % MEM_SIZE;
-	carriage->registry[reg_index] = char_to_int(game->arena, pos, 4);
+	carriage->registry[reg_index] = char_to_int(game->arena, pos, 4, true);
 	return true;
 }
