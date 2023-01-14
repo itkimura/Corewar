@@ -3,42 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   op_or.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:34:23 by thle              #+#    #+#             */
-/*   Updated: 2023/01/02 15:29:30 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/14 02:23:05 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
-*or* performs a "bitwise AND" statement for the values ​of
-the first two arguments and writes the result to the registry passed as
-the third argument.
-
-If the recorded result was equal to zero,
-then the value of carry must be set equal to 1.
-If the result was not zero, then - equal to 0.
-
-Since the first and second arguments can be one of three types,
-we will consider how to get the value of each of them:
-
-Argument #1 / Argument #2 - T_REG
-In this case, the value is taken from the registry passed as an argument.
-
-Argument #1 / Argument #2 - T_DIR
-In this case, the numerical value passed as an argument is used.
-
-Argument #1 / Argument #2 - T_IND
-If the argument type is T_IND,
-then it is necessary to set the address from which 4 bytes will be read.
-
-The address is defined as follows - current position + <ARGUMENT> % IDX_MOD.
-
-The 4-byte number read at this address will be the required value.
-*/
-
+ *
+ * Operation: or
+ * 
+ * Info:
+ * code:			7 (7)
+ * arg_type_code:	true
+ * number of args:	3
+ * arguments:		{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}
+ *
+ * Tasks:
+ * value = result of FIRST_ARG | result of SECOND_ARG
+ * then value will be written to the reg that corresponding the THIRD_ARG
+ * If value is 0, carry is set to 1. Else, carry is set to 0.
+ *
+ */
 bool	op_or(t_game *game, t_carriage *carriage)
 {
 	int reg;
