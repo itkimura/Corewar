@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/13 16:43:33 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/14 03:22:56 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,6 +287,7 @@ bool op_xor(t_game *game, t_carriage *carriage);
 
 bool op_st(t_game *game, t_carriage *carriage);
 bool op_sti(t_game *game, t_carriage *carriage);
+//above ops have been fixed and commented.
 bool op_ldi(t_game *game, t_carriage *carriage);
 bool op_lldi(t_game *game, t_carriage *carriage);
 bool op_fork(t_game *game, t_carriage *carriage);
