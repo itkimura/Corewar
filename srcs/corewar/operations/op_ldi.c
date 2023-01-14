@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:35:09 by thle              #+#    #+#             */
-/*   Updated: 2023/01/12 14:51:17 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/13 16:46:51 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ bool op_ldi(t_game *game, t_carriage *carriage)
 	int reg_index;
 	unsigned int pos;
 
-	reg_index = get_value(game, carriage, THIRD_ARG, true) - 1;
+	reg_index = carriage->arg_value[THIRD_ARG] - 1;
 	pos = (carriage->pc +
 		(get_value(game, carriage, FIRST_ARG, true) +
 		get_value(game, carriage, SECOND_ARG, true)) % IDX_MOD) % MEM_SIZE;
-	carriage->registry[reg_index] = char_to_int(game->arena, pos, 4);
+	carriage->registry[reg_index] = char_to_int(game->arena, pos, 4, true);
 	return true;
 }
