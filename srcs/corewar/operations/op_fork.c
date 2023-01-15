@@ -6,31 +6,41 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:38:53 by thle              #+#    #+#             */
-/*   Updated: 2023/01/14 02:44:23 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/15 02:32:29 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+
 /*
- * fork:makes a copy of the carriage.
- * And this copy is placed at the address <FIRST_ARGUMENT> % IDX_MOD.
  *
+ * Operation: fork
+ *
+ * Info:
+ * code:			12 (0c)
+ * arg_type_code:	false
+ * number of args:	1
+ * arguments:		{T_DIR}
+ *
+ * Tasks:
+ * makes a copy of the carriage.
  * What data is being copied?
  * [1]:Values of all registrys
  * [2]:The value of carry
  * [3]:The number of the cycle in which the last statement live performed
  * [4]:And something else, but more on that later.
- *
- * % MEM_SIZE -> if it is 4096 + 3, then 4099 %(4*1024) = 4099 % 4096 = 3.
+ * And this copy is placed at the address <FIRST_ARGUMENT> % IDX_MOD.
+ * 
  */
 bool op_fork(t_game *game, t_carriage *carriage)
 {
-	int shift;
+	int pos;
 
-	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[OP_FORK].t_dir_size, true);
-	if (add_carriage(game, carriage,
-					 (unsigned int)((carriage->pc + shift % IDX_MOD)) % MEM_SIZE) == false)
+	pos = carriage->pc + get_value(game, carriage, FIRST_ARG, true) % IDX_MOD;
+	if (pos < 0)
+		pos = MEM_SIZE + pos;
+	if (add_carriage(game, carriage, pos % MEM_SIZE) == false)
 		return (false);
 	return (true);
 }

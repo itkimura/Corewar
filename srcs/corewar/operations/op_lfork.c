@@ -6,28 +6,40 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:39:05 by thle              #+#    #+#             */
-/*   Updated: 2023/01/13 16:48:33 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/15 02:36:24 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
- * this statement is similar to the fork statement.
- * Except for the fact that a new carriage is created at the address
- * : current position + <FIRST_ARGUMENT>
- * In the lfork statement, truncation by modulo is not necessary.
+ *
+ * Operation: lfork
+ *
+ * Info:
+ * code:			15 (0f)
+ * arg_type_code:	false
+ * number of args:	1
+ * arguments:		{T_DIR}
+ *
+ * Tasks:
+ * makes a copy of the carriage.
+ * What data is being copied?
+ * [1]:Values of all registrys
+ * [2]:The value of carry
+ * [3]:The number of the cycle in which the last statement live performed
+ * [4]:And something else, but more on that later.
+ * And this copy is placed at the address <FIRST_ARGUMENT>.
+ * 
  */
 bool op_lfork(t_game *game, t_carriage *carriage)
 {
-	int shift;
+	int pos;
 
-	shift = char_to_int(game->arena, carriage->pc + 1, g_op_tab[OP_LFORK].t_dir_size, true);
-	// ft_printf("shift:%d\n", shift);
-	// shift = char_to_int(game, carriage->pc, + 1, 2);
-	if (add_carriage(game, carriage,
-					 (unsigned int)(carriage->pc + shift) % MEM_SIZE) == false)
+	pos = carriage->pc + get_value(game, carriage, FIRST_ARG, true);
+	if (pos < 0)
+		pos = MEM_SIZE + pos;
+	if (add_carriage(game, carriage, pos % MEM_SIZE) == false)
 		return (false);
-	// update_next_statement_pc(carriage);
 	return (true);
 }

@@ -6,34 +6,38 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:30 by thle              #+#    #+#             */
-/*   Updated: 2023/01/13 16:49:55 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/15 02:42:38 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
 /*
- * This statement is affected by the value of the carry flag.
  *
- * If it is equal to 1,then the function updates the value of PC
- * to the address: current position + <FIRST_ARGUMENT> % IDX_MOD.
+ * Operation: zjmp
  *
- * That is, zjmp sets where the carriage should move to perform the next statement.
- * This allows us to jump in memory to the desired position,
- * and not to do everything in order.
+ * Info:
+ * code:			9 (9)
+ * arg_type_code:	false
+ * number of args:	1
+ * arguments:		{T_DIR}
  *
- * If the carry value is zero, no movement is performed.
+ * Tasks:
+ * This op is only performed when carry is true
+ * The pc is set to perform the next pc which will be located at:
+ * current position + <FIRST_ARGUMENT> % IDX_MOD
+ *
  */
-
 bool op_zjmp(t_game *game, t_carriage *carriage)
 {
+	int pos;
+
 	if (carriage->carry == true)
 	{
-		carriage->next_statement_pc = (carriage->pc +
-						char_to_int(game->arena, carriage->pc + 1, 2, true) % IDX_MOD) %
-					   MEM_SIZE;
-		if (carriage->next_statement_pc < 0)
-			carriage->next_statement_pc = (MEM_SIZE + carriage->next_statement_pc) % MEM_SIZE;
+		pos = carriage->pc + get_value(game, carriage, FIRST_ARG, true) % IDX_MOD;
+		if (pos < 0)
+			pos = MEM_SIZE + pos;
+		carriage->next_statement_pc = pos % MEM_SIZE;
 	}
-	return true;
+	return (true);
 }
