@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/13 10:25:17 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/16 16:34:15 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,17 +241,16 @@ void print_bits(unsigned int nbr, int size)
  */
 void print_arg_and_val(t_carriage *carriage)
 {
-	char *arg_name;
-
 	ft_printf("%s%s%s%s:", BOLD, GREEN, g_op_tab[carriage->statement_index].name, RESET);
 	for (int i = 0; i < g_op_tab[carriage->statement_index].nbr_arg; i++)
 	{
 		if (carriage->arg[i] == T_REG)
-			arg_name = "T_REG";
+			ft_printf("\t[%d] - %s - %d\n", i + 1, "T_REG", carriage->arg_value[i]);
 		else if (carriage->arg[i] == T_DIR)
-			arg_name = "T_DIR";
+			ft_printf("\t[%d] - %s - %d\n", i + 1, "T_DIR", carriage->arg_value[i]);
 		else if (carriage->arg[i] == T_IND)
-			arg_name = "T_IND";
-		ft_printf("\t[%d] - %s - %d\n", i + 1, arg_name, carriage->arg_value[i]);
+			ft_printf("\t[%d] - %s - %d\n", i + 1, "T_IND", carriage->arg_value[i]);
+		else
+			ft_printf("\t[%d] - %s - %d\n", i + 1, "NOTHING", carriage->arg_value[i]);
 	}
 }
