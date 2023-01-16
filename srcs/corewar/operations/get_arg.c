@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/13 16:45:13 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/16 16:51:52 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,17 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 	int current_position;
 	int size;
 
+
 	index = 0;
 	current_position = (carriage->pc + 2) % MEM_SIZE;
 	if (g_op_tab[carriage->statement_index].arg_code_type == false)
 		current_position = (carriage->pc + 1) % MEM_SIZE;
-
-	while (index < g_op_tab[arena[carriage->pc] - 1].nbr_arg)
+	while (index < g_op_tab[carriage->statement_index].nbr_arg)
 	{
 		size = 1;
 		if (carriage->arg[index] == T_REG)
 		{
 			carriage->arg_value[index] = arena[current_position];
-			// reg_number check
 			if (carriage->arg_value[index] > REG_NUMBER || carriage->arg_value[index] < 1)
 				return (false);
 		}
@@ -56,13 +55,15 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 		{
 			size = T_IND_SIZE;
 			if (carriage->arg[index] == T_DIR)
-				size = g_op_tab[arena[carriage->pc] - 1].t_dir_size;
+				size = g_op_tab[carriage->statement_index].t_dir_size;
 			carriage->arg_value[index] = char_to_int(arena, current_position, size, true);
+			// if (carriage->id == 4 && carriage->statement_index == OP_LD)
+			// 	ft_printf("value :%d\n", carriage->arg_value[0]);
 		}
 		current_position = (current_position + size) % MEM_SIZE;
+		
 		index++;
 	}
-	// carriage->next_statement_pc = current_position;
 	return (true);
 }
 
@@ -112,12 +113,14 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 	{
 		if (carriage->arg[index] == IND_VALUE)
 			carriage->arg[index] = T_IND;
-		if (index >= g_op_tab[statement_index].nbr_arg && carriage->arg[index] != 0)
+		if ((index >= g_op_tab[statement_index].nbr_arg && carriage->arg[index] != 0)
+			|| (index < g_op_tab[statement_index].nbr_arg && carriage->arg[index] == 0))
 		{
 			return (false);
 		}
 		else if ((carriage->arg[index] & g_op_tab[statement_index].arg[index]) != carriage->arg[index])
 			return (false);
+		
 		index++;
 	}
 	return (collect_arg_values(carriage, arena));
