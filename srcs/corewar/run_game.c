@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/14 01:16:59 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/16 17:01:59 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void print_flag_l_operations(t_carriage *carriage)
 			if (carriage->arg[index] == T_REG)
 				ft_putchar('r');
 			ft_printf("%d ", carriage->arg_value[index]);
-			ft_printf("(%d)", carriage->registry[carriage->arg_value[index] - 1]);
 		}
 		else
 		{
@@ -112,41 +111,28 @@ bool run_carriages(t_game *game)
 	// ft_printf("Cycle: %d\n", game->number_of_cycles + 1);
 	while (carriage)
 	{
-		// if (carriage->id == 4)
-		// 	ft_printf("remaining: %d, statement_idx: %d\n", carriage->remaining_cycle, carriage->statement_index);
 		if (carriage->remaining_cycle <= 0)
 		{
+
 			if (carriage->statement_index > 15 || carriage->statement_index < 0)
 			{
-				// ft_printf("if--------------\n");
 				carriage->pc = (carriage->pc + 1) % MEM_SIZE;
 				carriage->statement_index = game->arena[carriage->pc] - 1;
-				carriage->remaining_cycle = 1;
+				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
+					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
+				else
+					carriage->remaining_cycle = 1;
 			}
 			else
 			{
-				// ft_printf("else--------------\n");
 				if (get_arg_value(carriage, game->arena) == true)
 				{
-					// if (carriage->id == 4)
-					// 	ft_printf("get_arg_value returns true\n");
-					// if (carriage->id == 4)
-					// 	print_arg_and_val(carriage);
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
+					flag_l(game, carriage);
 				}
-				else
-				{
-					// if (carriage->id == 4)
-					// 	ft_printf("get_arg_value returns FALSE\n");
-				}
-				flag_l(game, carriage);
-				// if (carriage->id == 4)
-				// 	ft_printf("%spc: %d, next_pc: %d, statement_index: %d%s\n", GREEN, carriage->pc, carriage->next_statement_pc, carriage->statement_index, RESET);
 				carriage->pc = carriage->next_statement_pc;
 				carriage->statement_index = game->arena[carriage->pc] - 1;
-				// if (carriage->id == 4)
-				// 	ft_printf("%s statement_idx %d %s\n", RED,carriage->statement_index, RESET);
 				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
 					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
 			}
