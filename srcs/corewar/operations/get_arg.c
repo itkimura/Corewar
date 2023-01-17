@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:47:35 by thle              #+#    #+#             */
-/*   Updated: 2023/01/16 16:51:52 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/17 16:57:55 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ static bool collect_arg_values(t_carriage *carriage, unsigned char *arena)
 			if (carriage->arg[index] == T_DIR)
 				size = g_op_tab[carriage->statement_index].t_dir_size;
 			carriage->arg_value[index] = char_to_int(arena, current_position, size, true);
-			// if (carriage->id == 4 && carriage->statement_index == OP_LD)
-			// 	ft_printf("value :%d\n", carriage->arg_value[0]);
 		}
 		current_position = (current_position + size) % MEM_SIZE;
 		
@@ -78,7 +76,7 @@ void update_next_statement_pc(t_carriage *carriage)
 		carriage->next_statement_pc = (carriage->pc + 1 + g_op_tab[carriage->statement_index].t_dir_size) % MEM_SIZE;
 	else
 	{
-		while (index < 4)
+		while (index < g_op_tab[carriage->statement_index].nbr_arg)
 		{
 			if (carriage->arg[index] == T_REG)
 				size += 1;
@@ -100,7 +98,7 @@ bool get_arg_value(t_carriage *carriage, unsigned char *arena)
 	int act;
 
 	statement_index = carriage->statement_index;
-	act = arena[carriage->pc + 1];
+	act = arena[(carriage->pc + 1) % MEM_SIZE];
 	if (g_op_tab[carriage->statement_index].arg_code_type == false)
 		act = 0b10000000;
 	carriage->arg[0] = (act & FIRST) >> 6;
