@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/16 17:01:59 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/17 17:22:52 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,29 @@ void print_flag_l_operations(t_carriage *carriage)
 	while (index < g_op_tab[carriage->statement_index].nbr_arg)
 	{
 		ft_putchar(' ');
-		if (carriage->arg[index] == T_REG && carriage->statement_index == OP_STI)
-		{
-			if (carriage->arg[index] == T_REG)
-				ft_putchar('r');
-			ft_printf("%d ", carriage->arg_value[index]);
-		}
-		else
-		{
-			if (carriage->arg[index] == T_REG)
-				ft_putchar('r');
-			ft_printf("%d", carriage->arg_value[index]);
-		}
+
+		if (carriage->arg[index] == T_REG)
+			ft_putchar('r');
+		ft_printf("%d", carriage->arg_value[index]);
+		if (index == 2 && carriage->statement_index == OP_STI)
+			ft_printf("(%d)", carriage->registry[carriage->arg_value[index] - 1]);
+		
 		index++;
+	}
+	if (carriage->statement_index == OP_ZJMP)
+	{
+		if (carriage->carry == true)
+			ft_printf(" OK");
+		else
+			ft_printf(" FAILED");
+	}
+	if (carriage->statement_index == OP_FORK)
+	{
+		ft_printf(" (%d)", carriage->pc + (carriage->arg_value[FIRST_ARG] % IDX_MOD));
+	}
+	if (carriage->statement_index == OP_LFORK)
+	{
+		ft_printf(" (%d)", carriage->pc + (carriage->arg_value[FIRST_ARG]));
 	}
 	ft_putchar('\n');
 }
@@ -108,16 +118,25 @@ bool run_carriages(t_game *game)
 	t_carriage *carriage;
 
 	carriage = game->carriage_head;
-	// ft_printf("Cycle: %d\n", game->number_of_cycles + 1);
+	// ft_printf("%sCycle: %d%s\n", GREEN, game->number_of_cycles + 1, RESET);
 	while (carriage)
 	{
+		// if (carriage->id == 7)
+		// {
+		// 	ft_printf("pc: %d\n", carriage->pc);
+		// 	ft_printf("code: %d, %d\n", carriage->statement_index, carriage->remaining_cycle);
+		// }
 		if (carriage->remaining_cycle <= 0)
 		{
-
 			if (carriage->statement_index > 15 || carriage->statement_index < 0)
 			{
-				carriage->pc = (carriage->pc + 1) % MEM_SIZE;
-				carriage->statement_index = game->arena[carriage->pc] - 1;
+				if (game->arena[carriage->pc] - 1 <= 15 && game->arena[carriage->pc] - 1 >= 0)
+					carriage->statement_index = game->arena[carriage->pc] - 1;
+				else
+				{
+					carriage->pc = (carriage->pc + 1) % MEM_SIZE;
+					carriage->statement_index = game->arena[carriage->pc] - 1;
+				}
 				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
 					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
 				else
@@ -131,6 +150,10 @@ bool run_carriages(t_game *game)
 						return (false);
 					flag_l(game, carriage);
 				}
+				// if (carriage->id == 7)
+				// {
+				// 	ft_printf("next_pc: %d\n", carriage->next_statement_pc);
+				// }
 				carriage->pc = carriage->next_statement_pc;
 				carriage->statement_index = game->arena[carriage->pc] - 1;
 				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
