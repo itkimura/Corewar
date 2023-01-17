@@ -50,51 +50,56 @@ str=$3
 #
 # loop cycles
 #
-loop_tests() {
-	if [ "$str" == "" ]
-	then
-		while [ $playernb -gt 0 ]
-		do
-			random=$(($RANDOM%TOTAL_COR_FILES))
-			champions+=" ${COR_FILES[$random]}"
-			((playernb--))
-		done
-	else
-		champions+=$str
-	fi
-	loop=$cycle
-	echo "Files: $champions"
-	while [ $loop -lt 10000 ]
-	do
-		./corewar -dump $loop $champions > test1
-		./resources/corewar -d $loop $champions > test2
-		#echo "Run $our"
-		#echo "Run $intra"
-		diff=`diff test1 test2`
-		#echo "diff = $diff"
-		if [ "$diff" == "" ]
-		then
-			echo -e -n "${GREEN}.${NC}"
-		else
-			echo -e -n "${RED}.${NC}"
-			echo "Do you want to print diff? [y/n]"
-			read -r b
-			if [ "$b" == "y" ]
-			then
-				echo -e "${RED}ERROR:${NC} ./corewar -d $loop $champions"
-				echo "diff = $diff"
-			fi
-			echo "Do you want to quit? [y/n]"
-			read -r b
-			if [ "$b" == "y" ]
-			then
-				break ;
-			fi
-		fi
-		((loop+=$cycle))
-	done
-	rm -f test1 test2
-	echo ""
-}
 
-loop_tests
+if [ "$str" == "" ]
+then
+	while [ $playernb -gt 0 ]
+	do
+		random=$(($RANDOM%TOTAL_COR_FILES))
+ 		champions+=" ${COR_FILES[$random]}"
+		((playernb--))
+	done
+else
+    nb=1
+    for arg in "$@"; do
+        if [ $nb -gt 2 ]
+		then
+            champions+=" $arg"
+        fi
+        ((nb++))
+      done
+fi
+loop=$cycle
+echo "Files: $champions"
+while [ $loop -lt 10000 ]
+do
+	./corewar -dump $loop $champions > test1
+	./resources/corewar -d $loop $champions > test2
+	#echo "Run $our"
+	#echo "Run $intra"
+	diff=`diff test1 test2`
+	#echo "diff = $diff"
+	if [ "$diff" == "" ]
+	then
+		echo -e -n "${GREEN}.${NC}"
+	else
+		echo -e -n "${RED}.${NC}"
+		echo "Do you want to print diff? [y/n]"
+		read -r b
+		if [ "$b" == "y" ]
+		then
+			echo -e "${RED}ERROR:${NC} ./corewar -d $loop $champions"
+			echo "diff = $diff"
+		fi
+		echo "Do you want to quit? [y/n]"
+		read -r b
+		if [ "$b" == "y" ]
+		then
+			break ;
+		fi
+	fi
+	((loop+=$cycle))
+done
+rm -f test1 test2
+echo ""
+
