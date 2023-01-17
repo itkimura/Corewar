@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/16 16:34:15 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/17 17:23:57 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,14 @@ void print_arena(t_game *game)
 	index = 0;
 	while (index < MEM_SIZE)
 	{
+		// if (index == 237)
+		// 	ft_printf("%s", GREEN);
 		if ((index) % 64 == 0)
 			ft_printf("0x%04x : ", index);
 		ft_printf("%02x ", game->arena[index]);
 		if ((index + 1) % 64 == 0)
 			ft_printf("\n");
+		// ft_printf("%s", RESET);
 		index++;
 	}
 }
