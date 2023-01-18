@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/17 17:22:52 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/18 19:33:12 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,10 @@ void run_check(t_game *game)
 	while (carriage)
 	{
 		next = carriage->next;
-		// number_of_live_statement >= NBR_LIVE -> game->cycle_to_die - CYCLE_DELTA
-		game->number_of_live_statement = 0;
 		if (carriage->live_performed == false)
 		{
 			if (game->flags_value[FLAG_L] == FO_DEATHS)
 			{
-				ft_printf("live_performed = %d\n", carriage->live_performed);
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 						  carriage->id, game->number_of_cycles - carriage->last_live_performed - 1,
 						  game->cycles_to_die);
@@ -61,6 +58,7 @@ void run_check(t_game *game)
 		game->cycles_to_die = game->cycles_to_die - CYCLE_DELTA;
 		game->number_of_check = 0;
 	}
+	game->check_counter = game->cycles_to_die;
 	game->number_of_live_statement = 0;
 	game->number_of_check++;
 }
@@ -81,7 +79,7 @@ void print_flag_l_operations(t_carriage *carriage)
 		ft_printf("%d", carriage->arg_value[index]);
 		if (index == 2 && carriage->statement_index == OP_STI)
 			ft_printf("(%d)", carriage->registry[carriage->arg_value[index] - 1]);
-		
+
 		index++;
 	}
 	if (carriage->statement_index == OP_ZJMP)
@@ -121,11 +119,6 @@ bool run_carriages(t_game *game)
 	// ft_printf("%sCycle: %d%s\n", GREEN, game->number_of_cycles + 1, RESET);
 	while (carriage)
 	{
-		// if (carriage->id == 7)
-		// {
-		// 	ft_printf("pc: %d\n", carriage->pc);
-		// 	ft_printf("code: %d, %d\n", carriage->statement_index, carriage->remaining_cycle);
-		// }
 		if (carriage->remaining_cycle <= 0)
 		{
 			if (carriage->statement_index > 15 || carriage->statement_index < 0)
@@ -149,11 +142,27 @@ bool run_carriages(t_game *game)
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
 					flag_l(game, carriage);
+					// if (carriage->id == 17 && carriage->statement_index == OP_LIVE)
+					// {
+					// 	ft_printf("pc: %d ", carriage->pc);
+					// 	ft_printf("(%02x ", game->arena[carriage->pc]);
+					// 	ft_printf("%02x ", game->arena[carriage->pc + 1]);
+					// 	ft_printf("%02x ", game->arena[carriage->pc + 2]);
+					// 	ft_printf("%02x ", game->arena[carriage->pc + 3]);
+					// 	ft_printf("%02x )\n", game->arena[carriage->pc + 4]);
+
+					// 	ft_printf("pc: %d ", carriage->next_statement_pc);
+					// 	ft_printf("(%02x ", game->arena[carriage->next_statement_pc]);
+					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 1]);
+					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 2]);
+					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 3]);
+					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 4]);
+					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 5]);
+					// 	ft_printf("%02x )\n", game->arena[carriage->next_statement_pc + 6]);
+						
+					// 	print_arena(game);
+					// }
 				}
-				// if (carriage->id == 7)
-				// {
-				// 	ft_printf("next_pc: %d\n", carriage->next_statement_pc);
-				// }
 				carriage->pc = carriage->next_statement_pc;
 				carriage->statement_index = game->arena[carriage->pc] - 1;
 				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
@@ -207,9 +216,10 @@ bool run_game(t_game *game)
 		}
 		run_carriages(game);
 		game->number_of_cycles++;
-		if (game->cycles_to_die <= 0 || game->number_of_cycles % game->cycles_to_die == 0)
+		game->check_counter--;
+
+		if (game->cycles_to_die <= 0 || game->check_counter <= 0)
 		{
-			// ft_printf("run check\n");
 			run_check(game);
 		}
 		index++;

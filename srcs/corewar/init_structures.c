@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/12 15:12:34 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/18 14:38:41 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ bool	init_game(t_game **game)
 	(*game)->number_of_cycles = 0;
 	(*game)->number_of_live_statement = 0;
 	(*game)->number_of_check = 0;
+	(*game)->check_counter = CYCLE_TO_DIE;
 	(*game)->carriage_head = NULL;
 	return (true);
 }

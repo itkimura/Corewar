@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/15 02:44:12 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/18 14:37:36 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ typedef struct s_game
 	int cycles_to_die;			  // could be changed
 	int winner;					  // could be t_player
 	int number_of_cycles;		  // for the entire run
+	int check_counter;			//if this counter runs out, check will be carried
 	int number_of_live_statement; // for the last cycles_to_die
 	int number_of_check;
 
