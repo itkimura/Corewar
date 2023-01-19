@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/18 19:33:12 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:29:47 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ bool run_carriages(t_game *game)
 	t_carriage *carriage;
 
 	carriage = game->carriage_head;
-	// ft_printf("%sCycle: %d%s\n", GREEN, game->number_of_cycles + 1, RESET);
+	ft_printf("Cycle: %d----------------\n", game->number_of_cycles + 1);
 	while (carriage)
 	{
 		if (carriage->remaining_cycle <= 0)
@@ -142,26 +142,6 @@ bool run_carriages(t_game *game)
 					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 						return (false);
 					flag_l(game, carriage);
-					// if (carriage->id == 17 && carriage->statement_index == OP_LIVE)
-					// {
-					// 	ft_printf("pc: %d ", carriage->pc);
-					// 	ft_printf("(%02x ", game->arena[carriage->pc]);
-					// 	ft_printf("%02x ", game->arena[carriage->pc + 1]);
-					// 	ft_printf("%02x ", game->arena[carriage->pc + 2]);
-					// 	ft_printf("%02x ", game->arena[carriage->pc + 3]);
-					// 	ft_printf("%02x )\n", game->arena[carriage->pc + 4]);
-
-					// 	ft_printf("pc: %d ", carriage->next_statement_pc);
-					// 	ft_printf("(%02x ", game->arena[carriage->next_statement_pc]);
-					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 1]);
-					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 2]);
-					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 3]);
-					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 4]);
-					// 	ft_printf("%02x ", game->arena[carriage->next_statement_pc + 5]);
-					// 	ft_printf("%02x )\n", game->arena[carriage->next_statement_pc + 6]);
-						
-					// 	print_arena(game);
-					// }
 				}
 				carriage->pc = carriage->next_statement_pc;
 				carriage->statement_index = game->arena[carriage->pc] - 1;
@@ -173,6 +153,48 @@ bool run_carriages(t_game *game)
 		carriage = carriage->next;
 	}
 	return (true);
+}
+
+bool is_op_code(char c)
+{
+	if (c <= 15 && c >= 0)
+		return true;
+	return false;
+}
+
+bool run_carriage_test(t_game *game)
+{
+	t_carriage *carriage;
+
+	// ft_printf("Cycle: %d----------------\n", game->number_of_cycles + 1);
+	carriage = game->carriage_head;
+	while (carriage)
+	{
+		carriage->remaining_cycle--;
+		if (carriage->remaining_cycle <= 0)
+		{
+			carriage->statement_index = game->arena[carriage->pc] - 1;
+			if (is_op_code(carriage->statement_index) == true)
+				carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
+			else
+			{
+				carriage->pc = (carriage->pc + 1) % MEM_SIZE;
+				carriage->remaining_cycle = 1;
+			}
+		}
+		else if (carriage->remaining_cycle == 1)
+		{
+			if (get_arg_value(carriage, game->arena) == true)
+			{
+				if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
+					return (false);
+			}
+			flag_l(game, carriage);
+			carriage->pc = carriage->next_statement_pc;
+		}
+		carriage = carriage->next;
+	}
+	return true;
 }
 
 bool print_dump(t_game *game)
@@ -214,15 +236,16 @@ bool run_game(t_game *game)
 			print_arena(game);
 			return (true);
 		}
-		run_carriages(game);
+		// run_carriages(game);
+		run_carriage_test(game);
 		game->number_of_cycles++;
 		game->check_counter--;
 
 		if (game->cycles_to_die <= 0 || game->check_counter <= 0)
-		{
 			run_check(game);
-		}
 		index++;
 	}
+	if (game->carriage_head == NULL)
+		ft_printf("Contestant %d, \"%s\", has won!\n", (game->winner) * -1, game->players_in_order[(game->winner) * -1 - 1]->name);
 	return (true);
 }

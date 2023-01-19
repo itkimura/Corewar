@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/18 14:38:41 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:03:26 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,15 @@ bool	init_player(t_player **new, t_game *game)
 
 bool	init_carriage(t_carriage **new, t_player *player, int id)
 {
+	(void) player;
 	*new = (t_carriage *)malloc(sizeof(t_carriage));
 	if (*new == NULL)
 		return (print_error("init_carriage", MALLOC_FAIL));
 	ft_memset(*new, 0, sizeof(t_carriage));
 	(*new)->id = id;
 	(*new)->registry[0] = -id;
-	(*new)->statement_index = player->exec_code[0] - 1;
-	(*new)->remaining_cycle = g_op_tab[(*new)->statement_index].cycles - 1;
+	// (*new)->statement_index = player->exec_code[0] - 1;
+	// (*new)->remaining_cycle = g_op_tab[(*new)->statement_index].cycles - 1;
 	(*new)->next = NULL;
 	return (true);
 }
