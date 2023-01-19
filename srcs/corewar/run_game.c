@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/19 15:29:47 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/19 16:25:05 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,53 +108,6 @@ void flag_l(t_game *game, t_carriage *carriage)
 		print_flag_l_operations(carriage);
 }
 
-/*
- * Fix to excute statement after waiting remaining cycle becomes 0
- */
-bool run_carriages(t_game *game)
-{
-	t_carriage *carriage;
-
-	carriage = game->carriage_head;
-	ft_printf("Cycle: %d----------------\n", game->number_of_cycles + 1);
-	while (carriage)
-	{
-		if (carriage->remaining_cycle <= 0)
-		{
-			if (carriage->statement_index > 15 || carriage->statement_index < 0)
-			{
-				if (game->arena[carriage->pc] - 1 <= 15 && game->arena[carriage->pc] - 1 >= 0)
-					carriage->statement_index = game->arena[carriage->pc] - 1;
-				else
-				{
-					carriage->pc = (carriage->pc + 1) % MEM_SIZE;
-					carriage->statement_index = game->arena[carriage->pc] - 1;
-				}
-				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
-					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
-				else
-					carriage->remaining_cycle = 1;
-			}
-			else
-			{
-				if (get_arg_value(carriage, game->arena) == true)
-				{
-					if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
-						return (false);
-					flag_l(game, carriage);
-				}
-				carriage->pc = carriage->next_statement_pc;
-				carriage->statement_index = game->arena[carriage->pc] - 1;
-				if (carriage->statement_index <= 15 && carriage->statement_index >= 0)
-					carriage->remaining_cycle = g_op_tab[carriage->statement_index].cycles;
-			}
-		}
-		(carriage->remaining_cycle)--;
-		carriage = carriage->next;
-	}
-	return (true);
-}
-
 bool is_op_code(char c)
 {
 	if (c <= 15 && c >= 0)
@@ -162,11 +115,10 @@ bool is_op_code(char c)
 	return false;
 }
 
-bool run_carriage_test(t_game *game)
+bool run_carriages(t_game *game)
 {
 	t_carriage *carriage;
 
-	// ft_printf("Cycle: %d----------------\n", game->number_of_cycles + 1);
 	carriage = game->carriage_head;
 	while (carriage)
 	{
@@ -236,8 +188,7 @@ bool run_game(t_game *game)
 			print_arena(game);
 			return (true);
 		}
-		// run_carriages(game);
-		run_carriage_test(game);
+		run_carriages(game);
 		game->number_of_cycles++;
 		game->check_counter--;
 
