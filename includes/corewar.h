@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/18 14:37:36 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:10:33 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,7 @@ bool add_carriage(t_game *game, t_carriage *src, unsigned int dst_pc);
 /*
  * get_arg.c
  */
-void update_next_statement_pc(t_carriage *carriage);
+// void update_next_statement_pc(t_carriage *carriage);
 bool get_arg_value(t_carriage *carriage, unsigned char *arena);
 
 /*
