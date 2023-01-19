@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_lfork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:39:05 by thle              #+#    #+#             */
-/*   Updated: 2023/01/15 02:36:24 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:49:05 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
  * And this copy is placed at the address <FIRST_ARGUMENT>.
  * 
  */
-bool op_lfork(t_game *game, t_carriage *carriage)
+bool	op_lfork(t_game *game, t_carriage *carriage)
 {
-	int pos;
+	int	pos;
 
 	pos = carriage->pc + get_value(game, carriage, FIRST_ARG, true);
 	if (pos < 0)

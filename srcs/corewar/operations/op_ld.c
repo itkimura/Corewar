@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:59 by thle              #+#    #+#             */
-/*   Updated: 2023/01/14 02:25:31 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:44:33 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
  * If value is 0, carry is set to 1. Else, carry is set to 0.
  *
  */
-bool op_ld(t_game *game, t_carriage *carriage)
+bool	op_ld(t_game *game, t_carriage *carriage)
 {
 	int	value;
-	int reg_index;
+	int	reg_index;
 
 	reg_index = carriage->arg_value[SECOND_ARG] - 1;
 	value = get_value(game, carriage, FIRST_ARG, true);
 	carriage->registry[reg_index] = value;
 	carriage->carry = (value == 0);
-	return true;
+	return (true);
 }

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:38:53 by thle              #+#    #+#             */
-/*   Updated: 2023/01/16 11:38:04 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:43:45 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 /*
  *
@@ -33,10 +32,10 @@
  * And this copy is placed at the address <FIRST_ARGUMENT> % IDX_MOD.
  * 
  */
-bool op_fork(t_game *game, t_carriage *carriage)
+bool	op_fork(t_game *game, t_carriage *carriage)
 {
-	int pos;
-	
+	int	pos;
+
 	pos = carriage->pc + (carriage->arg_value[FIRST_ARG] % IDX_MOD);
 	if (pos < 0)
 		pos = MEM_SIZE + pos;

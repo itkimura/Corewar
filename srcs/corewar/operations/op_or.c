@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_or.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:34:23 by thle              #+#    #+#             */
-/*   Updated: 2023/01/14 02:23:05 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:55:04 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
  */
 bool	op_or(t_game *game, t_carriage *carriage)
 {
-	int reg;
-	int value;
+	int	reg;
+	int	value;
 
 	reg = carriage->arg_value[THIRD_ARG] - 1;
-	value = get_value(game, carriage, FIRST_ARG, true) |
-			get_value(game, carriage, SECOND_ARG, true);
+	value = get_value(game, carriage, FIRST_ARG, true)
+		| get_value(game, carriage, SECOND_ARG, true);
 	carriage->registry[reg] = value;
 	carriage->carry = (value == 0);
-	return true;
+	return (true);
 }

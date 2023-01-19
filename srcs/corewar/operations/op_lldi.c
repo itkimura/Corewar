@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_lldi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:36:13 by thle              #+#    #+#             */
-/*   Updated: 2023/01/15 02:26:26 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:53:30 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@
  */
 bool	op_lldi(t_game *game, t_carriage *carriage)
 {
-	int reg_index;
-	int pos;
+	int	reg_index;
+	int	pos;
 
 	reg_index = carriage->arg_value[THIRD_ARG] - 1;
-	pos = (carriage->pc +
-		(get_value(game, carriage, FIRST_ARG, true) +
-		get_value(game, carriage, SECOND_ARG, true))) % MEM_SIZE;
+	pos = (carriage->pc
+			+ (get_value(game, carriage, FIRST_ARG, true)
+				+ get_value(game, carriage, SECOND_ARG, true))) % MEM_SIZE;
 	if (pos < 0)
 		pos = MEM_SIZE + pos;
-	carriage->registry[reg_index] =
-		char_to_int(game->arena, pos % MEM_SIZE, 4, true);
-	return true;
+	carriage->registry[reg_index]
+		= char_to_int(game->arena, pos % MEM_SIZE, 4, true);
+	return (true);
 }

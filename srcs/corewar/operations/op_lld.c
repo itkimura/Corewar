@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_lld.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:35:51 by thle              #+#    #+#             */
-/*   Updated: 2023/01/14 02:04:40 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:49:49 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@
  */
 bool	op_lld(t_game *game, t_carriage *carriage)
 {
-
 	int	value;
-	int reg_index;
+	int	reg_index;
 
 	reg_index = carriage->arg_value[SECOND_ARG] - 1;
 	value = get_value(game, carriage, FIRST_ARG, false);

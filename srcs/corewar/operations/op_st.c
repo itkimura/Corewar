@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_st.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:32:17 by thle              #+#    #+#             */
-/*   Updated: 2023/01/14 02:44:45 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:55:21 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
  * needed) then place value onto the arena starting from this position.
  * 
  */
-bool op_st(t_game *game, t_carriage *carriage)
+bool	op_st(t_game *game, t_carriage *carriage)
 {
-	int value;
-	int pos;
-	int reg_index;
+	int	value;
+	int	pos;
+	int	reg_index;
 
 	value = get_value(game, carriage, FIRST_ARG, true);
 	if (carriage->arg[SECOND_ARG] == T_REG)

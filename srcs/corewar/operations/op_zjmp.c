@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:31:30 by thle              #+#    #+#             */
-/*   Updated: 2023/01/15 02:42:38 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 15:59:53 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@
  * current position + <FIRST_ARGUMENT> % IDX_MOD
  *
  */
-bool op_zjmp(t_game *game, t_carriage *carriage)
+bool	op_zjmp(t_game *game, t_carriage *carriage)
 {
-	int pos;
+	int	pos;
 
 	if (carriage->carry == true)
 	{
-		pos = carriage->pc + get_value(game, carriage, FIRST_ARG, true) % IDX_MOD;
+		pos = carriage->pc
+			+ get_value(game, carriage, FIRST_ARG, true) % IDX_MOD;
 		if (pos < 0)
 			pos = MEM_SIZE + pos;
 		carriage->next_statement_pc = pos % MEM_SIZE;
