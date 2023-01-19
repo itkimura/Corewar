@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:33:01 by thule             #+#    #+#             */
-/*   Updated: 2023/01/14 01:09:46 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:04:26 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
  * else take value from address
  *
  */
-int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
+int	get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 {
-	int value;
-	int size;
-	int pos;
+	int	value;
+	int	size;
+	int	pos;
 
 	value = carriage->arg_value[order];
 	size = 4;
@@ -48,5 +48,5 @@ int get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 			pos = MEM_SIZE + pos;
 		value = char_to_int(game->arena, pos % MEM_SIZE, size, true);
 	}
-	return value;
+	return (value);
 }
