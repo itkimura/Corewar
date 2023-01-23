@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 16:10:33 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/23 16:32:03 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,9 +260,10 @@ bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game);
 bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 
 /*
- * calc_utils.c
+ * utils.c
  */
 int char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_arena);
+bool is_op_code(char c);
 
 /*
  * read_utils.c
