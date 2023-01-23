@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/19 16:25:05 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/23 18:37:22 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,6 @@ void flag_l(t_game *game, t_carriage *carriage)
 		print_flag_l_operations(carriage);
 }
 
-bool is_op_code(char c)
-{
-	if (c <= 15 && c >= 0)
-		return true;
-	return false;
-}
-
 bool run_carriages(t_game *game)
 {
 	t_carriage *carriage;
@@ -197,6 +190,6 @@ bool run_game(t_game *game)
 		index++;
 	}
 	if (game->carriage_head == NULL)
-		ft_printf("Contestant %d, \"%s\", has won!\n", (game->winner) * -1, game->players_in_order[(game->winner) * -1 - 1]->name);
+		ft_printf("Contestant %d, \"%s\", has won !\n", (game->winner) * -1, game->players_in_order[(game->winner) * -1 - 1]->name);
 	return (true);
 }
