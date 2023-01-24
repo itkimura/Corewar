@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 16:06:19 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 16:09:26 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,6 @@ void print_flag_l_death(t_game *game, t_carriage *carriage);
 /*
  * validate_champion.c
  */
-bool read_champion(t_player *player, char *argv, int fd);
 bool validate_champion(char *file_path, t_game *game);
 
 /*

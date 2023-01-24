@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/24 16:07:45 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 16:09:18 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	read_then_terminate_bytes(int fd, unsigned char *bytes, int size)
 	bytes[size] = '\0';
 }
 
-static bool validate(int fd, int type, t_player *player)
+static bool	validate(int fd, int type, t_player *player)
 {
-	unsigned char bytes[5];
+	unsigned char	bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
 	if (type == VALIDATE_MAGIC_HEADER)
@@ -59,7 +59,7 @@ static bool	read_exec_code(t_player *player, int fd)
 /*
  * read the campion, go to each function to save data
  */
-bool	read_champion(t_player *player, char *argv, int fd)
+static bool	read_champion(t_player *player, char *argv, int fd)
 {
 	if (validate(fd, VALIDATE_MAGIC_HEADER, player) == false)
 		return (print_error(argv, INVALID_HEADER));
