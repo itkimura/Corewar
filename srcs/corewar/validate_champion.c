@@ -6,44 +6,36 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/13 16:44:32 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 16:07:45 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
+#define VALIDATE_MAGIC_HEADER 1
+#define VALIDATE_NULL 2
+#define VALIDATE_EXEC_CODE_SIZE 3
 
-/*
- * Magic_header (4 byte)-> validate with COREWAR_EXEC_MAGIC
- */
-static bool	validate_magic_header(int fd)
+static void	read_then_terminate_bytes(int fd, unsigned char *bytes, int size)
 {
-	unsigned char	bytes[5];
-
-	read_then_terminate_bytes(fd, bytes, 4);
-	return (char_to_int(bytes, 0, 4, false) == COREWAR_EXEC_MAGIC);
+	read(fd, bytes, size);
+	bytes[size] = '\0';
 }
 
-/*
- * validate_null
- */
-static bool	validate_null(int fd)
+static bool validate(int fd, int type, t_player *player)
 {
-	unsigned char	bytes[5];
+	unsigned char bytes[5];
 
 	read_then_terminate_bytes(fd, bytes, 4);
-	return (char_to_int(bytes, 0, 4, false) == 0);
-}
-
-/*
- * validate it under CHAMP_MAX_SIZE and save it into t_player->exec_code_size
- */
-static bool	validate_exec_code_size(t_player *player, int fd)
-{
-	unsigned char	bytes[5];
-
-	read_then_terminate_bytes(fd, bytes, 4);
-	player->exec_code_size = char_to_int(bytes, 0, 4, false);
-	return (player->exec_code_size <= CHAMP_MAX_SIZE);
+	if (type == VALIDATE_MAGIC_HEADER)
+		return (char_to_int(bytes, 0, 4, false) == COREWAR_EXEC_MAGIC);
+	else if (type == VALIDATE_NULL)
+		return (char_to_int(bytes, 0, 4, false) == 0);
+	else if (type == VALIDATE_EXEC_CODE_SIZE)
+	{
+		player->exec_code_size = char_to_int(bytes, 0, 4, false);
+		return (player->exec_code_size <= CHAMP_MAX_SIZE);
+	}
+	return (false);
 }
 
 /*
@@ -69,15 +61,15 @@ static bool	read_exec_code(t_player *player, int fd)
  */
 bool	read_champion(t_player *player, char *argv, int fd)
 {
-	if (validate_magic_header(fd) == false)
+	if (validate(fd, VALIDATE_MAGIC_HEADER, player) == false)
 		return (print_error(argv, INVALID_HEADER));
 	read_then_terminate_bytes(fd, player->name, PROG_NAME_LENGTH);
-	if (validate_null(fd) == false)
+	if (validate(fd, VALIDATE_NULL, player) == false)
 		return (print_error(argv, INVALID_NULL));
-	if (validate_exec_code_size(player, fd) == false)
+	if (validate(fd, VALIDATE_EXEC_CODE_SIZE, player) == false)
 		return (print_error(argv, INVALID_CHAMPION_SIZE));
 	read_then_terminate_bytes(fd, player->comment, COMMENT_LENGTH);
-	if (validate_null(fd) == false)
+	if (validate(fd, VALIDATE_NULL, player) == false)
 		return (print_error(argv, INVALID_NULL));
 	if (read_exec_code(player, fd) == false)
 	{

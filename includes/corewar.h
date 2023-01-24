@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 15:31:46 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 16:06:19 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,11 +271,6 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 int char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_arena);
 bool is_op_code(char c);
 void kill_carriage(t_game *game, t_carriage *prev, t_carriage *curr, t_carriage *next);
-
-/*
- * read_utils.c
- */
-void read_then_terminate_bytes(int fd, unsigned char *bytes, int size);
 
 /*
  * op.c
