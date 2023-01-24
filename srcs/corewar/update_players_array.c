@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_players_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/10 21:38:46 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:03:26 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ bool	update_players_array(t_game *game)
 	missing_player[1] = '\0';
 	align_players(game);
 	index = game->total_players - 1;
+	game->total_carriages = game->total_players;
 	while (index >= 0)
 	{
 		missing_player[0] = index + 1 + '0';

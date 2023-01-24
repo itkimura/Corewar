@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/23 16:32:03 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 11:57:59 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,13 +170,14 @@ typedef struct s_game
 	int total_tmp_players;
 	int flags_value[TOTAL_FLAGS]; // initialize to 0
 
-	int cycles_to_die;			  // could be changed
-	int winner;					  // could be t_player
-	int number_of_cycles;		  // for the entire run
-	int check_counter;			//if this counter runs out, check will be carried
-	int number_of_live_statement; // for the last cycles_to_die
-	int number_of_check;
+	int cycles_to_die; // could be changed
+	int winner;		   // could be t_player
+	int total_cycles;  // for the entire run
+	int check_counter; // if this counter runs out, check will be carried
+	int total_lives;   // for the last cycles_to_die
+	int total_checks;
 
+	int total_carriages;
 	t_carriage *carriage_head;
 	unsigned char arena[MEM_SIZE];
 } t_game;
@@ -188,8 +189,8 @@ typedef struct s_op
 {
 	char *name;
 	int nbr_arg;
-	unsigned char arg[3];
-	unsigned char op_code;
+	int arg[3];
+	int op_code;
 	int cycles;
 	bool arg_code_type;
 	int t_dir_size;
@@ -201,7 +202,6 @@ typedef struct s_op
  */
 bool init_game(t_game **game);
 bool init_player(t_player **new, t_game *game);
-void store_palyer_number(t_game *game, t_player *player);
 bool validate_champion(char *file_path, t_game *game);
 bool validate_argv(int argc, char **argv);
 
@@ -220,9 +220,9 @@ bool update_players_array(t_game *game);
  * init_structure.c
  */
 bool init_game(t_game **game);
-void ft_unsigned_char_zero(unsigned char *str, int len);
 bool init_player(t_player **new, t_game *game);
 bool init_carriage(t_carriage **new, t_player *player, int id);
+void	init_arena(t_game *game);
 
 /*
  * free_all.c
@@ -248,6 +248,12 @@ void print_carriage_list(t_carriage *head);
 void print_arg_and_val(t_carriage *carriage);
 
 /*
+ * print_flag.c
+ */
+bool print_dump(t_game *game);
+void flag_l(t_game *game, t_carriage *carriage);
+
+/*
  * validate_champion.c
  */
 bool read_champion(t_player *player, char *argv, int fd);
@@ -256,7 +262,7 @@ bool validate_champion(char *file_path, t_game *game);
 /*
  * validate_flag.c
  */
-bool validate_n_flag_nb(char *argv, t_vm_flag *flag, t_game *game);
+bool validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
 bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 
 /*
@@ -264,6 +270,7 @@ bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
  */
 int char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_arena);
 bool is_op_code(char c);
+void kill_carriage(t_game *game, t_carriage *prev, t_carriage *curr, t_carriage *next);
 
 /*
  * read_utils.c
