@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_lfork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:39:05 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 15:49:05 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/24 13:26:08 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ bool	op_lfork(t_game *game, t_carriage *carriage)
 {
 	int	pos;
 
-	pos = carriage->pc + get_value(game, carriage, FIRST_ARG, true);
+	pos = (carriage->pc + get_value(game, carriage, FIRST_ARG, true))
+		% MEM_SIZE;
 	if (pos < 0)
 		pos = MEM_SIZE + pos;
 	if (add_carriage(game, carriage, pos % MEM_SIZE) == false)

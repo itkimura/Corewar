@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_st.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:32:17 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 15:55:21 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/24 13:26:21 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ bool	op_st(t_game *game, t_carriage *carriage)
 	}
 	else
 	{
-		pos = carriage->pc + (carriage->arg_value[SECOND_ARG] % IDX_MOD);
+		pos = (carriage->pc + (carriage->arg_value[SECOND_ARG] % IDX_MOD))
+			% MEM_SIZE;
 		if (pos < 0)
 			pos = MEM_SIZE + pos;
 		place_value(game, value, pos % MEM_SIZE);
