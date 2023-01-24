@@ -6,23 +6,12 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/23 18:37:22 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:29:40 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void kill_carriage(t_game *game, t_carriage *prev,
-				   t_carriage *curr, t_carriage *next)
-{
-	if (game->carriage_head == curr)
-		game->carriage_head = next;
-	if (curr != NULL)
-		free(curr);
-	curr = NULL;
-	if (prev != NULL)
-		prev->next = next;
-}
 
 void run_check(t_game *game)
 {
@@ -41,7 +30,7 @@ void run_check(t_game *game)
 			if (game->flags_value[FLAG_L] == FO_DEATHS)
 			{
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
-						  carriage->id, game->number_of_cycles - carriage->last_live_performed - 1,
+						  carriage->id, game->total_cycles - carriage->last_live_performed - 1,
 						  game->cycles_to_die);
 			}
 			kill_carriage(game, prev, carriage, next);
@@ -53,59 +42,14 @@ void run_check(t_game *game)
 		}
 		carriage = next;
 	}
-	if (game->number_of_live_statement >= NBR_LIVE || (game->number_of_check % MAX_CHECKS == 0 && game->number_of_check != 0))
+	if (game->total_lives >= NBR_LIVE || (game->total_checks % MAX_CHECKS == 0 && game->total_checks != 0))
 	{
 		game->cycles_to_die = game->cycles_to_die - CYCLE_DELTA;
-		game->number_of_check = 0;
+		game->total_checks = 0;
 	}
 	game->check_counter = game->cycles_to_die;
-	game->number_of_live_statement = 0;
-	game->number_of_check++;
-}
-
-void print_flag_l_operations(t_carriage *carriage)
-{
-	int index;
-
-	index = 0;
-	ft_printf("P%5d | %s",
-			  carriage->id, g_op_tab[carriage->statement_index].name);
-	while (index < g_op_tab[carriage->statement_index].nbr_arg)
-	{
-		ft_putchar(' ');
-
-		if (carriage->arg[index] == T_REG)
-			ft_putchar('r');
-		ft_printf("%d", carriage->arg_value[index]);
-		if (index == 2 && carriage->statement_index == OP_STI)
-			ft_printf("(%d)", carriage->registry[carriage->arg_value[index] - 1]);
-
-		index++;
-	}
-	if (carriage->statement_index == OP_ZJMP)
-	{
-		if (carriage->carry == true)
-			ft_printf(" OK");
-		else
-			ft_printf(" FAILED");
-	}
-	if (carriage->statement_index == OP_FORK)
-	{
-		ft_printf(" (%d)", carriage->pc + (carriage->arg_value[FIRST_ARG] % IDX_MOD));
-	}
-	if (carriage->statement_index == OP_LFORK)
-	{
-		ft_printf(" (%d)", carriage->pc + (carriage->arg_value[FIRST_ARG]));
-	}
-	ft_putchar('\n');
-}
-
-void flag_l(t_game *game, t_carriage *carriage)
-{
-	if (game->flags_value[FLAG_L] == FO_ADV && carriage->statement_index != OP_ZJMP)
-		print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
-	if (game->flags_value[FLAG_L] == FO_OPERAIONS)
-		print_flag_l_operations(carriage);
+	game->total_lives = 0;
+	game->total_checks++;
 }
 
 bool run_carriages(t_game *game)
@@ -142,28 +86,6 @@ bool run_carriages(t_game *game)
 	return true;
 }
 
-bool print_dump(t_game *game)
-{
-	int c;
-
-	c = 0;
-	if (game->flags_value[FLAG_DUMP] != INITIAL_VALUE && game->flags_value[FLAG_DUMP] == game->number_of_cycles)
-	{
-		print_arena(game);
-		return (false);
-	}
-	if (game->flags_value[FLAG_S] != INITIAL_VALUE && game->number_of_cycles % game->flags_value[FLAG_S] == 0 && game->number_of_cycles != 0)
-	{
-		print_arena(game);
-		while (1)
-		{
-			c = getchar();
-			if (c == '\n')
-				break;
-		}
-	}
-	return (true);
-}
 
 bool run_game(t_game *game)
 {
@@ -173,16 +95,16 @@ bool run_game(t_game *game)
 	while (game->carriage_head != NULL)
 	{
 		if (game->flags_value[FLAG_L] == FO_CYCLES)
-			ft_printf("It is now cycle %d\n", game->number_of_cycles + 1);
+			ft_printf("It is now cycle %d\n", game->total_cycles + 1);
 		if (print_dump(game) == false)
 			break;
-		if (game->flags_value[FLAG_DUMP] == game->number_of_cycles)
+		if (game->flags_value[FLAG_DUMP] == game->total_cycles)
 		{
 			print_arena(game);
 			return (true);
 		}
 		run_carriages(game);
-		game->number_of_cycles++;
+		game->total_cycles++;
 		game->check_counter--;
 
 		if (game->cycles_to_die <= 0 || game->check_counter <= 0)

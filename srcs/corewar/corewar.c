@@ -3,45 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/10 21:34:58 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:25:56 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-/*
- * initialize arena, place players onto arena
- * also print announcement of players
- */
-void	init_arena(t_game *game)
-{
-	int			index;
-	int			max_memory;
-	int			position;
-	t_player	*player;
 
-	max_memory = MEM_SIZE / game->total_players;
-	index = 0;
-	position = 0;
-	ft_printf("Introducing contestants...\n");
-	game->winner = game->total_players;
-	while (index < game->total_players)
-	{
-		player = game->players_in_order[index];
-		ft_memcpy(game->arena + position,
-			game->players_in_order[index]->exec_code,
-			game->players_in_order[index]->exec_code_size);
-		player->carriage->pc = position;
-		position += max_memory;
-		ft_printf("* Player %d, ", index + 1, player->exec_code_size);
-		ft_printf("weighing %d bytes, ", player->exec_code_size);
-		ft_printf("\"%s\" (\"%s\") !\n", player->name, player->comment);
-		index++;
-	}
-}
 
 /*
  * 1.initiarize game structure
@@ -60,8 +31,6 @@ bool	validate_argv(int argc, char **argv)
 	game = NULL;
 	if (init_game(&game) == false)
 		return (free_all(game), false);
-	// ft_printf("---- print_game ----\n");
-	// print_game(game);
 	flag = -1;
 	index = 1;
 	while (index < argc)
@@ -78,19 +47,7 @@ bool	validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
-
-	/* general test */
-	// ft_printf("---- print_all_player ----\n");
-	// print_all_players(game);
-	// ft_printf("---- print_game ----\n");
-	// print_game(game);
-	// ft_printf("---- run_game ----\n");
 	run_game(game);
-
-	/* thu's test */
-	// get_arg_value(game->carriage_head, game->arena);
-	// op_sti(game, game->carriage_head);
-
 	free_all(game);
 	return (true);
 }
