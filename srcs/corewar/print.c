@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/18 19:33:54 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:11:49 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ void print_single_carriage(t_carriage *head)
 	ft_printf("%sid:%s\t%u\n", BOLD, RESET, head->id);
 	ft_printf("%scarry%s:\t%d\n", BOLD, RESET, head->carry);
 	ft_printf("%sstatement_index%s:\t%d\n", BOLD, RESET, head->statement_index);
-	ft_printf("%slive_performed%s:\t%d\n", BOLD, RESET, head->live_performed);
 	ft_printf("%sremaining_cycle%s:\t%d\n", BOLD, RESET, head->remaining_cycle);
 	ft_printf("%spc%s:\t%d\n", BOLD, RESET, head->pc);
 	ft_printf("%snext_statment_pc%s:\t%d\n", BOLD, RESET, head->next_statement_pc);

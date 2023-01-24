@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/01/24 11:24:35 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:34:06 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool print_dump(t_game *game)
 	int c;
 
 	c = 0;
-	if (game->flags_value[FLAG_DUMP] != INITIAL_VALUE && game->flags_value[FLAG_DUMP] == game->total_cycles)
+	if (game->flags_value[FLAG_DUMP] != INITIAL_VALUE && game->flags_value[FLAG_DUMP] == game->total_cycles - 1)
 	{
 		print_arena(game);
 		return (false);
@@ -70,6 +70,14 @@ static void print_flag_l_operations(t_carriage *carriage)
 		ft_printf(" (%d)", carriage->pc + (carriage->arg_value[FIRST_ARG]));
 	}
 	ft_putchar('\n');
+}
+
+void print_flag_l_death(t_game *game, t_carriage *carriage)
+{
+	if (game->flags_value[FLAG_L] == FO_DEATHS)
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
+						  carriage->id, game->total_cycles - carriage->last_live_performed - 1,
+						  game->cycles_to_die);
 }
 
 void flag_l(t_game *game, t_carriage *carriage)
