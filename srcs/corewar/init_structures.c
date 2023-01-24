@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:47:45 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/24 13:33:46 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:09:07 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ bool init_game(t_game **game)
 		(*game)->flags_value[index++] = INITIAL_VALUE;
 	(*game)->cycles_to_die = CYCLE_TO_DIE;
 	(*game)->check_counter = CYCLE_TO_DIE;
+	(*game)->total_cycles = 1;
 	return (true);
 }
 
