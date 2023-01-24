@@ -71,7 +71,7 @@ else
 fi
 loop=$cycle
 echo "Files: $champions"
-while [ $loop -lt 10000 ]
+while [ $loop -lt 28001 ]
 do
 	./corewar -dump $loop $champions > test1
 	./resources/corewar -d $loop $champions > test2
@@ -81,9 +81,9 @@ do
 	#echo "diff = $diff"
 	if [ "$diff" == "" ]
 	then
-		echo -e -n "${GREEN}.${NC}"
+		echo -e -n "${GREEN}${loop}.${NC}"
 	else
-		echo -e -n "${RED}.${NC}"
+		echo -e -n "${RED}${loop}.${NC}"
 		echo "Do you want to print diff? [y/n]"
 		read -r b
 		if [ "$b" == "y" ]
