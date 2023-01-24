@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:30:10 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 13:27:29 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:11:28 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	op_live(t_game *game, t_carriage *carriage)
 	int	player;
 
 	carriage->last_live_performed = game->total_cycles;
-	carriage->live_performed = true;
 	(game->total_lives)++;
 	player = -(char_to_int(game->arena, carriage->pc + 1, 4, true));
 	if (player > 0 && player <= game->total_players)

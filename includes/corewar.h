@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 11:57:59 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:31:46 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,7 @@ typedef struct s_carriage
 
 	// if carriage perfom live -> change live_performed = true
 	// during check, need to set back to false
-	unsigned long last_live_performed;
-	bool live_performed;
+	int last_live_performed;
 
 	short int statement_index;
 	int remaining_cycle;
@@ -252,6 +251,7 @@ void print_arg_and_val(t_carriage *carriage);
  */
 bool print_dump(t_game *game);
 void flag_l(t_game *game, t_carriage *carriage);
+void print_flag_l_death(t_game *game, t_carriage *carriage);
 
 /*
  * validate_champion.c
