@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:34:21 by thle              #+#    #+#             */
-/*   Updated: 2023/01/23 16:31:30 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 11:22:24 by thule            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,16 @@ bool is_op_code(char c)
 	if (c <= 15 && c >= 0)
 		return true;
 	return false;
+}
+
+void kill_carriage(t_game *game, t_carriage *prev,
+				   t_carriage *curr, t_carriage *next)
+{
+	if (game->carriage_head == curr)
+		game->carriage_head = next;
+	if (curr != NULL)
+		free(curr);
+	curr = NULL;
+	if (prev != NULL)
+		prev->next = next;
 }
