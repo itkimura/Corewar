@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:03:25 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/24 11:03:26 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 21:25:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ bool	update_players_array(t_game *game)
 
 	missing_player[1] = '\0';
 	align_players(game);
-	index = game->total_players - 1;
+	index = game->total_players;
 	game->total_carriages = game->total_players;
-	while (index >= 0)
+	while (--index >= 0)
 	{
 		missing_player[0] = index + 1 + '0';
 		if (game->players_in_order[index] == NULL)
@@ -93,7 +93,6 @@ bool	update_players_array(t_game *game)
 			prev->next = new;
 		prev = new;
 		game->players_in_order[index]->carriage = new;
-		index--;
 	}
 	return (true);
 }

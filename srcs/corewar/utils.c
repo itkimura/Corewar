@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:34:21 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 11:22:24 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/25 09:45:46 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
  * short -> 2 bytes
  * int -> 4 bytes
  */
-int	char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_arena)
+int	char_to_int(unsigned char *bytes, unsigned int pos,
+		int nbytes, bool is_arena)
 {
 	unsigned char	number[4];
 	int				index;
@@ -32,7 +33,8 @@ int	char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_aren
 		else
 		{
 			if (is_arena == true)
-				number[index] = bytes[(pos + (nbytes - (index + 1))) % MEM_SIZE];
+				number[index]
+					= bytes[(pos + (nbytes - (index + 1))) % MEM_SIZE];
 			else
 				number[index] = bytes[pos + (nbytes - (index + 1))];
 		}
@@ -43,15 +45,15 @@ int	char_to_int(unsigned char *bytes, unsigned int pos, int nbytes, bool is_aren
 	return (*(short *)&number[0]);
 }
 
-bool is_op_code(char c)
+bool	is_op_code(char c)
 {
 	if (c <= 15 && c >= 0)
-		return true;
-	return false;
+		return (true);
+	return (false);
 }
 
-void kill_carriage(t_game *game, t_carriage *prev,
-				   t_carriage *curr, t_carriage *next)
+void	kill_carriage(t_game *game, t_carriage *prev,
+				t_carriage *curr, t_carriage *next)
 {
 	if (game->carriage_head == curr)
 		game->carriage_head = next;

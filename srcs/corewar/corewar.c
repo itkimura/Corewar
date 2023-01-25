@@ -6,13 +6,11 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 11:25:56 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/25 09:32:26 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
-
-
 
 /*
  * 1.initiarize game structure
@@ -38,18 +36,15 @@ bool	validate_argv(int argc, char **argv)
 		if (which_flag(argv, &index, &flag, game) == false)
 			return (free_all(game), false);
 		if (flag == NOT_FLAG)
-		{
 			if (validate_champion(argv[index], game) == false)
 				return (free_all(game), false);
-		}
 		index++;
 	}
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
 	run_game(game);
-	free_all(game);
-	return (true);
+	return (free_all(game), true);
 }
 
 /*
