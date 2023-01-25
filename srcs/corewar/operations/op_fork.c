@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:38:53 by thle              #+#    #+#             */
-/*   Updated: 2023/01/25 13:31:52 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:26:50 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ bool	op_fork(t_game *game, t_carriage *carriage)
 {
 	int	pos;
 
-	carriage->arg_value[FIRST_ARG] = carriage->pc + (carriage->arg_value[FIRST_ARG] % IDX_MOD);
-	//pos = (carriage->pc + (carriage->arg_value[FIRST_ARG] % IDX_MOD))
+	carriage->arg_value[FIRST_ARG]
+		= carriage->pc + (carriage->arg_value[FIRST_ARG] % IDX_MOD);
 	pos = carriage->arg_value[FIRST_ARG] % MEM_SIZE;
 	if (pos < 0)
 		pos = MEM_SIZE + pos;
