@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:35:51 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 15:49:49 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/25 13:34:07 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	op_lld(t_game *game, t_carriage *carriage)
 
 	reg_index = carriage->arg_value[SECOND_ARG] - 1;
 	value = get_value(game, carriage, FIRST_ARG, false);
+	carriage->arg_value[FIRST_ARG] = value;
 	carriage->registry[reg_index] = value;
 	carriage->carry = (value == 0);
 	return (true);

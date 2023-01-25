@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:30:10 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 15:11:28 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/25 13:25:06 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ bool	op_live(t_game *game, t_carriage *carriage)
 
 	carriage->last_live_performed = game->total_cycles;
 	(game->total_lives)++;
-	player = -(char_to_int(game->arena, carriage->pc + 1, 4, true));
+	player = -(carriage->arg_value[FIRST_ARG]);
 	if (player > 0 && player <= game->total_players)
-		game->winner = -player;
-	if (game->flags_value[FLAG_L] == FO_LIVES)
-		ft_printf("Player %d (%s) is said to be alive\n", player,
-			game->players_in_order[player - 1]->name);
+		game->winner = player;
 	return (true);
 }

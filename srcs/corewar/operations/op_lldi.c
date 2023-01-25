@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:36:13 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 15:53:30 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/25 14:16:35 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ bool	op_lldi(t_game *game, t_carriage *carriage)
 	int	pos;
 
 	reg_index = carriage->arg_value[THIRD_ARG] - 1;
+	carriage->arg_value[FIRST_ARG] = get_value(game, carriage, FIRST_ARG, true);
+	carriage->arg_value[SECOND_ARG] = get_value(game, carriage, SECOND_ARG, true);
 	pos = (carriage->pc
-			+ (get_value(game, carriage, FIRST_ARG, true)
-				+ get_value(game, carriage, SECOND_ARG, true))) % MEM_SIZE;
+			+ (carriage->arg_value[FIRST_ARG]
+				+ carriage->arg_value[SECOND_ARG])) % MEM_SIZE;
 	if (pos < 0)
 		pos = MEM_SIZE + pos;
 	carriage->registry[reg_index]

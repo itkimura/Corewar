@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/25 09:40:40 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/01/25 13:24:55 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static bool	perform_op(t_game *game, t_carriage *carriage)
 		{
 			if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 				return (false);
+			flag_l(game, carriage);
 		}
-		flag_l(game, carriage);
 		carriage->pc = carriage->next_statement_pc;
 	}
 	return (true);
@@ -114,7 +114,7 @@ bool	run_game(t_game *game)
 		index++;
 	}
 	if (game->carriage_head == NULL)
-		ft_printf("Contestant %d, \"%s\", has won !\n", (game->winner) * -1,
-			game->players_in_order[(game->winner) * -1 -1]->name);
+		ft_printf("Contestant %d, \"%s\", has won !\n", game->winner,
+			game->players_in_order[game->winner - 1]->name);
 	return (true);
 }

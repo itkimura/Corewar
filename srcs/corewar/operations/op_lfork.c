@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:39:05 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 13:26:08 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:21:04 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ bool	op_lfork(t_game *game, t_carriage *carriage)
 {
 	int	pos;
 
-	pos = (carriage->pc + get_value(game, carriage, FIRST_ARG, true))
-		% MEM_SIZE;
+	carriage->arg_value[FIRST_ARG] = carriage->pc + (carriage->arg_value[FIRST_ARG]);
+	pos = carriage->arg_value[FIRST_ARG] % MEM_SIZE;
 	if (pos < 0)
 		pos = MEM_SIZE + pos;
 	if (add_carriage(game, carriage, pos % MEM_SIZE) == false)
