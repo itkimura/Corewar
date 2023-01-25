@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/24 16:09:26 by thule            ###   ########.fr       */
+/*   Updated: 2023/01/24 21:09:51 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,10 +259,20 @@ void print_flag_l_death(t_game *game, t_carriage *carriage);
 bool validate_champion(char *file_path, t_game *game);
 
 /*
- * validate_flag.c
+ * flag.c
  */
-bool validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
-bool which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
+bool	is_number(char *argv);
+bool	is_after_flag_n(t_game *game);
+bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
+
+/* 
+ * flag_utils.c
+ */
+bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_l_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_a_flag(t_vm_flag *flag, t_game *game);
+bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game);
 
 /*
  * utils.c
