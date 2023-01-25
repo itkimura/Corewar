@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/01/25 16:01:59 by thle             ###   ########.fr       */
+/*   Updated: 2023/01/25 16:28:37 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,17 +169,18 @@ typedef struct s_game
 /*
  * op_tab
  */
+typedef bool	((*t_f)(t_game *game, t_carriage *s_carriage));
+
 typedef struct s_op
 {
-	char			*name;
-	int				nbr_arg;
-	int				arg[3];
-	int				op_code;
-	int				cycles;
-	bool			arg_code_type;
-	int				t_dir_size;
-	bool	(*f)
-	(t_game		*game, t_carriage	*s_carriage);
+	char	*name;
+	int		nbr_arg;
+	int		arg[3];
+	int		op_code;
+	int		cycles;
+	bool	arg_code_type;
+	int		t_dir_size;
+	t_f		f;
 }			t_op;
 
 /*
@@ -264,7 +265,7 @@ void	kill_carriage(t_game *game, t_carriage *prev,
 /*
  * op.c
  */
-extern t_op	g_op_tab[16];
+extern t_op		g_op_tab[16];
 
 /*
  * operation functions
