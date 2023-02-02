@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 20:04:22 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/02 15:21:12 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	validate_label(t_asmdata *data, char *ptr, int index)
 		i++;
 	if (ptr[i++] != LABEL_CHAR)
 		return (0);
-	label = ft_strsub(ptr, 0, i);
+	label = ft_strsub(ptr, 0, i - 1);
 	if (!label)
 		free_exit(data, MALLOCFAIL, ERROR);
 	data->oplist[index]->label = label;

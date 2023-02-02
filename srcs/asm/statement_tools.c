@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:09:08 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 20:05:43 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/02 09:45:49 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ int	validate_statement(t_asmdata *data, char *ptr, int index, int *i)
 	j = *i;
 	while (ptr[j] && ft_isalpha(ptr[j]))
 		j++;
-	if (ptr[j] == ' ' || ptr[j] == '\t' || ptr[j] == DIRECT_CHAR \
-		|| ptr[j] == LABEL_CHAR)
+	if (ptr[j] == ' ' || ptr[j] == '\t' || ptr[j] == DIRECT_CHAR)
 		statement = ft_strsub(ptr, *i, j - (*i));
 	if (!statement || get_statement_index(data, statement) == -1)
 	{

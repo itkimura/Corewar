@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 15:46:40 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/02 10:25:55 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,15 @@ int			get_label_adr(t_asmdata *data, t_op **ptr, char *name);
 // void		insert_label(t_asmdata *data, t_op *ptr, char *name);
 
 /*
-** Writing to file
+** Writing functions 
 */
 
 void		write_to_file(t_asmdata *data);
+void		write_name(t_asmdata *data, int fd);
+void		write_comment(t_asmdata *data, int fd);
+void		write_size(t_asmdata *data, int fd);
 int			ft_atoi_base(const char *str, int base);
+int			byte_shift_translate(int value);
 
 /* 
 ** Hash functions
