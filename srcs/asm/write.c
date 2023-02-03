@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/02 17:13:53 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/03 10:59:13 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	champ_code(t_op **data, int fd)
 //	ft_printf("table name == %s\n", g_statements[j].name);//g_statements[HASHTABLESIZE]
 	write(fd, &buf, 1);
 	buf = '0';
-	if (ft_strcmp((*tmp)->statement, g_statements[j].name) == 0)
+	if (g_statements[j].argcode == true && ft_strcmp((*tmp)->statement, g_statements[j].name) == 0)
 	{
 		buf = (*tmp)->argcode;
 //		ft_printf("buf == %c statement == %c\n", buf, g_statements[j].argcode);//g_statements[HASHTABLESIZE]
@@ -170,14 +170,12 @@ void	champ_code(t_op **data, int fd)
 //			if (ft_strlen((*tmp)->arg[i]) > 2)
 //				(long)(*tmp)->arg[i] |= 1L << 7;	
 			dir = ft_atoi(&(*tmp)->arg[i][1]);
-			ft_printf("j == %d dir == %d, arg[%d] == %d, char == %s\n", j, dir, i, ft_atoi(&(*tmp)->arg[i][1]), &(*tmp)->arg[i][1]);
-			/*
-			if (g_statements[j].size == 4 && g_statements[i].argcode == true)
+			ft_printf("j == %s dir == %d, arg[%d] == %d, char == %s\n", g_statements[j].name, dir, i, ft_atoi(&(*tmp)->arg[i][1]), &(*tmp)->arg[i][1]);
+			if (g_statements[j].size == 4)
 			{
 				write(fd, &((unsigned char*)&dir)[3], 1);
 				write(fd, &((unsigned char*)&dir)[2], 1);
 			}
-			*/
 			write(fd, &((unsigned char*)&dir)[1], 1);
 			write(fd, &((unsigned char*)&dir)[0], 1);
 		}
@@ -242,6 +240,7 @@ void	write_to_file(t_asmdata *data)
 	{
 		ft_printf("arg == %d instruction == %s\n", data->oplist[i]->args, data->oplist[i]->instruction);
 		champ_code(&data->oplist[i], fd);
+//		write(fd, "#", 1);	
 		i++;
 	}
 	/*
