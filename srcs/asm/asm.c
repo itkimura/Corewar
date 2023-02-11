@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/01 10:16:56 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/09 14:43:16 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
-	print_oplist(data);
+	ft_printf("JAMBON BEURRE\n");
+//	print_oplist(data);
 	ft_printf("*******opsize == %d\n", data->opsize);
 	write_to_file(data);
 	// print_hashlabel(data);

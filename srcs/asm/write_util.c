@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/02 09:52:20 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/11 11:41:43 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	write_name(t_asmdata *data, int fd)
 {
-//	int32_t	helper;
 	int		i;
 	char	buffer[PROG_NAME_LENGTH];
+//	int32_t	helper;
 
 	i = 0;
 	ft_printf("**********PROG_NAME + NULL + LEN*********\n");
@@ -62,7 +62,7 @@ void	write_size(t_asmdata *data, int fd)
 	int	i;
 
 	i = 0;
-	while(data->oplist[i])
+	while (data->oplist[i])
 		i++;
 	buffer = data->oplist[i - 1]->totalbyte;
 //	ft_printf("buffer == %d, size == %d, i == %d\n", buffer, data->header->prog_size, i);

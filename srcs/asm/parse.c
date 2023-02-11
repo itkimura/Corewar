@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2022/12/16 19:02:27 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/10 13:46:56 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 
 	arg_code = 0;
 	end = start;
+	ft_printf("arg = %s len = %zu\n", arg, ft_strlen(arg));
 	while (arg[end] && arg[end] != ' ' && arg[end] != '\t' \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
@@ -99,6 +100,13 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 
 	j = 0;
 	args = ft_strsplit(&ptr[i], SEPARATOR_CHAR);
+	/*
+	while ((*args) != NULL)
+	{
+		ft_printf("arg == %s\n", (*args));
+		args++;
+	}
+	*/
 	while (args && args[j])
 	{
 		start = 0;

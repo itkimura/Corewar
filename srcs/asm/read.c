@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2022/12/13 09:28:57 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/11 09:58:39 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,14 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
 
+	ft_printf("CHORIZO AU FOUR\n");
+//	ft_printf("CHORIZO line == %s\n", line);
 	j = 0;
-	if (line[i] == ' ')
+	while (ft_isspace(line[i]))
 		i++;
+//	if (line[i] == ' ')
+//		i++;
+	ft_printf("CHORIZO line == %s i == %d\n", &line[i], i);
 	if (line[i++] != '\"')
 		return (0);
 	while (line[i] && ptr[j])
@@ -46,6 +51,7 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 			break ;
 		ptr[j++] = line[i++];
 	}
+	ft_printf("CHORIZO 3 AU FOUR\n");
 	if (line[i] != '\"')
 		j = get_full_cmd(ptr, fd, j);
 	ptr[j] = '\0';
@@ -59,6 +65,9 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 	int		ret;
 	int		i;
 
+	ft_printf("TEUB DOREE\n");
+	if(line)
+		ft_printf("TEUB line == %s\n", line);
 	ret = 1;
 	while (ret)
 	{
@@ -69,10 +78,11 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 			free_exit(data, MALLOCFAIL, ERROR);
 		data->oplist[data->opcount++] = tmp;
 		ret = get_next_line(fd, &line);
-		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+//		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		while (line[i] && ft_isspace(line[i]))
 			i++;
 		while (!(*line) || *line == COMMENT_CHAR \
-			|| *line == ALTERNATE_COMMENT_CHAR || !line[i])
+			|| *line == ALTERNATE_COMMENT_CHAR || !line[i]) 
 		{
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
@@ -86,7 +96,8 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 	int	res;
 
 	res = 0;
-	while (line[res] && (line[res] == ' ' || line[res] == '\t'))
+	ft_printf("name == %d, comment == %d\n", data->name, data->comment);
+	while (line[res] && ft_isspace(line[res]))//(line[res] == ' ' || line[res] == '\t'))
 		res++;
 	if (!(*line) || !line[res])
 		ft_strdel(&line);
@@ -122,6 +133,7 @@ int	read_input(t_asmdata *data, char *argv)
 		if (ret == 1)
 			store_data(data, line, fd);
 	}
+	ft_printf("DRACULA TOUT NU\n");
 	if (close(fd) == -1)
 		free_exit(data, "Closing file failed", ERROR);
 	return (1);
