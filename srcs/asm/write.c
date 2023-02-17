@@ -6,13 +6,14 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/11 11:40:30 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/17 10:08:58 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <stdlib.h>
 
+/*
 void	hex_translator(char *str, int fd, int len)
 {
 	int		i;
@@ -30,7 +31,7 @@ void	hex_translator(char *str, int fd, int len)
 		i++;
 	}
 }
-
+*/
 int	byte_shift_translate(int value)
 {
 	int	converted;
@@ -42,7 +43,7 @@ int	byte_shift_translate(int value)
 	converted |= ((0xff000000 & value) >> 24);
 	return (converted);
 }
-
+/*
 int	check_arg(char *arg)
 {
 	if (!arg)
@@ -53,7 +54,7 @@ int	check_arg(char *arg)
 		return (REG_CODE);
 	return (IND_CODE);
 }
-
+*/
 char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
 {
 	char	*percent;
@@ -75,6 +76,8 @@ char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
 				percent = ft_strdup("%");
 				arg = ft_itoa(pos - byte);
 				percent = ft_strjoin(percent, arg);
+				if (!percent)
+					return (0);
 				arg = percent;
 				/*ft_printf("converted arg == %s\n", arg);*/
 				return (arg);
@@ -126,9 +129,9 @@ void	champ_code(t_op **data, int fd)
 {
 	int				i;
 	int				j;
-	int				dir;
-	int				ind;
-	int				check;
+//	int				dir;
+//	int				ind;
+//	int				check;
 	unsigned char	buf;
 	t_op			**tmp;
 
@@ -156,11 +159,13 @@ void	champ_code(t_op **data, int fd)
 	buf = '0';
 	if ((*tmp)->arg[i] == NULL)
 		return ;
+	convert_arg(tmp, fd);
+	/*
 	while (i < 3)
 	{
-/*		(*tmp)->arg[i] = translate_labels((*tmp)->arg[i], (*tmp)->byte);*/
+		(*tmp)->arg[i] = translate_labels((*tmp)->arg[i], (*tmp)->byte);
 		check = check_arg((*tmp)->arg[i]);
-/*		ft_printf("check == %d fd == %d i == %d arg[%d] == %s\n", check, fd, i, i, (*tmp)->arg[i]);*/
+		ft_printf("check == %d fd == %d i == %d arg[%d] == %s\n", check, fd, i, i, (*tmp)->arg[i]);
 		if (check == 1)
 		{
 			buf = ft_atoi(ft_strchr((*tmp)->arg[i], 'r') + 1);
@@ -168,10 +173,10 @@ void	champ_code(t_op **data, int fd)
 		}
 		else if (check == 2)
 		{
-/*			if (ft_strlen((*tmp)->arg[i]) > 2)
-				(long)(*tmp)->arg[i] |= 1L << 7; */
+			if (ft_strlen((*tmp)->arg[i]) > 2)
+				(long)(*tmp)->arg[i] |= 1L << 7; 
 			dir = ft_atoi(&(*tmp)->arg[i][1]);
-/*			ft_printf("j == %s dir == %d, arg[%d] == %d, char == %s\n", g_statements[j].name, dir, i, ft_atoi(&(*tmp)->arg[i][1]), &(*tmp)->arg[i][1]);*/
+			ft_printf("j == %s dir == %d, arg[%d] == %d, char == %s\n", g_statements[j].name, dir, i, ft_atoi(&(*tmp)->arg[i][1]), &(*tmp)->arg[i][1]);
 			if (g_statements[j].size == 4)
 			{
 				write(fd, &((unsigned char *)&dir)[3], 1);
@@ -183,35 +188,43 @@ void	champ_code(t_op **data, int fd)
 		else if (check == 3)
 		{
 			ind = ft_atoi((*tmp)->arg[i]);
-/*			ft_printf("ind == %d\n", ind);*/
+			ft_printf("ind == %d\n", ind);
 			write(fd, &((unsigned char *)&ind)[1], 1);
 			write(fd, &((unsigned char *)&ind)[0], 1);
-/*			ft_printf("teub de loup\n");*/
+			ft_printf("teub de loup\n");
 		}
 		i++;
 	}
+	*/
 }
 
-void	write_to_file(t_asmdata *data)
+void	write_to_file(t_asmdata *data, char *filename)
 {
+	char	*final_filename;
 	int32_t	helper;
 	int		i;
-	int		j;
+//	int		j;
 	int		fd;
 
+
+	final_filename = change_filename(filename);
+	if (!final_filename)
+		return ;
 	convert_label(data);
 	i = 0;
+	/*;
 	while (data->oplist[i])
 	{
 		j = 0;
 		while (j < 3)
 		{
-			/*ft_printf("arg == %s label == %s\n", data->oplist[i]->arg[j], data->oplist[i]->label);*/
+			ft_printf("arg == %s label == %s\n", data->oplist[i]->arg[j], data->oplist[i]->label);
 			j++;
 		}
 		i++;
 	}
-	fd = open("teub", O_RDWR | O_CREAT | O_TRUNC, 0600);
+	*/
+	fd = open(final_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
 	i = 0;
 /*	len = 4 + 128 + 4 + 4 + COMMENT_LENGTH + 4 + ft_strlen(champ_code); //+ data->opsize;*/
 	ft_printf("**********MAGIC_HEADER*********\n");

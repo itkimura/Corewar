@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/11 09:58:39 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:50:38 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 	t_op	*tmp;
 	int		ret;
 	int		i;
+	int		index; //TODO remove
 
 	ft_printf("TEUB DOREE\n");
 	if(line)
 		ft_printf("TEUB line == %s\n", line);
 	ret = 1;
+	index = 0; //TODO remove
 	while (ret)
 	{
 		i = 0;
@@ -81,12 +83,16 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 //		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		while (line[i] && ft_isspace(line[i]))
 			i++;
+		ft_printf("index == %d\n", index);
 		while (!(*line) || *line == COMMENT_CHAR \
 			|| *line == ALTERNATE_COMMENT_CHAR || !line[i]) 
 		{
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
+			if (ret == 0)
+				break;
 		}
+		index++;
 	}
 	return (1);
 }

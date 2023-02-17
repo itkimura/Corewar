@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/11 11:41:43 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/17 09:14:36 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,17 @@ void	write_size(t_asmdata *data, int fd)
 	}
 	write(fd, buffer, 4);
 	*/
+}
+
+char	*change_filename(char *filename)
+{
+	int name_idx;
+
+	name_idx = 0;
+	while (filename[name_idx] != '.')
+		name_idx++;
+	filename[name_idx] = '\0';
+	filename = ft_strjoin(filename, ".cor");
+	ft_printf("file name == %s\n", filename);
+	return (filename);
 }
