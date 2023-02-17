@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 09:19:08 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/17 10:48:22 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/17 12:33:29 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	convert_arg(t_op **tmp, int fd)
 	unsigned char	buf;
 
 	i = -1;
-	while (i++ < 3)
+	while (++i < 3)
 	{
 		check = check_arg((*tmp)->arg[i]);
 		if (check == 1)

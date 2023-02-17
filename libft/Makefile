@@ -6,7 +6,7 @@
 #    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/31 22:14:13 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/03 12:01:42 by itkimura         ###   ########.fr        #
+#    Updated: 2023/02/10 13:51:57 by ccariou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= libft.a
 
 # GCC
-CC			= gcc -Wall -Wextra -Werror
+CC			= gcc -Wall -Wextra -Werror -g
 
 # DIRECTORIES
 INC			= -I./includes/
