@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 14:21:24 by itkimura          #+#    #+#             */
-/*   Updated: 2021/11/17 15:58:49 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/19 12:11:55 by thle             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	int		j;
 	char	*str;
 
+	if (!haystack)
+		return(0);
 	i = 0;
 	j = 0;
 	str = (char *)haystack;

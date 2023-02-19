@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+         #
+#    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/31 22:14:13 by itkimura          #+#    #+#              #
-#    Updated: 2022/09/03 12:01:42 by itkimura         ###   ########.fr        #
+#    Updated: 2023/02/19 12:10:44 by thle             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		= libft.a
 
 # GCC
-CC			= gcc -Wall -Wextra -Werror
+CC			= gcc -Wall -Wextra -Werror -g
 
 # DIRECTORIES
 INC			= -I./includes/

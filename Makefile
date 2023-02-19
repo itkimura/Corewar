@@ -6,7 +6,7 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/02/19 11:28:05 by thle             ###   ########.fr        #
+#    Updated: 2023/02/19 12:07:21 by thle             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,9 @@ OP_SRCS = $(addprefix $(OP_SRCS_DIR), $(OP_FILES))
 OP_OBJS = $(addprefix $(OBJS_DIR), $(OP_FILES:%.c=%.o))
 
 
-ASM_FILES = asm.c
+ASM_FILES = debug.c asm.c free_tools.c hash_tools.c label_tools.c \
+						statement_tools.c read.c op_tools.c parse.c \
+						write.c write_util.c write_util2.c ft_atoi_base.c
 ASM_SRCS_DIR = ./srcs/asm/
 ASM_SRCS = $(addprefix $(ASM_SRCS_DIR), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))
@@ -78,6 +80,7 @@ $(OBJS_DIR)%.o: $(ASM_SRCS_DIR)%.c
 	@echo "Compiled $@"
 
 $(OBJS_DIR)%.o: $(OP_SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
@@ -90,4 +93,3 @@ fclean: clean
 	@/bin/rm -f $(NAME) $(ASM)
 
 re: fclean all
-
