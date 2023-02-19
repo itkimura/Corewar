@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/17 09:14:36 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/17 12:59:58 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*change_filename(char *filename)
 	int name_idx;
 
 	name_idx = 0;
+	name_idx = ft_strlen(filename);
 	while (filename[name_idx] != '.')
 		name_idx++;
 	filename[name_idx] = '\0';
