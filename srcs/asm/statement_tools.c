@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:09:08 by leo               #+#    #+#             */
-/*   Updated: 2023/02/19 12:49:55 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/19 14:04:08 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int	validate_statement(t_asmdata *data, char *ptr, int index, int *i)
 	}
 	data->oplist[index]->statement = statement;
 	*i = j;
+	while (ptr[j] && ptr[j] != COMMENT_CHAR && ptr[j] != ALTERNATE_COMMENT_CHAR)
+		j++;
+	while (ptr[j])
+		ptr[j++] = '#';
 	return (1);
 }
 

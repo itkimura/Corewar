@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/19 12:20:04 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/19 13:28:06 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ typedef struct s_asmdata
 	int				comment;
 	bool			leaks;
 }	t_asmdata;
+
+/* 
+	args binary 3 groups = 3 x 000;
+	first =  T_IND 
+	second = T_DIR %
+	third = T_REG r
+*/
 
 static const t_statement	g_statements[HASHTABLESIZE] = {
 {.code = 1, .name = "live", .argcode = false, .args = 0b010000000, .size = 4},

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/10 13:46:56 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/19 14:04:46 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,6 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 
 	j = 0;
 	args = ft_strsplit(&ptr[i], SEPARATOR_CHAR);
-	/*
-	while ((*args) != NULL)
-	{
-		ft_printf("arg == %s\n", (*args));
-		args++;
-	}
-	*/
 	while (args && args[j])
 	{
 		start = 0;
