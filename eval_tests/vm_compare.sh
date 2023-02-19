@@ -56,18 +56,18 @@ then
 	while [ $playernb -gt 0 ]
 	do
 		random=$(($RANDOM%TOTAL_COR_FILES))
- 		champions+=" ${COR_FILES[$random]}"
+		champions+=" ${COR_FILES[$random]}"
 		((playernb--))
 	done
 else
-    nb=1
-    for arg in "$@"; do
-        if [ $nb -gt 2 ]
+	nb=1
+	for arg in "$@"; do
+		if [ $nb -gt 2 ]
 		then
-            champions+=" $arg"
-        fi
-        ((nb++))
-      done
+			champions+=" $arg"
+		fi
+		((nb++))
+	done
 fi
 loop=$cycle
 echo "Files: $champions"
