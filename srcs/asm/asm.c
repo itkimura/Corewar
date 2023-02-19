@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/17 09:05:20 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/19 12:32:48 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
-	ft_printf("JAMBON BEURRE\n");
+	// ft_printf("JAMBON BEURRE\n");
 //	print_oplist(data);
-	ft_printf("*******opsize == %d\n", data->opsize);
+	// ft_printf("*******opsize == %d\n", data->opsize);
 	write_to_file(data, argv[1]);
 	// print_hashlabel(data);
 	free_exit(data, NULL, SUCCESS);

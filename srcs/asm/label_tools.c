@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2023/02/02 15:21:12 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/19 12:27:12 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	init_label(t_labels **label, t_op *ptr, char *name)
 		return (0);
 	tmp->name = name;
 	tmp->ptr = ptr;
+	tmp->next = NULL;
 	if (*label)
 		tmp->next = *label;
 	*label = tmp;

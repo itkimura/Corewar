@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   statement_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 15:09:08 by leo               #+#    #+#             */
-/*   Updated: 2023/02/02 09:45:49 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/19 12:15:59 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	init_statements_table(t_asmdata *data)
 		sizeof(t_hashstatement *) * HASHTABLESIZE);
 	if (!data->hashtable)
 		return (0);
-	while (data->hashtable[i])
+	while (i < HASHTABLESIZE)
 		data->hashtable[i++] = NULL;
 	return (insert_statements(data));
 }

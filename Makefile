@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
+#    By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/02/17 09:28:59 by ccariou          ###   ########.fr        #
+#    Updated: 2023/02/19 12:12:30 by leotran          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+# FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -g -fsanitize=address
 
 NAME = corewar
 ASM = asm

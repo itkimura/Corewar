@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/16 17:50:38 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/19 12:34:30 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 		data->name = store_cmd(data->header->prog_name, line, fd, 5);
 	else if (!ft_strncmp(line, COMMENT_CMD_STRING, 8))
 		data->comment = store_cmd(data->header->comment, line, fd, 8);
-	else if (line[0] == '.')
+	else if (line[0] == '.' || line[0] == COMMENT_CHAR || line[0] == ALTERNATE_COMMENT_CHAR)
 		ft_strdel(&line);
 	else if (!res || !data->name || !data->comment)
 		free_exit(data, "name or comment missing/invalid", ERROR);

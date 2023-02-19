@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:28:33 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 10:16:58 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/19 12:27:32 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	free_hashtable(t_asmdata *data)
 			i++;
 			continue ;
 		}
+
 		ft_strdel(&(data->hashtable[i]->name));
 		tmp_current = data->hashtable[i]->next;
 		while (tmp_current)
