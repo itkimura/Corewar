@@ -13,3 +13,7 @@ corewar
 
 asm
 !asm/
+
+:wq
+*.swp 
+*.swo
