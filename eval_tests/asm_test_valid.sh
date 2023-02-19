@@ -3,7 +3,7 @@ error_dir="/error_files/"
 output_dir= /Users/clem/Desktop/Hive/Corewawa 
 
 while getopts "ve" opt; do
-  case ${opt} in
+	case ${opt} in
     v )
 	  valid_dir="vm_champs/champs"
       echo "Outputting results from the \"$valid_dir\" directory"
