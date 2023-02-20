@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/17 10:08:58 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:35:48 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,6 @@ void	write_to_file(t_asmdata *data, char *filename)
 	fd = open(final_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
 	i = 0;
 /*	len = 4 + 128 + 4 + 4 + COMMENT_LENGTH + 4 + ft_strlen(champ_code); //+ data->opsize;*/
-	ft_printf("**********MAGIC_HEADER*********\n");
 	helper = byte_shift_translate(COREWAR_EXEC_MAGIC);
 	write (fd, &helper, 4);
 	write_name(data, fd);
@@ -238,7 +237,6 @@ void	write_to_file(t_asmdata *data, char *filename)
 	ft_printf("champ == %d prog_name == %s\n", champ, data->header->prog_name);
 	ft_printf("data->opsize == %d\n", data->opsize);
 	transcript = ft_strnew(len);*/
-	ft_printf("**********CHAMP_CODE*********\n");
 	while (data->oplist[i])
 	{
 /*		ft_printf("arg == %d instruction == %s\n", data->oplist[i]->args, data->oplist[i]->instruction);*/

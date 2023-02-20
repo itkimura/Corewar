@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/17 12:59:58 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:35:18 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	write_name(t_asmdata *data, int fd)
 //	int32_t	helper;
 
 	i = 0;
-	ft_printf("**********PROG_NAME + NULL + LEN*********\n");
 	ft_bzero(buffer, PROG_NAME_LENGTH);
 	while (i < PROG_NAME_LENGTH)
 	{
@@ -41,7 +40,6 @@ void	write_comment(t_asmdata *data, int fd)
 	int		i;
 	char	buffer[COMMENT_LENGTH];
 
-	ft_printf("**********COMMENT*********\n");
 	i = 0;
 	ft_bzero(buffer, PROG_NAME_LENGTH);
 	while (i < COMMENT_LENGTH)
@@ -85,11 +83,10 @@ char	*change_filename(char *filename)
 	int name_idx;
 
 	name_idx = 0;
-	name_idx = ft_strlen(filename);
+//	name_idx = ft_strlen(filename);
 	while (filename[name_idx] != '.')
 		name_idx++;
 	filename[name_idx] = '\0';
 	filename = ft_strjoin(filename, ".cor");
-	ft_printf("file name == %s\n", filename);
 	return (filename);
 }

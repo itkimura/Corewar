@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/19 14:04:46 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/20 14:34:20 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 
 	arg_code = 0;
 	end = start;
-	ft_printf("arg = %s len = %zu\n", arg, ft_strlen(arg));
+//	ft_printf("arg = %s len = %zu\n", arg, ft_strlen(arg));
 	while (arg[end] && arg[end] != ' ' && arg[end] != '\t' \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
