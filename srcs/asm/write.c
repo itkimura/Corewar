@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/20 14:35:48 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:22:48 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,19 +147,19 @@ void	champ_code(t_op **data, int fd)
 		j++;
 	}
 	buf = g_statements[j].code;
-/*	ft_printf("table name == %s\n", g_statements[j].name);//g_statements[HASHTABLESIZE]*/
+//	ft_printf("table name == %s\n", g_statements[j].name);//g_statements[HASHTABLESIZE]*/
 	write(fd, &buf, 1);
 	buf = '0';
 	if (g_statements[j].argcode == true && ft_strcmp((*tmp)->statement, g_statements[j].name) == 0)
 	{
 		buf = (*tmp)->argcode;
-/*		ft_printf("buf == %c statement == %c\n", buf, g_statements[j].argcode);//g_statements[HASHTABLESIZE]*/
+//		ft_printf("buf == %c statement == %c\n", buf, g_statements[j].argcode);//g_statements[HASHTABLESIZE]*/
 		write(fd, &buf, 1);
 	}
 	buf = '0';
 	if ((*tmp)->arg[i] == NULL)
 		return ;
-	convert_arg(tmp, fd);
+	convert_arg(tmp, fd, j);
 	/*
 	while (i < 3)
 	{
@@ -241,7 +241,7 @@ void	write_to_file(t_asmdata *data, char *filename)
 	{
 /*		ft_printf("arg == %d instruction == %s\n", data->oplist[i]->args, data->oplist[i]->instruction);*/
 		champ_code(&data->oplist[i], fd);
-	/*	write(fd, "#", 1);	*/
+//		write(fd, "#", 1);
 		i++;
 	}
 	/*

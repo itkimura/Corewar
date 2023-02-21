@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/19 13:28:06 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:23:23 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ char		*change_filename(char *filename);
 void		write_name(t_asmdata *data, int fd);
 void		write_comment(t_asmdata *data, int fd);
 void		write_size(t_asmdata *data, int fd);
-void		convert_arg(t_op **tmp, int fd);
+void		convert_arg(t_op **tmp, int fd, int j);
 int			ft_atoi_base(const char *str, int base);
 int			byte_shift_translate(int value);
 

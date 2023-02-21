@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 09:19:08 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/17 12:33:29 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:42:53 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_arg(char *arg)
 	return (IND_CODE);
 }
 
-void	convert_arg(t_op **tmp, int fd)
+void	convert_arg(t_op **tmp, int fd, int j)
 {
 	int				i;
 	int				ind;
@@ -31,8 +31,8 @@ void	convert_arg(t_op **tmp, int fd)
 	int				check;
 	unsigned char	buf;
 
-	i = -1;
-	while (++i < 3)
+	i = 0;
+	while (i < 3)
 	{
 		check = check_arg((*tmp)->arg[i]);
 		if (check == 1)
@@ -42,6 +42,7 @@ void	convert_arg(t_op **tmp, int fd)
 		}
 		else if (check == 2)
 		{
+//			ft_printf("(j = %d, i = %d g_statements[j].size == %d\n", j, i, g_statements[j].size);
 			dir = ft_atoi(&(*tmp)->arg[i][1]);
 			if (g_statements[j].size == 4)
 			{
@@ -57,5 +58,6 @@ void	convert_arg(t_op **tmp, int fd)
 			write(fd, &((unsigned char *)&ind)[1], 1);
 			write(fd, &((unsigned char *)&ind)[0], 1);
 		}
+		i++;
 	}
 }
