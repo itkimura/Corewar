@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/22 11:02:07 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:11:06 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	print_error(char *str, t_error error)
 	else if (error == MISSING_PLAYER)
 		ft_printf("Player %s%s%s is missing\n", BOLD, str, RESET);
 	else if (error == TOO_MANY_PLAYERS)
-		ft_printf("Too many players\n");
+		ft_printf("Too many champions\n");
 	else if (error == INVALID_HEADER)
 		ft_printf("File %s%s%s has an invalid header\n", BOLD, str, RESET);
 	else if (error == INVALID_NULL)
