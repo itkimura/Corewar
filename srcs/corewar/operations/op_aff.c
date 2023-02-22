@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:36:42 by thle              #+#    #+#             */
-/*   Updated: 2023/01/19 15:42:26 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/22 14:10:07 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@
 bool	op_aff(t_game *game, t_carriage *carriage)
 {
 	if (game->flags_value[FLAG_A] != INITIAL_VALUE)
-		ft_printf("%c\n", (char)carriage->registry[carriage->arg_value[0] - 1]);
+		ft_printf("Aff: %c\n", (char)carriage->registry[carriage->arg_value[0] - 1]);
 	return (true);
 }
