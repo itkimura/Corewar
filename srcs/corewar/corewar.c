@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/02/19 12:12:34 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/22 15:47:44 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ bool	validate_argv(int argc, char **argv)
 				return (free_all(game), false);
 		index++;
 	}
+	if (game->total_players == 0)
+		return (print_help(NULL), free_all(game), true);
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
