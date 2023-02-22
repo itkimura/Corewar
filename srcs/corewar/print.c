@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/25 15:33:40 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/22 11:02:07 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ bool	print_error(char *str, t_error error)
 	else if (error == TOO_MANY_PLAYERS)
 		ft_printf("Too many players\n");
 	else if (error == INVALID_HEADER)
-		ft_printf("File %s%s%s has invalid magic header\n", BOLD, str, RESET);
+		ft_printf("File %s%s%s has an invalid header\n", BOLD, str, RESET);
 	else if (error == INVALID_NULL)
 		ft_printf("File %s%s%s has invalid null bytes\n", BOLD, str, RESET);
 	else if (error == INVALID_CHAMPION_SIZE)
-		ft_printf("File %s%s%s has too large champion size\n", BOLD, str, RESET);
-	else if (error == INVALID_CHAMPION_SIZE)
+		ft_printf("File %s%s%s has too large a code ", BOLD, str, RESET);
+	else if (error == EXTRA_CHAMPION_CODE)
 		ft_printf("File %s%s%s has extra champion code\n", BOLD, str, RESET);
 	return (false);
 }

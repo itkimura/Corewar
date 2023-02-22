@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:00:58 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/25 15:26:18 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/22 11:10:32 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,12 @@ static bool	read_champion(t_player *player, char *argv, int fd)
 	if (validate(fd, VALIDATE_NULL, player) == false)
 		return (print_error(argv, INVALID_NULL));
 	if (validate(fd, VALIDATE_EXEC_CODE_SIZE, player) == false)
-		return (print_error(argv, INVALID_CHAMPION_SIZE));
+	{
+		print_error(argv, INVALID_CHAMPION_SIZE);
+		ft_printf("(%d bytes > %d bytes)\n",
+			player->exec_code_size, CHAMP_MAX_SIZE);
+		return (false);
+	}
 	read_then_terminate_bytes(fd, player->comment, COMMENT_LENGTH);
 	if (validate(fd, VALIDATE_NULL, player) == false)
 		return (print_error(argv, INVALID_NULL));
