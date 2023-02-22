@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/22 10:56:15 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:50:51 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*library for bonus*/
 # include <stdio.h>
 
-# define TOTAL_FLAGS 6
+# define TOTAL_FLAGS 7
 
 # define RED "\e[31m"
 # define GREEN "\e[32m"
@@ -52,6 +52,7 @@ typedef enum e_vm_flag
 	FLAG_V,
 	FLAG_A,
 	FLAG_S,
+	FLAG_LLD
 }				t_vm_flag;
 
 /*

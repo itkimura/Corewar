@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/24 21:01:21 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:47:52 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ bool	is_after_flag_n(t_game *game)
 }
 
 /*
+ * validate "-a" flag
+ */
+bool	validate_lld_flag(t_vm_flag *flag, t_game *game)
+{
+	if (is_after_flag_n(game) == true)
+		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	*flag = FLAG_LLD;
+	game->flags_value[FLAG_LLD] = 1;
+	return (true);
+}
+
+/*
  * return which flag by ft_strcmp
  */
 bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
@@ -54,5 +66,7 @@ bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game)
 		return (validate_a_flag(flag, game));
 	if (ft_strcmp(argv[*index], "-s") == 0)
 		return (validate_s_flag(argv[++(*index)], flag, game));
+	if (ft_strcmp(argv[*index], "--lld-size-2") == 0)
+		return (validate_lld_flag(flag, game));
 	return (true);
 }

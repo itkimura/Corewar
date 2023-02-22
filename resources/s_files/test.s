@@ -1,7 +1,6 @@
 .name "test"
 .comment "test"
-	ld 42, r2
-	aff r2
-	aff r2
-	aff r2
-	aff r2
+	lld 42, r2
+	st r2, 42
+	#ld 42, r2
+	#aff r2
