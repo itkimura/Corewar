@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 03:39:40 by leo               #+#    #+#             */
-/*   Updated: 2022/12/16 19:49:37 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/22 19:26:16 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,20 @@ int	init_op(t_op **op, char *line)
 int	resize_op_table(t_asmdata *data)
 {
 	t_op	**tmp;
+	int		tmpsize;
 	int		i;
 
 	i = 0;
-	data->opsize *= 2;
-	if (!init_op_table(&tmp, data->opsize))
+	tmpsize = data->opsize * 2;
+	if (!init_op_table(&tmp, tmpsize))
 		free_exit(data, MALLOCFAIL, ERROR);
-	while (data->oplist[i])
+	while (i < data->opsize)
 	{
 		tmp[i] = data->oplist[i];
 		i++;
 	}
 	free(data->oplist);
+	data->opsize = tmpsize;
 	data->oplist = tmp;
 	return (1);
 }
@@ -52,7 +54,6 @@ int	resize_op_table(t_asmdata *data)
 int	init_op_table(t_op	***oplist, int size)
 {
 	int	i;
-
 	i = 0;
 	*oplist = (t_op **)malloc(sizeof(t_op *) * size);
 	if (!(*oplist))
