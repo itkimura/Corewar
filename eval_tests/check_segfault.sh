@@ -3,7 +3,8 @@
 #
 # File path configuration (Please change if you want!)
 #
-ASM_PATH="./"
+# ASM_PATH="./"
+ASM_PATH="./resources/" #example_asm
 S_FILES_PATH="./resources/s_files/"
 
 #

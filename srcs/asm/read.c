@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 19:21:57 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/22 20:15:05 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,9 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
 
-//	ft_printf("CHORIZO line == %s\n", line);
 	j = 0;
 	while (ft_isspace(line[i]))
 		i++;
-//	if (line[i] == ' ')
-//		i++;
-//	ft_printf("CHORIZO line == %s i == %d\n", &line[i], i);
 	if (line[i++] != '\"')
 		return (0);
 	while (line[i] && ptr[j])
@@ -50,7 +46,6 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 			break ;
 		ptr[j++] = line[i++];
 	}
-//	ft_printf("CHORIZO 3 AU FOUR\n");
 	if (line[i] != '\"')
 		j = get_full_cmd(ptr, fd, j);
 	ptr[j] = '\0';
@@ -98,18 +93,17 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 	int	res;
 
 	res = 0;
-	//ft_printf("name == %d, comment == %d\n", data->name, data->comment);
-	while (line[res] && ft_isspace(line[res]))//(line[res] == ' ' || line[res] == '\t'))
+	while (line[res] && ft_isspace(line[res]))
 		res++;
-	if (!(*line) || !line[res])
+	if (!(*line) || !line[res] || line[res] == COMMENT_CHAR || line[res] == ALTERNATE_COMMENT_CHAR)
 		ft_strdel(&line);
 	else if (data->name && data->comment && *line)
 		res = store_op(data, line, fd);
-	else if (!ft_strncmp(line, NAME_CMD_STRING, 5))
-		data->name = store_cmd(data->header->prog_name, line, fd, 5);
-	else if (!ft_strncmp(line, COMMENT_CMD_STRING, 8))
-		data->comment = store_cmd(data->header->comment, line, fd, 8);
-	else if (line[0] == '.' || line[0] == COMMENT_CHAR || line[0] == ALTERNATE_COMMENT_CHAR)
+	else if (!ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
+		data->name = store_cmd(data->header->prog_name, line, fd, res + 5);
+	else if (!ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
+		data->comment = store_cmd(data->header->comment, line, fd, res + 8);
+	else if (line[res] == '.')
 		ft_strdel(&line);
 	else if (!res || !data->name || !data->comment)
 		free_exit(data, "name or comment missing/invalid", ERROR);
