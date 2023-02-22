@@ -4,7 +4,7 @@
 # File path configuration (Please change if you want!)
 #
 ASM_PATH="./"
-S_FILES_PATH="./resources/s_files/"
+S_FILES_PATH="./eval_tests/asm_error_files/"
 
 #
 # Color scheme
@@ -22,4 +22,4 @@ for FILE in $S_FILES;
 do
 	echo -e "$YELLOW\n$S_FILES_PATH$FILE$NC"
 	./asm $S_FILES_PATH$FILE
-done%
+done

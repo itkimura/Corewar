@@ -1,0 +1,148 @@
+./eval_tests/asm_error_files/2_statement_same_line.s -------------------> Syntax error at token [TOKEN][004:016] INSTRUCTION "live"
+./eval_tests/asm_error_files/Backward.s -------------------> Lexical error at [3:1]
+./eval_tests/asm_error_files/Death.s -------------------> Lexical error at [3:1]
+./eval_tests/asm_error_files/Torpille.s -------------------> Lexical error at [3:1]
+./eval_tests/asm_error_files/bad_comment_cmd.s -------------------> Lexical error at [2:1]
+./eval_tests/asm_error_files/bad_comment_cmd_dot_only.s -------------------> Lexical error at [2:1]
+./eval_tests/asm_error_files/bad_comment_cmd_no_dot.s -------------------> Syntax error at token [TOKEN][002:001] INSTRUCTION "comment"
+./eval_tests/asm_error_files/bad_extension.S -------------------> Writing output program to ./eval_tests/asm_error_files/bad_extension.cor
+./eval_tests/asm_error_files/bad_extension.bad -------------------> Writing output program to ./eval_tests/asm_error_files/bad_extension.cor
+./eval_tests/asm_error_files/bad_extension.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/bad_extension.ss -------------------> Writing output program to ./eval_tests/asm_error_files/bad_extension.cor
+./eval_tests/asm_error_files/bad_name_cmd.s -------------------> Lexical error at [1:1]
+./eval_tests/asm_error_files/bad_name_cmd_dot_only.s -------------------> Lexical error at [1:1]
+./eval_tests/asm_error_files/bad_name_cmd_no_dot.s -------------------> Syntax error at token [TOKEN][001:001] INSTRUCTION "name"
+./eval_tests/asm_error_files/bad_reference.s -------------------> Lexical error at [10:10]
+./eval_tests/asm_error_files/bad_reference2.s -------------------> Lexical error at [10:10]
+./eval_tests/asm_error_files/bad_reference3.s -------------------> Lexical error at [10:10]
+./eval_tests/asm_error_files/bad_reference4.s -------------------> Lexical error at [10:10]
+./eval_tests/asm_error_files/bee_gees.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/bee_gees.s -------------------> Writing output program to ./eval_tests/asm_error_files/bee_gees.cor
+./eval_tests/asm_error_files/catsaysmiumau.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/catsaysmiumau.s -------------------> Syntax error at token [TOKEN][004:005] LABEL "l2:"
+./eval_tests/asm_error_files/cmd_on_different_line.s -------------------> Syntax error at token [TOKEN][001:006] ENDLINE
+./eval_tests/asm_error_files/comment_before_cmd.s -------------------> Syntax error at token [TOKEN][004:001] LABEL "l2:"
+./eval_tests/asm_error_files/comment_before_str.s -------------------> Syntax error at token [TOKEN][001:014] ENDLINE
+./eval_tests/asm_error_files/comment_before_str2.s -------------------> Syntax error at token [TOKEN][001:013] ENDLINE
+./eval_tests/asm_error_files/comment_between_opcode.s -------------------> Syntax error at token [TOKEN][006:019] ENDLINE
+./eval_tests/asm_error_files/comment_middle_of_name.s -------------------> Lexical error at [1:1]
+./eval_tests/asm_error_files/comment_missing.s -------------------> Syntax error at token [TOKEN][002:002] INSTRUCTION "ld"
+./eval_tests/asm_error_files/comment_str_midline.s -------------------> Syntax error at token [TOKEN][003:001] ENDLINE
+./eval_tests/asm_error_files/comment_too_big.s -------------------> Champion comment too long (Max length 2048)
+./eval_tests/asm_error_files/comment_too_long.s -------------------> Champion comment too long (Max length 2048)
+./eval_tests/asm_error_files/comments_in_direct.s -------------------> Lexical error at [4:14]
+./eval_tests/asm_error_files/comments_in_reference.s -------------------> Lexical error at [4:14]
+./eval_tests/asm_error_files/comments_mid_arg.s -------------------> Syntax error at token [TOKEN][004:025] ENDLINE
+./eval_tests/asm_error_files/comments_mid_arg2.s -------------------> Syntax error at token [TOKEN][004:025] ENDLINE
+./eval_tests/asm_error_files/empty.s -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/empty_code.s -------------------> Syntax error at token [TOKEN][004:001] END "(null)"
+./eval_tests/asm_error_files/empty_reference.s -------------------> Lexical error at [10:10]
+./eval_tests/asm_error_files/extra_char.s -------------------> Lexical error at [9:15]
+./eval_tests/asm_error_files/extra_quote.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/extra_quote.s -------------------> ./eval_tests/asm_error_files/garbage_after_quote.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/garbage_after_quote.s -------------------> Syntax error at token [TOKEN][007:003] INSTRUCTION "asd"
+./eval_tests/asm_error_files/hex_arg.s -------------------> Lexical error at [24:10]
+./eval_tests/asm_error_files/illegal_char.s -------------------> Lexical error at [4:6]
+./eval_tests/asm_error_files/illegal_label_char.s -------------------> Lexical error at [4:1]
+./eval_tests/asm_error_files/illegal_label_char2.s -------------------> Lexical error at [4:1]
+./eval_tests/asm_error_files/incomplete_str.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/incomplete_str.s -------------------> Lexical error at [2:11]
+./eval_tests/asm_error_files/incomplete_string.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/incomplete_string.s -------------------> Syntax error at token [TOKEN][009:001] END "(null)"
+./eval_tests/asm_error_files/incomplete_string2.s -------------------> Syntax error at token [TOKEN][003:001] END "(null)"
+./eval_tests/asm_error_files/incorrect_args.s -------------------> Invalid parameter 0 type indirect for instruction sti
+./eval_tests/asm_error_files/incorrect_args2.s -------------------> Invalid parameter 0 type indirect for instruction zjmp
+./eval_tests/asm_error_files/incorrect_args3.s -------------------> Invalid parameter 1 type direct for instruction st
+./eval_tests/asm_error_files/incorrect_args4.s -------------------> Invalid parameter 1 type direct for instruction st
+./eval_tests/asm_error_files/incorrect_args5.s -------------------> Invalid parameter 1 type direct for instruction st
+./eval_tests/asm_error_files/incorrect_args6.s -------------------> Invalid parameter 0 type indirect for instruction lfork
+./eval_tests/asm_error_files/incorrect_args7.s -------------------> Invalid parameter 0 type indirect for instruction lfork
+./eval_tests/asm_error_files/indirect_arg_1.s -------------------> Lexical error at [4:12]
+./eval_tests/asm_error_files/indirect_arg_2.s -------------------> Lexical error at [4:9]
+./eval_tests/asm_error_files/insufficient_args.s -------------------> Syntax error at token [TOKEN][004:021] ENDLINE
+./eval_tests/asm_error_files/insufficient_args2.s -------------------> Invalid parameter count for instruction sti
+./eval_tests/asm_error_files/insufficient_args3.s -------------------> Syntax error at token [TOKEN][008:007] ENDLINE
+./eval_tests/asm_error_files/insufficient_args4.s -------------------> Syntax error at token [TOKEN][007:011] ENDLINE
+./eval_tests/asm_error_files/invalid_char_in_label.s -------------------> Writing output program to ./eval_tests/asm_error_files/invalid_char_in_label.cor
+./eval_tests/asm_error_files/invalid_direct_label.s -------------------> Lexical error at [11:12]
+./eval_tests/asm_error_files/invalid_statement.s -------------------> Syntax error at token [TOKEN][004:012] ENDLINE
+./eval_tests/asm_error_files/junk_after_comment_cmd.s -------------------> Syntax error at token [TOKEN][002:010] INSTRUCTION "x"
+./eval_tests/asm_error_files/junk_after_name_cmd.s -------------------> Syntax error at token [TOKEN][001:007] INSTRUCTION "s"
+./eval_tests/asm_error_files/junk_before_comment_cmd.s -------------------> Syntax error at token [TOKEN][002:001] INSTRUCTION "x"
+./eval_tests/asm_error_files/junk_before_name_cmd.s -------------------> Syntax error at token [TOKEN][001:001] INSTRUCTION "x"
+./eval_tests/asm_error_files/lde.s -------------------> Syntax error at token [TOKEN][002:002] INSTRUCTION "ld"
+./eval_tests/asm_error_files/leeloo.s -------------------> Lexical error at [31:23]
+./eval_tests/asm_error_files/mat.s -------------------> Lexical error at [182:1]
+./eval_tests/asm_error_files/missing_arg_1.s -------------------> Syntax error at token [TOKEN][025:018] ENDLINE
+./eval_tests/asm_error_files/missing_arg_2.s -------------------> Invalid parameter 0 type direct for instruction sti
+./eval_tests/asm_error_files/missing_arg_3.s -------------------> Syntax error at token [TOKEN][027:005] SEPARATOR ","
+./eval_tests/asm_error_files/missing_arg_4.s -------------------> Syntax error at token [TOKEN][036:007] ENDLINE
+./eval_tests/asm_error_files/missing_champ_code.s -------------------> Syntax error at token [TOKEN][006:001] END "(null)"
+./eval_tests/asm_error_files/missing_comma.s -------------------> Syntax error at token [TOKEN][011:008] INDIRECT_LABEL ":l2"
+./eval_tests/asm_error_files/missing_direct_number.s -------------------> Lexical error at [14:12]
+./eval_tests/asm_error_files/missing_instruction_1.s -------------------> No such label live while attempting to dereference token [TOKEN][027:008] DIRECT_LABEL "%:live"
+./eval_tests/asm_error_files/missing_newline.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/missing_newline.s -------------------> Syntax error at token [TOKEN][009:004] END "(null)"
+./eval_tests/asm_error_files/missing_quote.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/missing_quote.s -------------------> Syntax error at token [TOKEN][007:017] INSTRUCTION "just"
+./eval_tests/asm_error_files/missing_quote_2.s -------------------> Syntax error at token [TOKEN][005:013] INSTRUCTION "zork"
+./eval_tests/asm_error_files/missing_quote_3.s -------------------> Syntax error at token [TOKEN][005:013] INSTRUCTION "zork"
+./eval_tests/asm_error_files/multiple_outstanding_refs.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/multiple_outstanding_refs.s -------------------> No such label dead while attempting to dereference token [TOKEN][006:011] DIRECT_LABEL "%:dead"
+./eval_tests/asm_error_files/name_comment_same_line.s -------------------> Syntax error at token [TOKEN][001:014] COMMAND_COMMENT ".comment"
+./eval_tests/asm_error_files/name_too_big.s -------------------> Champion name too long (Max length 128)
+./eval_tests/asm_error_files/name_too_long.s -------------------> Champion name too long (Max length 128)
+./eval_tests/asm_error_files/new.s -------------------> Lexical error at [3:1]
+./eval_tests/asm_error_files/no_comment.s -------------------> Syntax error at token [TOKEN][003:001] LABEL "l2:"
+./eval_tests/asm_error_files/no_comment_cmd.s -------------------> Syntax error at token [TOKEN][002:001] STRING ""I'M ALIIIIVE""
+./eval_tests/asm_error_files/no_comment_str.s -------------------> Syntax error at token [TOKEN][003:001] ENDLINE
+./eval_tests/asm_error_files/no_extension -------------------> Writing output program to .cor
+./eval_tests/asm_error_files/no_name.s -------------------> Syntax error at token [TOKEN][003:001] LABEL "l2:"
+./eval_tests/asm_error_files/no_name_cmd.s -------------------> Syntax error at token [TOKEN][001:002] STRING ""zork""
+./eval_tests/asm_error_files/no_name_str.s -------------------> Syntax error at token [TOKEN][001:007] ENDLINE
+./eval_tests/asm_error_files/one_undefined_ref.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/one_undefined_ref.s -------------------> No such label dead while attempting to dereference token [TOKEN][006:011] DIRECT_LABEL "%:dead"
+./eval_tests/asm_error_files/op_add.s -------------------> Invalid parameter 2 type indirect for instruction add
+./eval_tests/asm_error_files/op_aff.s -------------------> Invalid parameter 0 type direct for instruction aff
+./eval_tests/asm_error_files/op_and.s -------------------> Invalid parameter 2 type indirect for instruction and
+./eval_tests/asm_error_files/op_fork.s -------------------> Invalid parameter 0 type indirect for instruction fork
+./eval_tests/asm_error_files/op_ld.s -------------------> Invalid parameter 1 type direct for instruction ld
+./eval_tests/asm_error_files/op_ldi.s -------------------> Invalid parameter 1 type indirect for instruction ldi
+./eval_tests/asm_error_files/op_live.s -------------------> Invalid parameter 0 type indirect for instruction live
+./eval_tests/asm_error_files/op_lld_invalid.s -------------------> Invalid parameter 1 type direct for instruction lld
+./eval_tests/asm_error_files/op_lldi.s -------------------> Invalid parameter 1 type indirect for instruction lldi
+./eval_tests/asm_error_files/op_or.s -------------------> Lexical error at [7:33]
+./eval_tests/asm_error_files/op_st.s -------------------> Lexical error at [7:11]
+./eval_tests/asm_error_files/op_sti.s -------------------> Invalid parameter 2 type indirect for instruction sti
+./eval_tests/asm_error_files/op_sub.s -------------------> Invalid parameter 0 type indirect for instruction sub
+./eval_tests/asm_error_files/op_xor.s -------------------> Invalid parameter 2 type indirect for instruction xor
+./eval_tests/asm_error_files/op_zjmp.s -------------------> Invalid parameter 0 type indirect for instruction zjmp
+./eval_tests/asm_error_files/ref_minus_ref.s -------------------> Lexical error at [4:21]
+./eval_tests/asm_error_files/ref_plus_ref.s -------------------> Lexical error at [4:21]
+./eval_tests/asm_error_files/reference_with_space.s -------------------> Lexical error at [4:14]
+./eval_tests/asm_error_files/reference_with_space2.s -------------------> Lexical error at [4:14]
+./eval_tests/asm_error_files/repeat_comment_cmd.s -------------------> Syntax error at token [TOKEN][002:009] COMMAND_COMMENT ".comment"
+./eval_tests/asm_error_files/repeat_comment_cmd2.s -------------------> Syntax error at token [TOKEN][002:010] COMMAND_COMMENT ".comment"
+./eval_tests/asm_error_files/repeat_comment_str.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/repeat_comment_str.s -------------------> Syntax error at token [TOKEN][002:024] STRING ""I'M ALIIIIVE""
+./eval_tests/asm_error_files/repeat_comment_str2.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/repeat_comment_str2.s -------------------> Syntax error at token [TOKEN][002:025] STRING ""I'M ALIIIIVE""
+./eval_tests/asm_error_files/repeat_name_cmd.s -------------------> Syntax error at token [TOKEN][001:006] COMMAND_NAME ".name"
+./eval_tests/asm_error_files/repeat_name_cmd2.s -------------------> Syntax error at token [TOKEN][001:007] COMMAND_NAME ".name"
+./eval_tests/asm_error_files/repeat_name_str.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/repeat_name_str.s -------------------> Syntax error at token [TOKEN][001:013] STRING ""zork""
+./eval_tests/asm_error_files/repeat_name_str2.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/repeat_name_str2.s -------------------> Syntax error at token [TOKEN][001:014] STRING ""zork""
+./eval_tests/asm_error_files/tdc2.s -------------------> Syntax error at token [TOKEN][016:007] INSTRUCTION "x00090000"
+./eval_tests/asm_error_files/tdc3.s -------------------> Lexical error at [3:1]
+./eval_tests/asm_error_files/tdc4.s -------------------> Lexical error at [3:1]
+./eval_tests/asm_error_files/text_after_label.s -------------------> Syntax error at token [TOKEN][006:027] ENDLINE
+./eval_tests/asm_error_files/too_many_args.s -------------------> Invalid parameter 3 type direct for instruction sti
+./eval_tests/asm_error_files/too_many_args2.s -------------------> Invalid parameter 1 type indirect for instruction zjmp
+./eval_tests/asm_error_files/too_many_args3.s -------------------> Invalid parameter 3 type direct for instruction and
+./eval_tests/asm_error_files/two_names.s -------------------> Syntax error at token [TOKEN][002:004] COMMAND_NAME ".name"
+./eval_tests/asm_error_files/undefined_label.cor -------------------> Syntax error at token [TOKEN][001:001] END "(null)"
+./eval_tests/asm_error_files/undefined_label.s -------------------> No such label asdsad2 while attempting to dereference token [TOKEN][005:006] DIRECT_LABEL "%:asdsad2"
+./eval_tests/asm_error_files/unknown_instr.s -------------------> Invalid instruction at token [TOKEN][005:003] INSTRUCTION "what"
+./eval_tests/asm_error_files/unknown_instr2.s -------------------> Invalid instruction at token [TOKEN][004:006] INSTRUCTION "std"
+./eval_tests/asm_error_files/wrong_arg.s -------------------> Lexical error at [11:17]
