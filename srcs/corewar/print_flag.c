@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/01/25 15:18:52 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:55:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ static void	print_flag_l_operations(t_carriage *carriage)
 		else
 			ft_printf(" FAILED");
 	}
-	flag_l_additionals(carriage);
+	if (carriage->statement_index == OP_STI
+		|| carriage->statement_index == OP_LDI || carriage->statement_index == OP_LLDI)
+		flag_l_additionals(carriage);
 	ft_putchar('\n');
 }
 
