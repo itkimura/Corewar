@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:33:01 by thule             #+#    #+#             */
-/*   Updated: 2023/02/22 15:38:20 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/23 10:04:25 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	get_value(t_game *game, t_carriage *carriage, int order, bool mod)
 	}
 	else if (carriage->arg[order] == T_IND)
 	{
-		if (game->flags_value[FLAG_LLD] != INITIAL_VALUE && carriage->statement_index == OP_LLD)
+		if (game->flags_value[FLAG_LLD] != INITIAL_VALUE
+			&& carriage->statement_index == OP_LLD)
 			size = 2;
 		if (mod == true)
 			pos = carriage->pc + (carriage->arg_value[order] % IDX_MOD);
