@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/02/23 13:55:27 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:08:49 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,33 @@ static void	flag_l_additionals(t_carriage *c)
 {
 	int	tmp;
 
-	ft_printf("\n       | ->");
-	if (c->statement_index == OP_STI)
+	if (c->statement_index == OP_STI
+		|| c->statement_index == OP_LDI || c->statement_index == OP_LLDI)
 	{
-		tmp = c->pc + c->arg_value[SECOND_ARG] + c->arg_value[THIRD_ARG];
-		ft_printf("store to %d + %d = %d (with pc and mod %d)",
-			c->arg_value[SECOND_ARG], c->arg_value[THIRD_ARG],
-			c->arg_value[SECOND_ARG] + c->arg_value[THIRD_ARG], tmp % IDX_MOD);
-	}
-	if (c->statement_index == OP_LDI)
-	{
-		tmp = c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG] + c->pc;
-		ft_printf("load from %d + %d = %d (with pc and mod %d)",
-			c->arg_value[FIRST_ARG], c->arg_value[SECOND_ARG],
-			c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG], tmp % IDX_MOD);
-	}
-	if (c->statement_index == OP_LLDI)
-	{
-		tmp = c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG] + c->pc;
-		ft_printf("load from %d + %d = %d (with pc %d)",
-			c->arg_value[FIRST_ARG], c->arg_value[SECOND_ARG],
-			c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG], tmp);
+		ft_printf("\n       | ->");
+		if (c->statement_index == OP_STI)
+		{
+			tmp = c->pc + c->arg_value[SECOND_ARG] + c->arg_value[THIRD_ARG];
+			ft_printf(" store to %d + %d = %d (with pc and mod %d)",
+				c->arg_value[SECOND_ARG], c->arg_value[THIRD_ARG],
+				c->arg_value[SECOND_ARG] + c->arg_value[THIRD_ARG],
+				c->pc + c->arg_value[SECOND_ARG] + c->arg_value[THIRD_ARG]);
+		}
+		if (c->statement_index == OP_LDI)
+		{
+			tmp = c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG] + c->pc;
+			ft_printf(" load from %d + %d = %d (with pc and mod %d)",
+				c->arg_value[FIRST_ARG], c->arg_value[SECOND_ARG],
+				c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG],
+				c->pc + c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG]);
+		}
+		if (c->statement_index == OP_LLDI)
+		{
+			tmp = c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG] + c->pc;
+			ft_printf(" load from %d + %d = %d (with pc %d)",
+				c->arg_value[FIRST_ARG], c->arg_value[SECOND_ARG],
+				c->arg_value[FIRST_ARG] + c->arg_value[SECOND_ARG], tmp);
+		}
 	}
 }
 
@@ -73,16 +79,23 @@ static void	print_flag_l_operations(t_carriage *carriage)
 	index = 0;
 	ft_printf("P%5d | %s",
 		carriage->id, g_op_tab[carriage->statement_index].name);
-	while (index < g_op_tab[carriage->statement_index].nbr_arg)
+	if (carriage->statement_index == OP_FORK)
 	{
-		ft_putchar(' ');
-		if (carriage->arg[index] == T_REG
-			&& ((carriage->arg[index]
-					| g_op_tab[carriage->statement_index].arg[index]) == T_REG))
-			ft_printf("r%d", carriage->arg_value[index]);
-		else
-			ft_printf("%d", carriage->arg_value[index]);
-		index++;
+		ft_printf(" %d (%d)", carriage->arg_value[SECOND_ARG], carriage->arg_value[FIRST_ARG]);
+	}
+	else
+	{
+		while (index < g_op_tab[carriage->statement_index].nbr_arg)
+		{
+			ft_putchar(' ');
+			if (carriage->arg[index] == T_REG
+				&& ((carriage->arg[index]
+						| g_op_tab[carriage->statement_index].arg[index]) == T_REG))
+				ft_printf("r%d", carriage->arg_value[index]);
+			else
+				ft_printf("%d", carriage->arg_value[index]);
+			index++;
+		}
 	}
 	if (carriage->statement_index == OP_ZJMP)
 	{
@@ -91,9 +104,7 @@ static void	print_flag_l_operations(t_carriage *carriage)
 		else
 			ft_printf(" FAILED");
 	}
-	if (carriage->statement_index == OP_STI
-		|| carriage->statement_index == OP_LDI || carriage->statement_index == OP_LLDI)
-		flag_l_additionals(carriage);
+	flag_l_additionals(carriage);
 	ft_putchar('\n');
 }
 

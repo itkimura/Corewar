@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/24 21:00:42 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:54:49 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game)
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	if (argv == NULL)
+		return (print_help(), false);
 	if (is_number(argv) == false)
 		return (print_error("-n flag", WRONG_NB));
 	nb = ft_atoi(argv);
@@ -42,6 +44,8 @@ bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game)
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	if (argv == NULL)
+		return (print_help(), false);
 	if (is_number(argv) == false)
 		return (print_error("-d flag", WRONG_NB));
 	nb = ft_atoi(argv);
@@ -59,6 +63,8 @@ bool	validate_l_flag(char *argv, t_vm_flag *flag, t_game *game)
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	if (argv == NULL)
+		return (print_help(), false);
 	if (is_number(argv) == false)
 		return (print_error("-l flag", WRONG_NB));
 	nb = ft_atoi(argv);
@@ -88,6 +94,8 @@ bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
 
 	if (is_after_flag_n(game) == true)
 		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	if (argv == NULL)
+		return (print_help(), false);
 	if (is_number(argv) == false)
 		return (print_error("-s flag", WRONG_NB));
 	nb = ft_atoi(argv);

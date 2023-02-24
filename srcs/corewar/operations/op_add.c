@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:33:00 by thle              #+#    #+#             */
-/*   Updated: 2023/01/25 15:26:05 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/23 20:59:01 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ bool	op_add(t_game *game, t_carriage *carriage)
 	int	reg_index;
 
 	reg_index = carriage->arg_value[THIRD_ARG] - 1;
-	carriage->arg_value[FIRST_ARG]
-		= get_value(game, carriage, FIRST_ARG, true);
-	carriage->arg_value[SECOND_ARG]
-		= get_value(game, carriage, SECOND_ARG, true);
-	value = carriage->arg_value[FIRST_ARG] + carriage->arg_value[SECOND_ARG];
+//	carriage->arg_value[FIRST_ARG]
+//		= get_value(game, carriage, FIRST_ARG, true);
+//	carriage->arg_value[SECOND_ARG]
+//		= get_value(game, carriage, SECOND_ARG, true);
+	//value = carriage->arg_value[FIRST_ARG] + carriage->arg_value[SECOND_ARG];
+	value = get_value(game, carriage, FIRST_ARG, true) + get_value(game, carriage, SECOND_ARG, true);
 	carriage->registry[reg_index] = value;
 	carriage->carry = (value == 0);
 	return (true);

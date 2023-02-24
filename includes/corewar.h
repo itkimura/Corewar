@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/22 14:50:51 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:52:13 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void	free_all(t_game *game);
  * print.c
  */
 bool	print_error(char *str, t_error error);
-void	print_help(char *file_path);
+void	print_help();
 void	print_adv(t_game *game, t_carriage *carriage, int shift);
 void	print_arena(t_game *game);
 

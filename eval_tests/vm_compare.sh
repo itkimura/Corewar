@@ -71,9 +71,10 @@ else
 fi
 loop=$cycle
 echo "Files: $champions"
-while [ $loop -lt 28001 ]
+while [ $loop -lt 500000 ]
 do
-	./corewar -dump $loop $champions > test1
+	#./corewar -dump $loop $champions > test1
+	./corewar --lld-size-2 -dump $loop $champions > test1
 	./resources/corewar -d $loop $champions > test2
 	#echo "Run $our"
 	#echo "Run $intra"
