@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/23 21:57:00 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:59:28 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	print_error(char *str, t_error error)
 /*
  * print help function
  */
-void	print_help()
+void	print_help(void)
 {
 	bold("Name", "\n");
 	ft_printf("\t - is a player that the progress of the battle and");

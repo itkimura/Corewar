@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/23 21:52:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:16:54 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,12 @@ void	print_arena(t_game *game);
  * print_flag.c
  */
 bool	print_dump(t_game *game);
-void	flag_l(t_game *game, t_carriage *carriage);
+
+/*
+ * print_flag_l.c
+ */
 void	print_flag_l_death(t_game *game, t_carriage *carriage);
+void	flag_l(t_game *game, t_carriage *carriage);
 
 /*
  * validate_champion.c
