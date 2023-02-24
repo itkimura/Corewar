@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/20 14:34:20 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/24 19:13:42 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static int	validate_arg(char *arg)
 	i = 1;
 	if (arg[0] == 'r' && arg[1] == '0' && arg[2] == '0')
 		return (arg_code);
-	if (arg[0] == 'r' && ft_isdigit(arg[1]) && (!arg[2] \
-		|| (ft_isdigit(arg[2]) && !arg[3])))
+	if (arg[0] == 'r' && ft_isdigit(arg[1]) \
+		&& (!arg[2] || (ft_isdigit(arg[2]) && !arg[2])))
 		arg_code = REG_CODE;
 	else if (arg[0] == DIRECT_CHAR)
 		arg_code = DIR_CODE;
@@ -73,8 +73,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 
 	arg_code = 0;
 	end = start;
-//	ft_printf("arg = %s len = %zu\n", arg, ft_strlen(arg));
-	while (arg[end] && arg[end] != ' ' && arg[end] != '\t' \
+	while (arg[end] && arg[end] != '\0' \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
 	arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);

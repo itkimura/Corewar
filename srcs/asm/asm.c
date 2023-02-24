@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/22 19:43:09 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/24 18:04:21 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 	// ft_printf("JAMBON BEURRE\n");
 //	print_oplist(data);
 	// ft_printf("*******opsize == %d\n", data->opsize);
-	 write_to_file(data, argv[1]);
+	//  write_to_file(data, argv[1]);
 	 ft_printf("Writing output program\n");
 	// print_hashlabel(data);
 	free_exit(data, NULL, SUCCESS);
