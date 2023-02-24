@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/20 14:35:18 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/24 15:16:28 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,26 @@
 
 void	write_name(t_asmdata *data, int fd)
 {
+	int		len;
 	int		i;
 	char	buffer[PROG_NAME_LENGTH];
 //	int32_t	helper;
 
+	len = 0;
 	i = 0;
 	ft_bzero(buffer, PROG_NAME_LENGTH);
 	while (i < PROG_NAME_LENGTH)
 	{
 		if (data->header->prog_name[i] != '#')
+		{
 			buffer[i] = (int)data->header->prog_name[i];
+			len += 1;
+		}
 		else if (data->header->prog_name[i] == '#')
 			buffer[i] = 0;
 		i++;
 	}
+	ft_printf("len == %d", len);
 	write(fd, buffer, PROG_NAME_LENGTH);
 	write(fd, NULL, 4);
 	write(fd, "\0\0\0\0", 4);
@@ -60,11 +66,18 @@ void	write_size(t_asmdata *data, int fd)
 	int	i;
 
 	i = 0;
+	buffer = 0;
 	while (data->oplist[i])
 		i++;
-	buffer = data->oplist[i - 1]->totalbyte;
-//	ft_printf("buffer == %d, size == %d, i == %d\n", buffer, data->header->prog_size, i);
+	//ft_printf("data->oplist[i] == %d\n", data->oplist[i]->totalbyte);
+	while (buffer == 0)
+	{
+		i--;
+		buffer = data->oplist[i]->totalbyte;
+	}
+	//ft_printf("buffer == %d, size == %d, i == %d\n", buffer, data->header->prog_size, i);
 	buffer = byte_shift_translate(buffer);
+	ft_printf("buffer == %d, size == %d, i == %d\n", buffer, data->header->prog_size, i);
 	write(fd, &buffer, 4);
 	/*
 	ft_bzero(buffer, 4);

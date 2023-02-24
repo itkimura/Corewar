@@ -104,14 +104,14 @@ fi
 # Run asm and example_asm on all files in s_files directory with -valid option
 if [ "$TEST_TYPE" == "valid" ]; then
     echo -e "\033[35mTesting with asm and example_asm with valid\033[0m"
-    for file in resources/s_files/*.s; do
+    for file in eval_tests/s_files/*.s; do
         echo -e "***\033[32mOUR ASM***\n"\033[0m >> valid_asm_test.txt
 		./asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
-		echo -e "\n" >> valid_asm_test.txt 
+		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" our_valid_asm/
         echo -e "***\033[31mOG ASM***\n"\033[0m >> valid_asm_test.txt
-		./resources/asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
-		echo -e "\n" >> valid_asm_test.txt 
+		./eval_tests/asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
+		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" og_valid_asm/
     done
     echo -e "\033[35mTests completed. Results can be found in valid_asm_test.txt\033[0m"
@@ -123,11 +123,11 @@ elif [ "$TEST_TYPE" == "error" ]; then
     for file in eval_tests/asm_error_files/*.s; do
         echo -e "***\033[32mOUR ASM***\n\033[0m" >> error_asm_test.txt
 		./asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
-		echo -e "\n" >> error_asm_test.txt 
+		echo -e "\n" >> error_asm_test.txt
         mv "${file%.s}.cor" our_error_asm/
         echo -e "***\033[31mOG ASM***\n\033[0m" >> error_asm_test.txt
-		./resources/asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
-		echo -e "\n" >> error_asm_test.txt 
+		./eval_tests/asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
+		echo -e "\n" >> error_asm_test.txt
         mv "${file%.s}.cor" og_error_asm/
     done
 	echo -e "\033[35mTests completed. Results can be found in error_asm_test.txt\033[0m"
