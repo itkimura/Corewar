@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 20:15:05 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/24 21:56:49 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,12 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 int	read_input(t_asmdata *data, char *argv)
 {
 	char	*line;
+	int		turn;
 	int		ret;
 	int		fd;
 
 	line = NULL;
+	turn = 0;
 	ret = 1;
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
@@ -127,8 +129,15 @@ int	read_input(t_asmdata *data, char *argv)
 	{
 		ret = get_next_line(fd, &line);
 		if (ret == 1)
+		{
 			store_data(data, line, fd);
+			turn += 1;
+		}
 	}
+	if (ret == 0 && turn == 0)
+		free_exit(data, "empty file", ERROR);
+	else if (data->opcount == 0)
+		free_exit(data, "command or data missing/invalid", ERROR);
 //	ft_printf("DRACULA TOUT NU\n");
 	if (close(fd) == -1)
 		free_exit(data, "Closing file failed", ERROR);
