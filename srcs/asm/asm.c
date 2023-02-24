@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/24 18:04:21 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/24 19:38:15 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	check_file_nam(char *filename)
 
 	name_idx = 0;
 	name_idx = ft_strlen(filename);
-	if (name_idx > 3 && filename[name_idx - 1] != 's' && \
-			filename[name_idx - 2] != '.')
+	ft_printf("[%c]\n", filename[name_idx - 1]);
+	if (name_idx >= 3 && filename[name_idx - 1] == 's' \
+		&& filename[name_idx - 2] == '.')
 		return (1);
 	else
 		return (0);
 }
-	
 
 int	main(int argc, char **argv)
 {
@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2 || argc > 3)
 		return (0);
-	if (check_file_nam(argv[1]) != 0)
+	if (!check_file_nam(argv[1]))
 	{
 		ft_printf("File extension non valid");
 		return (0);
