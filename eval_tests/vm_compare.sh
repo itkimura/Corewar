@@ -3,9 +3,9 @@
 #
 # File path configuration (Please change if you want!)
 #
-VM_PATH="./"
-INTRA_VM_PATH="./resources/"
-COR_FILES_PATH="./resources/cor_files/working/"
+VM_PATH="./corewar"
+INTRA_VM_PATH="./eval_tests/resources/corewar"
+COR_FILES_PATH="./eval_tests/cor_files/working/"
 COR_FILES=(`ls ${COR_FILES_PATH}*`)
 TOTAL_COR_FILES=$(ls $COR_FILES_PATH | wc -l)
 
@@ -25,14 +25,16 @@ ac=$#
 #
 if [ $ac -eq 0 -o "$1" = "--help" ]; then
 	echo -e "Description:\n"
-	echo -e "  The scrip tests your corwar  with random player and compare with the corwar from Resources\n"
+	echo -e "  The scrip tests your corwar with random player and compare the dump resoute of your corwar and the corwar from resources\n"
 	echo -e "Basic usage:\n"
-	echo -e "  ${BOLD}bash compare.sh N option:[the number of random players]${NC}\n"
+	echo -e "  ${BOLD}bash vm_compare.sh N option:[the number of players] options:[file path]${NC}\n"
 	echo -e "The following option is available:\n"
-	echo -e "  ${BOLD}bash compare.sh${NC}\t\tprint this help message"
-	echo -e "  ${BOLD}bash compare.sh --help${NC}\tprint this help message"
-	echo -e "  ${BOLD}bash compare.sh N${NC}\t\ttest corewar with ${BOLD}1${NC} player and compare with corwar from Resources every ${BOLD}N${NC} cycles"
-	echo -e "  ${BOLD}bash compare.sh N N2${NC}\t\ttest corewar with ${BOLD}N2${NC} players and compare with corwar from Resources every ${BOLD}N${NC} cycles\n\n"
+	echo -e "  ${BOLD}bash vm_compare.sh${NC}\t\t\tprint this help message"
+	echo -e "  ${BOLD}bash vm_compare.sh --help${NC}\t\tprint this help message"
+	echo -e "  ${BOLD}bash vm_compare.sh N${NC}\t\t\ttest corewar with ${BOLD}1${NC} player and compare with corwar from Resources every ${BOLD}N${NC} cycles"
+	echo -e "  ${BOLD}bash vm_compare.sh N N2${NC}\t\ttest corewar with ${BOLD}N2${NC} players and compare with corwar from Resources every ${BOLD}N${NC} cycles"
+	echo -e "  ${BOLD}bash vm_compare.sh N N2 [file path]${NC}\n\t\t\t\t\ttest corewar with ${BOLD}N2${NC} players of files and compare with corwar from Resources every ${BOLD}N${NC} cycles"
+	echo -e "\t\t\t\t\t${BOLD}E.g. ./vm_compare.sh 1000 2 player1.cor player2.cor${BOLD\t\t\t\t\t}"
 	exit
 fi
 
@@ -74,8 +76,8 @@ echo "Files: $champions"
 while [ $loop -lt 500000 ]
 do
 	#./corewar -dump $loop $champions > test1
-	./corewar --lld-size-2 -dump $loop $champions > test1
-	./resources/corewar -d $loop $champions > test2
+	$VM_PATH --lld-size-2 -dump $loop $champions > test1
+	$INTRA_VM_PATH -d $loop $champions > test2
 	#echo "Run $our"
 	#echo "Run $intra"
 	diff=`diff test1 test2`
