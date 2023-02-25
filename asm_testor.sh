@@ -109,7 +109,7 @@ if [ "$TEST_TYPE" == "valid" ]; then
 		./asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
 		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" our_valid_asm/
-        echo -e "***\033[31mOG ASM***\n"\033[0m >> valid_asm_test.txt
+        echo -e "***\033[31mOG ASM***\n\033[0m" >> valid_asm_test.txt
 		./eval_tests/asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
 		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" og_valid_asm/
@@ -117,7 +117,7 @@ if [ "$TEST_TYPE" == "valid" ]; then
     echo -e "\033[35mTests completed. Results can be found in valid_asm_test.txt\033[0m"
 
 # Run asm and example_asm on all files in asm_error_files directory with -error option
-#
+
 elif [ "$TEST_TYPE" == "error" ]; then
  	echo -e "\033[35mTesting with asm and example_asm error\033[0m"
     for file in eval_tests/asm_error_files/*.s; do
