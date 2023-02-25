@@ -5,7 +5,7 @@
 #
 # ASM_PATH="./"
 ASM_PATH="./resources/" #example_asm
-S_FILES_PATH="./resources/s_files/"
+S_FILES_PATH="./eval_tests/asm_error_files/"
 
 #
 # Color scheme

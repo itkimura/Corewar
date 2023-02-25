@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/22 18:46:36 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/24 15:52:57 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,10 @@ int			get_label_adr(t_asmdata *data, t_op **ptr, char *name);
 */
 
 void		write_to_file(t_asmdata *data, char *filename);
-char		*change_filename(char *filename);
 void		write_name(t_asmdata *data, int fd);
 void		write_comment(t_asmdata *data, int fd);
 void		write_size(t_asmdata *data, int fd);
+char		*change_filename(char *filename);
 void		convert_arg(t_op **tmp, int fd, int j);
 int			ft_atoi_base(const char *str, int base);
 int			byte_shift_translate(int value);

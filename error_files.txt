@@ -1,52 +1,40 @@
-./eval_tests/asm_error_files/bad_extension.S -------------------------->Writing output program
-./eval_tests/asm_error_files/2_statement_same_line.s -------------------------->Writing output program
-./eval_tests/asm_error_files/bad_extension.ss -------------------------->Writing output program
-./eval_tests/asm_error_files/bad_reference.s -------------------------->Writing output program
-./eval_tests/asm_error_files/bad_reference2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/bad_reference4.s -------------------------->Writing output program
-./eval_tests/asm_error_files/bee_gees.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comment_between_opcode.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comment_too_big.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comment_too_long.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comments_in_direct.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comments_in_reference.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comments_mid_arg.s -------------------------->Writing output program
-./eval_tests/asm_error_files/comments_mid_arg2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/empty_reference.s -------------------------->Writing output program
-./eval_tests/asm_error_files/extra_quote.s -------------------------->Writing output program
-./eval_tests/asm_error_files/garbage_after_quote.s -------------------------->Writing output program
-./eval_tests/asm_error_files/hex_arg.s -------------------------->Writing output program
-./eval_tests/asm_error_files/incorrect_args.s -------------------------->Writing output program
-./eval_tests/asm_error_files/indirect_arg_2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/insufficient_args.s -------------------------->Writing output program
-./eval_tests/asm_error_files/insufficient_args2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/insufficient_args3.s -------------------------->Writing output program
-./eval_tests/asm_error_files/invalid_char_in_label.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_arg_1.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_arg_3.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_arg_4.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_comma.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_direct_number.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_instruction_1.s -------------------------->Writing output program
-./eval_tests/asm_error_files/missing_newline.s -------------------------->Writing output program
-./eval_tests/asm_error_files/multiple_outstanding_refs.s -------------------------->Writing output program
-./eval_tests/asm_error_files/name_too_big.s -------------------------->Writing output program
-./eval_tests/asm_error_files/name_too_long.s -------------------------->Writing output program
-./eval_tests/asm_error_files/one_undefined_ref.s -------------------------->Writing output program
-./eval_tests/asm_error_files/ref_minus_ref.s -------------------------->Writing output program
-./eval_tests/asm_error_files/ref_plus_ref.s -------------------------->Writing output program
-./eval_tests/asm_error_files/reference_with_space.s -------------------------->Writing output program
-./eval_tests/asm_error_files/reference_with_space2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/repeat_comment_str.s -------------------------->Writing output program
-./eval_tests/asm_error_files/repeat_comment_str2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/repeat_name_str.s -------------------------->Writing output program
-./eval_tests/asm_error_files/repeat_name_str2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/tdc2.s -------------------------->Writing output program
-./eval_tests/asm_error_files/too_many_args.s -------------------------->Writing output program
-./eval_tests/asm_error_files/two_names.s -------------------------->Writing output program
-./eval_tests/asm_error_files/undefined_label.s -------------------------->Writing output program
-./eval_tests/asm_error_files/unknown_instr.s -------------------------->Writing output program
-./eval_tests/asm_error_files/wrong_arg.s -------------------------->Writing output program
+./eval_tests/asm_error_files/bad_extension.S[0m
+./eval_tests/asm_error_files/bad_extension.ss[0m
+
+./eval_tests/asm_error_files/bad_reference.s[0m
+./eval_tests/asm_error_files/bad_reference4.s[0m
+
+./eval_tests/asm_error_files/comment_too_big.s[0m
+./eval_tests/asm_error_files/comment_too_long.s[0m
+./eval_tests/asm_error_files/comments_in_direct.s[0m
+./eval_tests/asm_error_files/comments_in_reference.s[0m
+./eval_tests/asm_error_files/comments_mid_arg.s[0m
+./eval_tests/asm_error_files/comments_mid_arg2.s[0m
+
+./eval_tests/asm_error_files/empty_reference.s[0m
+./eval_tests/asm_error_files/extra_quote.s[0m
+./eval_tests/asm_error_files/incorrect_args.s[0m
+./eval_tests/asm_error_files/insufficient_args.s[0m
+./eval_tests/asm_error_files/insufficient_args2.s[0m
+./eval_tests/asm_error_files/insufficient_args3.s[0m
+./eval_tests/asm_error_files/invalid_char_in_label.s[0m
+./eval_tests/asm_error_files/missing_arg_1.s[0m
+./eval_tests/asm_error_files/missing_arg_4.s[0m
+./eval_tests/asm_error_files/missing_direct_number.s[0m
+./eval_tests/asm_error_files/missing_instruction_1.s[0m
+./eval_tests/asm_error_files/missing_newline.s[0m
+./eval_tests/asm_error_files/multiple_outstanding_refs.s[0m
+./eval_tests/asm_error_files/name_too_big.s[0m
+./eval_tests/asm_error_files/name_too_long.s[0m
+./eval_tests/asm_error_files/one_undefined_ref.s[0m
+./eval_tests/asm_error_files/repeat_comment_str.s[0m
+./eval_tests/asm_error_files/repeat_comment_str2.s[0m
+./eval_tests/asm_error_files/repeat_name_str.s[0m
+./eval_tests/asm_error_files/repeat_name_str2.s[0m
+./eval_tests/asm_error_files/too_many_args.s[0m
+./eval_tests/asm_error_files/two_names.s[0m
+./eval_tests/asm_error_files/undefined_label.s[0m
+./eval_tests/asm_error_files/unknown_instr.s[0m
 
 ./eval_tests/asm_error_files/empty.s --------------------------> SEGFAULT
 ./eval_tests/asm_error_files/empty_code.s --------------------------> SEGFAULT

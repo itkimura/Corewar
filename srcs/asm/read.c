@@ -6,13 +6,14 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 20:15:05 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/24 22:32:30 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <fcntl.h>
 
+/* TODO what is this used for ? 
 static int	get_full_cmd(char *ptr, int fd, int j)
 {
 	size_t	ret;
@@ -21,6 +22,7 @@ static int	get_full_cmd(char *ptr, int fd, int j)
 	ret = 1;
 	if (ptr[j])
 		ptr[j++] = '\n';
+	ft_printf("ptr == %s\n", ptr);
 	while (ret && ptr[j])
 	{
 		ret = read(fd, &buf, 1);
@@ -30,8 +32,9 @@ static int	get_full_cmd(char *ptr, int fd, int j)
 	}
 	return (j);
 }
+*/
 
-static int	store_cmd(char *ptr, char *line, int fd, int i)
+static int	store_cmd(t_asmdata *data, char *ptr, char *line, int fd, int i)
 {
 	int		j;
 
@@ -47,7 +50,12 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 		ptr[j++] = line[i++];
 	}
 	if (line[i] != '\"')
-		j = get_full_cmd(ptr, fd, j);
+	{
+		ft_strdel(&line);
+		free_exit(data, "string incomplete/invalid", ERROR);
+	}
+//		j = get_full_cmd(ptr, fd, j);
+	ft_printf("ptr == %d\n", fd);
 	ptr[j] = '\0';
 	ft_strdel(&line);
 	return (1);
@@ -100,9 +108,9 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 	else if (data->name && data->comment && *line)
 		res = store_op(data, line, fd);
 	else if (!ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
-		data->name = store_cmd(data->header->prog_name, line, fd, res + 5);
+		data->name = store_cmd(data, data->header->prog_name, line, fd, res + 5);
 	else if (!ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
-		data->comment = store_cmd(data->header->comment, line, fd, res + 8);
+		data->comment = store_cmd(data, data->header->comment, line, fd, res + 8);
 	else if (line[res] == '.')
 		ft_strdel(&line);
 	else if (!res || !data->name || !data->comment)
@@ -113,10 +121,12 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 int	read_input(t_asmdata *data, char *argv)
 {
 	char	*line;
+	int		turn;
 	int		ret;
 	int		fd;
 
 	line = NULL;
+	turn = 0;
 	ret = 1;
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
@@ -127,8 +137,15 @@ int	read_input(t_asmdata *data, char *argv)
 	{
 		ret = get_next_line(fd, &line);
 		if (ret == 1)
+		{
 			store_data(data, line, fd);
+			turn += 1;
+		}
 	}
+	if (ret == 0 && turn == 0)
+		free_exit(data, "empty file", ERROR);
+	else if (data->opcount == 0)
+		free_exit(data, "command or data missing/invalid", ERROR);
 //	ft_printf("DRACULA TOUT NU\n");
 	if (close(fd) == -1)
 		free_exit(data, "Closing file failed", ERROR);
