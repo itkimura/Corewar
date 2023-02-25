@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/24 10:59:28 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:11:43 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,27 @@ void	print_help(void)
 {
 	bold("Name", "\n");
 	ft_printf("\t - is a player that the progress of the battle and");
-	ft_printf(" declare the winner champion after its completion\n\n");
+	ft_printf(" declare the winner champion after its completion\n");
 	bold("Help", "\n\t");
-	bold("./corewar", "\tNO INPUT - print this help message\n\n");
+	bold("./corewar", "\t\tNO INPUT - print this help message\n");
 	bold("Usage", "\n\t");
-	bold("./corewar", "\t[-d N | -n N] <champion1.cor> <...>\n");
+	bold("./corewar", "\t\t[-d N | -n N] <champion1.cor> <...>\n");
 	bold("Flag", "\n");
-	bold("\t[-d / -dump N]", ":\tDump memory (32 octets·per·line) after ");
+	bold("\t[-d / -dump N]", ":\t\tDump memory (32 octets·per·line) after ");
 	bold("N", " cycles and exit\n");
-	bold("\t[-s N]", ":\t\tDump memory (32 octets per line) every ");
+	bold("\t[-s N]", ":\t\t\tDump memory (32 octets per line) every ");
 	bold("N", " cycles, pause and repeat again when 'enter' pressed\n");
-	bold("\t[-n N]", ":\t\tSet %sN%s of the next player\n");
-	bold("\t[-l N]", ":\n");
-	bold("\t\t\t1  ", ":Show lives\n");
-	bold("\t\t\t2  ", ":Show the number of cycles\n");
-	bold("\t\t\t4  ", ":Show operations (Params )\n");
-	bold("\t\t\t8  ", ":Show death\n");
-	bold("\t\t\t16 ", ":Show PC movement (Except for jumps)\n\n");
-	bold("\t[-a]:", "\t\tPrint output from \"aff\"\n\n");
+	bold("\t[-n N]", ":\t\t\tSet ");
+	bold("N", " of the next player\n");
+	bold("\t[-v N]", ":\n");
+	bold("\t\t\t\t1  ", ":Show lives\n");
+	bold("\t\t\t\t2  ", ":Show the number of cycles\n");
+	bold("\t\t\t\t4  ", ":Show operations (Params )\n");
+	bold("\t\t\t\t8  ", ":Show death\n");
+	bold("\t\t\t\t16 ", ":Show PC movement (Except for jumps)\n\n");
+	bold("\t[-a]:", "\t\t\tPrint output from \"aff\"\n");
+	bold("\t[--lld-size-2]:", "\n");
+	ft_printf("\t\t\t\tRead 2 bytes instead of 4 bytes in T_IND\n\n");
 }
 
 void	print_adv(t_game *game, t_carriage *carriage, int shift)

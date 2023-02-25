@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/25 12:36:30 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:31:29 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define RESET "\e[m"
 
 # define INITIAL_VALUE -1
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 enum	e_arg
 {
@@ -248,6 +250,25 @@ bool	is_number(char *argv);
 bool	is_after_flag_n(t_game *game);
 bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 
+/* 
+ * flag_validate.c
+ */
+bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_a_flag(t_vm_flag *flag, t_game *game);
+bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_lld_flag(t_vm_flag *flag, t_game *game);
+
+/* 
+ * flag_v_validate.c
+ */
+bool	validate_v_flag(char *argv, t_vm_flag *flag, t_game *game);
+
+/* 
+ * flag_validate_utils.c
+ */
+bool	is_number(char *argv);
+bool	is_after_flag_n(t_game *game);
 /* 
  * flag_utils.c
  */

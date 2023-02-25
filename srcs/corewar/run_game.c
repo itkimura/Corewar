@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/25 12:39:07 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:02:46 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	set_ctd(t_game *game)
 	{
 		game->cycles_to_die = game->cycles_to_die - CYCLE_DELTA;
 		game->total_checks = 0;
+		if (game->flags_value[FLAG_V] == FO_CYCLES)
+			ft_printf("Cycle to die is now %d\n", game->cycles_to_die);
 	}
 	game->check_counter = game->cycles_to_die;
 	game->total_lives = 0;

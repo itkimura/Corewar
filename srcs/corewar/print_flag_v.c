@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/02/25 12:38:14 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:57:41 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	print_v_normal_operations(t_carriage *carriage)
 static void	print_flag_v_operations(t_carriage *c)
 {
 	ft_printf("P%5d | %s", c->id, g_op_tab[c->statement_index].name);
-	if (c->statement_index == OP_FORK)
+	if (c->statement_index == OP_FORK || c->statement_index == OP_LFORK)
 		ft_printf(" %d (%d)",
 			c->arg_value[SECOND_ARG], c->arg_value[FIRST_ARG]);
 	else

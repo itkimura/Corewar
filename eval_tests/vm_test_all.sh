@@ -40,31 +40,43 @@ done
 #
 # Test operation (-v 4 compare)
 #
-echo -e "\n${BOLD}Test operations${NC}"
-CHAMPION_NB="1"
-PLAY_TIME="10"
-NB=$CHAMPION_NB
-while [ $PLAY_TIME -gt 0 ]
+echo -e "\n${BOLD}Test -v flags${NC}"
+COR_FILES=`ls $COR_FILES_PATH`
+NBS=`echo -e "1\n2\n4\n8\n16"`
+for FILE in $COR_FILES;
 do
-	while [ $NB -gt 0 ]
-	do
-		RANDOM_FILE=$(($RANDOM%TOTAL_COR_FILES))
-		CHAMPIONS+=" ${COR_FILES[$RANDOM_FILE]}"
-		((NB--))
-	done
-	echo -n -e "[$(basename $CHAMPIONS)]\t"
-	$VM_PATH --lld-size-2 $CHAMPIONS -l 4 > our
-	$INTRA_VM_PATH $CHAMPIONS -v 4 > intra
-	diff=`diff our intra`
-	if [ "$diff" == "" ]
+	FILE_NAME=`basename $FILE`
+	if [ "$FILE_NAME" != "Car.cor" ] && [ "$FILE_NAME" != "bee_gees.cor" ];
 	then
-		echo -e "${GREEN}OK${NC}"
-	else
-		echo -e "${RED}KO${NC}"
+		echo -e "[$YELLOW$FILE$NC]"
+		for NB in $NBS
+		do
+			echo -n "$NB:"
+			$VM_PATH --lld-size-2 $COR_FILES_PATH$FILE -v $NB > our
+			$INTRA_VM_PATH $COR_FILES_PATH$FILE -v $NB > intra
+			diff=`diff our intra`
+			if [ "$diff" == "" ]
+			then
+				echo -e -n "${GREEN}OK${NC} "
+			else
+				echo -e -n "${RED}KO${NC} "
+			#	echo "Do you want to print diff? [y/n]"
+			#	read -r b
+			#	if [ "$b" == "y" ]
+			#	then
+			#		echo -e "${RED}ERROR:${NC} ./corewar -d $loop $champions"
+			#		echo "diff = $diff"
+			#	fi
+			#	echo "Do you want to quit? [y/n]"
+			#	read -r b
+			#	if [ "$b" == "y" ]
+			#	then
+			#		exit
+			#	fi
+			fi
+		done
+		echo ""
 	fi
-	NB=$CHAMPION_NB
-	CHAMPIONS=""
-	((PLAY_TIME--))
 done
 rm -f our
 rm -f intra

@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:55:56 by thle              #+#    #+#             */
-/*   Updated: 2023/02/25 12:42:24 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:28:08 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ bool	validate_argv(int argc, char **argv)
 	if (update_players_array(game) == false)
 		return (free_all(game), false);
 	init_arena(game);
-	ft_printf("game->total_player = %d\n", game->total_players);
 	run_game(game);
 	return (free_all(game), true);
 }
