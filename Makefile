@@ -6,12 +6,14 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/02/25 13:17:08 by itkimura         ###   ########.fr        #
+#    Updated: 2023/02/25 19:22:17 by ccariou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
+DFLAGS  = -fsanitize=address -fsanitize=undefined \
+	-fno-sanitize-recover=all -fno-sanitize=null -fno-sanitize=alignment
 
 NAME = corewar
 ASM = asm
@@ -54,6 +56,9 @@ ASM_SRCS = $(addprefix $(ASM_SRCS_DIR), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))
 
 all: $(NAME) $(ASM)
+
+debug: FLAGS += $(DFLAGS)
+debug: all
 
 $(NAME): $(LIB) $(COREWAR_OBJS) $(OP_OBJS)
 	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) $(OP_OBJS) -L$(LIB_DIR) -lft

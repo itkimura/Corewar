@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/24 19:13:42 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/25 20:32:52 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ static int	validate_arg(char *arg)
 	i = 1;
 	if (arg[0] == 'r' && arg[1] == '0' && arg[2] == '0')
 		return (arg_code);
+//	if (arg[1] && arg[2])
+//		ft_printf("arg == %s arg[0] = %c arg[1] = %d, arg[2] = %d\n", arg, arg[0], arg[1], arg[2]);
 	if (arg[0] == 'r' && ft_isdigit(arg[1]) \
-		&& (!arg[2] || (ft_isdigit(arg[2]) && !arg[2])))
+		&& (!arg[2] || ft_isdigit(arg[2])))
 		arg_code = REG_CODE;
 	else if (arg[0] == DIRECT_CHAR)
 		arg_code = DIR_CODE;
@@ -73,7 +75,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 
 	arg_code = 0;
 	end = start;
-	while (arg[end] && arg[end] != '\0' \
+	while (arg[end] && arg[end] != '\0' && !ft_isspace(arg[end]) \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
 	arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
