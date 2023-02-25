@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/24 11:16:54 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 12:36:30 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*library for bonus*/
 # include <stdio.h>
 
-# define TOTAL_FLAGS 7
+# define TOTAL_FLAGS 6
 
 # define RED "\e[31m"
 # define GREEN "\e[32m"
@@ -48,7 +48,6 @@ typedef enum e_vm_flag
 	NOT_FLAG = -1,
 	FLAG_DUMP,
 	FLAG_N,
-	FLAG_L,
 	FLAG_V,
 	FLAG_A,
 	FLAG_S,
@@ -232,10 +231,10 @@ void	print_arena(t_game *game);
 bool	print_dump(t_game *game);
 
 /*
- * print_flag_l.c
+ * print_flag_v.c
  */
-void	print_flag_l_death(t_game *game, t_carriage *carriage);
-void	flag_l(t_game *game, t_carriage *carriage);
+void	print_flag_v_death(t_game *game, t_carriage *carriage);
+void	flag_v(t_game *game, t_carriage *carriage);
 
 /*
  * validate_champion.c
@@ -254,7 +253,7 @@ bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
  */
 bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
 bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game);
-bool	validate_l_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_v_flag(char *argv, t_vm_flag *flag, t_game *game);
 bool	validate_a_flag(t_vm_flag *flag, t_game *game);
 bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game);
 

@@ -6,7 +6,7 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/02/24 11:17:42 by itkimura         ###   ########.fr        #
+#    Updated: 2023/02/25 12:36:39 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ COREWAR_FILES =		corewar.c				print.c				\
 					validate_champion.c		init_structures.c	\
 					update_players_array.c	free.c				\
 					utils.c					run_game.c			\
-					print_flag.c			print_flag_l.c		\
+					print_flag.c			print_flag_v.c		\
 					flag.c					flag_utils.c
 
 COREWAR_SRCS_DIR = ./srcs/corewar/

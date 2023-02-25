@@ -41,27 +41,31 @@ done
 # Test operation (-v 4 compare)
 #
 echo -e "\n${BOLD}Test operations${NC}"
-CHAMPION_NB="4"
-PLAY_TIME="1"
+CHAMPION_NB="1"
+PLAY_TIME="10"
+NB=$CHAMPION_NB
 while [ $PLAY_TIME -gt 0 ]
 do
-	while [ $CHAMPION_NB -gt 0 ]
+	while [ $NB -gt 0 ]
 	do
 		RANDOM_FILE=$(($RANDOM%TOTAL_COR_FILES))
 		CHAMPIONS+=" ${COR_FILES[$RANDOM_FILE]}"
-		((CHAMPION_NB--))
+		((NB--))
 	done
-	echo "$CHAMPIONS"
+	echo -n -e "[$(basename $CHAMPIONS)]\t"
 	$VM_PATH --lld-size-2 $CHAMPIONS -l 4 > our
 	$INTRA_VM_PATH $CHAMPIONS -v 4 > intra
 	diff=`diff our intra`
 	if [ "$diff" == "" ]
 	then
-		echo -e -n "${GREEN}.${NC}"
+		echo -e "${GREEN}OK${NC}"
 	else
-		echo -e -n "${RED}.${NC}"
+		echo -e "${RED}KO${NC}"
 	fi
-	CHAMPINON_NB="4"
+	NB=$CHAMPION_NB
+	CHAMPIONS=""
 	((PLAY_TIME--))
 done
+rm -f our
+rm -f intra
 

@@ -6,13 +6,13 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/02/24 11:12:47 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 12:38:14 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	flag_l_additionals(t_carriage *c)
+static void	flag_v_additionals(t_carriage *c)
 {
 	int	tmp;
 
@@ -38,7 +38,7 @@ static void	flag_l_additionals(t_carriage *c)
 	}
 }
 
-static void	print_l_normal_operations(t_carriage *carriage)
+static void	print_v_normal_operations(t_carriage *carriage)
 {
 	int	index;
 
@@ -56,14 +56,14 @@ static void	print_l_normal_operations(t_carriage *carriage)
 	}
 }
 
-static void	print_flag_l_operations(t_carriage *c)
+static void	print_flag_v_operations(t_carriage *c)
 {
 	ft_printf("P%5d | %s", c->id, g_op_tab[c->statement_index].name);
 	if (c->statement_index == OP_FORK)
 		ft_printf(" %d (%d)",
 			c->arg_value[SECOND_ARG], c->arg_value[FIRST_ARG]);
 	else
-		print_l_normal_operations(c);
+		print_v_normal_operations(c);
 	if (c->statement_index == OP_ZJMP)
 	{
 		if (c->carry == true)
@@ -73,29 +73,29 @@ static void	print_flag_l_operations(t_carriage *c)
 	}
 	if (c->statement_index == OP_STI || c->statement_index == OP_LDI
 		|| c->statement_index == OP_LLDI)
-		flag_l_additionals(c);
+		flag_v_additionals(c);
 	ft_putchar('\n');
 }
 
-void	print_flag_l_death(t_game *game, t_carriage *carriage)
+void	print_flag_v_death(t_game *game, t_carriage *carriage)
 {
-	if (game->flags_value[FLAG_L] == FO_DEATHS)
+	if (game->flags_value[FLAG_V] == FO_DEATHS)
 		ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
 			carriage->id,
 			game->total_cycles - carriage->last_live_performed - 1,
 			game->cycles_to_die);
 }
 
-void	flag_l(t_game *game, t_carriage *carriage)
+void	flag_v(t_game *game, t_carriage *carriage)
 {
 	int	player;
 
-	if (game->flags_value[FLAG_L] == FO_ADV
+	if (game->flags_value[FLAG_V] == FO_ADV
 		&& carriage->statement_index != OP_ZJMP)
 		print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
-	if (game->flags_value[FLAG_L] == FO_OPERAIONS)
-		print_flag_l_operations(carriage);
-	if (game->flags_value[FLAG_L] == FO_LIVES
+	if (game->flags_value[FLAG_V] == FO_OPERAIONS)
+		print_flag_v_operations(carriage);
+	if (game->flags_value[FLAG_V] == FO_LIVES
 		&& carriage->statement_index == OP_LIVE)
 	{
 		player = -(carriage->arg_value[FIRST_ARG]);
