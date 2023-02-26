@@ -260,7 +260,7 @@ Champion comment too long (Max length 2048)
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg
 
 
 ***[31mOG ASM***
@@ -345,7 +345,6 @@ Lexical error at [9:15]
 
 ***[31mOG ASM***
 [0m
-Syntax error at token [TOKEN][005:017] INSTRUCTION "rk"
 
 
 ***[32mOUR ASM***
@@ -415,7 +414,6 @@ Lexical error at [2:11]
 
 ***[31mOG ASM***
 [0m
-Syntax error at token [TOKEN][009:001] END "(null)"
 
 
 ***[32mOUR ASM***
@@ -710,7 +708,7 @@ Syntax error at token [TOKEN][011:008] INDIRECT_LABEL ":l2"
 
 ***[32mOUR ASM***
 [0m
-Writing output program
+[Error]: invalid arg
 
 
 ***[31mOG ASM***
@@ -745,7 +743,6 @@ Syntax error at token [TOKEN][009:004] END "(null)"
 
 ***[31mOG ASM***
 [0m
-Syntax error at token [TOKEN][007:017] INSTRUCTION "just"
 
 
 ***[32mOUR ASM***
@@ -755,7 +752,6 @@ Syntax error at token [TOKEN][007:017] INSTRUCTION "just"
 
 ***[31mOG ASM***
 [0m
-Syntax error at token [TOKEN][005:013] INSTRUCTION "zork"
 
 
 ***[32mOUR ASM***

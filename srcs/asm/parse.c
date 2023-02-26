@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 22:12:35 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 22:31:17 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	validate_arg(char *arg)
 	int	i;
 
 	arg_code = 0;
-	i = 1;
+	i = 1 + (arg[1] == '-');
 	if (arg[0] == 'r' && arg[1] == '0' && arg[2] == '0')
 		return (0);
 	if (arg[0] == 'r' && ft_isdigit(arg[1]) \
@@ -68,16 +68,14 @@ static int	validate_arg(char *arg)
 		arg_code = DIR_CODE;
 	if (arg[0] == DIRECT_CHAR && arg[1] != LABEL_CHAR)
 	{
-		if (arg[i] == '-')
-			i++;
 		while (arg[i] == '0')
 			i++;
 		while(arg[i] && ft_isdigit(arg[i]))
 			i++;
-		if (arg[i])
+		if (arg[i] || i == 1 + (arg[1] == '-'))
 			return (0);
 	}
-	else if (arg[0] != 'r')
+	else
 		arg_code = validate_ind_arg(arg, arg_code);
 	return (arg_code);
 }
