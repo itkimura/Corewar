@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/24 15:57:40 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/26 11:53:26 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	write_name(t_asmdata *data, int fd)
 	i = 0;
 	len = 0;
 	len = ft_strlen(data->header->prog_name);
-	ft_printf("len == %d\n", len);
 	ft_bzero(buffer, PROG_NAME_LENGTH);
 	while (i <= PROG_NAME_LENGTH)
 	{

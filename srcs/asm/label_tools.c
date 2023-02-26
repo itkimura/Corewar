@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 20:27:18 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 11:51:26 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	validate_label(t_asmdata *data, char *ptr, int index)
 	while (ptr[i] && (ptr[i] == ' ' || ptr[i] == '\t'))
 		i++;
 	if (ptr[i] && validate_statement(data, ptr, index, &i))
-		seperate_instruction(data, ptr, index, i);
+		validate_instruction(data, ptr, index, i);
 	else if (ptr[i] && (ptr[i] != COMMENT_CHAR \
 		&& ptr[i] != ALTERNATE_COMMENT_CHAR))
 		free_exit(data, "Invalid instruction/label2", ERROR);

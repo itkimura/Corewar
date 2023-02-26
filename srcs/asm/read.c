@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/25 15:09:55 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/26 11:52:49 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_full_cmd(char *ptr, int fd, int j)
 	return (j);
 }
 
-static int	store_cmd(t_asmdata *data, char *ptr, char *line, int fd, int i)
+static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
 
@@ -54,10 +54,7 @@ static int	store_cmd(t_asmdata *data, char *ptr, char *line, int fd, int i)
 		ft_strdel(&line);
 		free_exit(data, "string incomplete/invalid", ERROR);
 	}*/
-	ft_printf("ptr == %d\n", data->opcount);
-	ft_printf("ptr == %d\n", fd);
 	ptr[j] = '\0';
-	ft_printf("ptr == %c\n", ptr[j - 1]);
 	ft_strdel(&line);
 	return (1);
 }
@@ -109,9 +106,9 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 	else if (data->name && data->comment && *line)
 		res = store_op(data, line, fd);
 	else if (!ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
-		data->name = store_cmd(data, data->header->prog_name, line, fd, res + 5);
+		data->name = store_cmd(data->header->prog_name, line, fd, res + 5);
 	else if (!ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
-		data->comment = store_cmd(data, data->header->comment, line, fd, res + 8);
+		data->comment = store_cmd(data->header->comment, line, fd, res + 8);
 	else if (line[res] == '.')
 		ft_strdel(&line);
 	else if (!res || !data->name || !data->comment)

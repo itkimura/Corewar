@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 03:39:40 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 19:26:16 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 11:01:43 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	init_op(t_op **op, char *line)
 	(*op)->arg[0] = NULL;
 	(*op)->arg[1] = NULL;
 	(*op)->arg[2] = NULL;
+	(*op)->arg_count = 0;
 	(*op)->argcode = 0;
 	(*op)->args = 0;
 	(*op)->totalbyte = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/24 15:52:57 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/26 11:47:30 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_statement
 	char		*name;
 	bool		argcode;
 	u_int16_t	args;
+	int			arg_count;
 	int			code;
 	int			size;
 }	t_statement;
@@ -49,6 +50,7 @@ typedef struct s_op
 	char		*statement;
 	char		*arg[3];
 	u_int16_t	args;
+	int			arg_count;
 	int			argcode;
 	int			totalbyte;
 	int			byte;
@@ -82,27 +84,28 @@ typedef struct s_asmdata
 */
 
 static const t_statement	g_statements[HASHTABLESIZE] = {
-{.code = 1, .name = "live", .argcode = false, .args = 0b010000000, .size = 4},
-{.code = 2, .name = "ld", .argcode = true, .args = 0b110001000, .size = 4},
-{.code = 3, .name = "st", .argcode = true, .args = 0b001101000, .size = 4},
-{.code = 4, .name = "add", .argcode = true, .args = 0b001001001, .size = 4},
-{.code = 5, .name = "sub", .argcode = true, .args = 0b001001001, .size = 4},
-{.code = 6, .name = "and", .argcode = true, .args = 0b111111001, .size = 4},
-{.code = 7, .name = "or", .argcode = true, .args = 0b111111001, .size = 4},
-{.code = 8, .name = "xor", .argcode = true, .args = 0b111111001, .size = 4},
-{.code = 9, .name = "zjmp", .argcode = false, .args = 0b010000000, .size = 2},
-{.code = 10, .name = "ldi", .argcode = true, .args = 0b111011001, .size = 2},
-{.code = 11, .name = "sti", .argcode = true, .args = 0b001111011, .size = 2},
-{.code = 12, .name = "fork", .argcode = false, .args = 0b010000000, .size = 2},
-{.code = 13, .name = "lld", .argcode = true, .args = 0b110001000, .size = 4},
-{.code = 14, .name = "lldi", .argcode = true, .args = 0b111011001, .size = 2},
-{.code = 15, .name = "lfork", .argcode = false, .args = 0b010000000, .size = 2},
-{.code = 16, .name = "aff", .argcode = true, .args = 0b001000000, .size = 4},
+{.code = 1, .name = "live", .argcode = false, .args = 0b010000000, .arg_count = 1, .size = 4},
+{.code = 2, .name = "ld", .argcode = true, .args = 0b110001000, .arg_count = 2, .size = 4},
+{.code = 3, .name = "st", .argcode = true, .args = 0b001101000, .arg_count = 2, .size = 4},
+{.code = 4, .name = "add", .argcode = true, .args = 0b001001001, .arg_count = 3, .size = 4},
+{.code = 5, .name = "sub", .argcode = true, .args = 0b001001001, .arg_count = 3, .size = 4},
+{.code = 6, .name = "and", .argcode = true, .args = 0b111111001, .arg_count = 3, .size = 4},
+{.code = 7, .name = "or", .argcode = true, .args = 0b111111001, .arg_count = 3, .size = 4},
+{.code = 8, .name = "xor", .argcode = true, .args = 0b111111001, .arg_count = 3, .size = 4},
+{.code = 9, .name = "zjmp", .argcode = false, .args = 0b010000000, .arg_count = 1, .size = 2},
+{.code = 10, .name = "ldi", .argcode = true, .args = 0b111011001, .arg_count = 3, .size = 2},
+{.code = 11, .name = "sti", .argcode = true, .args = 0b001111011, .arg_count = 3, .size = 2},
+{.code = 12, .name = "fork", .argcode = false, .args = 0b010000000, .arg_count = 1, .size = 2},
+{.code = 13, .name = "lld", .argcode = true, .args = 0b110001000, .arg_count = 2, .size = 4},
+{.code = 14, .name = "lldi", .argcode = true, .args = 0b111011001, .arg_count = 3, .size = 2},
+{.code = 15, .name = "lfork", .argcode = false, .args = 0b010000000, .arg_count = 1, .size = 2},
+{.code = 16, .name = "aff", .argcode = true, .args = 0b001000000, .arg_count = 1, .size = 4},
 };
 
 int			read_input(t_asmdata *data, char *argv);
 void		seperate_instruction(t_asmdata *data, char *ptr, int index, int i);
 void		parse_instructions(t_asmdata *data);
+void		validate_instruction(t_asmdata *data, char *ptr, int index, int i);
 void		free_exit(t_asmdata *data, char *str, bool is_error);
 void		add_byte_to_op(t_asmdata *data, int index, int arg_code, int tmp_index);
 

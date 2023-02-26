@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/25 22:18:12 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 11:51:44 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 	data->oplist[index]->args = \
 	data->oplist[index]->args << 3 | (1 << (arg_code -1));
 	add_byte_to_op(data, index, arg_code, tmp_index);
+	data->oplist[index]->arg_count++;
 	return (arg);
 }
 
@@ -136,13 +137,25 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 	ft_memdel((void **)&args);
 }
 
+void	validate_instruction(t_asmdata *data, char *ptr, int index, int i)
+{
+	u_int16_t	res;
+	int			tmp_i;
+
+	seperate_instruction(data, ptr, index, i);
+	tmp_i = get_statement_index(data, data->oplist[index]->statement);
+	res = data->oplist[index]->args & g_statements[tmp_i].args;
+	if (data->oplist[index]->arg_count != g_statements[tmp_i].arg_count \
+		|| res ^ data->oplist[index]->args)
+		free_exit(data, "invalid arg type/count for statement", ERROR);
+}
+
 void	parse_instructions(t_asmdata *data)
 {
 	char		*ptr;
-	u_int16_t	tmp;
 	int			index;
 	int			i;
-	int			tmp_i;
+	
 
 	index = 0;
 	while (index < data->opcount)
@@ -152,13 +165,7 @@ void	parse_instructions(t_asmdata *data)
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
 		if (validate_statement(data, ptr, index, &i))
-		{
-			seperate_instruction(data, ptr, index, i);
-			tmp_i = get_statement_index(data, data->oplist[index]->statement);
-			tmp = data->oplist[index]->args & g_statements[tmp_i].args;
-			if (tmp != data->oplist[index]->args)
-				free_exit(data, "invalid arg type for statement", ERROR);
-		}
+			validate_instruction(data, ptr, index, i);
 		else if (i == 0 && !validate_label(data, ptr, index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;
