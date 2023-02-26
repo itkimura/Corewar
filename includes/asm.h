@@ -6,7 +6,11 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/26 11:47:30 by leotran          ###   ########.fr       */
+=======
+/*   Updated: 2023/02/26 11:02:21 by ccariou          ###   ########.fr       */
+>>>>>>> 58cfd7364ee7f9abc19dc7f2071fc6d0d2a5ba82
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +110,7 @@ int			read_input(t_asmdata *data, char *argv);
 void		seperate_instruction(t_asmdata *data, char *ptr, int index, int i);
 void		parse_instructions(t_asmdata *data);
 void		validate_instruction(t_asmdata *data, char *ptr, int index, int i);
+int			check_size(char *str, int code);
 void		free_exit(t_asmdata *data, char *str, bool is_error);
 void		add_byte_to_op(t_asmdata *data, int index, int arg_code, int tmp_index);
 
