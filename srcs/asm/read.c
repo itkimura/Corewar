@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 23:16:29 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/27 00:00:30 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,24 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 	i = 0;
 	while (line[i] && ft_isspace(line[i]))
 		i++;
-	if (!line[i] || line[i] == COMMENT_CHAR || line[i] == ALTERNATE_COMMENT_CHAR)
+	if (!line[i] || line[i] == COMMENT_CHAR \
+		|| line[i] == ALTERNATE_COMMENT_CHAR)
 		ft_strdel(&line);
 	else if (data->name && data->comment && *line)
 		i = store_op(data, line, fd, 1);
 	else if (!data->name && !ft_strncmp(&(line[i]), NAME_CMD_STRING, 5))
 	{
 		data->name = store_cmd(data->header->prog_name, line, fd, i + 5);
-		if (check_size(data->header->prog_name, 1) == 1)
-			free_exit(data, "name size invalid", ERROR);
+		i = check_size(data->header->prog_name, 1);
 	}
 	else if (!data->comment && !ft_strncmp(&line[i], COMMENT_CMD_STRING, 8))
 	{
 		data->comment = store_cmd(data->header->comment, line, fd, i + 8);
-		if (check_size(data->header->comment, 2) == 1)
-			free_exit(data, "comment size invalid", ERROR);
+		i = check_size(data->header->comment, 2);
 	}
-	else if (!i || !data->name || !data->comment || line[i] == '.')
-	{
-		ft_strdel(&line);
-		free_exit(data, "name/comment error or bad command", ERROR);
-	}
-	return (1);
+	else if (!data->name || !data->comment || line[i] == '.')
+		return (-1);
+	return (i);
 }
 
 int	read_input(t_asmdata *data, char *argv)
@@ -130,8 +126,11 @@ int	read_input(t_asmdata *data, char *argv)
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		if (ret == 1)
-			store_data(data, line, fd);
+		if (ret == 1 && store_data(data, line, fd) == -1)
+		{
+			ft_strdel(&line);
+			free_exit(data, "name/comment error or bad command", ERROR);
+		}
 	}
 	if (data->opcount == 0)
 		free_exit(data, "empty file/incomplete command?#need2check", ERROR);
