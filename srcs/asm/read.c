@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 21:43:10 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 22:36:56 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,23 @@ static int	store_data(t_asmdata *data, char *line, int fd)
 		ft_strdel(&line);
 	else if (data->name && data->comment && *line)
 		res = store_op(data, line, fd);
-	else if (!ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
+	else if (!data->name && !ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
 	{
 		data->name = store_cmd(data->header->prog_name, line, fd, res + 5);
 		if (check_size(data->header->prog_name, 1) == 1)
 			free_exit(data, "name size invalid", ERROR);
 	}
-	else if (!ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
+	else if (!data->comment && !ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
 	{
 		data->comment = store_cmd(data->header->comment, line, fd, res + 8);
 		if (check_size(data->header->comment, 2) == 1)
 			free_exit(data, "comment size invalid", ERROR);
 	}
-	else if (line[res] == '.')
+	else if (!res || !data->name || !data->comment || line[res] == '.')
+	{
 		ft_strdel(&line);
-	else if (!res || !data->name || !data->comment)
-		free_exit(data, "name or comment missing/invalid", ERROR);
+		free_exit(data, "name/comment error or bad command", ERROR);
+	}
 	return (1);
 }
 
