@@ -360,7 +360,7 @@ Syntax error at token [TOKEN][007:003] INSTRUCTION "asd"
 
 ***[32mOUR ASM***
 [0m
-Writing output program
+[Error]: invalid arg
 
 
 ***[31mOG ASM***
@@ -560,16 +560,6 @@ Syntax error at token [TOKEN][007:011] ENDLINE
 
 ***[32mOUR ASM***
 [0m
-Writing output program
-
-
-***[31mOG ASM***
-[0m
-Writing output program to eval_tests/asm_error_files/invalid_char_in_label.cor
-
-
-***[32mOUR ASM***
-[0m
 [Error]: invalid arg
 
 
@@ -650,7 +640,7 @@ Lexical error at [31:23]
 
 ***[32mOUR ASM***
 [0m
-[Error]: Invalid instruction/label
+[Error]: invalid arg
 
 
 ***[31mOG ASM***

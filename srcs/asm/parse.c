@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 12:41:59 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 13:05:43 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ static int	validate_ind_arg(char *arg, int res)
 	return (tmp);
 }
 
+static int	check_comment_after_arg(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i] && ft_isspace(arg[i]))
+		i++;
+	if (!arg[i])
+		return (1);
+	if (arg[i] == COMMENT_CHAR || arg[i] == ALTERNATE_COMMENT_CHAR)
+		return (1);
+	return (0);
+}
+
 static int	validate_arg(char *arg)
 {
 	int	arg_code;
@@ -56,8 +70,9 @@ static int	validate_arg(char *arg)
 	{
 		while (arg[i] == '0')
 			i++;
-		if (arg[i] && !ft_isdigit(arg[i]) && arg[i + 1] \
-			&& (!ft_isdigit(arg[i + 1]) && arg[i + 2]))
+		while(arg[i] && ft_isdigit(arg[i]))
+			i++;
+		if (arg[i])
 			arg_code = 0;
 	}
 	else if (arg[0] != 'r')
@@ -65,19 +80,7 @@ static int	validate_arg(char *arg)
 	return (arg_code);
 }
 
-static int	check_comment_after_arg(char *arg)
-{
-	int	i;
 
-	i = 0;
-	while (arg[i] && ft_isspace(arg[i]))
-		i++;
-	if (!arg[i])
-		return (1);
-	if (arg[i] == COMMENT_CHAR || arg[i] == ALTERNATE_COMMENT_CHAR)
-		return (1);
-	return (0);
-}
 
 static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 {
