@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 11:51:44 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 12:19:02 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void	validate_instruction(t_asmdata *data, char *ptr, int index, int i)
 	if (data->oplist[index]->arg_count != g_statements[tmp_i].arg_count \
 		|| res ^ data->oplist[index]->args)
 		free_exit(data, "invalid arg type/count for statement", ERROR);
+	// ft_printf("arg {%s} count = %d\n", ptr, data->oplist[index]->arg_count);
 }
 
 void	parse_instructions(t_asmdata *data)
@@ -166,7 +167,7 @@ void	parse_instructions(t_asmdata *data)
 			i++;
 		if (validate_statement(data, ptr, index, &i))
 			validate_instruction(data, ptr, index, i);
-		else if (i == 0 && !validate_label(data, ptr, index))
+		else if (!validate_label(data, ptr, index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;
 	}

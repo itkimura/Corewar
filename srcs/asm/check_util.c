@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccariou <ccariou@hive.fi>                  +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:31:35 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/26 11:17:37 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/26 12:19:33 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	check_size(char *str, int code)
 	int	len;
 
 	len = ft_strlen(str);
-	ft_printf("str == %s strlen == %d\n", str, len);
 	if (code == 1)
 		if (len >= PROG_NAME_LENGTH)
 			return (1);
