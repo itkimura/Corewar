@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 12:28:32 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 21:41:14 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	validate_label(t_asmdata *data, char *ptr, int index)
 	i = 0;
 	while (ptr[i] && ft_strchr(LABEL_CHARS, ptr[i]))
 		i++;
+	// ft_printf("label_tools.c ptr [%s]\n", ptr);
 	if (ptr[i++] != LABEL_CHAR)
 		return (0);
 	label = ft_strsub(ptr, 0, i - 1);

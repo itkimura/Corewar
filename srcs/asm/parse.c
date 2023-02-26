@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 21:18:10 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 21:41:00 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,10 +168,10 @@ void	parse_instructions(t_asmdata *data)
 		ptr = data->oplist[index]->instruction;
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
-		// ft_printf("ptr [%s]\n", ptr);
+		// ft_printf("ptr in parse.c [%s]\n", ptr);
 		if (validate_statement(data, ptr, index, &i))
 			validate_instruction(data, ptr, index, i);
-		else if (!validate_label(data, ptr, index))
+		else if (!validate_label(data, &ptr[i], index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;
 	}
