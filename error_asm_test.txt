@@ -100,7 +100,7 @@ Syntax error at token [TOKEN][001:001] INSTRUCTION "name"
 
 ***[32mOUR ASM***
 [0m
-Writing output program
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -110,7 +110,7 @@ Lexical error at [10:10]
 
 ***[32mOUR ASM***
 [0m
-Writing output program
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -130,7 +130,7 @@ Lexical error at [10:10]
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -260,7 +260,7 @@ Champion comment too long (Max length 2048)
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -320,7 +320,7 @@ Syntax error at token [TOKEN][004:001] END "(null)"
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -430,7 +430,7 @@ Syntax error at token [TOKEN][003:001] END "(null)"
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -480,7 +480,7 @@ Invalid parameter 1 type direct for instruction st
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -490,7 +490,7 @@ Invalid parameter 0 type indirect for instruction lfork
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -720,7 +720,7 @@ Syntax error at token [TOKEN][011:008] INDIRECT_LABEL ":l2"
 
 ***[32mOUR ASM***
 [0m
-Writing output program
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -960,7 +960,7 @@ Invalid parameter 1 type indirect for instruction ldi
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -1020,7 +1020,7 @@ Invalid parameter 2 type indirect for instruction sti
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -1030,7 +1030,7 @@ Invalid parameter 0 type indirect for instruction sub
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -1040,7 +1040,7 @@ Invalid parameter 2 type indirect for instruction xor
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***
@@ -1220,7 +1220,7 @@ Invalid parameter 3 type direct for instruction sti
 
 ***[32mOUR ASM***
 [0m
-[Error]: invalid arg type/count for statement
+[Error]: invalid arg (not a valid comment)
 
 
 ***[31mOG ASM***

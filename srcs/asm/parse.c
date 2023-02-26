@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 12:19:02 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 12:41:59 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 	while (arg[end] && !ft_isspace(arg[end]) \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
-	if (!check_comment_after_arg(&arg[end]))
+	if (!check_comment_after_arg(&arg[end]) || start + 1 == end)
 		free_exit(data, "invalid arg (not a valid comment)", ERROR);
 	arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
 	arg[end - start] = '\0';
