@@ -110,7 +110,7 @@ if [ "$TEST_TYPE" == "valid" ]; then
 		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" our_valid_asm/
         echo -e "***\033[31mOG ASM***\n"\033[0m >> valid_asm_test.txt
-		./eval_tests/asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
+		./eval_tests/example_asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
 		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" og_valid_asm/
     done
@@ -126,7 +126,7 @@ elif [ "$TEST_TYPE" == "error" ]; then
 		echo -e "\n" >> error_asm_test.txt
         mv "${file%.s}.cor" our_error_asm/
         echo -e "***\033[31mOG ASM***\n\033[0m" >> error_asm_test.txt
-		./eval_tests/asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
+		./eval_tests/example_asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
 		echo -e "\n" >> error_asm_test.txt
         mv "${file%.s}.cor" og_error_asm/
     done
