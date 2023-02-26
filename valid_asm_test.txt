@@ -1,6 +1,6 @@
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -10,7 +10,7 @@ Writing output program to eval_tests/s_files/42.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -30,7 +30,7 @@ Writing output program to eval_tests/s_files/Backward_fixed.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -40,7 +40,7 @@ Writing output program to eval_tests/s_files/Bazou.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -60,7 +60,7 @@ Writing output program to eval_tests/s_files/Code_eater.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -70,7 +70,7 @@ Writing output program to eval_tests/s_files/Death_fixed.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -100,7 +100,7 @@ Writing output program to eval_tests/s_files/Explosive_Kitty.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -140,7 +140,7 @@ Writing output program to eval_tests/s_files/Horace.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -150,7 +150,7 @@ Writing output program to eval_tests/s_files/Izi_Miaou.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -190,7 +190,7 @@ Writing output program to eval_tests/s_files/Machine-gun.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -210,7 +210,7 @@ Writing output program to eval_tests/s_files/Misaka_Mikoto.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -230,7 +230,7 @@ Writing output program to eval_tests/s_files/O-Maley_Miaou.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -240,7 +240,7 @@ Writing output program to eval_tests/s_files/Octobre_Rouge_V4.2.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -260,7 +260,7 @@ Writing output program to eval_tests/s_files/Stargate0_1.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+[Error]: Invalid instruction/label
 
 
 ***[31mOG ASM***
@@ -280,7 +280,7 @@ Writing output program to eval_tests/s_files/THUNDER.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -310,7 +310,7 @@ Writing output program to eval_tests/s_files/Wall.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -330,7 +330,7 @@ Writing output program to eval_tests/s_files/_honeybadger.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -340,7 +340,7 @@ Writing output program to eval_tests/s_files/all_instructions.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -350,7 +350,7 @@ Writing output program to eval_tests/s_files/all_ops.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -370,7 +370,7 @@ Writing output program to eval_tests/s_files/bee_gees.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -490,7 +490,7 @@ Writing output program to eval_tests/s_files/corelol.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -589,7 +589,7 @@ Writing output program to eval_tests/s_files/empty_name_comment.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -629,7 +629,7 @@ Writing output program to eval_tests/s_files/fixed_tdc3.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -669,7 +669,7 @@ Writing output program to eval_tests/s_files/helltrain.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -689,7 +689,7 @@ Writing output program to eval_tests/s_files/jump.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -739,7 +739,7 @@ Writing output program to eval_tests/s_files/label_at_end.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -749,7 +749,7 @@ Writing output program to eval_tests/s_files/lapsang.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+[Error]: Invalid instruction/label
 
 
 ***[31mOG ASM***
@@ -779,7 +779,7 @@ Writing output program to eval_tests/s_files/lfork.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -789,7 +789,7 @@ Writing output program to eval_tests/s_files/littlepuppy.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -799,7 +799,7 @@ Writing output program to eval_tests/s_files/live.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -849,7 +849,7 @@ Writing output program to eval_tests/s_files/master_of_puppets.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -889,7 +889,7 @@ Writing output program to eval_tests/s_files/meowluigi.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -909,7 +909,7 @@ Writing output program to eval_tests/s_files/moro.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -979,7 +979,7 @@ Writing output program to eval_tests/s_files/name_with_nl_comments.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1139,7 +1139,7 @@ Writing output program to eval_tests/s_files/op_zjmp.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+[Error]: Invalid instruction/label
 
 
 ***[31mOG ASM***
@@ -1169,7 +1169,7 @@ Writing output program to eval_tests/s_files/run_Kitty_RUN.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1179,7 +1179,7 @@ Writing output program to eval_tests/s_files/salamahenagalabadoun.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1189,7 +1189,7 @@ Writing output program to eval_tests/s_files/sam_2.0.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1199,7 +1199,7 @@ Writing output program to eval_tests/s_files/sencha.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1209,7 +1209,7 @@ Writing output program to eval_tests/s_files/skynet.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1219,7 +1219,7 @@ Writing output program to eval_tests/s_files/slider2.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1239,7 +1239,7 @@ Writing output program to eval_tests/s_files/tdc4.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1269,7 +1269,7 @@ Writing output program to eval_tests/s_files/test_lld.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1309,7 +1309,7 @@ Writing output program to eval_tests/s_files/turtle.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1319,7 +1319,7 @@ Writing output program to eval_tests/s_files/ultima.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1329,7 +1329,7 @@ Writing output program to eval_tests/s_files/ultimate-surrender.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1339,7 +1339,7 @@ Writing output program to eval_tests/s_files/wave.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg
+Writing output program
 
 
 ***[31mOG ASM***
@@ -1349,7 +1349,7 @@ Writing output program to eval_tests/s_files/weird_load.cor
 
 ***[32mOUR ASM***
 033[0m
-[Error]: invalid arg (not a valid comment)
+Writing output program
 
 
 ***[31mOG ASM***
