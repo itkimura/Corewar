@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/26 11:56:52 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 13:20:54 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void		validate_instruction(t_asmdata *data, char *ptr, int index, int i);
 int			check_size(char *str, int code);
 void		free_exit(t_asmdata *data, char *str, bool is_error);
 void		add_byte_to_op(t_asmdata *data, int index, int arg_code, int tmp_index);
+int			check_comment_after_arg(char *arg);
 
 /* 
 **	Op functions

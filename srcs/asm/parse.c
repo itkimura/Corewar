@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 13:05:43 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 13:20:41 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	validate_ind_arg(char *arg, int res)
 	return (tmp);
 }
 
-static int	check_comment_after_arg(char *arg)
+int	check_comment_after_arg(char *arg)
 {
 	int	i;
 
@@ -79,8 +79,6 @@ static int	validate_arg(char *arg)
 		arg_code = validate_ind_arg(arg, arg_code);
 	return (arg_code);
 }
-
-
 
 static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 {

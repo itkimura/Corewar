@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/26 12:48:51 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 13:10:16 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 //	print_oplist(data);
 	// ft_printf("*******opsize == %d\n", data->opsize);
 	write_to_file(data, argv[1]);
-	 ft_printf("Writing output program\n");
+	ft_printf("Writing output program\n");
 	// print_hashlabel(data);
 	free_exit(data, NULL, SUCCESS);
 	return (0);
