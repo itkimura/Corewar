@@ -6,24 +6,24 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 21:41:00 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 22:12:35 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	validate_ind_arg(char *arg, int res)
+static int	validate_ind_arg(char *arg, int arg_code)
 {
-	int	tmp;
+	int	tmp_code;
 	int	i;
 
-	tmp = res;
+	tmp_code = arg_code;
 	i = 1;
 	if (arg[0] == LABEL_CHAR || arg[0] == '-' || ft_isdigit(arg[0]))
-		tmp = IND_CODE;
-	if (res == DIR_CODE || arg[0] == '-')
+		tmp_code = IND_CODE;
+	if (arg_code == DIR_CODE || arg[0] == '-')
 		i++;
-	if (arg[0] == LABEL_CHAR || res)
+	if (arg[0] == LABEL_CHAR || arg_code)
 	{
 		while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 			i++;
@@ -33,9 +33,9 @@ static int	validate_ind_arg(char *arg, int res)
 		while (arg[i] && ft_isdigit(arg[i]))
 			i++;
 	}
-	if (arg[i])
-		tmp = 0;
-	return (tmp);
+	if (arg[i] || (arg[0] == LABEL_CHAR && i == 1))
+		tmp_code = 0;
+	return (tmp_code);
 }
 
 int	check_comment_after_arg(char *arg)
@@ -60,11 +60,11 @@ static int	validate_arg(char *arg)
 	arg_code = 0;
 	i = 1;
 	if (arg[0] == 'r' && arg[1] == '0' && arg[2] == '0')
-		return (arg_code);
+		return (0);
 	if (arg[0] == 'r' && ft_isdigit(arg[1]) \
 		&& (!arg[2] || (ft_isdigit(arg[2]) && !arg[3])))
-		arg_code = REG_CODE;
-	else if (arg[0] == DIRECT_CHAR)
+		return (REG_CODE);
+	if (arg[0] == DIRECT_CHAR)
 		arg_code = DIR_CODE;
 	if (arg[0] == DIRECT_CHAR && arg[1] != LABEL_CHAR)
 	{
@@ -75,7 +75,7 @@ static int	validate_arg(char *arg)
 		while(arg[i] && ft_isdigit(arg[i]))
 			i++;
 		if (arg[i])
-			arg_code = 0;
+			return (0);
 	}
 	else if (arg[0] != 'r')
 		arg_code = validate_ind_arg(arg, arg_code);

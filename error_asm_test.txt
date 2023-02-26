@@ -1,0 +1,1280 @@
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:016] INSTRUCTION "live"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [3:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [3:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [3:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [2:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [2:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:001] INSTRUCTION "comment"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [1:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [1:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:001] INSTRUCTION "name"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [10:10]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [10:10]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [10:10]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [10:10]
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+Writing output program to eval_tests/asm_error_files/bee_gees.cor
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label2
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:005] LABEL "l2:"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:006] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:001] LABEL "l2:"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:014] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:013] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][006:019] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [1:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:002] INSTRUCTION "ld"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][003:001] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Champion comment too long (Max length 2048)
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Champion comment too long (Max length 2048)
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:14]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:14]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:025] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:025] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: empty file
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:001] END "(null)"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: command or data missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:001] END "(null)"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [10:10]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [9:15]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][005:017] INSTRUCTION "rk"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][007:003] INSTRUCTION "asd"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [24:10]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label2
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:6]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [2:11]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: command or data missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][009:001] END "(null)"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: command or data missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][003:001] END "(null)"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction sti
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction zjmp
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type direct for instruction st
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type direct for instruction st
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type direct for instruction st
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction lfork
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction lfork
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:12]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:9]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:021] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter count for instruction sti
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][008:007] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label2
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][007:011] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [11:12]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][004:012] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:010] INSTRUCTION "x"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:007] INSTRUCTION "s"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:001] INSTRUCTION "x"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:001] INSTRUCTION "x"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:002] INSTRUCTION "ld"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [31:23]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [182:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][025:018] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type direct for instruction sti
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][027:005] SEPARATOR ","
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][036:007] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: command or data missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][006:001] END "(null)"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][011:008] INDIRECT_LABEL ":l2"
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [14:12]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+No such label live while attempting to dereference token [TOKEN][027:008] DIRECT_LABEL "%:live"
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][009:004] END "(null)"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][007:017] INSTRUCTION "just"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][005:013] INSTRUCTION "zork"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][005:013] INSTRUCTION "zork"
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+No such label dead while attempting to dereference token [TOKEN][006:011] DIRECT_LABEL "%:dead"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:014] COMMAND_COMMENT ".comment"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Champion name too long (Max length 128)
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Champion name too long (Max length 128)
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [3:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][003:001] LABEL "l2:"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:001] STRING ""I'M ALIIIIVE""
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][003:001] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][003:001] LABEL "l2:"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:002] STRING ""zork""
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:007] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+No such label dead while attempting to dereference token [TOKEN][006:011] DIRECT_LABEL "%:dead"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 2 type indirect for instruction add
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type direct for instruction aff
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 2 type indirect for instruction and
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction fork
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type direct for instruction ld
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type indirect for instruction ldi
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction live
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type direct for instruction lld
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type indirect for instruction lldi
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [7:33]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [7:11]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 2 type indirect for instruction sti
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction sub
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 2 type indirect for instruction xor
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 0 type indirect for instruction zjmp
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:21]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:21]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:14]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [4:14]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:009] COMMAND_COMMENT ".comment"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: comment size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:010] COMMAND_COMMENT ".comment"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:024] STRING ""I'M ALIIIIVE""
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:025] STRING ""I'M ALIIIIVE""
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:006] COMMAND_NAME ".name"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name size invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:007] COMMAND_NAME ".name"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:013] STRING ""zork""
+
+
+***[32mOUR ASM***
+[0m
+[Error]: name or comment missing/invalid
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][001:014] STRING ""zork""
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][016:007] INSTRUCTION "x00090000"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [3:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [3:1]
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label2
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][006:027] ENDLINE
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 3 type direct for instruction sti
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 1 type indirect for instruction zjmp
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg type/count for statement
+
+
+***[31mOG ASM***
+[0m
+Invalid parameter 3 type direct for instruction and
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+Syntax error at token [TOKEN][002:004] COMMAND_NAME ".name"
+
+
+***[32mOUR ASM***
+[0m
+Writing output program
+
+
+***[31mOG ASM***
+[0m
+No such label asdsad2 while attempting to dereference token [TOKEN][005:006] DIRECT_LABEL "%:asdsad2"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label
+
+
+***[31mOG ASM***
+[0m
+Invalid instruction at token [TOKEN][005:003] INSTRUCTION "what"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: Invalid instruction/label2
+
+
+***[31mOG ASM***
+[0m
+Invalid instruction at token [TOKEN][004:006] INSTRUCTION "std"
+
+
+***[32mOUR ASM***
+[0m
+[Error]: invalid arg (not a valid comment)
+
+
+***[31mOG ASM***
+[0m
+Lexical error at [11:17]
+
+
