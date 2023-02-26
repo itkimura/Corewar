@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 22:31:17 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 22:52:44 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,6 @@ static int	validate_ind_arg(char *arg, int arg_code)
 	return (tmp_code);
 }
 
-int	check_comment_after_arg(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i] && ft_isspace(arg[i]))
-		i++;
-	if (!arg[i])
-		return (1);
-	if (arg[i] == COMMENT_CHAR || arg[i] == ALTERNATE_COMMENT_CHAR)
-		return (1);
-	return (0);
-}
-
 static int	validate_arg(char *arg)
 {
 	int	arg_code;
@@ -70,7 +56,7 @@ static int	validate_arg(char *arg)
 	{
 		while (arg[i] == '0')
 			i++;
-		while(arg[i] && ft_isdigit(arg[i]))
+		while (arg[i] && ft_isdigit(arg[i]))
 			i++;
 		if (arg[i] || i == 1 + (arg[1] == '-'))
 			return (0);
@@ -138,26 +124,11 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 	ft_memdel((void **)&args);
 }
 
-void	validate_instruction(t_asmdata *data, char *ptr, int index, int i)
-{
-	u_int16_t	res;
-	int			tmp_i;
-
-	seperate_instruction(data, ptr, index, i);
-	tmp_i = get_statement_index(data, data->oplist[index]->statement);
-	res = data->oplist[index]->args & g_statements[tmp_i].args;
-	if (data->oplist[index]->arg_count != g_statements[tmp_i].arg_count \
-		|| res ^ data->oplist[index]->args)
-		free_exit(data, "invalid arg type/count for statement", ERROR);
-	// ft_printf("arg {%s} count = %d\n", ptr, data->oplist[index]->arg_count);
-}
-
 void	parse_instructions(t_asmdata *data)
 {
 	char		*ptr;
 	int			index;
 	int			i;
-	
 
 	index = 0;
 	while (index < data->opcount)
@@ -166,9 +137,8 @@ void	parse_instructions(t_asmdata *data)
 		ptr = data->oplist[index]->instruction;
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
-		// ft_printf("ptr in parse.c [%s]\n", ptr);
 		if (validate_statement(data, ptr, index, &i))
-			validate_instruction(data, ptr, index, i);
+			check_instruction(data, ptr, index, i);
 		else if (!validate_label(data, &ptr[i], index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;

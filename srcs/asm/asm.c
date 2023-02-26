@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/26 13:10:16 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 22:50:01 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_structs(t_asmdata *data)
 	data->opsize = OPSIZE;
 	data->leaks = false;
 }
+
 int	check_file_nam(char *filename)
 {
 	int	name_idx;
@@ -65,12 +66,8 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
-	// ft_printf("JAMBON BEURRE\n");
-//	print_oplist(data);
-	// ft_printf("*******opsize == %d\n", data->opsize);
 	write_to_file(data, argv[1]);
 	ft_printf("Writing output program\n");
-	// print_hashlabel(data);
 	free_exit(data, NULL, SUCCESS);
 	return (0);
 }
