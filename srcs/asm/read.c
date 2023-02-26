@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 13:35:43 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 21:27:41 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,22 @@ static int	store_op(t_asmdata *data, char *line, int fd)
 	ret = 1;
 	while (ret)
 	{
-		i = 0;
 		if (data->opcount == data->opsize)
 			resize_op_table(data);
 		if (!init_op(&tmp, line))
 			free_exit(data, MALLOCFAIL, ERROR);
 		data->oplist[data->opcount++] = tmp;
 		ret = get_next_line(fd, &line);
-		while (line[i] && ft_isspace(line[i]))
-			i++;
-		while (!(*line) || *line == COMMENT_CHAR \
-			|| *line == ALTERNATE_COMMENT_CHAR || !line[i]) 
+		while (ret) 
 		{
+			i = 0;
+			while (line[i] && ft_isspace(line[i]))
+				i++;
+			if (line[i] && line[i] != COMMENT_CHAR \
+				&& line[i] != ALTERNATE_COMMENT_CHAR)
+				break ;
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
-			if (ret == 0)
-				break;
 		}
 	}
 	return (1);

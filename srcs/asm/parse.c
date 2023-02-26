@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 13:56:45 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/26 21:18:10 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 	while (arg[end] && !ft_isspace(arg[end]) \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
-	// ft_printf("arg [%s] and end [%s]\n", arg, &arg[end]);
-	if (!check_comment_after_arg(&arg[end]) || (start + 1 == end && arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR && arg[end]))
+	if (!check_comment_after_arg(&arg[end]))
 		free_exit(data, "invalid arg (not a valid comment)", ERROR);
 	arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
 	arg[end - start] = '\0';
@@ -169,6 +168,7 @@ void	parse_instructions(t_asmdata *data)
 		ptr = data->oplist[index]->instruction;
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
+		// ft_printf("ptr [%s]\n", ptr);
 		if (validate_statement(data, ptr, index, &i))
 			validate_instruction(data, ptr, index, i);
 		else if (!validate_label(data, ptr, index))
