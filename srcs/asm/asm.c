@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/24 21:38:12 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/26 10:38:32 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	check_file_nam(char *filename)
 
 	name_idx = 0;
 	name_idx = ft_strlen(filename);
-	ft_printf("[%c]\n", filename[name_idx - 1]);
 	if (name_idx >= 3 && filename[name_idx - 1] == 's' \
 		&& filename[name_idx - 2] == '.')
 		return (1);
