@@ -5,7 +5,7 @@
 #
 # ASM_PATH="./"
 ASM_PATH="./resources/" #example_asm
-S_FILES_PATH="./resources/s_files/"
+S_FILES_PATH="./eval_tests/s_files/"
 
 #
 # Color scheme
@@ -21,6 +21,7 @@ ac=$#
 S_FILES=`ls $S_FILES_PATH`
 for FILE in $S_FILES;
 do
-	echo -e "$YELLOW\n$S_FILES_PATH$FILE$NC"
-	./asm $S_FILES_PATH$FILE
+	echo -e "for file: $S_FILES_PATH$FILE$NC" >> leaks.txt
+	./asm $S_FILES_PATH$FILE -x >> leaks.txt
+	echo -e "---------------\n" >> leaks.txt
 done

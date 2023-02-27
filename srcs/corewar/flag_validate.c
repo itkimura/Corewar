@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/23 21:54:49 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:20:24 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,6 @@ bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game)
 	return (true);
 }
 
-/* 
- * validate -s flag and save number in game->flag_value;
- */
-bool	validate_l_flag(char *argv, t_vm_flag *flag, t_game *game)
-{
-	int	nb;
-
-	if (is_after_flag_n(game) == true)
-		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
-	if (argv == NULL)
-		return (print_help(), false);
-	if (is_number(argv) == false)
-		return (print_error("-l flag", WRONG_NB));
-	nb = ft_atoi(argv);
-	*flag = FLAG_L;
-	game->flags_value[FLAG_L] = nb;
-	return (true);
-}
-
 /*
  * validate "-a" flag
  */
@@ -101,5 +82,17 @@ bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game)
 	nb = ft_atoi(argv);
 	*flag = FLAG_S;
 	game->flags_value[FLAG_S] = nb;
+	return (true);
+}
+
+/*
+ * validate "-a" flag
+ */
+bool	validate_lld_flag(t_vm_flag *flag, t_game *game)
+{
+	if (is_after_flag_n(game) == true)
+		return (print_error("", NO_PLAYER_AFTER_FLAG_N));
+	*flag = FLAG_LLD;
+	game->flags_value[FLAG_LLD] = 1;
 	return (true);
 }

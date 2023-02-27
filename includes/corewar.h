@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/23 21:52:13 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:31:29 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /*library for bonus*/
 # include <stdio.h>
 
-# define TOTAL_FLAGS 7
+# define TOTAL_FLAGS 6
 
 # define RED "\e[31m"
 # define GREEN "\e[32m"
@@ -31,6 +31,8 @@
 # define RESET "\e[m"
 
 # define INITIAL_VALUE -1
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 enum	e_arg
 {
@@ -48,7 +50,6 @@ typedef enum e_vm_flag
 	NOT_FLAG = -1,
 	FLAG_DUMP,
 	FLAG_N,
-	FLAG_L,
 	FLAG_V,
 	FLAG_A,
 	FLAG_S,
@@ -230,8 +231,12 @@ void	print_arena(t_game *game);
  * print_flag.c
  */
 bool	print_dump(t_game *game);
-void	flag_l(t_game *game, t_carriage *carriage);
-void	print_flag_l_death(t_game *game, t_carriage *carriage);
+
+/*
+ * print_flag_v.c
+ */
+void	print_flag_v_death(t_game *game, t_carriage *carriage);
+void	flag_v(t_game *game, t_carriage *carriage);
 
 /*
  * validate_champion.c
@@ -246,11 +251,30 @@ bool	is_after_flag_n(t_game *game);
 bool	which_flag(char **argv, int *index, t_vm_flag *flag, t_game *game);
 
 /* 
+ * flag_validate.c
+ */
+bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_a_flag(t_vm_flag *flag, t_game *game);
+bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_lld_flag(t_vm_flag *flag, t_game *game);
+
+/* 
+ * flag_v_validate.c
+ */
+bool	validate_v_flag(char *argv, t_vm_flag *flag, t_game *game);
+
+/* 
+ * flag_validate_utils.c
+ */
+bool	is_number(char *argv);
+bool	is_after_flag_n(t_game *game);
+/* 
  * flag_utils.c
  */
 bool	validate_n_flag(char *argv, t_vm_flag *flag, t_game *game);
 bool	validate_d_flag(char *argv, t_vm_flag *flag, t_game *game);
-bool	validate_l_flag(char *argv, t_vm_flag *flag, t_game *game);
+bool	validate_v_flag(char *argv, t_vm_flag *flag, t_game *game);
 bool	validate_a_flag(t_vm_flag *flag, t_game *game);
 bool	validate_s_flag(char *argv, t_vm_flag *flag, t_game *game);
 

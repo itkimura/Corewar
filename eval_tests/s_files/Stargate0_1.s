@@ -36,7 +36,7 @@ advanced_wall:
 	zjmp %:advanced_wall
 	live %0
 
-	
+
 	ld		%495, r8
 fork %:coreclear
 	st r1, 280

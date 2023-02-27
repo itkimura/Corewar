@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 20:15:05 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/27 00:00:30 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,65 +49,65 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 	if (line[i] != '\"')
 		j = get_full_cmd(ptr, fd, j);
 	ptr[j] = '\0';
+	if (!check_comment_after_arg(&line[i + 1]))
+		return (0);
 	ft_strdel(&line);
 	return (1);
 }
 
-static int	store_op(t_asmdata *data, char *line, int fd)
+static int	store_op(t_asmdata *data, char *line, int fd, int ret)
 {
 	t_op	*tmp;
-	int		ret;
 	int		i;
-	int		index; //TODO remove
 
-	ret = 1;
-	index = 0; //TODO remove
 	while (ret)
 	{
-		i = 0;
 		if (data->opcount == data->opsize)
 			resize_op_table(data);
 		if (!init_op(&tmp, line))
 			free_exit(data, MALLOCFAIL, ERROR);
 		data->oplist[data->opcount++] = tmp;
 		ret = get_next_line(fd, &line);
-//		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		while (line[i] && ft_isspace(line[i]))
-			i++;
-//		ft_printf("index == %d\n", index);
-		while (!(*line) || *line == COMMENT_CHAR \
-			|| *line == ALTERNATE_COMMENT_CHAR || !line[i]) 
+		while (ret)
 		{
+			i = 0;
+			while (line[i] && ft_isspace(line[i]))
+				i++;
+			if (line[i] && line[i] != COMMENT_CHAR \
+				&& line[i] != ALTERNATE_COMMENT_CHAR)
+				break ;
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
-			if (ret == 0)
-				break;
 		}
-		index++;
 	}
 	return (1);
 }
 
 static int	store_data(t_asmdata *data, char *line, int fd)
 {
-	int	res;
+	int	i;
 
-	res = 0;
-	while (line[res] && ft_isspace(line[res]))
-		res++;
-	if (!(*line) || !line[res] || line[res] == COMMENT_CHAR || line[res] == ALTERNATE_COMMENT_CHAR)
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	if (!line[i] || line[i] == COMMENT_CHAR \
+		|| line[i] == ALTERNATE_COMMENT_CHAR)
 		ft_strdel(&line);
 	else if (data->name && data->comment && *line)
-		res = store_op(data, line, fd);
-	else if (!ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
-		data->name = store_cmd(data->header->prog_name, line, fd, res + 5);
-	else if (!ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
-		data->comment = store_cmd(data->header->comment, line, fd, res + 8);
-	else if (line[res] == '.')
-		ft_strdel(&line);
-	else if (!res || !data->name || !data->comment)
-		free_exit(data, "name or comment missing/invalid", ERROR);
-	return (1);
+		i = store_op(data, line, fd, 1);
+	else if (!data->name && !ft_strncmp(&(line[i]), NAME_CMD_STRING, 5))
+	{
+		data->name = store_cmd(data->header->prog_name, line, fd, i + 5);
+		i = check_size(data->header->prog_name, 1);
+	}
+	else if (!data->comment && !ft_strncmp(&line[i], COMMENT_CMD_STRING, 8))
+	{
+		data->comment = store_cmd(data->header->comment, line, fd, i + 8);
+		i = check_size(data->header->comment, 2);
+	}
+	else if (!data->name || !data->comment || line[i] == '.')
+		return (-1);
+	return (i);
 }
 
 int	read_input(t_asmdata *data, char *argv)
@@ -126,10 +126,14 @@ int	read_input(t_asmdata *data, char *argv)
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		if (ret == 1)
-			store_data(data, line, fd);
+		if (ret == 1 && store_data(data, line, fd) == -1)
+		{
+			ft_strdel(&line);
+			free_exit(data, "name/comment error or bad command", ERROR);
+		}
 	}
-//	ft_printf("DRACULA TOUT NU\n");
+	if (data->opcount == 0)
+		free_exit(data, "empty file/incomplete command?#need2check", ERROR);
 	if (close(fd) == -1)
 		free_exit(data, "Closing file failed", ERROR);
 	return (1);

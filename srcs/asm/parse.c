@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/20 14:34:20 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/26 22:52:44 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	validate_ind_arg(char *arg, int res)
+static int	validate_ind_arg(char *arg, int arg_code)
 {
-	int	tmp;
+	int	tmp_code;
 	int	i;
 
-	tmp = res;
+	tmp_code = arg_code;
 	i = 1;
 	if (arg[0] == LABEL_CHAR || arg[0] == '-' || ft_isdigit(arg[0]))
-		tmp = IND_CODE;
-	if (res == DIR_CODE || arg[0] == '-')
+		tmp_code = IND_CODE;
+	if (arg_code == DIR_CODE || arg[0] == '-')
 		i++;
-	if (arg[0] == LABEL_CHAR || res)
+	if (arg[0] == LABEL_CHAR || arg_code)
 	{
 		while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 			i++;
@@ -33,9 +33,9 @@ static int	validate_ind_arg(char *arg, int res)
 		while (arg[i] && ft_isdigit(arg[i]))
 			i++;
 	}
-	if (arg[i])
-		tmp = 0;
-	return (tmp);
+	if (arg[i] || (arg[0] == LABEL_CHAR && i == 1))
+		tmp_code = 0;
+	return (tmp_code);
 }
 
 static int	validate_arg(char *arg)
@@ -44,23 +44,24 @@ static int	validate_arg(char *arg)
 	int	i;
 
 	arg_code = 0;
-	i = 1;
+	i = 1 + (arg[1] == '-');
 	if (arg[0] == 'r' && arg[1] == '0' && arg[2] == '0')
-		return (arg_code);
-	if (arg[0] == 'r' && ft_isdigit(arg[1]) && (!arg[2] \
-		|| (ft_isdigit(arg[2]) && !arg[3])))
-		arg_code = REG_CODE;
-	else if (arg[0] == DIRECT_CHAR)
+		return (0);
+	if (arg[0] == 'r' && ft_isdigit(arg[1]) \
+		&& (!arg[2] || (ft_isdigit(arg[2]) && !arg[3])))
+		return (REG_CODE);
+	if (arg[0] == DIRECT_CHAR)
 		arg_code = DIR_CODE;
 	if (arg[0] == DIRECT_CHAR && arg[1] != LABEL_CHAR)
 	{
 		while (arg[i] == '0')
 			i++;
-		if (arg[i] && !ft_isdigit(arg[i]) && arg[i + 1] \
-			&& (!ft_isdigit(arg[i + 1]) && arg[i + 2]))
-			arg_code = 0;
+		while (arg[i] && ft_isdigit(arg[i]))
+			i++;
+		if (arg[i] || i == 1 + (arg[1] == '-'))
+			return (0);
 	}
-	else if (arg[0] != 'r')
+	else
 		arg_code = validate_ind_arg(arg, arg_code);
 	return (arg_code);
 }
@@ -73,10 +74,11 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 
 	arg_code = 0;
 	end = start;
-//	ft_printf("arg = %s len = %zu\n", arg, ft_strlen(arg));
-	while (arg[end] && arg[end] != ' ' && arg[end] != '\t' \
+	while (arg[end] && !ft_isspace(arg[end]) \
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
+	if (!check_comment_after_arg(&arg[end]))
+		free_exit(data, "invalid arg (not a valid comment)", ERROR);
 	arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
 	arg[end - start] = '\0';
 	arg_code = validate_arg(arg);
@@ -89,6 +91,7 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 	data->oplist[index]->args = \
 	data->oplist[index]->args << 3 | (1 << (arg_code -1));
 	add_byte_to_op(data, index, arg_code, tmp_index);
+	data->oplist[index]->arg_count++;
 	return (arg);
 }
 
@@ -124,10 +127,8 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 void	parse_instructions(t_asmdata *data)
 {
 	char		*ptr;
-	u_int16_t	tmp;
 	int			index;
 	int			i;
-	int			tmp_i;
 
 	index = 0;
 	while (index < data->opcount)
@@ -137,14 +138,8 @@ void	parse_instructions(t_asmdata *data)
 		while (ptr[i] == ' ' || ptr[i] == '\t')
 			i++;
 		if (validate_statement(data, ptr, index, &i))
-		{
-			seperate_instruction(data, ptr, index, i);
-			tmp_i = get_statement_index(data, data->oplist[index]->statement);
-			tmp = data->oplist[index]->args & g_statements[tmp_i].args;
-			if (tmp != data->oplist[index]->args)
-				free_exit(data, "invalid arg type for statement", ERROR);
-		}
-		else if (i == 0 && !validate_label(data, ptr, index))
+			check_instruction(data, ptr, index, i);
+		else if (!validate_label(data, &ptr[i], index))
 			free_exit(data, "Invalid instruction/label", ERROR);
 		index++;
 	}

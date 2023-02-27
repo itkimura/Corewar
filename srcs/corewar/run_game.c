@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/01/25 13:24:55 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:02:46 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	set_ctd(t_game *game)
 	{
 		game->cycles_to_die = game->cycles_to_die - CYCLE_DELTA;
 		game->total_checks = 0;
+		if (game->flags_value[FLAG_V] == FO_CYCLES)
+			ft_printf("Cycle to die is now %d\n", game->cycles_to_die);
 	}
 	game->check_counter = game->cycles_to_die;
 	game->total_lives = 0;
@@ -43,7 +45,7 @@ static void	run_check(t_game *game)
 		next = carriage->next;
 		if (carriage->last_live_performed <= limit)
 		{
-			print_flag_l_death(game, carriage);
+			print_flag_v_death(game, carriage);
 			kill_carriage(game, prev, carriage, next);
 		}
 		else
@@ -73,7 +75,7 @@ static bool	perform_op(t_game *game, t_carriage *carriage)
 		{
 			if (g_op_tab[carriage->statement_index].f(game, carriage) == false)
 				return (false);
-			flag_l(game, carriage);
+			flag_v(game, carriage);
 		}
 		carriage->pc = carriage->next_statement_pc;
 	}
@@ -102,7 +104,7 @@ bool	run_game(t_game *game)
 	index = 0;
 	while (game->carriage_head != NULL)
 	{
-		if (game->flags_value[FLAG_L] == FO_CYCLES)
+		if (game->flags_value[FLAG_V] == FO_CYCLES)
 			ft_printf("It is now cycle %d\n", game->total_cycles);
 		if (print_dump(game) == false)
 			break ;

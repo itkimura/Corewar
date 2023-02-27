@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/22 19:43:09 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:11 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ static void	init_structs(t_asmdata *data)
 	data->opsize = OPSIZE;
 	data->leaks = false;
 }
+
 int	check_file_nam(char *filename)
 {
 	int	name_idx;
 
 	name_idx = 0;
 	name_idx = ft_strlen(filename);
-	if (name_idx > 3 && filename[name_idx - 1] != 's' && \
-			filename[name_idx - 2] != '.')
+	if (name_idx >= 3 && filename[name_idx - 1] == 's' \
+		&& filename[name_idx - 2] == '.')
 		return (1);
 	else
 		return (0);
 }
-	
 
 int	main(int argc, char **argv)
 {
@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2 || argc > 3)
 		return (0);
-	if (check_file_nam(argv[1]) != 0)
+	if (!check_file_nam(argv[1]))
 	{
 		ft_printf("File extension non valid");
 		return (0);
@@ -66,12 +66,10 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
-	// ft_printf("JAMBON BEURRE\n");
-//	print_oplist(data);
-	// ft_printf("*******opsize == %d\n", data->opsize);
-	 write_to_file(data, argv[1]);
-	 ft_printf("Writing output program\n");
-	// print_hashlabel(data);
+	if (check_if_label_exists(data) == 1)
+		free_exit(data, "arg label reference doesn't exists", ERROR);
+	write_to_file(data, argv[1]);
+	ft_printf("Writing output program\n");
 	free_exit(data, NULL, SUCCESS);
 	return (0);
 }

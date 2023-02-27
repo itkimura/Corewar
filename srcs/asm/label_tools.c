@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 14:19:55 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 20:27:18 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 22:53:16 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	validate_label(t_asmdata *data, char *ptr, int index)
 	while (ptr[i] && (ptr[i] == ' ' || ptr[i] == '\t'))
 		i++;
 	if (ptr[i] && validate_statement(data, ptr, index, &i))
-		seperate_instruction(data, ptr, index, i);
+		check_instruction(data, ptr, index, i);
 	else if (ptr[i] && (ptr[i] != COMMENT_CHAR \
 		&& ptr[i] != ALTERNATE_COMMENT_CHAR))
 		free_exit(data, "Invalid instruction/label2", ERROR);

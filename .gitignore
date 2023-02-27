@@ -17,3 +17,5 @@ asm
 :wq
 *.swp 
 *.swo
+
+leaks.txt

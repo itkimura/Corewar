@@ -11,6 +11,6 @@ sti	r1,%:live, r2
 	lldi 42, r2, r3
 	st r1, :l2
 
-live:	live	% #<-- ERROR HERE
+live:	live	%	#<-- ERROR HERE
 	zjmp	%:live
 	
