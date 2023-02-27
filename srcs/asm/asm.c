@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/27 00:37:06 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/27 15:12:11 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	main(int argc, char **argv)
 		data->leaks = true;
 	read_input(data, argv[1]);
 	parse_instructions(data);
+	if (check_if_label_exists(data) == 1)
+		free_exit(data, "arg label reference doesn't exists", ERROR);
 	write_to_file(data, argv[1]);
 	ft_printf("Writing output program\n");
 	free_exit(data, NULL, SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:31:35 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/27 00:00:21 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/27 13:53:45 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,52 @@ void	check_instruction(t_asmdata *data, char *ptr, int index, int i)
 	if (data->oplist[index]->arg_count != g_statements[tmp_i].arg_count \
 		|| res ^ data->oplist[index]->args)
 		free_exit(data, "invalid arg type/count for statement", ERROR);
+}
+
+static int	check_arg_label(t_asmdata *data, char *arg)
+{
+	int	check_idx;
+	int	valid;
+
+	valid = 0;
+	check_idx = 0;
+	while (check_idx < data->opcount)
+	{
+		if (data->oplist[check_idx]->label != NULL && valid == 0)
+		{
+			if (ft_strcmp(data->oplist[check_idx]->label, &arg[2]) == 0)
+				valid = 1;
+		}
+		if (valid == 1)
+			break ;
+		check_idx += 1;
+	}
+	if (valid == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	check_if_label_exists(t_asmdata *data)
+{
+	int	op_idx;
+	int	arg_idx;
+
+	op_idx = 0;
+	while (op_idx < data->opcount)
+	{
+		arg_idx = 0;
+		while (data->oplist[op_idx]->arg[arg_idx] != NULL && arg_idx < 3)
+		{
+			if (ft_strstr(data->oplist[op_idx]->arg[arg_idx], "%:") != NULL)
+			{
+				if (check_arg_label(data, \
+					data->oplist[op_idx]->arg[arg_idx]) == 1)
+					return (1);
+			}
+			arg_idx += 1;
+		}
+		op_idx += 1;
+	}
+	return (0);
 }

@@ -6,18 +6,29 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/26 11:53:26 by leotran          ###   ########.fr       */
+/*   Updated: 2023/02/27 14:36:39 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+int	byte_shift_translate(int value)
+{
+	int	converted;
+
+	converted = 0;
+	converted |= ((0x000000ff & value) << 24);
+	converted |= ((0x0000ff00 & value) << 8);
+	converted |= ((0x00ff0000 & value) >> 8);
+	converted |= ((0xff000000 & value) >> 24);
+	return (converted);
+}
 
 void	write_name(t_asmdata *data, int fd)
 {
 	int		i;
 	int		len;
 	char	buffer[PROG_NAME_LENGTH];
-//	int32_t	helper;
 
 	i = 0;
 	len = 0;
@@ -25,7 +36,7 @@ void	write_name(t_asmdata *data, int fd)
 	ft_bzero(buffer, PROG_NAME_LENGTH);
 	while (i <= PROG_NAME_LENGTH)
 	{
-		if (i <= len) 
+		if (i <= len)
 		{
 			buffer[i] = (int)data->header->prog_name[i];
 		}
@@ -36,8 +47,6 @@ void	write_name(t_asmdata *data, int fd)
 	write(fd, buffer, PROG_NAME_LENGTH);
 	write(fd, NULL, 4);
 	write(fd, "\0\0\0\0", 4);
-//	helper = byte_shift_translate(data->opsize);
-	//write(fd, &helper, 4);
 }
 
 void	write_comment(t_asmdata *data, int fd)
@@ -51,7 +60,7 @@ void	write_comment(t_asmdata *data, int fd)
 	ft_bzero(buffer, PROG_NAME_LENGTH);
 	while (i <= COMMENT_LENGTH)
 	{
-		if (i <= len) 
+		if (i <= len)
 			buffer[i] = (int)data->header->comment[i];
 		else if (data->header->comment[i] == '#' && i > len)
 			buffer[i] = 0;
@@ -70,34 +79,20 @@ void	write_size(t_asmdata *data, int fd)
 	buffer = 0;
 	while (data->oplist[i])
 		i++;
-	//ft_printf("data->oplist[i] == %d\n", data->oplist[i]->totalbyte);
 	while (buffer == 0)
 	{
 		i--;
 		buffer = data->oplist[i]->totalbyte;
 	}
-	//ft_printf("buffer == %d, size == %d, i == %d\n", buffer, data->header->prog_size, i);
 	buffer = byte_shift_translate(buffer);
-	//ft_printf("buffer == %d, size == %d, i == %d\n", buffer, data->header->prog_size, i);
 	write(fd, &buffer, 4);
-	/*
-	ft_bzero(buffer, 4);
-	while(i >= 0)
-	{
-		buffer[j] = (char)data->header->prog_size;
-		i--;
-		j++;
-	}
-	write(fd, buffer, 4);
-	*/
 }
 
 char	*change_filename(char *filename)
 {
-	int name_idx;
+	int	name_idx;
 
 	name_idx = 0;
-//	name_idx = ft_strlen(filename);
 	while (filename[name_idx] != '.')
 		name_idx++;
 	filename[name_idx] = '\0';

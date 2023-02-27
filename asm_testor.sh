@@ -57,6 +57,8 @@ fi
 
 # Clean up created directories and text files
 if [ "$CLEANUP" == true ]; then
+	rm eval_tests/asm_error_files/*.cor
+	rm eval_tests/s_files/*.cor
     if [ -d "our_valid_asm" ]; then
         rm -rf "our_valid_asm"
     fi
