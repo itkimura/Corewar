@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/28 23:31:35 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 00:53:58 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	parse_instructions(data);
 	if (check_if_label_exists(data) == 1)
 		free_exit(data, "arg label reference doesn't exists", ERROR);
-	// write_to_file(data, argv[1]);
+	write_to_file(data, argv[1]);
 	ft_printf("Writing output program\n");
 	free_exit(data, NULL, SUCCESS);
 	return (0);
