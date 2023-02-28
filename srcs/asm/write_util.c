@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/27 14:36:39 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:13:14 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ int	byte_shift_translate(int value)
 	int	converted;
 
 	converted = 0;
-	converted |= ((0x000000ff & value) << 24);
-	converted |= ((0x0000ff00 & value) << 8);
-	converted |= ((0x00ff0000 & value) >> 8);
-	converted |= ((0xff000000 & value) >> 24);
+	if (value)
+	{
+		converted |= ((0x000000ff & value) << 24);
+		converted |= ((0x0000ff00 & value) << 8);
+		converted |= ((0x00ff0000 & value) >> 8);
+		converted |= ((0xff000000 & value) >> 24);
+	}
 	return (converted);
 }
 
@@ -90,12 +93,13 @@ void	write_size(t_asmdata *data, int fd)
 
 char	*change_filename(char *filename)
 {
-	int	name_idx;
+	int		name_idx;
+	char	*helper;
 
 	name_idx = 0;
 	while (filename[name_idx] != '.')
 		name_idx++;
 	filename[name_idx] = '\0';
-	filename = ft_strjoin(filename, ".cor");
-	return (filename);
+	helper = ft_strjoin(filename, ".cor");
+	return (helper);
 }

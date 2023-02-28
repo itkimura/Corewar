@@ -6,16 +6,39 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/27 15:10:57 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:46:13 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <stdlib.h>
 
-char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
+static char	*label_helper(char *str, int byte, int pos)
 {
 	char	*percent;
+	char	*helper;
+
+	if ((str)[0] == '%')
+	{
+		percent = ft_strdup("%");
+		helper = ft_itoa(pos - byte);
+		if (!percent && !helper)
+			return (0);
+		str = ft_strjoin(percent, helper);
+		ft_strdel(&percent);
+		ft_strdel(&helper);
+		return (str);
+	}
+	else
+	{
+		str = ft_itoa(pos - byte);
+		return (str);
+	}
+	return (0);
+}
+
+char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
+{
 	int		pos;
 
 	i = -1;
@@ -24,17 +47,7 @@ char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
 	{
 		if (ft_strequ(data->oplist[i]->label, ft_strchr(arg, ':') + 1))
 		{
-			if ((arg)[0] == '%')
-			{
-				percent = ft_strdup("%");
-				arg = ft_itoa(pos - byte);
-				percent = ft_strjoin(percent, arg);
-				if (!percent)
-					return (0);
-				arg = percent;
-				return (arg);
-			}
-			arg = ft_itoa(pos - byte);
+			arg = label_helper(arg, byte, pos);
 			return (arg);
 		}
 		pos += data->oplist[i]->byte;
@@ -57,19 +70,16 @@ void	convert_label(t_asmdata *data)
 		{
 			if (data->oplist[i]->arg[j] && \
 				ft_strchr(data->oplist[i]->arg[j], ':'))
+			{
 				data->oplist[i]->arg[j] = \
 				translate_labels(data, data->oplist[i]->arg[j], pos, i);
+			}
 			j++;
 		}
 		pos += data->oplist[i]->byte;
 		i++;
 	}
 }
-/*
- * statement
- * typecode
- * arg
- */
 
 void	champ_code(t_op **data, int fd)
 {
@@ -113,6 +123,7 @@ void	write_to_file(t_asmdata *data, char *filename)
 	convert_label(data);
 	i = 0;
 	fd = open(final_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
+	ft_strdel(&final_filename);
 	i = 0;
 	helper = byte_shift_translate(COREWAR_EXEC_MAGIC);
 	write (fd, &helper, 4);

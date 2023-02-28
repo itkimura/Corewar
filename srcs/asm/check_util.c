@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:31:35 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/27 13:53:45 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/27 20:22:55 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	check_if_label_exists(t_asmdata *data)
 	while (op_idx < data->opcount)
 	{
 		arg_idx = 0;
-		while (data->oplist[op_idx]->arg[arg_idx] != NULL && arg_idx < 3)
+		while (arg_idx < 3 && data->oplist[op_idx]->arg[arg_idx] != NULL)
 		{
 			if (ft_strstr(data->oplist[op_idx]->arg[arg_idx], "%:") != NULL)
 			{
