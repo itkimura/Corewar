@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/28 22:55:28 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 00:06:39 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static const t_statement	g_statements[HASHTABLESIZE] = {
 };
 
 int			read_input(t_asmdata *data, char *argv);
-void		seperate_instruction(t_asmdata *data, char *ptr, int index, int i);
+char		**seperate_instruction(t_asmdata *data, char *ptr, int index, int i);
 void		parse_instructions(t_asmdata *data);
 void		check_instruction(t_asmdata *data, char *ptr, int index, int i);
 int			check_size(char *str, int code);
@@ -112,7 +112,7 @@ void		free_exit(t_asmdata *data, char *str, bool is_error);
 void		add_byte_to_op(t_asmdata *data, int index, int arg_code, int tmp_index);
 int			check_comment_after_arg(char *arg);
 void		check_last_byte_is_newline(t_asmdata *data, int fd);
-
+int			free_args(char **args, int arg_count);
 
 /* 
 **	Op functions

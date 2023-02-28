@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/02/26 22:52:44 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 00:10:04 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 		&& arg[end] != COMMENT_CHAR && arg[end] != ALTERNATE_COMMENT_CHAR)
 		end++;
 	if (!check_comment_after_arg(&arg[end]))
-		free_exit(data, "invalid arg (not a valid comment)", ERROR);
+		return (NULL);
 	arg = ft_memmove((void *)&arg[0], (void *)&arg[start], end - start);
 	arg[end - start] = '\0';
 	arg_code = validate_arg(arg);
 	if (!arg_code)
-		free_exit(data, "invalid arg", ERROR);
+		return (NULL);
 	tmp_index = get_statement_index(data, data->oplist[index]->statement);
 	if (g_statements[tmp_index].argcode)
 		data->oplist[index]->argcode = \
@@ -91,11 +91,10 @@ static char	*trim_arg(t_asmdata *data, char *arg, int index, int start)
 	data->oplist[index]->args = \
 	data->oplist[index]->args << 3 | (1 << (arg_code -1));
 	add_byte_to_op(data, index, arg_code, tmp_index);
-	data->oplist[index]->arg_count++;
 	return (arg);
 }
 
-void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
+char	**seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 {
 	char	**args;
 	int		j;
@@ -108,10 +107,9 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 		start = 0;
 		while (args[j][start] == ' ' || args[j][start] == '\t')
 			start++;
-		if (args[j][start] == DIRECT_CHAR || args[j][start] == LABEL_CHAR \
-			|| args[j][start] == 'r' || ft_isdigit(args[j][start]) \
-			|| (args[j][start] == '-' && ft_isdigit(args[j][start + 1])))
-			data->oplist[index]->arg[j] = trim_arg(data, args[j], index, start);
+		data->oplist[index]->arg[j] = trim_arg(data, args[j], index, start);
+		if (!data->oplist[index]->arg[j] && free_args(args, 1))
+			ft_memdel((void **)&args);
 		j++;
 	}
 	while (j++ < 3)
@@ -120,8 +118,9 @@ void	seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 		data->oplist[index]->args = data->oplist[index]->args << 3;
 	}
 	if (!args)
-		free_exit(data, "ft_strsplit fail", ERROR);
-	ft_memdel((void **)&args);
+		free_exit(data, "invalid args", ERROR);
+	data->oplist[index]->arg_count = j;
+	return (args);
 }
 
 void	parse_instructions(t_asmdata *data)

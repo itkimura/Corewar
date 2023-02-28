@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:31:35 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/27 20:22:55 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/01 00:10:14 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,20 @@ int	check_comment_after_arg(char *arg)
 
 void	check_instruction(t_asmdata *data, char *ptr, int index, int i)
 {
+	char		**args;
 	u_int16_t	res;
 	int			tmp_i;
 
-	seperate_instruction(data, ptr, index, i);
+	args = seperate_instruction(data, ptr, index, i);
 	tmp_i = get_statement_index(data, data->oplist[index]->statement);
 	res = data->oplist[index]->args & g_statements[tmp_i].args;
 	if (data->oplist[index]->arg_count != g_statements[tmp_i].arg_count \
 		|| res ^ data->oplist[index]->args)
+	{
+		free_args(args, data->oplist[index]->arg_count);
+		ft_memdel((void **)&args);
 		free_exit(data, "invalid arg type/count for statement", ERROR);
+	}
 }
 
 static int	check_arg_label(t_asmdata *data, char *arg)
