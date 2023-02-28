@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
+#    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/02/26 10:49:48 by ccariou          ###   ########.fr        #
+#    Updated: 2023/02/28 21:49:20 by leo              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
-DFLAGS  = -fsanitize=address -fsanitize=undefined \
+DFLAGS  = -g -fsanitize=address -fsanitize=undefined \
 	-fno-sanitize-recover=all -fno-sanitize=null -fno-sanitize=alignment
 
 NAME = corewar

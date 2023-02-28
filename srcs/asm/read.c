@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/27 00:00:30 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/28 22:54:27 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,11 @@ int	read_input(t_asmdata *data, char *argv)
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		free_exit(data, "Open file failed", ERROR);
-	if (!data)
-		return (0);
+	check_last_byte_is_newline(data, fd);
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		if (ret == 1 && store_data(data, line, fd) == -1)
+		if (ret && store_data(data, line, fd) == -1)
 		{
 			ft_strdel(&line);
 			free_exit(data, "name/comment error or bad command", ERROR);

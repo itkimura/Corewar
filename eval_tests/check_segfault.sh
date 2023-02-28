@@ -5,7 +5,8 @@
 #
 # ASM_PATH="./"
 ASM_PATH="./resources/" #example_asm
-S_FILES_PATH="./eval_tests/s_files/"
+S_FILES_PATH="./eval_tests/asm_error_files/"
+# S_FILES_PATH="./eval_tests/s_files/"
 
 #
 # Color scheme
@@ -17,7 +18,7 @@ BLUE='\033[0;34m'
 BOLD='\033[0;1m'
 NC='\033[0m'
 ac=$#
-
+echo -e "" >> leaks.txt
 S_FILES=`ls $S_FILES_PATH`
 for FILE in $S_FILES;
 do

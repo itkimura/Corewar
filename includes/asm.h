@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/02/28 13:06:45 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/28 22:55:28 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int			check_if_label_exists(t_asmdata *data);
 void		free_exit(t_asmdata *data, char *str, bool is_error);
 void		add_byte_to_op(t_asmdata *data, int index, int arg_code, int tmp_index);
 int			check_comment_after_arg(char *arg);
+void		check_last_byte_is_newline(t_asmdata *data, int fd);
+
 
 /* 
 **	Op functions

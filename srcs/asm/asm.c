@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/02/27 15:12:11 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/02/28 23:11:35 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	init_structs(t_asmdata *data)
 	data->header = (t_header *)malloc(sizeof(t_header));
 	if (!data->header)
 		free_exit(data, MALLOCFAIL, ERROR);
-//	ft_bzero((char *)data->header->prog_name, PROG_NAME_LENGTH + 1);
 	ft_memset((void *)data->header->prog_name, '#', PROG_NAME_LENGTH + 1);
 	ft_memset((void *)data->header->comment, '#', COMMENT_LENGTH + 1);
 	data->header->prog_name[PROG_NAME_LENGTH] = '\0';
@@ -47,6 +46,18 @@ int	check_file_nam(char *filename)
 		return (0);
 }
 
+void	check_last_byte_is_newline(t_asmdata *data, int fd)
+{
+	char	c;
+
+	c = '\0';
+	lseek(fd, -1L, SEEK_END);
+	if (read(fd, &c, 1) && c != '\n')
+		free_exit(data, "no newline at the end of the file", ERROR);
+	else
+		lseek(fd, 0, SEEK_SET);
+}
+
 int	main(int argc, char **argv)
 {
 	t_asmdata	*data;
@@ -68,7 +79,7 @@ int	main(int argc, char **argv)
 	parse_instructions(data);
 	if (check_if_label_exists(data) == 1)
 		free_exit(data, "arg label reference doesn't exists", ERROR);
-	write_to_file(data, argv[1]);
+	// write_to_file(data, argv[1]);
 	ft_printf("Writing output program\n");
 	free_exit(data, NULL, SUCCESS);
 	return (0);
