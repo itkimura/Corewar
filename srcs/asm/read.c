@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/28 22:54:27 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 01:35:32 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,33 @@ static int	get_full_cmd(char *ptr, int fd, int j)
 static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
+	int		res;
 
 	j = 0;
+	res = 1;
 	while (ft_isspace(line[i]))
 		i++;
 	if (line[i++] != '\"')
+	{
+		ft_strdel(&line);
 		return (0);
-	while (line[i] && ptr[j])
+	}
+	while (res && line[i] && ptr[j])
 	{
 		if (line[i] == '\"')
 			break ;
 		ptr[j++] = line[i++];
 	}
-	if (line[i] != '\"')
+	if (res && line[i] != '\"')
 		j = get_full_cmd(ptr, fd, j);
 	ptr[j] = '\0';
 	if (!check_comment_after_arg(&line[i + 1]))
+	{
+		// ft_strdel(&line); need to fix this line it double free if comment too big or leaks if repeat_name_str
 		return (0);
+	}
 	ft_strdel(&line);
-	return (1);
+	return (res);
 }
 
 static int	store_op(t_asmdata *data, char *line, int fd, int ret)
