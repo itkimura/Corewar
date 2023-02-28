@@ -150,16 +150,6 @@ Lexical error at [10:10]
 
 ***[32mOUR ASM***
 [0m
-Writing output program
-
-
-***[31mOG ASM***
-[0m
-Writing output program to eval_tests/asm_error_files/bee_gees.cor
-
-
-***[32mOUR ASM***
-[0m
 [Error]: Invalid instruction/label2
 
 
@@ -425,7 +415,6 @@ Lexical error at [2:11]
 
 ***[31mOG ASM***
 [0m
-Syntax error at token [TOKEN][009:001] END "(null)"
 
 
 ***[32mOUR ASM***

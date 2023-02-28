@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 10:23:22 by leo               #+#    #+#             */
-/*   Updated: 2023/03/01 00:46:19 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 01:03:12 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	**seperate_instruction(t_asmdata *data, char *ptr, int index, int i)
 		while (args[j][start] == ' ' || args[j][start] == '\t')
 			start++;
 		data->oplist[index]->arg[j] = trim_arg(data, args[j], index, start);
-		if (!data->oplist[index]->arg[j] && free_args(args, 1))
+		if (!data->oplist[index]->arg[j] && free_args(args, j))
 			ft_memdel((void **)&args);
 		j++;
 		data->oplist[index]->arg_count = j;

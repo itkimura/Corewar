@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:28:33 by leo               #+#    #+#             */
-/*   Updated: 2023/03/01 00:16:25 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 01:03:36 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	free_args(char **args, int arg_count)
 {
 	int	i;
 
-	i = 0;
+	i = arg_count;
 	if (arg_count > 3)
 		i = 3;
 	while (args[i])
