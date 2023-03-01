@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2023/02/19 12:21:49 by thle             ###   ########.fr       */
+/*   Updated: 2023/03/01 13:42:27 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define CHAMP_MAX_SIZE			682
 
 # define COMMENT_CHAR			'#'
-#define ALTERNATE_COMMENT_CHAR	';'
+# define ALTERNATE_COMMENT_CHAR	';'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR				'%'
 # define SEPARATOR_CHAR			','
