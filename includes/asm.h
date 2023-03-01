@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/03/01 14:19:16 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/01 21:49:59 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ char		**seperate_instruction(t_asmdata *data, \
 			char *ptr, int index, int i);
 void		parse_instructions(t_asmdata *data);
 void		check_instruction(t_asmdata *data, char *ptr, int index, int i);
-int			check_size(char *str, int code);
 int			check_if_label_exists(t_asmdata *data);
 void		free_exit(t_asmdata *data, char *str, bool is_error);
 void		add_byte_to_op(t_asmdata *data, int index, \

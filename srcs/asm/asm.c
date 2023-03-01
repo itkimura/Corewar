@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/03/01 01:25:28 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 21:52:55 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	init_structs(t_asmdata *data)
 	data->header = (t_header *)malloc(sizeof(t_header));
 	if (!data->header)
 		free_exit(data, MALLOCFAIL, ERROR);
-	ft_memset((void *)data->header->prog_name, '#', PROG_NAME_LENGTH + 1);
-	ft_memset((void *)data->header->comment, '#', COMMENT_LENGTH + 1);
+	ft_memset((void *)data->header->prog_name, '#', PROG_NAME_LENGTH);
+	ft_memset((void *)data->header->comment, '#', COMMENT_LENGTH);
 	data->header->prog_name[PROG_NAME_LENGTH] = '\0';
 	data->header->comment[COMMENT_LENGTH] = '\0';
 	data->header->magic = COREWAR_EXEC_MAGIC;
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	parse_instructions(data);
 	if (check_if_label_exists(data) == 1)
 		free_exit(data, "arg label reference doesn't exists", ERROR);
-	// write_to_file(data, argv[1]);
+	write_to_file(data, argv[1]);
 	ft_printf("Writing output program\n");
 	free_exit(data, NULL, SUCCESS);
 	return (0);

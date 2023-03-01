@@ -6,25 +6,11 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:31:35 by ccariou           #+#    #+#             */
-/*   Updated: 2023/03/01 00:52:58 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 21:49:41 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int	check_size(char *str, int code)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if (code == 1)
-		if (len >= PROG_NAME_LENGTH)
-			return (-1);
-	if (code == 2)
-		if (len >= COMMENT_LENGTH)
-			return (-1);
-	return (1);
-}
 
 int	check_comment_after_arg(char *arg)
 {
@@ -52,8 +38,6 @@ void	check_instruction(t_asmdata *data, char *ptr, int index, int i)
 	if (data->oplist[index]->arg_count != g_statements[tmp_i].arg_count \
 		|| res ^ data->oplist[index]->args)
 	{
-		// t_op *op = data->oplist[index];
-		// ft_printf("arg count [%d] string [%s]\n", op->arg_count, op->instruction);
 		free_args(args, data->oplist[index]->arg_count);
 		ft_memdel((void **)&args);
 		free_exit(data, "invalid arg type/count for statement", ERROR);
