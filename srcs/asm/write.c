@@ -6,7 +6,7 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/03/02 13:43:28 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/02 14:55:18 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 
 static char	*label_helper(char *str, int byte, int pos)
 {
-	char	*percent;
 	char	*helper;
 
 	if ((str)[0] == '%')
 	{
-		percent = ft_strdup("%");
 		helper = ft_itoa(pos - byte);
-		if (!percent && !helper)
+		if (!helper)
 			return (0);
 		free(str);
-		str = ft_strjoin(percent, helper);
-		ft_strdel(&percent);
+		str = ft_strjoin("%", helper);
 		ft_strdel(&helper);
 		return (str);
 	}

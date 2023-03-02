@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/02/28 13:13:14 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/02 15:13:17 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	write_size(t_asmdata *data, int fd)
 	buffer = 0;
 	while (data->oplist[i])
 		i++;
-	while (buffer == 0)
+	while (buffer == 0 && i > 0)
 	{
 		i--;
 		buffer = data->oplist[i]->totalbyte;
