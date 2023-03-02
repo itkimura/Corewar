@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:56:19 by thle              #+#    #+#             */
-/*   Updated: 2023/03/01 21:52:55 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/02 16:18:28 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,27 @@ static void	init_structs(t_asmdata *data)
 	data->leaks = false;
 }
 
-int	check_file_nam(char *filename)
+static int	check_file(int argc, char *filename)
 {
 	int	name_idx;
 
+	if (argc != 2)
+	{
+		ft_printf("Not enough/Too many arguments usage ./asm file.s");
+		return (0);
+	}
 	name_idx = 0;
+	if (filename[0] == '.')
+		return (0);
 	name_idx = ft_strlen(filename);
 	if (name_idx >= 3 && filename[name_idx - 1] == 's' \
 		&& filename[name_idx - 2] == '.')
 		return (1);
 	else
+	{
+		ft_printf("File extension non valid");
 		return (0);
+	}
 }
 
 void	check_last_byte_is_newline(t_asmdata *data, int fd)
@@ -62,13 +72,8 @@ int	main(int argc, char **argv)
 {
 	t_asmdata	*data;
 
-	if (argc < 2 || argc > 3)
+	if (!check_file(argc, argv[1]))
 		return (0);
-	if (!check_file_nam(argv[1]))
-	{
-		ft_printf("File extension non valid");
-		return (0);
-	}
 	data = (t_asmdata *)malloc(sizeof(t_asmdata));
 	if (!data)
 		return (1);
