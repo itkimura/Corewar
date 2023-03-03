@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/03/01 21:49:24 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/03 16:33:09 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 	}
 	if (res && line[i] != '\"')
 		res = get_full_cmd(ptr, fd, &j);
-	if (!check_comment_after_arg(&line[i + 1]))
+	else if (!check_comment_after_arg(&line[i + 1]))
 		res = 0;
 	ptr[j] = '\0';
 	ft_strdel(&line);
