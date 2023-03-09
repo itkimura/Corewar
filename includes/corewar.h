@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:48 by thle              #+#    #+#             */
-/*   Updated: 2023/02/25 13:31:29 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/26 11:37:04 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,7 @@ bool	print_dump(t_game *game);
  * print_flag_v.c
  */
 void	print_flag_v_death(t_game *game, t_carriage *carriage);
+void	flag_v_adv(t_game *game, t_carriage *carriage);
 void	flag_v(t_game *game, t_carriage *carriage);
 
 /*

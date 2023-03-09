@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/02/25 16:57:41 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/26 11:58:38 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,6 @@ void	flag_v(t_game *game, t_carriage *carriage)
 {
 	int	player;
 
-	if (game->flags_value[FLAG_V] == FO_ADV
-		&& carriage->statement_index != OP_ZJMP)
-		print_adv(game, carriage, carriage->next_statement_pc - carriage->pc);
 	if (game->flags_value[FLAG_V] == FO_OPERAIONS)
 		print_flag_v_operations(carriage);
 	if (game->flags_value[FLAG_V] == FO_LIVES

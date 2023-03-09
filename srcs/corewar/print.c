@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:28 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/25 16:11:43 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:55:35 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,6 @@ void	print_help(void)
 	bold("\t[-a]:", "\t\t\tPrint output from \"aff\"\n");
 	bold("\t[--lld-size-2]:", "\n");
 	ft_printf("\t\t\t\tRead 2 bytes instead of 4 bytes in T_IND\n\n");
-}
-
-void	print_adv(t_game *game, t_carriage *carriage, int shift)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("ADV %d (0x%04x -> 0x%04x) ",
-		shift, carriage->pc, carriage->pc + shift);
-	while (i < shift)
-		ft_printf("%02x ", game->arena[carriage->pc + i++]);
-	ft_printf("\n");
 }
 
 /*

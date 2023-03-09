@@ -30,12 +30,20 @@ COR_ERROR_FILES=`ls $COR_ERROR_FILES_PATH`
 for FILE in $COR_ERROR_FILES;
 do
 	echo -e "[$YELLOW$FILE$NC]"
+	leaks -q --atExit -- $VM_PATH --lld-size-2 $COR_ERROR_FILES_PATH$FILE > output
+	echo -e -n "LEAKS:\t"
+	res=`cat output | tail -n 2 | awk '{print $3}'`
+	if [ "$res" == "0" ]
+		then
+			echo -e "${GREEN}OK${NC} "
+		else
+			echo -e "${RED}KO${NC} "
+	fi
 	echo -n -e "YOUR:\t"
-	$VM_PATH --lld-size-2 $COR_ERROR_FILES_PATH$FILE
+	cat output | head -n 1
 	echo -n -e "TEST:\t"
 	$INTRA_VM_PATH $COR_ERROR_FILES_PATH$FILE
 done
-
 
 #
 # Test operation (-v 4 compare)
@@ -52,32 +60,39 @@ do
 		for NB in $NBS
 		do
 			echo -n "$NB:"
-			$VM_PATH --lld-size-2 $COR_FILES_PATH$FILE -v $NB > our
+			leaks -q --atExit -- $VM_PATH --lld-size-2 $COR_FILES_PATH$FILE -v $NB > output
+			leaks=`cat output | tail -n 2 | awk '{print $3}'`
+			line=`cat output | wc -l`
+			cat output | head -n $((line - 4)) > our
 			$INTRA_VM_PATH $COR_FILES_PATH$FILE -v $NB > intra
 			diff=`diff our intra`
-			if [ "$diff" == "" ]
+			if [ "$diff" == "" ] && [ "$leaks" == "0" ]
 			then
 				echo -e -n "${GREEN}OK${NC} "
+			elif [ "$leaks" != "0" ];
+			then
+				echo -e -n "${RED}LEAKS${NC} "
 			else
 				echo -e -n "${RED}KO${NC} "
-			#	echo "Do you want to print diff? [y/n]"
-			#	read -r b
-			#	if [ "$b" == "y" ]
-			#	then
-			#		echo -e "${RED}ERROR:${NC} ./corewar -d $loop $champions"
-			#		echo "diff = $diff"
-			#	fi
-			#	echo "Do you want to quit? [y/n]"
-			#	read -r b
-			#	if [ "$b" == "y" ]
-			#	then
-			#		exit
-			#	fi
+				echo "Do you want to print diff? [y/n]"
+				read -r b
+				if [ "$b" == "y" ]
+				then
+					echo -e "${RED}ERROR:${NC} ./corewar -d $loop $champions"
+					echo "diff = $diff"
+				fi
+				echo "Do you want to quit? [y/n]"
+				read -r b
+				if [ "$b" == "y" ]
+				then
+					exit
+				fi
 			fi
 		done
 		echo ""
 	fi
 done
 rm -f our
+rm -f output
 rm -f intra
 

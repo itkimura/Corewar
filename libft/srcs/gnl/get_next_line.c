@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 19:44:39 by itkimura          #+#    #+#             */
-/*   Updated: 2022/12/05 15:23:15 by thle             ###   ########.fr       */
+/*   Updated: 2023/02/26 15:30:16 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** else -> when the file doesn't have any \n then just use strdup
 */
 
-static int	cpy_line(const int fd, char **line, char **stack)
+static int	cpy_line(int ret, const int fd, char **line, char **stack)
 {
 	int		i;
 	char	*tmp;
@@ -47,7 +47,7 @@ static int	cpy_line(const int fd, char **line, char **stack)
 	}
 	if (!*line)
 		return (-1);
-	return (1);
+	return (ret);
 }
 
 /*
@@ -72,7 +72,11 @@ static int	status_return(int ret, const int fd, char **line, char **stack)
 	else if (ret == 0 && stack[fd] == 0)
 		return (0);
 	else
-		return (cpy_line(fd, line, stack));
+	{
+		if (ret > 0)
+			ret = 1;
+		return (cpy_line(ret, fd, line, stack));
+	}
 }
 
 int	combine_stack(char **stack, char *buffer)
@@ -105,7 +109,7 @@ int	get_next_line(const int fd, char **line)
 	if (fd < 0 || line == 0)
 		return (-1);
 	if (stack[fd] && ft_strchr(stack[fd], '\n'))
-		return (cpy_line(fd, line, stack));
+		return (cpy_line(1, fd, line, stack));
 	while (1)
 	{
 		ret = read(fd, buffer, BUFF_SIZE);

@@ -6,7 +6,7 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:18:49 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/25 16:02:46 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/26 11:42:55 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static bool	perform_op(t_game *game, t_carriage *carriage)
 				return (false);
 			flag_v(game, carriage);
 		}
+		flag_v_adv(game, carriage);
 		carriage->pc = carriage->next_statement_pc;
 	}
 	return (true);

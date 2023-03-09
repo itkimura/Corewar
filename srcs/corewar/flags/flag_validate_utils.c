@@ -6,7 +6,7 @@
 /*   By: thle <thle@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:59:57 by itkimura          #+#    #+#             */
-/*   Updated: 2023/02/25 13:12:25 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/26 12:09:18 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ bool	is_number(char *argv)
 			return (false);
 		index++;
 	}
-	if (index > 10)
-		return (false);
 	nb = ft_atoli(&argv[index]);
 	if (nb > INT_MAX && nb >= 0)
 		return (false);

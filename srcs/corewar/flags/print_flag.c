@@ -6,11 +6,38 @@
 /*   By: thule <thule@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:48 by thule             #+#    #+#             */
-/*   Updated: 2023/02/24 11:12:34 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/02/26 12:00:19 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void	print_adv(t_game *game, t_carriage *carriage, int shift)
+{
+	int	i;
+	int	pos;
+
+	i = 0;
+	if (shift < 0)
+		shift = MEM_SIZE + shift;
+	ft_printf("ADV %d (0x%04x -> 0x%04x) ",
+		shift, carriage->pc, carriage->pc + shift);
+	while (i < shift)
+	{
+		pos = (carriage->pc + i) % MEM_SIZE;
+		ft_printf("%02x ", game->arena[pos]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+void	flag_v_adv(t_game *game, t_carriage *c)
+{
+	if (game->flags_value[FLAG_V] == FO_ADV
+		&& (c->statement_index != OP_ZJMP
+			|| (c->statement_index == OP_ZJMP && c->carry == false)))
+		print_adv(game, c, c->next_statement_pc - c->pc);
+}
 
 bool	print_dump(t_game *game)
 {
