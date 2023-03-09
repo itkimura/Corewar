@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:58:36 by leo               #+#    #+#             */
-/*   Updated: 2022/12/16 13:50:10 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/28 23:14:04 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	print_oplist(t_asmdata *data)
 			}
 			ft_printf("\n");
 		}
-		else
+		else if ((*tmp)->label)
 			ft_printf("label: {%s}\n", (*tmp)->label);
 		tmp++;
 	}

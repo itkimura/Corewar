@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 03:39:40 by leo               #+#    #+#             */
-/*   Updated: 2023/02/22 19:26:16 by leo              ###   ########.fr       */
+/*   Updated: 2023/02/26 22:54:31 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	init_op(t_op **op, char *line)
 	(*op)->arg[0] = NULL;
 	(*op)->arg[1] = NULL;
 	(*op)->arg[2] = NULL;
+	(*op)->arg_count = 0;
 	(*op)->argcode = 0;
 	(*op)->args = 0;
 	(*op)->totalbyte = 0;
@@ -54,6 +55,7 @@ int	resize_op_table(t_asmdata *data)
 int	init_op_table(t_op	***oplist, int size)
 {
 	int	i;
+
 	i = 0;
 	*oplist = (t_op **)malloc(sizeof(t_op *) * size);
 	if (!(*oplist))

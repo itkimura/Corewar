@@ -6,7 +6,7 @@
 /*   By: itkimura <itkimura@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:37:47 by itkimura          #+#    #+#             */
-/*   Updated: 2022/04/04 16:42:36 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:15:32 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	put_nbr(t_format *f, va_list *ap, void (*p_flag[])(t_format *, char))
 		else
 			nb = tmp_nb;
 		if (f->sign && nb >= 0 && tmp_nb >= 0)
-		f->prefix = "+";
+			f->prefix = "+";
 	}
 	else
 		nb = get_unsigned(f, ap);

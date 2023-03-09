@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 10:28:33 by leo               #+#    #+#             */
-/*   Updated: 2022/12/14 10:16:58 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/01 01:03:36 by leo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,21 @@ static void	free_oplist(t_asmdata *data)
 		i++;
 	}
 	ft_memdel((void **)&data->oplist);
+}
+
+int	free_args(char **args, int arg_count)
+{
+	int	i;
+
+	i = arg_count;
+	if (arg_count > 3)
+		i = 3;
+	while (args[i])
+	{
+		ft_strdel(&args[i]);
+		i++;
+	}
+	return (1);
 }
 
 void	free_exit(t_asmdata *data, char *str, bool is_error)

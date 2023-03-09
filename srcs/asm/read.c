@@ -3,151 +3,131 @@
 /*                                                        :::      ::::::::   */
 /*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/02/25 15:09:55 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:33:09 by leotran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <fcntl.h>
 
-static int	get_full_cmd(char *ptr, int fd, int j)
+static int	get_full_cmd(char *ptr, int fd, int *j)
 {
 	size_t	ret;
 	char	buf;
 
 	ret = 1;
-	if (ptr[j])
-		ptr[j++] = '\n';
-	//ft_printf("ptr == %s\n", ptr);
-	while (ret && ptr[j])
+	if (ptr[*j])
+		ptr[(*j)++] = '\n';
+	while (ret && ptr[*j])
 	{
 		ret = read(fd, &buf, 1);
 		if (buf == '\"')
 			break ;
-		ptr[j++] = buf;
+		ptr[(*j)++] = buf;
 	}
-	return (j);
+	if (!ptr[*j] && buf != '\"')
+		return (0);
+	return (1);
 }
 
-static int	store_cmd(t_asmdata *data, char *ptr, char *line, int fd, int i)
+static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
+	int		res;
 
 	j = 0;
+	res = 1;
 	while (ft_isspace(line[i]))
 		i++;
 	if (line[i++] != '\"')
-		return (0);
-	while (line[i] && ptr[j])
+		res = 0;
+	while (res && line[i] && ptr[j])
 	{
 		if (line[i] == '\"')
 			break ;
 		ptr[j++] = line[i++];
 	}
-	if (line[i] != '\"')
-		j = get_full_cmd(ptr, fd, j);
-/*	{
-		ft_printf("line[%d] == %s", i, line[i]);
-		ft_strdel(&line);
-		free_exit(data, "string incomplete/invalid", ERROR);
-	}*/
-	ft_printf("ptr == %d\n", data->opcount);
-	ft_printf("ptr == %d\n", fd);
+	if (res && line[i] != '\"')
+		res = get_full_cmd(ptr, fd, &j);
+	else if (!check_comment_after_arg(&line[i + 1]))
+		res = 0;
 	ptr[j] = '\0';
-	ft_printf("ptr == %c\n", ptr[j - 1]);
 	ft_strdel(&line);
-	return (1);
+	return (res);
 }
 
-static int	store_op(t_asmdata *data, char *line, int fd)
+static int	store_op(t_asmdata *data, char *line, int fd, int ret)
 {
 	t_op	*tmp;
-	int		ret;
 	int		i;
-	int		index; //TODO remove
 
-	ret = 1;
-	index = 0; //TODO remove
 	while (ret)
 	{
-		i = 0;
 		if (data->opcount == data->opsize)
 			resize_op_table(data);
 		if (!init_op(&tmp, line))
 			free_exit(data, MALLOCFAIL, ERROR);
 		data->oplist[data->opcount++] = tmp;
 		ret = get_next_line(fd, &line);
-//		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		while (line[i] && ft_isspace(line[i]))
-			i++;
-//		ft_printf("index == %d\n", index);
-		while (!(*line) || *line == COMMENT_CHAR \
-			|| *line == ALTERNATE_COMMENT_CHAR || !line[i]) 
+		while (ret)
 		{
+			i = 0;
+			while (line[i] && ft_isspace(line[i]))
+				i++;
+			if (line[i] && line[i] != COMMENT_CHAR \
+				&& line[i] != ALTERNATE_COMMENT_CHAR)
+				break ;
 			ft_strdel(&line);
 			ret = get_next_line(fd, &line);
-			if (ret == 0)
-				break;
 		}
-		index++;
 	}
 	return (1);
 }
 
 static int	store_data(t_asmdata *data, char *line, int fd)
 {
-	int	res;
+	int	i;
 
-	res = 0;
-	while (line[res] && ft_isspace(line[res]))
-		res++;
-	if (!(*line) || !line[res] || line[res] == COMMENT_CHAR || line[res] == ALTERNATE_COMMENT_CHAR)
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	if (!line[i] || line[i] == COMMENT_CHAR \
+		|| line[i] == ALTERNATE_COMMENT_CHAR)
 		ft_strdel(&line);
 	else if (data->name && data->comment && *line)
-		res = store_op(data, line, fd);
-	else if (!ft_strncmp(&(line[res]), NAME_CMD_STRING, 5))
-		data->name = store_cmd(data, data->header->prog_name, line, fd, res + 5);
-	else if (!ft_strncmp(&line[res], COMMENT_CMD_STRING, 8))
-		data->comment = store_cmd(data, data->header->comment, line, fd, res + 8);
-	else if (line[res] == '.')
-		ft_strdel(&line);
-	else if (!res || !data->name || !data->comment)
-		free_exit(data, "name or comment missing/invalid", ERROR);
-	return (1);
+		i = store_op(data, line, fd, 1);
+	else if (!data->name && !ft_strncmp(&(line[i]), NAME_CMD_STRING, 5))
+		data->name = store_cmd(data->header->prog_name, line, fd, i + 5);
+	else if (!data->comment && !ft_strncmp(&line[i], COMMENT_CMD_STRING, 8))
+		data->comment = store_cmd(data->header->comment, line, fd, i + 8);
+	else if (!data->name || !data->comment || line[i] == '.')
+		return (-1);
+	return (i);
 }
 
 int	read_input(t_asmdata *data, char *argv)
 {
 	char	*line;
-	int		turn;
 	int		ret;
 	int		fd;
 
 	line = NULL;
-	turn = 0;
 	ret = 1;
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		free_exit(data, "Open file failed", ERROR);
-	if (!data)
-		return (0);
+	check_last_byte_is_newline(data, fd);
 	while (ret)
 	{
 		ret = get_next_line(fd, &line);
-		if (ret == 1)
-		{
-			store_data(data, line, fd);
-			turn += 1;
-		}
+		if (ret && store_data(data, line, fd) == -1)
+			free_exit(data, "name/comment error or bad command", ERROR);
 	}
-	if (ret == 0 && turn == 0)
-		free_exit(data, "empty file", ERROR);
-	else if (data->opcount == 0)
-		free_exit(data, "command or data missing/invalid", ERROR);
-//	ft_printf("DRACULA TOUT NU\n");
+	if (data->opcount == 0)
+		free_exit(data, "empty file/incomplete command?#need2check", ERROR);
 	if (close(fd) == -1)
 		free_exit(data, "Closing file failed", ERROR);
 	return (1);

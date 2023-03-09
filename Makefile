@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
+#    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/02/26 13:20:06 by itkimura         ###   ########.fr        #
+#    Updated: 2023/03/09 10:59:49 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
-DFLAGS  = -fsanitize=address -fsanitize=undefined \
+DFLAGS  = -g -fsanitize=address -fsanitize=undefined \
 	-fno-sanitize-recover=all -fno-sanitize=null -fno-sanitize=alignment
 
 NAME = corewar
@@ -51,7 +51,8 @@ FLAG_OBJS = $(addprefix $(OBJS_DIR), $(FLAG_FILES:%.c=%.o))
 
 ASM_FILES = debug.c asm.c free_tools.c hash_tools.c label_tools.c \
 						statement_tools.c read.c op_tools.c parse.c \
-						write.c write_util.c write_util2.c ft_atoi_base.c
+						write.c write_util.c write_util2.c ft_atoi_base.c \
+						check_util.c
 ASM_SRCS_DIR = ./srcs/asm/
 ASM_SRCS = $(addprefix $(ASM_SRCS_DIR), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))
