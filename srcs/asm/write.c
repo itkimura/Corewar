@@ -6,34 +6,32 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/03/02 14:55:18 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/10 17:24:29 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <stdlib.h>
 
-static char	*label_helper(char *str, int byte, int pos)
+static char	*label_helper(t_asmdata *data, char *str, int byte, int pos)
 {
 	char	*helper;
 
-	if ((str)[0] == '%')
+	if (str[0] == '%')
 	{
 		helper = ft_itoa(pos - byte);
 		if (!helper)
-			return (0);
+			free_exit(data, MALLOCFAIL, ERROR);
 		free(str);
 		str = ft_strjoin("%", helper);
 		ft_strdel(&helper);
 		return (str);
 	}
-	else
-	{
-		free(str);
-		str = ft_itoa(pos - byte);
-		return (str);
-	}
-	return (0);
+	free(str);
+	str = ft_itoa(pos - byte);
+	if (!str)
+		free_exit(data, MALLOCFAIL, ERROR);
+	return (str);
 }
 
 char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
@@ -46,7 +44,7 @@ char	*translate_labels(t_asmdata *data, char *arg, int byte, int i)
 	{
 		if (ft_strequ(data->oplist[i]->label, ft_strchr(arg, ':') + 1))
 		{
-			arg = label_helper(arg, byte, pos);
+			arg = label_helper(data, arg, byte, pos);
 			return (arg);
 		}
 		pos += data->oplist[i]->byte;
@@ -116,7 +114,7 @@ void	write_to_file(t_asmdata *data, char *filename)
 	int		i;
 	int		fd;
 
-	final_filename = change_filename(filename);
+	final_filename = change_filename(data, filename);
 	if (!final_filename)
 		return ;
 	convert_label(data);

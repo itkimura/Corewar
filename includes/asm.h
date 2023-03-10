@@ -6,7 +6,7 @@
 /*   By: leo <leo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:59:46 by thle              #+#    #+#             */
-/*   Updated: 2023/03/01 21:49:59 by leo              ###   ########.fr       */
+/*   Updated: 2023/03/10 17:24:22 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static const t_statement	g_statements[HASHTABLESIZE] = {
 	.args = 0b001000000, .arg_count = 1, .size = 4},
 };
 
+int			store_cmd(char *ptr, char *line, int fd, int i);
 int			read_input(t_asmdata *data, char *argv);
 char		**seperate_instruction(t_asmdata *data, \
 			char *ptr, int index, int i);
@@ -134,7 +135,6 @@ int			free_args(char **args, int arg_count);
 /* 
 **	Op functions
 */
-
 int			init_op_table(t_op ***oplist, int size);
 int			resize_op_table(t_asmdata *data);
 int			init_op(t_op **op, char *line);
@@ -142,7 +142,6 @@ int			init_op(t_op **op, char *line);
 /* 
 **	Statement functions
 */
-
 int			validate_statement(t_asmdata *data, char *ptr, int index, int *i);
 int			init_statements_table(t_asmdata *data);
 int			get_statement_index(t_asmdata *data, char *name);
@@ -150,35 +149,30 @@ int			get_statement_index(t_asmdata *data, char *name);
 /* 
 **	Label functions
 */
-
 int			validate_label(t_asmdata *data, char *ptr, int index);
 int			init_labels_table(t_asmdata *data);
 int			get_label_adr(t_asmdata *data, t_op **ptr, char *name);
-// void		insert_label(t_asmdata *data, t_op *ptr, char *name);
 
 /*
 ** Writing functions 
 */
-
 void		write_to_file(t_asmdata *data, char *filename);
 void		write_name(t_asmdata *data, int fd);
 void		write_comment(t_asmdata *data, int fd);
 void		write_size(t_asmdata *data, int fd);
 void		convert_arg(t_op **tmp, int fd, int j);
-char		*change_filename(char *filename);
+char		*change_filename(t_asmdata *data, char *filename);
 int			ft_atoi_base(const char *str, int base);
 int			byte_shift_translate(int value);
 
 /* 
 ** Hash functions
 */
-
 uint32_t	hash(char *str);
 
 /*
 ** Bonus: Debugger tools
 */
-
 void		print_hashtable(t_asmdata *data);
 void		print_statement(t_asmdata *data, char *name);
 void		print_hashlabel(t_asmdata *data);

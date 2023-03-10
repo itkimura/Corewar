@@ -6,7 +6,7 @@
 #    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/03/10 12:27:44 by itkimura         ###   ########.fr        #
+#    Updated: 2023/03/10 16:57:40 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ FLAG_OBJS = $(addprefix $(OBJS_DIR), $(FLAG_FILES:%.c=%.o))
 ASM_FILES = debug.c asm.c free_tools.c hash_tools.c label_tools.c \
 						statement_tools.c read.c op_tools.c parse.c \
 						write.c write_util.c write_util2.c ft_atoi_base.c \
-						check_util.c
+						check_util.c read_command.c
 ASM_SRCS_DIR = ./srcs/asm/
 ASM_SRCS = $(addprefix $(ASM_SRCS_DIR), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))

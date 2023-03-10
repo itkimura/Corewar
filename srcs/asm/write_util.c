@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/03/10 11:37:04 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/10 17:19:22 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	write_size(t_asmdata *data, int fd)
 	write(fd, &buffer, 4);
 }
 
-char	*change_filename(char *filename)
+char	*change_filename(t_asmdata *data, char *filename)
 {
 	int		name_idx;
 	char	*helper;
@@ -102,6 +102,6 @@ char	*change_filename(char *filename)
 	filename[name_idx] = '\0';
 	helper = ft_strjoin(filename, ".cor");
 	if (!helper)
-		return (0);
+		free_exit(data, MALLOCFAIL, ERROR);
 	return (helper);
 }
