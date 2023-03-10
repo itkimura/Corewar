@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:40:11 by leo               #+#    #+#             */
-/*   Updated: 2023/03/03 16:33:09 by leotran          ###   ########.fr       */
+/*   Updated: 2023/03/10 15:39:01 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,33 @@ static int	get_full_cmd(char *ptr, int fd, int *j)
 {
 	size_t	ret;
 	char	buf;
+	char *line;
 
 	ret = 1;
+	buf = 0;
 	if (ptr[*j])
 		ptr[(*j)++] = '\n';
+	line = 0;
 	while (ret && ptr[*j])
 	{
-		ret = read(fd, &buf, 1);
-		if (buf == '\"')
-			break ;
-		ptr[(*j)++] = buf;
+		//ret = read(fd, &buf, 1);
+		ret = get_next_line(fd, &line);
+		//ft_printf("line = %s\n", line);
+		int len = ft_strlen(line);
+		for (int i = 0; i < len; i++)
+			ptr[(*j)++] = line[i];
+		if (line[len - 1] == '\"')
+			break;
+		//if (buf == '\"')
+		//	break ;
+		//ptr[(*j)++] = buf;
 	}
 	if (!ptr[*j] && buf != '\"')
 		return (0);
 	return (1);
 }
 
+/* store comment and name (cmd = command .*) */
 static int	store_cmd(char *ptr, char *line, int fd, int i)
 {
 	int		j;
@@ -40,6 +51,7 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 
 	j = 0;
 	res = 1;
+	//ft_printf("--- store_cmd ---\n");
 	while (ft_isspace(line[i]))
 		i++;
 	if (line[i++] != '\"')
@@ -55,6 +67,7 @@ static int	store_cmd(char *ptr, char *line, int fd, int i)
 	else if (!check_comment_after_arg(&line[i + 1]))
 		res = 0;
 	ptr[j] = '\0';
+	//ft_printf("final_comment = %s\n", ptr);
 	ft_strdel(&line);
 	return (res);
 }
