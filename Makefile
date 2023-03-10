@@ -6,14 +6,12 @@
 #    By: leo <leo@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 14:39:51 by thle              #+#    #+#              #
-#    Updated: 2023/03/09 10:59:49 by itkimura         ###   ########.fr        #
+#    Updated: 2023/03/10 12:27:44 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror
-DFLAGS  = -g -fsanitize=address -fsanitize=undefined \
-	-fno-sanitize-recover=all -fno-sanitize=null -fno-sanitize=alignment
 
 NAME = corewar
 ASM = asm
@@ -57,52 +55,76 @@ ASM_SRCS_DIR = ./srcs/asm/
 ASM_SRCS = $(addprefix $(ASM_SRCS_DIR), $(ASM_FILES))
 ASM_OBJS = $(addprefix $(OBJS_DIR), $(ASM_FILES:%.c=%.o))
 
+# COLORS
+GREEN			:= $(shell tput -Txterm setaf 2)
+YELLOW			:= $(shell tput -Txterm setaf 3)
+WHITE			:= $(shell tput -Txterm setaf 7)
+RESET			:= $(shell tput -Txterm sgr0)
+BOLD			:= $(shell tput bold)
+
 all: $(NAME) $(ASM)
 
-debug: FLAGS += $(DFLAGS)
-debug: all
+libft: $(LIB)
 
-$(NAME): $(LIB) $(COREWAR_OBJS) $(OP_OBJS) $(FLAG_OBJS)
-	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) $(OP_OBJS) $(FLAG_OBJS) -L$(LIB_DIR) -lft
-	@echo "Compiled $(NAME)"
+$(NAME): $(LIB) $(OBJS_DIR) $(COREWAR_OBJS) $(OP_OBJS) $(FLAG_OBJS)
+	@$(CC) -o $(NAME) $(FLAGS) $(COREWAR_OBJS) \
+		$(OP_OBJS) $(FLAG_OBJS) -L$(LIB_DIR) -lft
+	@echo "Compiled ${BOLD}$(NAME)${RESET}"
 
-$(ASM): $(LIB) $(ASM_OBJS)
+$(ASM): $(LIB) $(OBJS_DIR) $(ASM_OBJS)
 	@$(CC) -o $(ASM) $(FLAGS) $(ASM_OBJS) -L$(LIB_DIR) -lft
-	@echo "Compiled $(ASM)"
+	@echo "Compiled ${BOLD}$(ASM)${RESET}"
 
 $(LIB):
 	@$(MAKE) -sC ./libft
-	@echo "Compiled $(LIB)"
+	@echo "Compiled ${BOLD}$(LIB)${RESET}"
 
-# $(OBJS_DIR):
-# 	@mkdir -p $(OBJS_DIR)
+$(OBJS_DIR):
+	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(COREWAR_SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
 $(OBJS_DIR)%.o: $(ASM_SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
 $(OBJS_DIR)%.o: $(OP_SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
 $(OBJS_DIR)%.o: $(FLAG_SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAGS) -I$(INCLUDES_DIR) -I$(LIB_INCLUDE) -c $^ -o $@
 	@echo "Compiled $@"
 
 clean:
 	@$(MAKE) -sC $(LIB_DIR) clean
 	@/bin/rm -rf $(OBJS_DIR)
+	@echo "Deleted ${BOLD}$(OBJS_DIR)${RESET}"
 
-fclean: clean
+fclean:
 	@$(MAKE) -sC $(LIB_DIR) fclean
+	@/bin/rm -rf $(OBJS_DIR)
 	@/bin/rm -f $(NAME) $(ASM)
+	@echo "Deleted ${BOLD}$(NAME)${RESET}"
+	@echo "Deleted ${BOLD}$(ASM)${RESET}"
 
 re: fclean all
+
+
+help:
+	@echo "Usage: ${GREEN}make${RESET} ${BOLD}command${RESET} [options]\n"
+	@echo "Commands:\n"
+	@echo "  ${BOLD}make${RESET}\t\t\tcompile libft, asm and corewar"
+	@echo "  ${BOLD}make libft${RESET}\t\tcompile ./libft/libft.a"
+	@echo "  ${BOLD}make corewar${RESET}\t\tcompile corewar"
+	@echo "  ${BOLD}make asm${RESET}\t\tcompile asm"
+	@echo "  ${BOLD}make clean${RESET}\t\tdelete object files"
+	@echo "  ${BOLD}make fclean${RESET}\c"
+	@echo "\t\tdelete object files and all excutable files\c"
+	@echo "(libft, push_swap and checker)"
+	@echo "  ${BOLD}make re${RESET}\c"
+	@echo "\t\tdelete object files and\c"
+	@echo "all excutable files and compile all again"
+	@echo "  ${BOLD}help${RESET}\t\t\tprint this help message\n"
