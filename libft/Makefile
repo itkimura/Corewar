@@ -6,7 +6,7 @@
 #    By: thle <thle@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/31 22:14:13 by itkimura          #+#    #+#              #
-#    Updated: 2023/02/19 12:10:44 by thle             ###   ########.fr        #
+#    Updated: 2023/03/10 12:22:11 by itkimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(LIBFT_OBJS) $(PRINTF_OBJS) $(GNL_OBJS)
 	@ar rc $(NAME) $(wildcard $(OBJ_DIR)*.o)
-	@echo "${BOLD}[libft]${RESET}\t\tCompiled!"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -84,11 +83,11 @@ $(OBJ_DIR)%.o: $(GNL_DIR)%.c
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo "${BOLD}[libft]${RESET}\t\tObject files has been deleted"
+	@echo "Deleted ${BOLD}$(OBJ_DIR)${RESET}"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "${BOLD}[libft]${RESET}\t\tExecutable file has been deleted"
+	@echo "Deleted ${BOLD}$(NAME)${RESET}"
 
 re: clean fclean all
 
