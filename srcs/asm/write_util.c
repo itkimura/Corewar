@@ -6,7 +6,7 @@
 /*   By: leotran <leotran@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 09:50:45 by ccariou           #+#    #+#             */
-/*   Updated: 2023/03/02 15:13:17 by ccariou          ###   ########.fr       */
+/*   Updated: 2023/03/10 11:37:04 by ccariou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ char	*change_filename(char *filename)
 		name_idx++;
 	filename[name_idx] = '\0';
 	helper = ft_strjoin(filename, ".cor");
+	if (!helper)
+		return (0);
 	return (helper);
 }

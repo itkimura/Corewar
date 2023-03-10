@@ -57,8 +57,8 @@ fi
 
 # Clean up created directories and text files
 if [ "$CLEANUP" == true ]; then
-	rm eval_tests/asm_error_files/*.cor
-	rm eval_tests/s_files/*.cor
+	rm asm_error_files/*.cor
+	rm s_files/*.cor
     if [ -d "our_valid_asm" ]; then
         rm -rf "our_valid_asm"
     fi
@@ -106,13 +106,13 @@ fi
 # Run asm and example_asm on all files in s_files directory with -valid option
 if [ "$TEST_TYPE" == "valid" ]; then
     echo -e "\033[35mTesting with asm and example_asm with valid\033[0m"
-    for file in eval_tests/s_files/*.s; do
+    for file in s_files/*.s; do
         echo -e "***\033[32mOUR ASM***\n"\033[0m >> valid_asm_test.txt
 		./asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
 		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" our_valid_asm/
         echo -e "***\033[31mOG ASM***\n"\033[0m >> valid_asm_test.txt
-		./eval_tests/example_asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
+		./example_asm "$file" 2>&1 | tee -a valid_asm_test.txt > /dev/null
 		echo -e "\n" >> valid_asm_test.txt
         mv "${file%.s}.cor" og_valid_asm/
     done
@@ -122,13 +122,13 @@ if [ "$TEST_TYPE" == "valid" ]; then
 #
 elif [ "$TEST_TYPE" == "error" ]; then
  	echo -e "\033[35mTesting with asm and example_asm error\033[0m"
-    for file in eval_tests/asm_error_files/*.s; do
+    for file in asm_error_files/*.s; do
         echo -e "***\033[32mOUR ASM***\n\033[0m" >> error_asm_test.txt
 		./asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
 		echo -e "\n" >> error_asm_test.txt
         mv "${file%.s}.cor" our_error_asm/
         echo -e "***\033[31mOG ASM***\n\033[0m" >> error_asm_test.txt
-		./eval_tests/example_asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
+		./example_asm "$file" 2>&1 | tee -a error_asm_test.txt > /dev/null
 		echo -e "\n" >> error_asm_test.txt
         mv "${file%.s}.cor" og_error_asm/
     done
