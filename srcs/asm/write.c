@@ -6,12 +6,11 @@
 /*   By: ccariou <ccariou@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:43:57 by ccariou           #+#    #+#             */
-/*   Updated: 2023/03/10 17:24:29 by itkimura         ###   ########.fr       */
+/*   Updated: 2023/03/14 10:21:09 by itkimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include <stdlib.h>
 
 static char	*label_helper(t_asmdata *data, char *str, int byte, int pos)
 {
